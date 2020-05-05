@@ -5,10 +5,17 @@
  */
 package BLL;
 
+import DAL.LoaiSpDAL;
+import DTO.LoaiSpDTO;
+import java.util.List;
+
 /**
  *
  * @author Cong
  */
 public class LoaiSpBLL {
-  
+  LoaiSpDAL loaiSpDAL = new LoaiSpDAL();
+  public List<LoaiSpDTO> getAllLoaiSp() {
+    return loaiSpDAL.getAllLoaiSp();
+  }
 }
