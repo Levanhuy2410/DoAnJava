@@ -46,7 +46,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 168, 232));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("<html> <center>QUẢN LÝ THÔNG TIN SẢN PHẨM</center></html>");
 
@@ -68,6 +68,8 @@ public class QuanLySanPham extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 120));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         BTThem.setBackground(new java.awt.Color(0, 168, 232));
         BTThem.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -97,13 +99,13 @@ public class QuanLySanPham extends javax.swing.JFrame {
         jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Sản Phẩm", "Tên Sản Phẩm", "Giá Bán", "Thời Gian Bảo Hành", "Hãng Sản Xuất", "Số Lượng Tồn", "Mô Tả"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Giá Bán", "Thời Gian Bảo Hành", "Hãng Sản Xuất", "Số Lượng Tồn", "Mô Tả", "Loại Sản Phẩm"
             }
         ));
         jTable1.setSelectionBackground(new java.awt.Color(0, 168, 232));
@@ -174,7 +176,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
 
     private void BTThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemActionPerformed
         // TODO add your handling code here:
-        ThemSanPham themsp = new ThemSanPham();
+        SanPhamThem themsp = new SanPhamThem();
         themsp.setVisible(true);
     }//GEN-LAST:event_BTThemActionPerformed
 
@@ -192,7 +194,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
         }
         else {
-            CapNhatSanPham capnhat = new CapNhatSanPham();
+            SanPhamCapNhat capnhat = new SanPhamCapNhat();
             capnhat.setVisible(true);
         }
     }//GEN-LAST:event_BTCapNhatActionPerformed

@@ -46,7 +46,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 168, 232));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("<html> <center>QUẢN LÝ THÔNG TIN HÓA ĐƠN</center></html>");
 
@@ -68,6 +68,8 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 120));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         BTThem.setBackground(new java.awt.Color(0, 168, 232));
         BTThem.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -104,11 +106,15 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Hóa Đơn", "Ngày Hóa Đơn", "Số Lượng", "Trị Giá", "Mã Khách Hàng", "Mã Nhân Viên", "Mã Sản Phẩm"
+                "Mã Hóa Đơn", "Ngày Hóa Đơn", "Tên Sản Phẩm", "Số Lượng", "Thành Tiền", "Tên Thành Viên ( Nếu Có )", "Tên Nhân Viên Lập"
             }
         ));
         jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(110);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(130);
+        }
         jTable1.getAccessibleContext().setAccessibleName("");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -177,7 +183,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
 
     private void BTThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemActionPerformed
         // TODO add your handling code here:
-        ThemHoaDon themhd = new ThemHoaDon();
+        HoaDonThem themhd = new HoaDonThem();
         themhd.setVisible(true);
     }//GEN-LAST:event_BTThemActionPerformed
 
@@ -190,14 +196,6 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
 
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
-        int selected = jTable1.getSelectedRow();
-        if (selected < 0){
-            JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
-        }
-        else {
-            CapNhatHoaDon capnhat = new CapNhatHoaDon();
-            capnhat.setVisible(true);
-        }
     }//GEN-LAST:event_BTCapNhatActionPerformed
 
     /**
