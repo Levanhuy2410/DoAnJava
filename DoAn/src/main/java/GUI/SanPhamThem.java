@@ -19,13 +19,16 @@ public class SanPhamThem extends javax.swing.JFrame {
     /** Creates new form ThemSanPham */
     public SanPhamThem() {
       initComponents();
+      loadLoaisp();
+      
+    }
+    public void loadLoaisp() {
       LoaiSpBLL loaiSpBLL = new LoaiSpBLL();
       List<LoaiSpDTO> allLoaiSp = loaiSpBLL.getAllLoaiSp();
       allLoaiSp.forEach((LoaiSpDTO action) -> {
         jComboBox1.addItem(action.getTenLSp());
       });
     }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
