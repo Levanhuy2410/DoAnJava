@@ -39,6 +39,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
+        BTCapNhat1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,13 +90,13 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê", "Tên Sản Phẩm", "Số Lượng Hệ Thống", "Số Lượng Thực", "Lý Do"
+                "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê"
             }
         ));
         jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
@@ -114,6 +115,11 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                 BTReturnActionPerformed(evt);
             }
         });
+
+        BTCapNhat1.setBackground(new java.awt.Color(0, 102, 204));
+        BTCapNhat1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        BTCapNhat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-view-35.png"))); // NOI18N
+        BTCapNhat1.setText("  XEM CTKK");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -135,6 +141,8 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                                 .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(BTCapNhat1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -150,7 +158,8 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BTThem)
                         .addComponent(jButton2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTCapNhat1)))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -215,6 +224,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTCapNhat1;
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
     private javax.swing.JButton jButton2;

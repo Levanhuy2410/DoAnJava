@@ -40,6 +40,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
+        BTCapNhat1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,7 +57,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(118, 118, 118)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
                 .addGap(117, 117, 117))
         );
         jPanel1Layout.setVerticalGroup(
@@ -67,7 +68,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 120));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 120));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -100,20 +101,19 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã Hóa Đơn", "Ngày Hóa Đơn", "Tên Sản Phẩm", "Số Lượng", "Thành Tiền", "Tên Thành Viên ( Nếu Có )", "Tên Nhân Viên Lập"
+                "Mã Hóa Đơn", "Ngày Hóa Đơn", "Thành Tiền", "Tên Thành Viên ( Nếu Có )", "Tên Nhân Viên Lập HĐ"
             }
         ));
         jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(110);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(130);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(130);
         }
         jTable1.getAccessibleContext().setAccessibleName("");
 
@@ -130,6 +130,16 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
             }
         });
 
+        BTCapNhat1.setBackground(new java.awt.Color(0, 102, 204));
+        BTCapNhat1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        BTCapNhat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-view-35.png"))); // NOI18N
+        BTCapNhat1.setText("  XEM CTHĐ");
+        BTCapNhat1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTCapNhat1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -139,7 +149,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 46, Short.MAX_VALUE))
+                        .addGap(0, 116, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,6 +162,8 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50)
                                 .addComponent(BTCapNhat)
+                                .addGap(50, 50, 50)
+                                .addComponent(BTCapNhat1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -168,15 +180,16 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                         .addComponent(BTThem)
                         .addComponent(jButton2)
                         .addComponent(BTCapNhat)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTCapNhat1)))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTReturn)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1010, 460));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1080, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -197,6 +210,10 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTCapNhatActionPerformed
+
+    private void BTCapNhat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhat1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTCapNhat1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +253,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTCapNhat;
+    private javax.swing.JButton BTCapNhat1;
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
     private javax.swing.JButton jButton2;
