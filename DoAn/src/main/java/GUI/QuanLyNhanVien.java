@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import DAL.NhanVienDAL;
+import DTO.NhanVien;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,6 +21,28 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
      */
     public QuanLyNhanVien() {
         initComponents();
+        TableThongTinNhanVien();
+    }
+    public void TableThongTinNhanVien(){
+        DefaultTableModel model = (DefaultTableModel) TableThongTinNhanVien.getModel();
+        while (TableThongTinNhanVien.getRowCount() > 0){
+            model.removeRow(0);
+        }
+        NhanVien nv = new NhanVien();
+        ArrayList<NhanVien> nvarr = NhanVienDAL.getListNhanVien();
+        for (int i = 0; i < nvarr.size(); i++){
+            nv = nvarr.get(i);
+            String maNV = nv.maNV;
+            String tenNV = nv.tenNV;
+            String chucVu = nv.chucVu;
+            String ngaySinh = nv.ngaySinh;
+            String ngayVL = nv.ngayVL;
+            int mucLuong = nv.mucLuong;
+            String username = nv.username;
+            Object[] row = {maNV, tenNV, chucVu, ngayVL, ngaySinh, mucLuong};
+            model.addRow(row);
+        }
+        TableThongTinNhanVien.setModel(model);
     }
 
     /**
@@ -36,7 +61,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         BTCapNhat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableThongTinNhanVien = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
@@ -96,8 +121,8 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableThongTinNhanVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        TableThongTinNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -108,9 +133,9 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Ngày Vào Làm", "Ngày Sinh", "Mức Lương"
             }
         ));
-        jTable1.setSelectionBackground(new java.awt.Color(0, 168, 232));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 168, 232));
-        jScrollPane1.setViewportView(jTable1);
+        TableThongTinNhanVien.setSelectionBackground(new java.awt.Color(0, 168, 232));
+        TableThongTinNhanVien.setSelectionForeground(new java.awt.Color(0, 168, 232));
+        jScrollPane1.setViewportView(TableThongTinNhanVien);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -189,7 +214,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
-        int selected = jTable1.getSelectedRow();
+        int selected = TableThongTinNhanVien.getSelectedRow();
         if (selected < 0){
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
         }
@@ -241,13 +266,13 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton BTCapNhat;
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
+    private javax.swing.JTable TableThongTinNhanVien;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

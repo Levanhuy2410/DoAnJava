@@ -5,6 +5,7 @@
  */
 package DAL;
 import DTO.TaiKhoan;
+import DTO.NhanVien;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -49,6 +50,10 @@ public class TaiKhoanDAL {
         } catch (SQLException e){
             e.printStackTrace();
         }
+        return result;
+    }
+    public static NhanVien getNhanVien(String username){
+        NhanVien result = null;
         return result;
     }
 }
