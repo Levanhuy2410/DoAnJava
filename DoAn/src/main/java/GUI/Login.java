@@ -6,6 +6,7 @@
 package GUI;
 import DAL.TaiKhoanDAL;
 import DTO.TaiKhoan;
+import BLL.TaiKhoanBLL;
 import java.sql.Connection;
 import Main.*;
 import javax.swing.JOptionPane;
@@ -24,7 +25,7 @@ public class Login extends javax.swing.JFrame {
     public void DangNhap(){
         String username = Username.getText();
         String password = new String(Password.getPassword());
-        if (DAL.TaiKhoanDAL.KiemTraLogin(username, password)){
+        if (BLL.TaiKhoanBLL.KiemTraLogin(username, password)){
             ManHinhChinh mainscr = new ManHinhChinh();
             mainscr.setVisible(true);
             dispose();

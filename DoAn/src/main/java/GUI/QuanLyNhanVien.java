@@ -6,6 +6,7 @@
 package GUI;
 import DAL.NhanVienDAL;
 import DTO.NhanVien;
+import BLL.NhanVienBLL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +30,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             model.removeRow(0);
         }
         NhanVien nv = new NhanVien();
-        ArrayList<NhanVien> nvarr = NhanVienDAL.getListNhanVien();
+        ArrayList<NhanVien> nvarr = NhanVienBLL.NhanVienAll();
         for (int i = 0; i < nvarr.size(); i++){
             nv = nvarr.get(i);
             String maNV = nv.maNV;

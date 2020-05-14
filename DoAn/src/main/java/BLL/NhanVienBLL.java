@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 package BLL;
-import DTO.TaiKhoan;
-import DAL.TaiKhoanDAL;
+import DAL.NhanVienDAL;
+import DTO.NhanVien;
+import java.util.ArrayList;
 /**
  *
  * @author USER
  */
-public class TaiKhoanBLL {
-    
-    public static boolean KiemTraLogin(String username, String password) {
-        return TaiKhoanDAL.KiemTraLogin(username, password);
+public class NhanVienBLL {
+    public static ArrayList<NhanVien> NhanVienAll(){
+        return NhanVienDAL.getListNhanVien();
     }
 }
