@@ -7,7 +7,7 @@
 package GUI;
 
 import BLL.LoaiSpBLL;
-import DTO.LoaiSpDTO;
+import DTO.LoaiSP;
 import java.util.List;
 
 /**
@@ -24,8 +24,8 @@ public class SanPhamThem extends javax.swing.JFrame {
     }
     public void loadLoaisp() {
       LoaiSpBLL loaiSpBLL = new LoaiSpBLL();
-      List<LoaiSpDTO> allLoaiSp = loaiSpBLL.getAllLoaiSp();
-      allLoaiSp.forEach((LoaiSpDTO action) -> {
+      List<LoaiSP> allLoaiSp = loaiSpBLL.getAllLoaiSp();
+      allLoaiSp.forEach((LoaiSP action) -> {
         jComboBox1.addItem(action.getTenLSp());
       });
     }

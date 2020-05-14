@@ -6,7 +6,7 @@
 package Main;
 
 import BLL.LoaiSpBLL;
-import DTO.LoaiSpDTO;
+import DTO.LoaiSP;
 import GUI.Login;
 import java.sql.*;
 import java.util.List;

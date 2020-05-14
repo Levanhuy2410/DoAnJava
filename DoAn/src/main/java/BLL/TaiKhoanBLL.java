@@ -4,20 +4,10 @@
  * and open the template in the editor.
  */
 package BLL;
-
-import DAL.LoaiSpDAL;
+import DAL.TaiKhoanDAL;
 import DTO.LoaiSP;
-import java.util.List;
-
 /**
  *
- * @author Cong
+ * @author USER
  */
-public class LoaiSpBLL {
 
-    LoaiSpDAL loaiSpDAL = new LoaiSpDAL();
-
-    public List<LoaiSP> getAllLoaiSp() {
-        return loaiSpDAL.getAllLoaiSp();
-    }
-}
