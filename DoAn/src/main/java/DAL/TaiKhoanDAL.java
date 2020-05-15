@@ -9,6 +9,8 @@ import DTO.NhanVien;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,8 +54,23 @@ public class TaiKhoanDAL {
         }
         return result;
     }
-    public static NhanVien getNhanVien(String username){
-        NhanVien result = null;
+    public static ArrayList<String> getThongTinNhanVien(String username){
+        ArrayList<String> result = new ArrayList<>();
+        String query = "SELECT TENNV, CHUCVU FROM NHANVIEN WHERE USERNAME = '" + username + "'";
+        ArrayList<Object> nv = new ArrayList<>();
+        try {
+            JdbcConnection.getConnection();
+            ResultSet rs = JdbcConnection.executeQuery(query, nv);
+            if (rs.next()){
+                result.add(rs.getString("TENNV"));
+                result.add(rs.getString("CHUCVU"));
+            }
+            else {
+                result = null;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return result;
     }
 }

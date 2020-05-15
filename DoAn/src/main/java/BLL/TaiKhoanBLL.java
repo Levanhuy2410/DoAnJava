@@ -6,6 +6,7 @@
 package BLL;
 import DTO.TaiKhoan;
 import DAL.TaiKhoanDAL;
+import java.util.ArrayList;
 /**
  *
  * @author USER
@@ -14,5 +15,8 @@ public class TaiKhoanBLL {
     
     public static boolean KiemTraLogin(String username, String password) {
         return TaiKhoanDAL.KiemTraLogin(username, password);
+    }
+    public static ArrayList<String> getThongTinNhanVien(String username){
+        return TaiKhoanDAL.getThongTinNhanVien(username);
     }
 }

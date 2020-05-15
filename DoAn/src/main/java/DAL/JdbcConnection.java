@@ -52,6 +52,25 @@ public class JdbcConnection {
         }
         return rs;
     }
+    // Dành cho các câu lệnh Update, Insert
+    public static boolean executeUpdate(String sql, ArrayList<Object> arr){
+        try {
+            PreparedStatement stm;
+            stm = JdbcConnection.getConnection().prepareStatement(sql);
+            if (arr.size() > 0) {
+                for (int i = 0; i < arr.size(); i++) {
+                    stm.setObject(i + 1, arr.get(i));
+                }
+            }
+            stm.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
 
 //  public static void main(String[] args) throws SQLException {
 //    Connection connection = getConnection();

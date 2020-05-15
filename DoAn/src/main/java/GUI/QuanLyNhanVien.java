@@ -25,8 +25,8 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         TableThongTinNhanVien();
     }
     public void TableThongTinNhanVien(){
-        DefaultTableModel model = (DefaultTableModel) TableThongTinNhanVien.getModel();
-        while (TableThongTinNhanVien.getRowCount() > 0){
+        DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
+        while (JTableNhanVien.getRowCount() > 0){
             model.removeRow(0);
         }
         NhanVien nv = new NhanVien();
@@ -43,7 +43,12 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             Object[] row = {maNV, tenNV, chucVu, ngayVL, ngaySinh, mucLuong};
             model.addRow(row);
         }
-        TableThongTinNhanVien.setModel(model);
+        JTableNhanVien.setModel(model);
+    }
+    // Add 1 dòng lên table
+    public static void AddRowToTable(Object [] dataRow){
+        DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
+        model.addRow(dataRow);
     }
 
     /**
@@ -62,7 +67,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         BTCapNhat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableThongTinNhanVien = new javax.swing.JTable();
+        JTableNhanVien = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
@@ -122,8 +127,8 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             }
         });
 
-        TableThongTinNhanVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        TableThongTinNhanVien.setModel(new javax.swing.table.DefaultTableModel(
+        JTableNhanVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        JTableNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -134,9 +139,9 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Ngày Vào Làm", "Ngày Sinh", "Mức Lương"
             }
         ));
-        TableThongTinNhanVien.setSelectionBackground(new java.awt.Color(0, 168, 232));
-        TableThongTinNhanVien.setSelectionForeground(new java.awt.Color(0, 168, 232));
-        jScrollPane1.setViewportView(TableThongTinNhanVien);
+        JTableNhanVien.setSelectionBackground(new java.awt.Color(0, 168, 232));
+        JTableNhanVien.setSelectionForeground(new java.awt.Color(0, 168, 232));
+        jScrollPane1.setViewportView(JTableNhanVien);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -215,7 +220,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
-        int selected = TableThongTinNhanVien.getSelectedRow();
+        int selected = JTableNhanVien.getSelectedRow();
         if (selected < 0){
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
         }
@@ -267,7 +272,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton BTCapNhat;
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
-    private javax.swing.JTable TableThongTinNhanVien;
+    public static javax.swing.JTable JTableNhanVien;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

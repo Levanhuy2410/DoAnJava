@@ -7,8 +7,11 @@ package GUI;
 import DAL.TaiKhoanDAL;
 import DTO.TaiKhoan;
 import BLL.TaiKhoanBLL;
+import static GUI.ManHinhChinh.ChucVu;
+import static GUI.ManHinhChinh.TenNV;
 import java.sql.Connection;
 import Main.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
@@ -28,6 +31,7 @@ public class Login extends javax.swing.JFrame {
         if (BLL.TaiKhoanBLL.KiemTraLogin(username, password)){
             ManHinhChinh mainscr = new ManHinhChinh();
             mainscr.setVisible(true);
+            mainscr.loadThongTinNhanVien(username);
             dispose();
         }
         else {
@@ -167,7 +171,7 @@ public class Login extends javax.swing.JFrame {
 
     private void BTLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTLoginActionPerformed
         // TODO add your handling code here:
-        DangNhap();
+        this.DangNhap();
     }//GEN-LAST:event_BTLoginActionPerformed
 
     private void BTExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTExitActionPerformed
@@ -219,7 +223,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton BTExit;
     private javax.swing.JButton BTLogin;
     private javax.swing.JPasswordField Password;
-    private javax.swing.JTextField Username;
+    public javax.swing.JTextField Username;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

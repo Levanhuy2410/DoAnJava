@@ -37,4 +37,15 @@ public class NhanVienDAL {
         }
         return result;
     }
+    
+    public static boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong){
+        boolean result = true;
+        String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG) "
+                + "VALUES (id_manv.NEXTVAL,'" + tenNV + "','" + chucVu + "', TO_DATE('" + ngayVL + "','YYYY-MM-DD'), TO_DATE('" + ngaySinh + "','YYYY-MM-DD'),'" 
+                + mucLuong + "')";
+        ArrayList<Object> arr = new ArrayList<>();
+        JdbcConnection.getConnection();
+        result = JdbcConnection.executeUpdate(query, arr);
+        return result;
+    }
 }

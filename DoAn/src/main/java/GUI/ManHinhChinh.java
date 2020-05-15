@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import BLL.TaiKhoanBLL;
+import DAL.NhanVienDAL;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -25,7 +27,13 @@ public class ManHinhChinh extends javax.swing.JFrame {
         String date = new Date().toString();
         timelable.setText(date);
     }
-
+    public void loadThongTinNhanVien(String loginUser){
+        Login login = new Login();
+        String username = loginUser;
+        ArrayList<String> nv = TaiKhoanBLL.getThongTinNhanVien(username);
+        TenNV.setText(nv.get(0));
+        ChucVu.setText(nv.get(1));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,10 +61,10 @@ public class ManHinhChinh extends javax.swing.JFrame {
         BTReturn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        TenNV = new javax.swing.JLabel();
         timelable = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        ChucVu = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -87,7 +95,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(234, 234, 234)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
                 .addGap(234, 234, 234))
         );
         jPanel1Layout.setVerticalGroup(
@@ -95,7 +103,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 0, 948, 140));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 0, 940, 140));
 
         jPanel2.setBackground(new java.awt.Color(0, 168, 232));
 
@@ -242,7 +250,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 43, Short.MAX_VALUE)))
+                        .addGap(0, 47, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -254,7 +262,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BTReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(BTQuanLyNhapKho, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTQuanLyXuatKho, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,14 +283,14 @@ public class ManHinhChinh extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -1, -1, 930));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -1, 260, 930));
 
         jPanel3.setBackground(new java.awt.Color(250, 250, 250));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-male-user-100.png"))); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("TÊN NHÂN VIÊN...");
+        TenNV.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TenNV.setText("TÊN NHÂN VIÊN...");
 
         timelable.setBackground(new java.awt.Color(0, 0, 0));
         timelable.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
@@ -292,9 +300,9 @@ public class ManHinhChinh extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 2, 28)); // NOI18N
         jLabel5.setText("WELCOME BACK...");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("CHỨC VỤ");
+        ChucVu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ChucVu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChucVu.setText("CHỨC VỤ");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -314,7 +322,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -322,8 +330,8 @@ public class ManHinhChinh extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+                                .addComponent(ChucVu)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
                                 .addComponent(jLabel7)
                                 .addGap(244, 244, 244)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,16 +352,16 @@ public class ManHinhChinh extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jLabel4)))
+                        .addComponent(TenNV)))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel6)
+                    .addComponent(ChucVu)
                     .addComponent(jLabel8))
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 950, 220));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 940, 220));
 
         jPanel4.setBackground(new java.awt.Color(250, 250, 250));
         jPanel4.setLayout(new java.awt.GridLayout(2, 2, 15, 15));
@@ -492,6 +500,8 @@ public class ManHinhChinh extends javax.swing.JFrame {
     private javax.swing.JButton BTQuanLyThongTinThanhVien;
     private javax.swing.JButton BTQuanLyXuatKho;
     private javax.swing.JButton BTReturn;
+    public static javax.swing.JLabel ChucVu;
+    public static javax.swing.JLabel TenNV;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
@@ -500,9 +510,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
