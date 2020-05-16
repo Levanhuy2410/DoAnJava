@@ -12,10 +12,12 @@ import java.util.ArrayList;
  * @author USER
  */
 public class NhanVienBLL {
+    public static NhanVienDAL NhanVienDAL = new NhanVienDAL();
+    
     public static ArrayList<NhanVien> NhanVienAll(){
         return NhanVienDAL.getListNhanVien();
     }
-    public static boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong){
-        return NhanVienDAL.insertNhanVien(tenNV, chucVu, ngayVL, ngaySinh, mucLuong);
+    public static boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong, String username){
+        return NhanVienDAL.insertNhanVien(tenNV, chucVu, ngayVL, ngaySinh, mucLuong, username);
     }
 }

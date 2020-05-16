@@ -70,8 +70,17 @@ public class JdbcConnection {
         }
         return true;
     }
+    public static void closeConnection(){
+        try {
+            if (JdbcConnection.getConnection()!=null){
+                JdbcConnection.getConnection().close();
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
     
-
 //  public static void main(String[] args) throws SQLException {
 //    Connection connection = getConnection();
 //    if (connection != null) System.out.println("_________________________Connected______________________");

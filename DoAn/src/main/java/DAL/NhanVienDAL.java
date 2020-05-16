@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  * @author USER
  */
 public class NhanVienDAL {
-    public static ArrayList<NhanVien> getListNhanVien(){
+    // Hàm hiện danh sách nhân viên
+    public ArrayList<NhanVien> getListNhanVien(){
         ArrayList<NhanVien> result = new ArrayList<>();
         String query = "SELECT * FROM NHANVIEN";
         ArrayList<Object> arr = new ArrayList<>();
@@ -32,20 +33,26 @@ public class NhanVienDAL {
                 String username = rs.getString("USERNAME");
                 result.add(new NhanVien(maNV, tenNV, chucVu, ngayVL, ngaySinh, mucLuong, username));
             }
+            JdbcConnection.closeConnection();
         } catch (SQLException ex) {
             Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
         }
         return result;
     }
-    
-    public static boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong){
-        boolean result = true;
-        String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG) "
-                + "VALUES (id_manv.NEXTVAL,'" + tenNV + "','" + chucVu + "', TO_DATE('" + ngayVL + "','YYYY-MM-DD'), TO_DATE('" + ngaySinh + "','YYYY-MM-DD'),'" 
-                + mucLuong + "')";
-        ArrayList<Object> arr = new ArrayList<>();
-        JdbcConnection.getConnection();
-        result = JdbcConnection.executeUpdate(query, arr);
+    // Hàm tạo nhân viên
+    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong, String username){
+        boolean result = false;
+        try {   
+            String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG, USERNAME) "
+                    + "VALUES (id_manv.NEXTVAL,'" + tenNV + "','" + chucVu + "', TO_DATE('" + ngayVL + "','YYYY-MM-DD'), TO_DATE('" + ngaySinh + "','YYYY-MM-DD'),'" 
+                    + mucLuong + "','" + username +"')";
+            ArrayList<Object> arr = new ArrayList<>();
+            JdbcConnection.getConnection();
+            result = JdbcConnection.executeUpdate(query, arr);
+            JdbcConnection.closeConnection();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
         return result;
     }
 }

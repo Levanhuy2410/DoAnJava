@@ -24,7 +24,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         initComponents();
         TableThongTinNhanVien();
     }
-    public void TableThongTinNhanVien(){
+    public static void TableThongTinNhanVien(){
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
         while (JTableNhanVien.getRowCount() > 0){
             model.removeRow(0);
