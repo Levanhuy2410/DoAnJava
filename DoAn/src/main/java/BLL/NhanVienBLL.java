@@ -20,4 +20,12 @@ public class NhanVienBLL {
     public static boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong, String username){
         return NhanVienDAL.insertNhanVien(tenNV, chucVu, ngayVL, ngaySinh, mucLuong, username);
     }
+    
+    public static boolean deleteNhanVien(String MaNV){
+        return NhanVienDAL.deleteNhanVien(MaNV);
+    }
+    
+    public static boolean updateNhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong){
+        return NhanVienDAL.updateNhanVien(maNV, tenNV, chucVu, ngayVL, ngaySinh, mucLuong);
+    }
 }

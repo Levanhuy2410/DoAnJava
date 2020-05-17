@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+
 import DAL.NhanVienDAL;
 import DTO.NhanVien;
 import BLL.NhanVienBLL;
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author USER
  */
 public class QuanLyNhanVien extends javax.swing.JFrame {
-
+    public NhanVienCapNhat capnhat = new NhanVienCapNhat();
     /**
      * Creates new form QuanLySanPham
      */
@@ -24,14 +25,15 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         initComponents();
         TableThongTinNhanVien();
     }
-    public static void TableThongTinNhanVien(){
+
+    public static void TableThongTinNhanVien() {
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
-        while (JTableNhanVien.getRowCount() > 0){
+        while (JTableNhanVien.getRowCount() > 0) {
             model.removeRow(0);
         }
         NhanVien nv = new NhanVien();
         ArrayList<NhanVien> nvarr = NhanVienBLL.NhanVienAll();
-        for (int i = 0; i < nvarr.size(); i++){
+        for (int i = 0; i < nvarr.size(); i++) {
             nv = nvarr.get(i);
             String maNV = nv.maNV;
             String tenNV = nv.tenNV;
@@ -45,10 +47,21 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         }
         JTableNhanVien.setModel(model);
     }
+
     // Add 1 dòng lên table
-    public static void AddRowToTable(Object [] dataRow){
+    public void AddRowToTable(Object[] dataRow) {
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
         model.addRow(dataRow);
+    }
+    // Update row
+    public static void UpdateRow(Object[] row){
+        int indexTB = JTableNhanVien.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
+        model.setValueAt(row[0], indexTB, 1);
+        model.setValueAt(row[1], indexTB, 2);
+        model.setValueAt(row[2], indexTB, 3);
+        model.setValueAt(row[3], indexTB, 4);
+        model.setValueAt(row[4], indexTB, 5);
     }
 
     /**
@@ -64,7 +77,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         BTThem = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BTXoa = new javax.swing.JButton();
         BTCapNhat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableNhanVien = new javax.swing.JTable();
@@ -112,10 +125,15 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
-        jButton2.setText("  XÓA");
+        BTXoa.setBackground(new java.awt.Color(255, 0, 0));
+        BTXoa.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        BTXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
+        BTXoa.setText("  XÓA");
+        BTXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTXoaActionPerformed(evt);
+            }
+        });
 
         BTCapNhat.setBackground(new java.awt.Color(51, 255, 51));
         BTCapNhat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -169,7 +187,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(BTCapNhat)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
@@ -190,7 +208,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BTThem)
-                        .addComponent(jButton2)
+                        .addComponent(BTXoa)
                         .addComponent(BTCapNhat)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
@@ -220,15 +238,46 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
+        // Lấy vị trí đang chọn trên JTable
         int selected = JTableNhanVien.getSelectedRow();
-        if (selected < 0){
+        
+        if (selected < 0) {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
-        }
-        else {
-            NhanVienCapNhat capnhat = new NhanVienCapNhat();
+        } else {
+            // Lấy dữ liệu dòng đang chọn hiện lên 
+            String MANV = JTableNhanVien.getModel().getValueAt(selected, 0).toString();
+            String TENNV = JTableNhanVien.getModel().getValueAt(selected, 1).toString();
+            String CHUCVU = JTableNhanVien.getModel().getValueAt(selected, 2).toString();
+            String NGAYVL = JTableNhanVien.getModel().getValueAt(selected, 3).toString();
+            String NGAYSINH = JTableNhanVien.getModel().getValueAt(selected, 4).toString();
+            String MUCLUONG = JTableNhanVien.getModel().getValueAt(selected, 5).toString();
+            // Hiện lên JFrame cập nhật
+            capnhat.maNV.setText(MANV);
+            capnhat.tenNV.setText(TENNV);
+            capnhat.chucVu.setSelectedItem(CHUCVU);
+            capnhat.ngayVL.setText(NGAYVL);
+            capnhat.ngaySinh.setText(NGAYSINH);
+            capnhat.mucLuong.setText(MUCLUONG);
             capnhat.setVisible(true);
         }
     }//GEN-LAST:event_BTCapNhatActionPerformed
+
+    private void BTXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXoaActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
+        // Lay vi tri dang chon tren JTable
+        int indexTB = JTableNhanVien.getSelectedRow();
+        // Lay du lieu tu dong dang chon.
+        String maNV = JTableNhanVien.getModel().getValueAt(indexTB, 0).toString();
+        // Delete dong du lieu
+        if (NhanVienBLL.deleteNhanVien(maNV)) {
+            JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            model.removeRow(indexTB);   
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BTXoaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,8 +321,8 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton BTCapNhat;
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
+    private javax.swing.JButton BTXoa;
     public static javax.swing.JTable JTableNhanVien;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

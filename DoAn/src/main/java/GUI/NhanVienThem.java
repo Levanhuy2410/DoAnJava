@@ -19,8 +19,6 @@ import javax.swing.text.MaskFormatter;
  */
 public class NhanVienThem extends javax.swing.JFrame {
 
-    public int a = 0;
-
     /**
      * Creates new form ThemSanPham
      */
@@ -282,25 +280,30 @@ public class NhanVienThem extends javax.swing.JFrame {
         String PASSWORD = new String(password.getPassword());
         String REPASSWORD = new String(repassword.getPassword());
         // Check thông tin 2 pass có trùng nhau không
-        if (!PASSWORD.equals(REPASSWORD)) {
-            JOptionPane.showMessageDialog(rootPane, "Password nhập lại không trùng", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
+        if (TENNV.isEmpty() || CHUCVU.isEmpty() || NGAYVL.isEmpty() || NGAYSINH.isEmpty()
+                || USERNAME.isEmpty() || PASSWORD.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Dữ liệu không được để trống", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
         } else {
-            // Check username có bị trùng hay không
-            if (BLL.TaiKhoanBLL.kiemTraTrungUsername(USERNAME)) {
-                JOptionPane.showMessageDialog(rootPane, "Tên username bị trùng", "Lỗi trùng username", JOptionPane.ERROR_MESSAGE);
+            if (!PASSWORD.equals(REPASSWORD)) {
+                JOptionPane.showMessageDialog(rootPane, "Password nhập lại không trùng", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
             } else {
-                // Insert into NhanVien
-                BLL.NhanVienBLL.insertNhanVien(TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG, USERNAME);
-                // Insert into TaiKhoan
-                //        // Insert on Table
-                //        Object[] row = {++a, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG};
-                //        QuanLyNhanVien.AddRowToTable(row);
-                // insert into TaiKhoan
-                BLL.TaiKhoanBLL.insertTaiKhoan(USERNAME, PASSWORD, CHUCVU);
-                // reload list
-                QuanLyNhanVien.TableThongTinNhanVien();
-                // Thông báo thành công
-                JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                // Check username có bị trùng hay không
+                if (BLL.TaiKhoanBLL.kiemTraTrungUsername(USERNAME)) {
+                    JOptionPane.showMessageDialog(rootPane, "Tên username bị trùng", "Lỗi trùng username", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Insert into NhanVien
+                    BLL.NhanVienBLL.insertNhanVien(TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG, USERNAME);
+                    // Insert into TaiKhoan
+                    //        // Insert on Table
+                    //        Object[] row = {++a, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG};
+                    //        QuanLyNhanVien.AddRowToTable(row);
+                    // insert into TaiKhoan
+                    BLL.TaiKhoanBLL.insertTaiKhoan(USERNAME, PASSWORD, CHUCVU);
+                    // reload list
+                    QuanLyNhanVien.TableThongTinNhanVien();
+                    // Thông báo thành công
+                    JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_BTThemActionPerformed

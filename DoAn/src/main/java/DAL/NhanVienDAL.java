@@ -55,4 +55,33 @@ public class NhanVienDAL {
         }
         return result;
     }
+    // Ham` xoa' nhan vien
+    public boolean deleteNhanVien(String MaNV){
+        boolean result = false;
+        try {
+            String query = "DELETE FROM NHANVIEN WHERE MANV ='" + MaNV + "'";
+            ArrayList<Object> arr = new ArrayList<>();
+            JdbcConnection.getConnection();
+            result = JdbcConnection.executeUpdate(query, arr);
+            JdbcConnection.closeConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    // Hàm update nhân viên
+    public boolean updateNhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong){
+        boolean result = false;
+        try {
+            String query = "UPDATE NHANVIEN SET TENNV = '" + tenNV + "'," 
+                    + "CHUCVU = '" + chucVu + "', NGAYVL = TO_DATE('" + ngayVL + "','YYYY-MM-DD HH24:MI:SS'), NGAYSINH = TO_DATE('" + ngaySinh + "', 'YYYY-MM-DD HH24:MI:SS'), MUCLUONG = '" + mucLuong + "' WHERE MANV = '" + maNV + "'";
+            ArrayList<Object> arr = new ArrayList<>();
+            JdbcConnection.getConnection();
+            result = JdbcConnection.executeUpdate(query, arr);
+            JdbcConnection.closeConnection();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return result;
+    }
 }
