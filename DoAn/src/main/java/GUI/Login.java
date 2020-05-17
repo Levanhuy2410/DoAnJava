@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
  * @author USER
  */
 public class Login extends javax.swing.JFrame {
-
+    
+    TaiKhoanBLL TaiKhoanBLL = new TaiKhoanBLL();
     /**
      * Creates new form NewJFrame
      */
@@ -28,7 +29,7 @@ public class Login extends javax.swing.JFrame {
     public void DangNhap(){
         String username = Username.getText();
         String password = new String(Password.getPassword());
-        if (BLL.TaiKhoanBLL.KiemTraLogin(username, password)){
+        if (TaiKhoanBLL.KiemTraLogin(username, password)){
             ManHinhChinh mainscr = new ManHinhChinh();
             mainscr.setVisible(true);
             mainscr.loadThongTinNhanVien(username);
@@ -171,7 +172,13 @@ public class Login extends javax.swing.JFrame {
 
     private void BTLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTLoginActionPerformed
         // TODO add your handling code here:
-        this.DangNhap();
+        if (Username.getText().trim().isEmpty() || new String(Password.getPassword()).trim().isEmpty())
+        {
+            JOptionPane.showMessageDialog(rootPane, "Dữ liệu đang để trống", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            this.DangNhap();
+        }
     }//GEN-LAST:event_BTLoginActionPerformed
 
     private void BTExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTExitActionPerformed

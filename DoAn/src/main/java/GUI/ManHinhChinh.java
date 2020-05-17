@@ -17,7 +17,7 @@ import java.util.Date;
  * @author USER
  */
 public class ManHinhChinh extends javax.swing.JFrame {
-
+    public TaiKhoanBLL TaiKhoanBLL = new TaiKhoanBLL();
     /**
      * Creates new form ManHinhChinh
      */

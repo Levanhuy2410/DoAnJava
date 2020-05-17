@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class NhanVienDAL {
     // Hàm hiện danh sách nhân viên
-    public ArrayList<NhanVien> getListNhanVien(){
+    public static ArrayList<NhanVien> getListNhanVien(){
         ArrayList<NhanVien> result = new ArrayList<>();
         String query = "SELECT * FROM NHANVIEN";
         ArrayList<Object> arr = new ArrayList<>();

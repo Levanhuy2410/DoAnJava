@@ -6,7 +6,7 @@
 
 package GUI;
 
-
+import BLL.NhanVienBLL;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +18,7 @@ import javax.swing.text.MaskFormatter;
  * @author USER
  */
 public class NhanVienCapNhat extends javax.swing.JFrame {
-    
+    public NhanVienBLL NhanVienBLL = new NhanVienBLL();
     /** Creates new form ThemSanPham */
     
     public NhanVienCapNhat() {
@@ -211,17 +211,17 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
         // Lấy thông tin cập nhật
-        String MANV = maNV.getText();
-        String TENNV = tenNV.getText();
-        String CHUCVU = chucVu.getSelectedItem().toString();
-        String NGAYVL = ngayVL.getText();
-        String NGAYSINH = ngaySinh.getText();
+        String MANV = maNV.getText().trim();
+        String TENNV = tenNV.getText().trim();
+        String CHUCVU = chucVu.getSelectedItem().toString().trim();
+        String NGAYVL = ngayVL.getText().trim();
+        String NGAYSINH = ngaySinh.getText().trim();
         int MUCLUONG = Integer.parseInt(mucLuong.getText());
         // Kiểm tra các ô nhập liệu có để trống hay không
         if (TENNV.isEmpty() || CHUCVU.isEmpty() || NGAYVL.isEmpty() || NGAYSINH.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Dữ liệu không được để trống", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
         } else {
-            if (BLL.NhanVienBLL.updateNhanVien(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG)) 
+            if (NhanVienBLL.updateNhanVien(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG)) 
             {
                 JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
                 Object [] data = {TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG};

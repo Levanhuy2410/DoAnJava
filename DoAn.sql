@@ -84,7 +84,7 @@ ALTER TABLE loaisp ADD CONSTRAINT loaisp_pk PRIMARY KEY ( malsp );
 CREATE TABLE nhanvien (
     manv      NUMBER
         CONSTRAINT nnc_nhanvien_manv NOT NULL,
-    tennv     VARCHAR2(20),
+    tennv     VARCHAR2(30),
     chucvu    VARCHAR2(23),
     ngayvl    DATE,
     ngaysinh  DATE,
@@ -92,6 +92,8 @@ CREATE TABLE nhanvien (
     username  VARCHAR2(20)
 );
 alter table nhanvien modify manv number;
+alter table nhanvien modify tennv varchar2(30);
+alter table nhanvien modify mucluong number(15);
 ALTER TABLE nhanvien ADD CONSTRAINT nhanvien_pk PRIMARY KEY ( manv );
 
 CREATE TABLE phieukk (

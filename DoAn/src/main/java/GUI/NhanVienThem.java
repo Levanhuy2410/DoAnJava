@@ -18,7 +18,8 @@ import javax.swing.text.MaskFormatter;
  * @author USER
  */
 public class NhanVienThem extends javax.swing.JFrame {
-
+    public NhanVienBLL NhanVienBLL = new NhanVienBLL();
+    public TaiKhoanBLL TaiKhoanBLL = new TaiKhoanBLL();
     /**
      * Creates new form ThemSanPham
      */
@@ -270,15 +271,15 @@ public class NhanVienThem extends javax.swing.JFrame {
     private void BTThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemActionPerformed
         // TODO add your handling code here:
         // Lấy thông tin của nhân viên
-        String TENNV = tenNV.getText();
-        String CHUCVU = chucVu.getSelectedItem().toString();
-        String NGAYVL = ngayVL.getText();
-        String NGAYSINH = ngaySinh.getText();
-        int MUCLUONG = Integer.parseInt(mucLuong.getText());
+        String TENNV = tenNV.getText().trim();
+        String CHUCVU = chucVu.getSelectedItem().toString().trim();
+        String NGAYVL = ngayVL.getText().trim();
+        String NGAYSINH = ngaySinh.getText().trim();
+        int MUCLUONG = Integer.parseInt(mucLuong.getText().trim());
         // Lấy thông tin tài khoản 
-        String USERNAME = username.getText();
-        String PASSWORD = new String(password.getPassword());
-        String REPASSWORD = new String(repassword.getPassword());
+        String USERNAME = username.getText().trim();
+        String PASSWORD = new String(password.getPassword()).trim();
+        String REPASSWORD = new String(repassword.getPassword()).trim();
         // Check thông tin 2 pass có trùng nhau không
         if (TENNV.isEmpty() || CHUCVU.isEmpty() || NGAYVL.isEmpty() || NGAYSINH.isEmpty()
                 || USERNAME.isEmpty() || PASSWORD.isEmpty()) {
@@ -288,17 +289,17 @@ public class NhanVienThem extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Password nhập lại không trùng", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
             } else {
                 // Check username có bị trùng hay không
-                if (BLL.TaiKhoanBLL.kiemTraTrungUsername(USERNAME)) {
+                if (TaiKhoanBLL.kiemTraTrungUsername(USERNAME)) {
                     JOptionPane.showMessageDialog(rootPane, "Tên username bị trùng", "Lỗi trùng username", JOptionPane.ERROR_MESSAGE);
                 } else {
                     // Insert into NhanVien
-                    BLL.NhanVienBLL.insertNhanVien(TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG, USERNAME);
+                    NhanVienBLL.insertNhanVien(TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG, USERNAME);
                     // Insert into TaiKhoan
                     //        // Insert on Table
                     //        Object[] row = {++a, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG};
                     //        QuanLyNhanVien.AddRowToTable(row);
                     // insert into TaiKhoan
-                    BLL.TaiKhoanBLL.insertTaiKhoan(USERNAME, PASSWORD, CHUCVU);
+                    TaiKhoanBLL.insertTaiKhoan(USERNAME, PASSWORD, CHUCVU);
                     // reload list
                     QuanLyNhanVien.TableThongTinNhanVien();
                     // Thông báo thành công

@@ -12,17 +12,17 @@ import java.util.ArrayList;
  * @author USER
  */
 public class TaiKhoanBLL {
-    public static TaiKhoanDAL TaiKhoanDAL = new TaiKhoanDAL();
-    public static boolean KiemTraLogin(String username, String password) {
+    public TaiKhoanDAL TaiKhoanDAL = new TaiKhoanDAL();
+    public boolean KiemTraLogin(String username, String password) {
         return TaiKhoanDAL.KiemTraLogin(username, password);
     }
-    public static ArrayList<String> getThongTinNhanVien(String username){
+    public ArrayList<String> getThongTinNhanVien(String username){
         return TaiKhoanDAL.getThongTinNhanVien(username);
     }
-    public static boolean insertTaiKhoan(String username, String password, String loaiTK){
+    public boolean insertTaiKhoan(String username, String password, String loaiTK){
         return TaiKhoanDAL.insertTaiKhoan(username, password, loaiTK);
     }
-    public static boolean kiemTraTrungUsername(String username){
+    public boolean kiemTraTrungUsername(String username){
         return TaiKhoanDAL.kiemTraTrungUsername(username);
     }
 }

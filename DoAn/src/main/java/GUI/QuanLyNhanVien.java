@@ -8,6 +8,7 @@ package GUI;
 import DAL.NhanVienDAL;
 import DTO.NhanVien;
 import BLL.NhanVienBLL;
+import BLL.NhanVienBLL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QuanLyNhanVien extends javax.swing.JFrame {
     public NhanVienCapNhat capnhat = new NhanVienCapNhat();
+    public NhanVienBLL NhanVienBLL = new NhanVienBLL();
     /**
      * Creates new form QuanLySanPham
      */
@@ -32,7 +34,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             model.removeRow(0);
         }
         NhanVien nv = new NhanVien();
-        ArrayList<NhanVien> nvarr = NhanVienBLL.NhanVienAll();
+        ArrayList<NhanVien> nvarr = BLL.NhanVienBLL.NhanVienAll();
         for (int i = 0; i < nvarr.size(); i++) {
             nv = nvarr.get(i);
             String maNV = nv.maNV;
@@ -47,13 +49,12 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         }
         JTableNhanVien.setModel(model);
     }
-
     // Add 1 dòng lên table
     public void AddRowToTable(Object[] dataRow) {
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
         model.addRow(dataRow);
     }
-    // Update row
+    // Update 1 row trên table
     public static void UpdateRow(Object[] row){
         int indexTB = JTableNhanVien.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
