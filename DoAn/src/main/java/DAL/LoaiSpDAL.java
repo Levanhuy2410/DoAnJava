@@ -32,6 +32,27 @@ public class LoaiSpDAL {
     } catch (SQLException ex) {
       Logger.getLogger(LoaiSpDAL.class.getName()).log(Level.SEVERE, null, ex);
     }
+    finally {
+      try {
+        connection.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(LoaiSpDAL.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
     return listLoaiSp;
+  }
+  public int getIdLoaispByName(String name) {
+    String query = "SELECT MALSP FROM LOAISP WHERE TENLSP = ?";
+    try {
+      PreparedStatement ps = connection.prepareStatement(query);
+      ps.setString(1, name);
+      ResultSet rs = ps.executeQuery();
+      while (rs.next()) {
+        return rs.getInt(1);
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(LoaiSpDAL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return 0;
   }
 }

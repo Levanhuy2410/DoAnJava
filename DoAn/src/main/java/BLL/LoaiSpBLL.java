@@ -20,4 +20,7 @@ public class LoaiSpBLL {
     public List<LoaiSP> getAllLoaiSp() {
         return loaiSpDAL.getAllLoaiSp();
     }
+    public int getIdLoaispByName(String tenLsp) {
+      return loaiSpDAL.getIdLoaispByName(tenLsp);
+    }
 }
