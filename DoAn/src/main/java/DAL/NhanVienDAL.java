@@ -40,7 +40,7 @@ public class NhanVienDAL {
         return result;
     }
     // Hàm tạo nhân viên
-    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong, String username){
+    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String mucLuong, String username){
         boolean result = false;
         try {   
             String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG, USERNAME) "
@@ -70,7 +70,7 @@ public class NhanVienDAL {
         return result;
     }
     // Hàm update nhân viên
-    public boolean updateNhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong){
+    public boolean updateNhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, String mucLuong){
         boolean result = false;
         try {
             String query = "UPDATE NHANVIEN SET TENNV = '" + tenNV + "'," 

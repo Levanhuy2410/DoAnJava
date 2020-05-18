@@ -99,7 +99,6 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                 "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê"
             }
         ));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jTable1);
         jTable1.getAccessibleContext().setAccessibleName("");
 

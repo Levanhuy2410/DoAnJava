@@ -110,7 +110,6 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                 "Mã Hóa Đơn", "Ngày Hóa Đơn", "Thành Tiền", "Tên Thành Viên ( Nếu Có )", "Tên Nhân Viên Lập HĐ"
             }
         ));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(3).setPreferredWidth(130);

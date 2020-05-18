@@ -11,7 +11,9 @@ import BLL.NhanVienBLL;
 import BLL.NhanVienBLL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -20,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class QuanLyNhanVien extends javax.swing.JFrame {
     public NhanVienCapNhat capnhat = new NhanVienCapNhat();
     public NhanVienBLL NhanVienBLL = new NhanVienBLL();
+    
     /**
      * Creates new form QuanLySanPham
      */
@@ -64,7 +67,15 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         model.setValueAt(row[3], indexTB, 4);
         model.setValueAt(row[4], indexTB, 5);
     }
-
+    // Filter theo tên
+//    public void Filter(String query){
+//       DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
+//       TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+//       JTableNhanVien.setRowSorter(tr);
+//       
+//       tr.setRowFilter(RowFilter.regexFilter(query));
+//       JTableNhanVien.setRowSorter(tr);
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +93,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         BTCapNhat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableNhanVien = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        Filter = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
 
@@ -146,7 +157,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             }
         });
 
-        JTableNhanVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        JTableNhanVien.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         JTableNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -158,11 +169,15 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Ngày Vào Làm", "Ngày Sinh", "Mức Lương"
             }
         ));
-        JTableNhanVien.setSelectionBackground(new java.awt.Color(0, 168, 232));
-        JTableNhanVien.setSelectionForeground(new java.awt.Color(0, 168, 232));
+        JTableNhanVien.setShowHorizontalLines(false);
         jScrollPane1.setViewportView(JTableNhanVien);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Filter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Filter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                FilterKeyReleased(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-search-35.png"))); // NOI18N
 
@@ -194,7 +209,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(66, 66, 66)
@@ -211,12 +226,12 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                         .addComponent(BTThem)
                         .addComponent(BTXoa)
                         .addComponent(BTCapNhat)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTReturn)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1010, 460));
@@ -263,7 +278,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             capnhat.setVisible(true);
         }
     }//GEN-LAST:event_BTCapNhatActionPerformed
-
+    
     private void BTXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXoaActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
@@ -273,12 +288,21 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         String maNV = JTableNhanVien.getModel().getValueAt(indexTB, 0).toString();
         // Delete dong du lieu
         if (NhanVienBLL.deleteNhanVien(maNV)) {
-            JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             model.removeRow(indexTB);   
+            JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);   
         } else {
             JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BTXoaActionPerformed
+
+    private void FilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FilterKeyReleased
+        // TODO add your handling code here:
+       DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
+       String query = Filter.getText();
+       TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+       JTableNhanVien.setRowSorter(tr);
+       tr.setRowFilter(RowFilter.regexFilter(query));
+    }//GEN-LAST:event_FilterKeyReleased
 
     /**
      * @param args the command line arguments
@@ -323,12 +347,12 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
     private javax.swing.JButton BTXoa;
+    private javax.swing.JTextField Filter;
     public static javax.swing.JTable JTableNhanVien;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
