@@ -15,18 +15,22 @@ public class NhanVien {
     public String chucVu;
     public String ngayVL;
     public String ngaySinh;
+    public String sdt;
+    public String email;
     public int mucLuong;
     public String username;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, int mucLuong, String username) {
+    public NhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, int mucLuong, String username) {
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.chucVu = chucVu;
         this.ngayVL = ngayVL;
         this.ngaySinh = ngaySinh;
+        this.sdt = sdt;
+        this.email = email;
         this.mucLuong = mucLuong;
         this.username = username;
     }

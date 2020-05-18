@@ -21,7 +21,7 @@ CREATE TABLE ctphieukk (
     makk       NUMBER NOT NULL,
     slhethong  INTEGER,
     slt        INTEGER,
-    lydo       VARCHAR2(20)
+    lydo       VARCHAR2(50)
 );
 alter table ctphieukk modify masp number;
 alter table ctphieukk modify makk number;
@@ -64,9 +64,11 @@ alter table hoadon modify manv number;
 ALTER TABLE hoadon ADD CONSTRAINT hoadon_pk PRIMARY KEY ( mahd );
 
 CREATE TABLE khthanhvien (
-    matv    VARCHAR2(20) NOT NULL,
-    tentv   VARCHAR2(30),
-    loaitv  VARCHAR2(20),
+    matv    NUMBER NOT NULL,
+    tentv   VARCHAR2(50),
+    loaitv  VARCHAR2(50),
+    sdt       VARCHAR2(50),
+    email     VARCHAR2(50),
     diemtv  INTEGER
 );
 alter table khthanhvien modify matv number;
@@ -75,7 +77,7 @@ ALTER TABLE khthanhvien ADD CONSTRAINT khthanhvien_pk PRIMARY KEY ( matv );
 
 CREATE TABLE loaisp (
     malsp   NUMBER NOT NULL,
-    tenlsp  VARCHAR2(20)
+    tenlsp  VARCHAR2(50)
 );
 alter table loaisp modify malsp number;
 
@@ -84,16 +86,20 @@ ALTER TABLE loaisp ADD CONSTRAINT loaisp_pk PRIMARY KEY ( malsp );
 CREATE TABLE nhanvien (
     manv      NUMBER
         CONSTRAINT nnc_nhanvien_manv NOT NULL,
-    tennv     VARCHAR2(30),
-    chucvu    VARCHAR2(23),
+    tennv     VARCHAR2(50),
+    chucvu    VARCHAR2(50),
     ngayvl    DATE,
     ngaysinh  DATE,
-    mucluong  NUMBER(8),
-    username  VARCHAR2(20)
+    sdt       VARCHAR2(50),
+    email     VARCHAR2(50),
+    mucluong  NUMBER(10),
+    username  VARCHAR2(50)
 );
 alter table nhanvien modify manv number;
 alter table nhanvien modify tennv varchar2(30);
 alter table nhanvien modify mucluong number(15);
+alter table nhanvien add sdt varchar2(20);
+alter table nhanvien add email varchar2(50);
 ALTER TABLE nhanvien ADD CONSTRAINT nhanvien_pk PRIMARY KEY ( manv );
 
 CREATE TABLE phieukk (
@@ -107,7 +113,7 @@ ALTER TABLE phieukk ADD CONSTRAINT phieuxhv1_pk PRIMARY KEY ( makk );
 CREATE TABLE phieunh (
     manh    NUMBER NOT NULL,
     ngaynh  DATE,
-    nhacc   VARCHAR2(30)
+    nhacc   VARCHAR2(50)
 );
 alter table phieunh modify manh number;
 
@@ -123,22 +129,22 @@ ALTER TABLE phieuxh ADD CONSTRAINT phieuxh_pk PRIMARY KEY ( maxh );
 
 CREATE TABLE sanpham (
     masp    NUMBER NOT NULL,
-    tensp   VARCHAR2(20),
+    tensp   VARCHAR2(50),
     giaban  NUMBER(8),
-    tgbh    NUMBER(2),
-    hangsx  VARCHAR2(20),
+    tgbh    NUMBER,
+    hangsx  VARCHAR2(50),
     slton   INTEGER,
-    mota    VARCHAR2(30),
-    malsp   VARCHAR2(20) NOT NULL
+    mota    VARCHAR2(50),
+    malsp   VARCHAR2(50) NOT NULL
 );
 alter table sanpham modify masp number;
 
 ALTER TABLE sanpham ADD CONSTRAINT sanpham_pk PRIMARY KEY ( masp );
 
 CREATE TABLE taikhoan (
-    username  VARCHAR2(20) NOT NULL,
-    password  VARCHAR2(20),
-    loaitk    VARCHAR2(20)
+    username  VARCHAR2(50) NOT NULL,
+    password  VARCHAR2(50),
+    loaitk    VARCHAR2(50)
 );
 ALTER TABLE taikhoan modify loaitk varchar2(23);
 
@@ -200,14 +206,28 @@ drop sequence id_phieukk;
 drop sequence id_phieunhap;
 drop sequence id_phieuxuat;
 drop sequence id_masp;
+
+drop table CTHOADON;
+drop table CTPHIEUKK;
+drop table CTPHIEUNHAP;
+drop table CTPHIEUXUAT;
+drop table HOADON;
+drop table KHTHANHVIEN;
+drop table LOAISP;
+drop table NHANVIEN;
+drop table PHIEUKK;
+drop table PHIEUNH;
+drop table PHIEUXH;
+drop table SANPHAM;
+drop table TAIKHOAN;
 -- MANV SEQUENCE
 CREATE SEQUENCE id_manv
     INCREMENT BY 1
     START WITH 1
     MINVALUE 1
     MAXVALUE 10000
-    CYCLE
-    CACHE 2;
+    NOCYCLE
+    NOCACHE;
 -- MAHD SEQUENCE
 CREATE SEQUENCE id_mahd
     INCREMENT BY 1

@@ -8,7 +8,7 @@ package GUI;
 import DAL.NhanVienDAL;
 import DTO.NhanVien;
 import BLL.NhanVienBLL;
-import BLL.NhanVienBLL;
+import BLL.TaiKhoanBLL;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -22,7 +22,7 @@ import javax.swing.table.TableRowSorter;
 public class QuanLyNhanVien extends javax.swing.JFrame {
     public NhanVienCapNhat capnhat = new NhanVienCapNhat();
     public NhanVienBLL NhanVienBLL = new NhanVienBLL();
-    
+    public TaiKhoanBLL TaiKhoanBLL = new TaiKhoanBLL();
     /**
      * Creates new form QuanLySanPham
      */
@@ -46,8 +46,9 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             String ngaySinh = nv.ngaySinh;
             String ngayVL = nv.ngayVL;
             int mucLuong = nv.mucLuong;
-            String username = nv.username;
-            Object[] row = {maNV, tenNV, chucVu, ngayVL, ngaySinh, mucLuong};
+            String sdt = nv.sdt;
+            String email = nv.email; 
+            Object[] row = {maNV, tenNV, chucVu, ngayVL, ngaySinh, sdt, email, mucLuong};
             model.addRow(row);
         }
         JTableNhanVien.setModel(model);
@@ -66,6 +67,8 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         model.setValueAt(row[2], indexTB, 3);
         model.setValueAt(row[3], indexTB, 4);
         model.setValueAt(row[4], indexTB, 5);
+        model.setValueAt(row[5], indexTB, 6);
+        model.setValueAt(row[6], indexTB, 7);
     }
     // Filter theo tên
 //    public void Filter(String query){
@@ -160,13 +163,13 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         JTableNhanVien.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         JTableNhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Ngày Vào Làm", "Ngày Sinh", "Mức Lương"
+                "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Ngày Vào Làm", "Ngày Sinh", "SĐT", "Email", "Mức Lương"
             }
         ));
         JTableNhanVien.setShowHorizontalLines(false);
@@ -267,7 +270,9 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             String CHUCVU = JTableNhanVien.getModel().getValueAt(selected, 2).toString();
             String NGAYVL = JTableNhanVien.getModel().getValueAt(selected, 3).toString();
             String NGAYSINH = JTableNhanVien.getModel().getValueAt(selected, 4).toString();
-            String MUCLUONG = JTableNhanVien.getModel().getValueAt(selected, 5).toString();
+            String SDT = JTableNhanVien.getModel().getValueAt(selected, 5).toString();
+            String EMAIL = JTableNhanVien.getModel().getValueAt(selected, 6).toString();
+            String MUCLUONG = JTableNhanVien.getModel().getValueAt(selected, 7).toString();
             // Hiện lên JFrame cập nhật
             capnhat.maNV.setText(MANV);
             capnhat.tenNV.setText(TENNV);
@@ -275,6 +280,8 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             capnhat.ngayVL.setText(NGAYVL);
             capnhat.ngaySinh.setText(NGAYSINH);
             capnhat.mucLuong.setText(MUCLUONG);
+            capnhat.sdt.setText(SDT);
+            capnhat.email.setText(EMAIL);
             capnhat.setVisible(true);
         }
     }//GEN-LAST:event_BTCapNhatActionPerformed
@@ -286,9 +293,11 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         int indexTB = JTableNhanVien.getSelectedRow();
         // Lay du lieu tu dong dang chon.
         String maNV = JTableNhanVien.getModel().getValueAt(indexTB, 0).toString();
+        
         // Delete dong du lieu
         if (NhanVienBLL.deleteNhanVien(maNV)) {
-            model.removeRow(indexTB);   
+            model.removeRow(indexTB);
+            // Thông báo thành công
             JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);   
         } else {
             JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);

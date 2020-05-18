@@ -31,8 +31,11 @@ public class ManHinhChinh extends javax.swing.JFrame {
         Login login = new Login();
         String username = loginUser;
         ArrayList<String> nv = TaiKhoanBLL.getThongTinNhanVien(username);
+        // Lấy thông tin nhân viên hiện lên mainscreen
         TenNV.setText(nv.get(0));
         ChucVu.setText(nv.get(1));
+        Email.setText(nv.get(2));
+        SDT.setText(nv.get(3));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,8 +68,8 @@ public class ManHinhChinh extends javax.swing.JFrame {
         timelable = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         ChucVu = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        Email = new javax.swing.JLabel();
+        SDT = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -304,13 +307,13 @@ public class ManHinhChinh extends javax.swing.JFrame {
         ChucVu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChucVu.setText("CHỨC VỤ");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("EMAIL");
+        Email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Email.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Email.setText("EMAIL");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("SĐT");
+        SDT.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SDT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        SDT.setText("SĐT");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -332,10 +335,10 @@ public class ManHinhChinh extends javax.swing.JFrame {
                                 .addGap(20, 20, 20)
                                 .addComponent(ChucVu)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
-                                .addComponent(jLabel7)
+                                .addComponent(Email)
                                 .addGap(244, 244, 244)))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
+                            .addComponent(SDT)
                             .addComponent(timelable, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -355,9 +358,9 @@ public class ManHinhChinh extends javax.swing.JFrame {
                         .addComponent(TenNV)))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(Email)
                     .addComponent(ChucVu)
-                    .addComponent(jLabel8))
+                    .addComponent(SDT))
                 .addContainerGap())
         );
 
@@ -501,6 +504,8 @@ public class ManHinhChinh extends javax.swing.JFrame {
     private javax.swing.JButton BTQuanLyXuatKho;
     private javax.swing.JButton BTReturn;
     public static javax.swing.JLabel ChucVu;
+    private javax.swing.JLabel Email;
+    private javax.swing.JLabel SDT;
     public static javax.swing.JLabel TenNV;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -511,8 +516,6 @@ public class ManHinhChinh extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

@@ -81,7 +81,7 @@ public class TaiKhoanDAL {
     //  Hàm lấy thông tin nhân viên từ username
     public ArrayList<String> getThongTinNhanVien(String username) {
         ArrayList<String> result = new ArrayList<>();
-        String query = "SELECT TENNV, CHUCVU FROM NHANVIEN WHERE USERNAME = '" + username + "'";
+        String query = "SELECT TENNV, CHUCVU, SDT, EMAIL FROM NHANVIEN WHERE USERNAME = '" + username + "'";
         ArrayList<Object> nv = new ArrayList<>();
         try {
             JdbcConnection.getConnection();
@@ -89,6 +89,8 @@ public class TaiKhoanDAL {
             if (rs.next()) {
                 result.add(rs.getString("TENNV"));
                 result.add(rs.getString("CHUCVU"));
+                result.add(rs.getString("SDT"));
+                result.add(rs.getString("EMAIL"));
             } else {
                 result = null;
             }
@@ -113,4 +115,19 @@ public class TaiKhoanDAL {
         }
         return result;
     }
+
+    // Hàm xóa tài khoản từ mã nhân viên
+//    public boolean deleteTaiKhoan(String maNV) {
+//        boolean result = false;
+//        try {
+//            String query = "DELETE (SELECT * FROM TAIKHOAN tk JOIN NHANVIEN nv "
+//                        + "ON tk.username = nv.username WHERE nv.MANV = '" +  maNV + "'";
+//            ArrayList<Object> tk = new ArrayList<>();
+//            JdbcConnection.getConnection();
+//            result = JdbcConnection.executeUpdate(query, tk);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        return result;
+//    }
 }

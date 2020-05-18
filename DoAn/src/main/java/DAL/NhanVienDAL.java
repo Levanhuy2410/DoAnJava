@@ -29,9 +29,11 @@ public class NhanVienDAL {
                 String chucVu = rs.getString("CHUCVU");
                 String ngayVL = rs.getString("NGAYVL");
                 String ngaySinh = rs.getString("NGAYSINH");
+                String sdt = rs.getString("SDT");
+                String email = rs.getString("EMAIL");
                 int mucLuong = rs.getInt("MUCLUONG");
                 String username = rs.getString("USERNAME");
-                result.add(new NhanVien(maNV, tenNV, chucVu, ngayVL, ngaySinh, mucLuong, username));
+                result.add(new NhanVien(maNV, tenNV, chucVu, ngayVL, ngaySinh, sdt, email, mucLuong, username));
             }
             JdbcConnection.closeConnection();
         } catch (SQLException ex) {
@@ -40,12 +42,12 @@ public class NhanVienDAL {
         return result;
     }
     // Hàm tạo nhân viên
-    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String mucLuong, String username){
+    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, String mucLuong, String username){
         boolean result = false;
         try {   
-            String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG, USERNAME) "
+            String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG, USERNAME) "
                     + "VALUES (id_manv.NEXTVAL,'" + tenNV + "','" + chucVu + "', TO_DATE('" + ngayVL + "','YYYY-MM-DD'), TO_DATE('" + ngaySinh + "','YYYY-MM-DD'),'" 
-                    + mucLuong + "','" + username +"')";
+                    + sdt + "','" + email + "','" + mucLuong + "','" + username +"')";
             ArrayList<Object> arr = new ArrayList<>();
             JdbcConnection.getConnection();
             result = JdbcConnection.executeUpdate(query, arr);
@@ -59,10 +61,16 @@ public class NhanVienDAL {
     public boolean deleteNhanVien(String MaNV){
         boolean result = false;
         try {
-            String query = "DELETE FROM NHANVIEN WHERE MANV ='" + MaNV + "'";
+            String query1 = "DELETE FROM TAIKHOAN WHERE"
+                    + "EXISTS (SELECT * FROM NHANVIEN"
+                    + "WHERE NHANVIEN.MANV = TAIKHOAN." + MaNV + ")";
+            String query2 = "DELETE FROM NHANVIEN WHERE MANV ='" + MaNV + "'";
             ArrayList<Object> arr = new ArrayList<>();
             JdbcConnection.getConnection();
-            result = JdbcConnection.executeUpdate(query, arr);
+            // Xóa tài khoản của nhân viên
+            result = JdbcConnection.executeUpdate(query1, arr);
+            // Xóa thông tin nhân viên
+            result = JdbcConnection.executeUpdate(query2, arr);
             JdbcConnection.closeConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -70,11 +78,12 @@ public class NhanVienDAL {
         return result;
     }
     // Hàm update nhân viên
-    public boolean updateNhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, String mucLuong){
+    public boolean updateNhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, String mucLuong){
         boolean result = false;
         try {
             String query = "UPDATE NHANVIEN SET TENNV = '" + tenNV + "'," 
-                    + "CHUCVU = '" + chucVu + "', NGAYVL = TO_DATE('" + ngayVL + "','YYYY-MM-DD HH24:MI:SS'), NGAYSINH = TO_DATE('" + ngaySinh + "', 'YYYY-MM-DD HH24:MI:SS'), MUCLUONG = '" + mucLuong + "' WHERE MANV = '" + maNV + "'";
+                    + "CHUCVU = '" + chucVu + "', NGAYVL = TO_DATE('" + ngayVL + "','YYYY-MM-DD HH24:MI:SS'), NGAYSINH = TO_DATE('" + ngaySinh + 
+                    "', 'YYYY-MM-DD HH24:MI:SS'), SDT = '" + sdt + "', EMAIL = '" + email + "'," + "MUCLUONG = '" + mucLuong + "' WHERE MANV = '" + maNV + "'";
             ArrayList<Object> arr = new ArrayList<>();
             JdbcConnection.getConnection();
             result = JdbcConnection.executeUpdate(query, arr);

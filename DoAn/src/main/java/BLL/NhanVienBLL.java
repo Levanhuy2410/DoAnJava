@@ -25,7 +25,7 @@ public class NhanVienBLL {
     }
     private Component rootPane;
 
-    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String mucLuong, String username, String password, String repass) {
+    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, String mucLuong, String username, String password, String repass) {
         if (tenNV.isEmpty() || chucVu.isEmpty() || ngayVL.isEmpty() || ngaySinh.isEmpty() || mucLuong.isEmpty() || username.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Dữ liệu không được để trống", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -36,7 +36,7 @@ public class NhanVienBLL {
             JOptionPane.showMessageDialog(rootPane, "Tên username bị trùng", "Lỗi trùng username", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            return NhanVienDAL.insertNhanVien(tenNV, chucVu, ngayVL, ngaySinh, mucLuong, username);
+            return NhanVienDAL.insertNhanVien(tenNV, chucVu, ngayVL, ngaySinh, sdt, email, mucLuong, username);
         }
     }
 
@@ -44,12 +44,12 @@ public class NhanVienBLL {
         return NhanVienDAL.deleteNhanVien(MaNV);
     }
 
-    public boolean updateNhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, String mucLuong) {
+    public boolean updateNhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, String mucLuong) {
         if (tenNV.isEmpty() || chucVu.isEmpty() || ngayVL.isEmpty() || ngaySinh.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Dữ liệu không được để trống", "Lỗi nhập liệu", JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            return NhanVienDAL.updateNhanVien(maNV, tenNV, chucVu, ngayVL, ngaySinh, mucLuong);
+            return NhanVienDAL.updateNhanVien(maNV, tenNV, chucVu, ngayVL, ngaySinh, sdt, email, mucLuong);
         }
     }
 }
