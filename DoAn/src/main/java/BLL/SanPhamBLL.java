@@ -7,6 +7,7 @@ package BLL;
 
 import DAL.SanPhamDAL;
 import DTO.SanPham;
+import java.util.List;
 
 /**
  *
@@ -17,6 +18,9 @@ public class SanPhamBLL {
   public boolean themSanPham(String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, int maLsp) {
     SanPham sanpham = new SanPham(tenSp, giaBan, tgbh, hangSx, slTon, mota, maLsp);
     return sanphamDAL.themSanPham(sanpham);
+  }
+  public List<SanPham> getAllSanPham() {
+    return sanphamDAL.getAllSanPham();
   }
   
 }

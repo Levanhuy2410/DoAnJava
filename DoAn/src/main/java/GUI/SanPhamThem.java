@@ -258,14 +258,17 @@ public class SanPhamThem extends javax.swing.JFrame {
         String tenLsp = tenLoaiTxt.getSelectedItem().toString().trim();
         
         if (tenSp.isEmpty() || giaBan.isEmpty() || tgbh.isEmpty() || soluong.isEmpty() || hangSx.isEmpty() || mota.isEmpty() || tenLsp.isEmpty()) {
-          JOptionPane.showMessageDialog(rootPane, "Vui lòng kiểm tra lại dữ liệu");
+          JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
           return;
         }
         
         SanPhamBLL sanphamBLL = new SanPhamBLL();
         boolean result = sanphamBLL.themSanPham(tenSp, Integer.parseInt(giaBan), Integer.parseInt(tgbh), hangSx, Integer.parseInt(soluong), mota, loaiSpBLL.getIdLoaispByName(tenLsp));
-        if (result) JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công !");
-        else JOptionPane.showMessageDialog(null, "Không thành công, vui lòng kiểm tra lại thông tin");
+        if (result) {
+          JOptionPane.showMessageDialog(rootPane, "Thêm sản phẩm thành công !");
+          QuanLySanPham.loadAllSanpham();
+        }
+        else JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_BTThemActionPerformed
 
   private void tenLoaiTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenLoaiTxtActionPerformed

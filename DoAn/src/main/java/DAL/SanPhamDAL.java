@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +21,21 @@ import java.util.logging.Logger;
  */
 public class SanPhamDAL {
   private final Connection connection = JdbcConnection.getConnection();
+  public List<SanPham> getAllSanPham() {
+    String query = "SELECT * FROM SANPHAM";
+    List<SanPham> listSanPham = new ArrayList<>();
+    try {
+      PreparedStatement ps = connection.prepareStatement(query);
+      ResultSet rs = ps.executeQuery();
+      while (rs.next()) {
+        SanPham sanpham = new SanPham(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getInt(8));
+        listSanPham.add(sanpham);
+      }   
+    } catch (SQLException ex) {
+      Logger.getLogger(SanPhamDAL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return listSanPham;
+  }
   public boolean themSanPham(SanPham sanpham) {
     String query = "INSERT INTO SANPHAM VALUES(ID_MASP.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
     try {
@@ -40,4 +57,8 @@ public class SanPhamDAL {
     }
     return false;
   }
+//  public static void main(String[] args) {
+//    SanPhamDAL test = new SanPhamDAL();
+//    System.out.println(test.getAllSanPham());
+//  }
 }

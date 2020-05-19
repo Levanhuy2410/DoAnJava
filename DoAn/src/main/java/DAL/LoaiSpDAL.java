@@ -32,13 +32,6 @@ public class LoaiSpDAL {
     } catch (SQLException ex) {
       Logger.getLogger(LoaiSpDAL.class.getName()).log(Level.SEVERE, null, ex);
     }
-    finally {
-      try {
-        connection.close();
-      } catch (SQLException ex) {
-        Logger.getLogger(LoaiSpDAL.class.getName()).log(Level.SEVERE, null, ex);
-      }
-    }
     return listLoaiSp;
   }
   public int getIdLoaispByName(String name) {
