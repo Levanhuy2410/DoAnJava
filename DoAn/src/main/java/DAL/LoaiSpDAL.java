@@ -19,12 +19,12 @@ import java.util.logging.Logger;
 public class LoaiSpDAL {
   private final Connection connection = JdbcConnection.getConnection();
   
-  public List<LoaiSP> getAllLoaiSp() {
+  public static List<LoaiSP> getAllLoaiSp() {
     List<LoaiSP> listLoaiSp = new ArrayList<>();
     try {
       String query = "SELECT * FROM LOAISP";
-      PreparedStatement ps = connection.prepareStatement(query);
-      ResultSet rs = ps.executeQuery();
+      ArrayList<Object> arr = new ArrayList<>();
+      ResultSet rs = JdbcConnection.executeQuery(query, arr);
       while (rs.next()) {
         LoaiSP loaiSp = new LoaiSP(rs.getString(1), rs.getString(2));
         listLoaiSp.add(loaiSp);
@@ -34,12 +34,12 @@ public class LoaiSpDAL {
     }
     return listLoaiSp;
   }
-  public int getIdLoaispByName(String name) {
+  public static int getIdLoaispByName(String name) {
     String query = "SELECT MALSP FROM LOAISP WHERE TENLSP = ?";
     try {
-      PreparedStatement ps = connection.prepareStatement(query);
-      ps.setString(1, name);
-      ResultSet rs = ps.executeQuery();
+      ArrayList<Object> arr = new ArrayList<>();
+      arr.add(name);
+      ResultSet rs = JdbcConnection.executeQuery(query, arr);
       while (rs.next()) {
         return rs.getInt(1);
       }
@@ -47,5 +47,8 @@ public class LoaiSpDAL {
       Logger.getLogger(LoaiSpDAL.class.getName()).log(Level.SEVERE, null, ex);
     }
     return 0;
+  }
+  public static void main(String[] args) {
+    System.out.println(LoaiSpDAL.getIdLoaispByName("RAM DDR4"));
   }
 }
