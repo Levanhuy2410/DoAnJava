@@ -14,13 +14,15 @@ import java.util.List;
  * @author Cong
  */
 public class SanPhamBLL {
-  SanPhamDAL sanphamDAL = new SanPhamDAL();
   public boolean themSanPham(String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, int maLsp) {
     SanPham sanpham = new SanPham(tenSp, giaBan, tgbh, hangSx, slTon, mota, maLsp);
-    return sanphamDAL.themSanPham(sanpham);
+    return SanPhamDAL.themSanPham(sanpham);
   }
   public List<SanPham> getAllSanPham() {
-    return sanphamDAL.getAllSanPham();
+    return SanPhamDAL.getAllSanPham();
+  }
+  public static boolean xoaSanPham(String idSanPham) {
+    return SanPhamDAL.xoaSanPham(idSanPham);
   }
   
 }

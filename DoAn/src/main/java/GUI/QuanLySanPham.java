@@ -54,7 +54,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
     jLabel1 = new javax.swing.JLabel();
     jPanel2 = new javax.swing.JPanel();
     BTThem = new javax.swing.JButton();
-    jButton2 = new javax.swing.JButton();
+    btnXoa = new javax.swing.JButton();
     BTCapNhat = new javax.swing.JButton();
     jScrollPane1 = new javax.swing.JScrollPane();
     tableSanPham = new javax.swing.JTable();
@@ -102,10 +102,15 @@ public class QuanLySanPham extends javax.swing.JFrame {
       }
     });
 
-    jButton2.setBackground(new java.awt.Color(255, 0, 0));
-    jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
-    jButton2.setText("  XÓA");
+    btnXoa.setBackground(new java.awt.Color(255, 0, 0));
+    btnXoa.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+    btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
+    btnXoa.setText("  XÓA");
+    btnXoa.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnXoaActionPerformed(evt);
+      }
+    });
 
     BTCapNhat.setBackground(new java.awt.Color(51, 255, 51));
     BTCapNhat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -159,7 +164,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
           .addGroup(jPanel2Layout.createSequentialGroup()
             .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(50, 50, 50)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(50, 50, 50)
             .addComponent(BTCapNhat)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
@@ -180,7 +185,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
           .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
             .addComponent(BTThem)
-            .addComponent(jButton2)
+            .addComponent(btnXoa)
             .addComponent(BTCapNhat)
             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addGap(39, 39, 39)
@@ -219,6 +224,17 @@ public class QuanLySanPham extends javax.swing.JFrame {
             capnhat.setVisible(true);
         }
     }//GEN-LAST:event_BTCapNhatActionPerformed
+
+  private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+    // TODO add your handling code here:
+    String idSanPham = tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString();
+    if (SanPhamBLL.xoaSanPham(idSanPham)) {
+      QuanLySanPham.loadAllSanpham();
+      JOptionPane.showMessageDialog(rootPane, "Xóa sản phẩm thành công");
+      return;
+    }
+    JOptionPane.showMessageDialog(rootPane, "Xóa thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+  }//GEN-LAST:event_btnXoaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,7 +275,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
   private javax.swing.JButton BTCapNhat;
   private javax.swing.JButton BTReturn;
   private javax.swing.JButton BTThem;
-  private javax.swing.JButton jButton2;
+  private javax.swing.JButton btnXoa;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JPanel jPanel1;
