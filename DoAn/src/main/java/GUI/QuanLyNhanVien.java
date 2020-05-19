@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import DAL.NhanVienDAL;
 import DTO.NhanVien;
 import BLL.NhanVienBLL;
 import BLL.TaiKhoanBLL;
@@ -20,9 +19,11 @@ import javax.swing.table.TableRowSorter;
  * @author USER
  */
 public class QuanLyNhanVien extends javax.swing.JFrame {
+
     public NhanVienCapNhat capnhat = new NhanVienCapNhat();
     public NhanVienBLL NhanVienBLL = new NhanVienBLL();
     public TaiKhoanBLL TaiKhoanBLL = new TaiKhoanBLL();
+
     /**
      * Creates new form QuanLySanPham
      */
@@ -47,19 +48,21 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             String ngayVL = nv.ngayVL;
             int mucLuong = nv.mucLuong;
             String sdt = nv.sdt;
-            String email = nv.email; 
+            String email = nv.email;
             Object[] row = {maNV, tenNV, chucVu, ngayVL, ngaySinh, sdt, email, mucLuong};
             model.addRow(row);
         }
         JTableNhanVien.setModel(model);
     }
+
     // Add 1 dòng lên table
     public void AddRowToTable(Object[] dataRow) {
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
         model.addRow(dataRow);
     }
+
     // Update 1 row trên table
-    public static void UpdateRow(Object[] row){
+    public static void UpdateRow(Object[] row) {
         int indexTB = JTableNhanVien.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
         model.setValueAt(row[0], indexTB, 1);
@@ -70,6 +73,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         model.setValueAt(row[5], indexTB, 6);
         model.setValueAt(row[6], indexTB, 7);
     }
+
     // Filter theo tên
 //    public void Filter(String query){
 //       DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
@@ -260,7 +264,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
         // Lấy vị trí đang chọn trên JTable
         int selected = JTableNhanVien.getSelectedRow();
-        
+
         if (selected < 0) {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
         } else {
@@ -285,32 +289,38 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             capnhat.setVisible(true);
         }
     }//GEN-LAST:event_BTCapNhatActionPerformed
-    
+
     private void BTXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXoaActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
-        // Lay vi tri dang chon tren JTable
-        int indexTB = JTableNhanVien.getSelectedRow();
-        // Lay du lieu tu dong dang chon.
-        String maNV = JTableNhanVien.getModel().getValueAt(indexTB, 0).toString();
-        
-        // Delete dong du lieu
-        if (NhanVienBLL.deleteNhanVien(maNV)) {
-            model.removeRow(indexTB);
-            // Thông báo thành công
-            JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);   
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
+            // Lay vi tri dang chon tren JTable
+            int indexTB = JTableNhanVien.getSelectedRow();
+            // Lay du lieu tu dong dang chon.
+            String maNV = JTableNhanVien.getModel().getValueAt(indexTB, 0).toString();
+            // Delete dong du lieu
+            if (TaiKhoanBLL.deleteTaiKhoan(maNV)) {
+                {
+                    if (NhanVienBLL.deleteNhanVien(maNV)) {
+                        model.removeRow(indexTB);
+                        // Thông báo thành công
+                        JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_BTXoaActionPerformed
 
     private void FilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FilterKeyReleased
         // TODO add your handling code here:
-       DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
-       String query = Filter.getText();
-       TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
-       JTableNhanVien.setRowSorter(tr);
-       tr.setRowFilter(RowFilter.regexFilter(query));
+        DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
+        String query = Filter.getText();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+        JTableNhanVien.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(query));
     }//GEN-LAST:event_FilterKeyReleased
 
     /**

@@ -5,7 +5,14 @@
  */
 package GUI;
 
+import DTO.ThanhVien;
+import BLL.ThanhVienBLL;
+import static GUI.QuanLyNhanVien.JTableNhanVien;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -18,8 +25,29 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
      */
     public QuanLyThanhVien() {
         initComponents();
+        TableThongTinThanhVien();
     }
-
+    public static void TableThongTinThanhVien(){
+        DefaultTableModel model = (DefaultTableModel) JTableThanhVien.getModel();
+        while (JTableThanhVien.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+        ThanhVien tv = new ThanhVien();
+        ArrayList<ThanhVien> tvarr = ThanhVienBLL.ThanhVienALL();
+        for (int i = 0; i < tvarr.size(); i++) {
+            tv = tvarr.get(i);
+            String maTV = tv.maTV;
+            String tenTV = tv.tenTV;
+            String loaiTV = tv.loaiTV;
+            String sdt = tv.sdt;
+            String email = tv.email;
+            int diemTV = tv.diemTV;
+            Object[] row = {maTV, tenTV, loaiTV, sdt, email, diemTV};
+            model.addRow(row);
+        }
+        JTableThanhVien.setModel(model);    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,7 +64,7 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         BTCapNhat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTableThanhVien = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
@@ -96,23 +124,28 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTableThanhVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        JTableThanhVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Thành Viên", "Tên Thành Viên", "Loại Thành Viên", "Điểm Thành Viên"
+                "Mã Thành Viên", "Tên Thành Viên", "Loại Thành Viên", "SĐT", "Email", "Điểm Thành Viên"
             }
         ));
-        jTable1.setSelectionBackground(new java.awt.Color(0, 168, 232));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 168, 232));
-        jScrollPane1.setViewportView(jTable1);
+        JTableThanhVien.setSelectionBackground(new java.awt.Color(0, 168, 232));
+        JTableThanhVien.setSelectionForeground(new java.awt.Color(0, 168, 232));
+        jScrollPane1.setViewportView(JTableThanhVien);
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-search-35.png"))); // NOI18N
 
@@ -189,7 +222,7 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
 
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
-        int selected = jTable1.getSelectedRow();
+        int selected = JTableThanhVien.getSelectedRow();
         if (selected < 0){
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
         }
@@ -198,6 +231,16 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
             capnhat.setVisible(true);
         }
     }//GEN-LAST:event_BTCapNhatActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) JTableThanhVien.getModel();
+        String query = jTextField1.getText();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+        JTableThanhVien.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(query));
+    }//GEN-LAST:event_jTextField1KeyReleased
 
     /**
      * @param args the command line arguments
@@ -239,13 +282,13 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
     private javax.swing.JButton BTCapNhat;
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
+    public static javax.swing.JTable JTableThanhVien;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

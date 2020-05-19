@@ -25,7 +25,7 @@ public class TaiKhoanBLL {
     public boolean kiemTraTrungUsername(String username){
         return TaiKhoanDAL.kiemTraTrungUsername(username);
     }
-//    public boolean deleteTaiKhoan(String maNV){
-//        return TaiKhoanDAL.deleteTaiKhoan(maNV);
-//    }
+    public boolean deleteTaiKhoan(String maNV){
+        return TaiKhoanDAL.deleteTaiKhoan(maNV);
+    }
 }

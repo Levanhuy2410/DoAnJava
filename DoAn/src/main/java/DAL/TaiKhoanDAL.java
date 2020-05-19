@@ -115,19 +115,19 @@ public class TaiKhoanDAL {
         }
         return result;
     }
-
+    
     // Hàm xóa tài khoản từ mã nhân viên
-//    public boolean deleteTaiKhoan(String maNV) {
-//        boolean result = false;
-//        try {
-//            String query = "DELETE (SELECT * FROM TAIKHOAN tk JOIN NHANVIEN nv "
-//                        + "ON tk.username = nv.username WHERE nv.MANV = '" +  maNV + "'";
-//            ArrayList<Object> tk = new ArrayList<>();
-//            JdbcConnection.getConnection();
-//            result = JdbcConnection.executeUpdate(query, tk);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        return result;
-//    }
+    public boolean deleteTaiKhoan(String maNV) {
+        boolean result = false;
+        try {
+            String query = "DELETE (SELECT * FROM TAIKHOAN tk JOIN NHANVIEN nv "
+                        + "ON tk.username = nv.username WHERE nv.MANV = '" +  maNV + "')";
+            ArrayList<Object> tk = new ArrayList<>();
+            JdbcConnection.getConnection();
+            result = JdbcConnection.executeUpdate(query, tk);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
 }

@@ -4,14 +4,8 @@
  * and open the template in the editor.
  */
 package GUI;
-import DAL.TaiKhoanDAL;
-import DTO.TaiKhoan;
+
 import BLL.TaiKhoanBLL;
-import static GUI.ManHinhChinh.ChucVu;
-import static GUI.ManHinhChinh.TenNV;
-import java.sql.Connection;
-import Main.*;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
@@ -20,6 +14,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     
     TaiKhoanBLL TaiKhoanBLL = new TaiKhoanBLL();
+    public static String username = "";
     /**
      * Creates new form NewJFrame
      */
@@ -27,12 +22,11 @@ public class Login extends javax.swing.JFrame {
         initComponents();
     }
     public void DangNhap(){
-        String username = Username.getText();
+        this.username = Username.getText();
         String password = new String(Password.getPassword());
         if (TaiKhoanBLL.KiemTraLogin(username, password)){
             ManHinhChinh mainscr = new ManHinhChinh();
             mainscr.setVisible(true);
-            mainscr.loadThongTinNhanVien(username);
             dispose();
         }
         else {

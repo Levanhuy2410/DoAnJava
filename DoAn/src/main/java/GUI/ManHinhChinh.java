@@ -5,10 +5,6 @@
  */
 package GUI;
 import BLL.TaiKhoanBLL;
-import DAL.NhanVienDAL;
-import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -24,18 +20,26 @@ public class ManHinhChinh extends javax.swing.JFrame {
     
     public ManHinhChinh() {
         initComponents();
+        loadThongTinNhanVien(Login.username);
         String date = new Date().toString();
         timelable.setText(date);
     }
     public void loadThongTinNhanVien(String loginUser){
-        Login login = new Login();
         String username = loginUser;
         ArrayList<String> nv = TaiKhoanBLL.getThongTinNhanVien(username);
         // Lấy thông tin nhân viên hiện lên mainscreen
-        TenNV.setText(nv.get(0));
-        ChucVu.setText(nv.get(1));
-        Email.setText(nv.get(2));
-        SDT.setText(nv.get(3));
+        if (username.isEmpty()){
+            TenNV.setText("");
+            ChucVu.setText("");
+            Email.setText("");
+            SDT.setText("");
+        }
+        else {
+            TenNV.setText(nv.get(0));
+            ChucVu.setText(nv.get(1));
+            Email.setText(nv.get(2));
+            SDT.setText(nv.get(3));
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -323,23 +327,23 @@ public class ManHinhChinh extends javax.swing.JFrame {
                 .addGap(75, 75, 75)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(TenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(TenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addComponent(ChucVu)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
-                                .addComponent(Email)
-                                .addGap(244, 244, 244)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SDT)
-                            .addComponent(timelable, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(Email)))
+                        .addGap(244, 244, 244)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(SDT)
+                    .addComponent(timelable, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(

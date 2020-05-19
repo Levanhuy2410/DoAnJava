@@ -61,16 +61,11 @@ public class NhanVienDAL {
     public boolean deleteNhanVien(String MaNV){
         boolean result = false;
         try {
-            String query1 = "DELETE FROM TAIKHOAN WHERE"
-                    + "EXISTS (SELECT * FROM NHANVIEN"
-                    + "WHERE NHANVIEN.MANV = TAIKHOAN." + MaNV + ")";
-            String query2 = "DELETE FROM NHANVIEN WHERE MANV ='" + MaNV + "'";
+            String query = "DELETE FROM NHANVIEN WHERE MANV ='" + MaNV + "'";
             ArrayList<Object> arr = new ArrayList<>();
             JdbcConnection.getConnection();
             // Xóa tài khoản của nhân viên
-            result = JdbcConnection.executeUpdate(query1, arr);
-            // Xóa thông tin nhân viên
-            result = JdbcConnection.executeUpdate(query2, arr);
+            result = JdbcConnection.executeUpdate(query, arr);
             JdbcConnection.closeConnection();
         } catch (Exception ex) {
             ex.printStackTrace();
