@@ -13,6 +13,7 @@ public class TaiKhoan {
     public String username;
     public String password;
     public String loaiTK;
+    
 
     public TaiKhoan(String username, String password, String loaiTK) {
         this.username = username;

@@ -301,14 +301,12 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             String maNV = JTableNhanVien.getModel().getValueAt(indexTB, 0).toString();
             // Delete dong du lieu
             if (TaiKhoanBLL.deleteTaiKhoan(maNV)) {
-                {
-                    if (NhanVienBLL.deleteNhanVien(maNV)) {
-                        model.removeRow(indexTB);
-                        // Thông báo thành công
-                        JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    }
+                if (NhanVienBLL.deleteNhanVien(maNV)) {
+                    model.removeRow(indexTB);
+                    // Thông báo thành công
+                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }

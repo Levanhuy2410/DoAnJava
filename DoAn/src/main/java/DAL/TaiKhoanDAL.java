@@ -120,8 +120,10 @@ public class TaiKhoanDAL {
     public boolean deleteTaiKhoan(String maNV) {
         boolean result = false;
         try {
-            String query = "DELETE (SELECT * FROM TAIKHOAN tk JOIN NHANVIEN nv "
-                        + "ON tk.username = nv.username WHERE nv.MANV = '" +  maNV + "')";
+            String query = "DELETE FROM TAIKHOAN WHERE EXISTS("
+                    + " SELECT NHANVIEN.manv FROM NHANVIEN"
+                    + " WHERE NHANVIEN.username = TAIKHOAN.username"
+                    + " AND MANV = " + maNV + ")"; 
             ArrayList<Object> tk = new ArrayList<>();
             JdbcConnection.getConnection();
             result = JdbcConnection.executeUpdate(query, tk);
