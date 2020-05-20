@@ -22,13 +22,13 @@ import java.util.logging.Logger;
 public class SanPhamDAL {
   private final Connection connection = JdbcConnection.getConnection();
   public static List<SanPham> getAllSanPham() {
-    String query = "SELECT * FROM SANPHAM";
+    String query = "SELECT * FROM SANPHAM S JOIN LOAISP L on S.MALSP = L.MALSP";
     List<SanPham> listSanPham = new ArrayList<>();
     ArrayList<Object> arr = new ArrayList<>();
     ResultSet rs = JdbcConnection.executeQuery(query, arr);
     try {
       while (rs.next()) {
-        SanPham sanpham = new SanPham(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getInt(8));
+        SanPham sanpham = new SanPham(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getString(10));
         listSanPham.add(sanpham);
       }
     } catch (SQLException ex) {
@@ -39,13 +39,13 @@ public class SanPhamDAL {
   public static boolean themSanPham(SanPham sanpham) {
     String query = "INSERT INTO SANPHAM VALUES(ID_MASP.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
     ArrayList<Object> arr = new ArrayList<>();
-    arr.add(sanpham.getTenSp());
-    arr.add(sanpham.getGiaBan());
-    arr.add(sanpham.getTgbh());
-    arr.add(sanpham.getHangSx());
-    arr.add(sanpham.getSlTon());
-    arr.add(sanpham.getMota());
-    arr.add(sanpham.getMaLsp());
+    arr.add(sanpham.tenSp);
+    arr.add(sanpham.giaBan);
+    arr.add(sanpham.tgbh);
+    arr.add(sanpham.hangSx);
+    arr.add(sanpham.slTon);
+    arr.add(sanpham.mota);
+    arr.add(sanpham.maLsp);
     return JdbcConnection.executeUpdate(query, arr);
   }
   public static boolean xoaSanPham(String idSanPham) {
@@ -54,7 +54,21 @@ public class SanPhamDAL {
     arr.add(idSanPham);
     return JdbcConnection.executeUpdate(query, arr);
   }
+  public static boolean capnhatSanPham(SanPham sanpham) {
+    String query = "UPDATE SANPHAM SET TENSP = ?, GIABAN = ?, TGBH = ?, HANGSX = ?, SLTON = ?, MOTA = ?, MALSP = ? WHERE MASP = ?";
+    ArrayList<Object> arr = new ArrayList<>();
+    arr.add(sanpham.tenSp);
+    arr.add(sanpham.giaBan);
+    arr.add(sanpham.tgbh);
+    arr.add(sanpham.hangSx);
+    arr.add(sanpham.slTon);
+    arr.add(sanpham.mota);
+    arr.add(sanpham.maLsp);
+    arr.add(sanpham.maSp);
+    return JdbcConnection.executeUpdate(query, arr);
+  }
 //  public static void main(String[] args) {
-//    System.out.println(SanPhamDAL.xoaSanPham(15));
+//    SanPham a = new SanPham(23, "COng update", 14000, 36, "CONGCOMPANY", 1, "afs", 2, "RAM DDR4");
+//    System.out.println(SanPhamDAL.capnhatSanPham(a));
 //  }
 }

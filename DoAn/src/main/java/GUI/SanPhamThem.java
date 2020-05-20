@@ -248,27 +248,33 @@ public class SanPhamThem extends javax.swing.JFrame {
 
     private void BTThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemActionPerformed
         // TODO add your handling code here:
-        LoaiSpBLL loaiSpBLL = new LoaiSpBLL();
-        String tenSp = tenSpTxt.getText().trim();
-        String giaBan = giaBanTxt.getText().trim();
-        String tgbh = TgbhTxt.getText().trim();
-        String hangSx = hangSxTxt.getText().trim();
-        String soluong = soluongTxt.getText().trim();
-        String mota = moTaTxt.getText().trim();
-        String tenLsp = tenLoaiTxt.getSelectedItem().toString().trim();
-        
-        if (tenSp.isEmpty() || giaBan.isEmpty() || tgbh.isEmpty() || soluong.isEmpty() || hangSx.isEmpty() || mota.isEmpty() || tenLsp.isEmpty()) {
+        try {
+          LoaiSpBLL loaiSpBLL = new LoaiSpBLL();
+          String tenSp = tenSpTxt.getText().trim();
+          String giaBan = giaBanTxt.getText().trim();
+          String tgbh = TgbhTxt.getText().trim();
+          String hangSx = hangSxTxt.getText().trim();
+          String soluong = soluongTxt.getText().trim();
+          String mota = moTaTxt.getText().trim();
+          String tenLsp = tenLoaiTxt.getSelectedItem().toString().trim();
+
+          if (tenSp.isEmpty() || giaBan.isEmpty() || tgbh.isEmpty() || soluong.isEmpty() || hangSx.isEmpty() || mota.isEmpty() || tenLsp.isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+          }
+
+          SanPhamBLL sanphamBLL = new SanPhamBLL();
+          boolean result = sanphamBLL.themSanPham(tenSp, Integer.parseInt(giaBan), Integer.parseInt(tgbh), hangSx, Integer.parseInt(soluong), mota, loaiSpBLL.getIdLoaispByName(tenLsp));
+          if (result) {
+            QuanLySanPham.loadAllSanpham();
+            JOptionPane.showMessageDialog(rootPane, "Thêm sản phẩm thành công !");
+          }
+          else JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        catch(NumberFormatException e) {
           JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
-          return;
         }
         
-        SanPhamBLL sanphamBLL = new SanPhamBLL();
-        boolean result = sanphamBLL.themSanPham(tenSp, Integer.parseInt(giaBan), Integer.parseInt(tgbh), hangSx, Integer.parseInt(soluong), mota, loaiSpBLL.getIdLoaispByName(tenLsp));
-        if (result) {
-          JOptionPane.showMessageDialog(rootPane, "Thêm sản phẩm thành công !");
-          QuanLySanPham.loadAllSanpham();
-        }
-        else JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_BTThemActionPerformed
 
   private void tenLoaiTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenLoaiTxtActionPerformed
