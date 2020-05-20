@@ -28,4 +28,5 @@ public class TaiKhoanBLL {
     public boolean deleteTaiKhoan(String maNV){
         return TaiKhoanDAL.deleteTaiKhoan(maNV);
     }
+    
 }

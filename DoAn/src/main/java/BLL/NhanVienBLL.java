@@ -52,4 +52,7 @@ public class NhanVienBLL {
             return NhanVienDAL.updateNhanVien(maNV, tenNV, chucVu, ngayVL, ngaySinh, sdt, email, mucLuong);
         }
     }
+    public int getMaNV(String username){
+        return NhanVienDAL.getMaNV(username);
+    }
 }

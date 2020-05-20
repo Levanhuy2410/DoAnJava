@@ -88,4 +88,21 @@ public class NhanVienDAL {
         }
         return result;
     }
+    // Ham get ma nhan vien
+    public int getMaNV(String username){
+        int maNV = 0;
+        String query = "SELECT MANV FROM NHANVIEN WHERE USERNAME = '" + username + "'";
+        ArrayList<Object> arr = new ArrayList<>();
+        try {
+            JdbcConnection.getConnection();
+            ResultSet rs = JdbcConnection.executeQuery(query, arr);
+            if (rs.next()){
+                maNV = rs.getInt("MANV");
+            }
+            JdbcConnection.closeConnection();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return maNV;
+    }
 }

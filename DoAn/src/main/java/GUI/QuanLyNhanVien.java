@@ -56,7 +56,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     }
 
     // Add 1 dòng lên table
-    public void AddRowToTable(Object[] dataRow) {
+    public static void AddRowToTable(Object[] dataRow) {
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
         model.addRow(dataRow);
     }
