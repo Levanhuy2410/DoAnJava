@@ -312,18 +312,14 @@ public class NhanVienThem extends javax.swing.JFrame {
         String USERNAME = username.getText().trim();
         String PASSWORD = new String(password.getPassword()).trim();
         String REPASSWORD = new String(repassword.getPassword()).trim();
-        // Check thông tin 2 pass có trùng nhau không
-
         // Insert into NhanVien
         if (NhanVienBLL.insertNhanVien(TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG, USERNAME, PASSWORD, REPASSWORD)) {
             // Insert into TaiKhoan
-            //        // Insert on Table
-            //        Object[] row = {++a, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG};
-            //        QuanLyNhanVien.AddRowToTable(row);
-            // insert into TaiKhoan
             TaiKhoanBLL.insertTaiKhoan(USERNAME, PASSWORD, CHUCVU);
-            // reload list
-            QuanLyNhanVien.TableThongTinNhanVien();
+            // Add 1 dong len jtable
+            int MANV = NhanVienBLL.getMaNV(USERNAME);
+            Object[] row = {MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG};
+            QuanLyNhanVien.AddRowToTable(row);
             // Thông báo thành công
             JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         }
