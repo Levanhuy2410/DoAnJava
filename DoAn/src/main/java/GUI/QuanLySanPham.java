@@ -35,7 +35,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
         }
         List<SanPham> listSanPham = sanPhamBLL.getAllSanPham();
         for (SanPham sp : listSanPham) {
-          Object[] row = { sp.getMaSp(), sp.getTenSp(), sp.getGiaBan(), sp.getTgbh(), sp.getHangSx(), sp.getSlTon(), sp.getMota(), sp.getMaLsp() };
+          Object[] row = { sp.maSp, sp.tenSp, sp.giaBan, sp.tgbh, sp.hangSx, sp.slTon, sp.mota, sp.tenLsp};
           model.addRow(row);
         }
         tableSanPham.setModel(model);
@@ -218,22 +218,43 @@ public class QuanLySanPham extends javax.swing.JFrame {
         int selected = tableSanPham.getSelectedRow();
         if (selected < 0){
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
+            return;
         }
-        else {
-            SanPhamCapNhat capnhat = new SanPhamCapNhat();
-            capnhat.setVisible(true);
-        }
+        int selectedRow = tableSanPham.getSelectedRow();
+        String idSanPham = tableSanPham.getValueAt(selectedRow, 0).toString();
+        String tenSp = tableSanPham.getValueAt(selectedRow, 1).toString();
+        String giaBan = tableSanPham.getValueAt(selectedRow, 2).toString();
+        String tgbh = tableSanPham.getValueAt(selectedRow, 3).toString();
+        String hangSx = tableSanPham.getValueAt(selectedRow, 4).toString();
+        String soluong = tableSanPham.getValueAt(selectedRow, 5).toString();
+        String mota = tableSanPham.getValueAt(selectedRow, 6).toString();
+        String loaiSp = tableSanPham.getValueAt(selectedRow, 7).toString();
+        System.out.println(idSanPham + tenSp + giaBan + tgbh + soluong + mota + loaiSp);
+        SanPhamCapNhat capnhat = new SanPhamCapNhat();
+        capnhat.maSp = Integer.parseInt(idSanPham);
+        capnhat.tenSpTxt.setText(tenSp);
+        capnhat.giaBanTxt.setText(giaBan);
+        capnhat.tgbhTxt.setText(tgbh);
+        capnhat.hangSxTxt.setText(hangSx);
+        capnhat.soluongTxt.setText(soluong);
+        capnhat.motaTxt.setText(mota);
+        capnhat.loaiSpTxt.setSelectedItem(loaiSp);
+        
+        capnhat.setVisible(true);
     }//GEN-LAST:event_BTCapNhatActionPerformed
 
   private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
     // TODO add your handling code here:
-    String idSanPham = tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString();
-    if (SanPhamBLL.xoaSanPham(idSanPham)) {
-      QuanLySanPham.loadAllSanpham();
-      JOptionPane.showMessageDialog(rootPane, "Xóa sản phẩm thành công");
-      return;
+    int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
+    if (reply == JOptionPane.YES_OPTION) {
+      String idSanPham = tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString();
+      if (SanPhamBLL.xoaSanPham(idSanPham)) {
+        QuanLySanPham.loadAllSanpham();
+        return;
+      }
+      JOptionPane.showMessageDialog(rootPane, "Xóa thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
-    JOptionPane.showMessageDialog(rootPane, "Xóa thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    
   }//GEN-LAST:event_btnXoaActionPerformed
 
     /**

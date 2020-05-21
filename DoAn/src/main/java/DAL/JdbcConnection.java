@@ -22,7 +22,7 @@ public class JdbcConnection {
 
     // Mở kết nối đến database
     public static Connection getConnection() {
-        final String url = "jdbc:oracle:thin:@localhost:1521/orcl";
+        final String url = "jdbc:oracle:thin:@localhost:1521/ORCLCDB.localdomain";
         final String user = "doan";
         final String password = "doan";
 

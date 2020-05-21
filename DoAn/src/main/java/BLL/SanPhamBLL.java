@@ -5,6 +5,7 @@
  */
 package BLL;
 
+import DAL.LoaiSpDAL;
 import DAL.SanPhamDAL;
 import DTO.SanPham;
 import java.util.List;
@@ -23,6 +24,14 @@ public class SanPhamBLL {
   }
   public static boolean xoaSanPham(String idSanPham) {
     return SanPhamDAL.xoaSanPham(idSanPham);
+  }
+  public static boolean capnhatSanPham(int maSp, String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, String tenLsp) {
+    int maLsp = LoaiSpDAL.getIdLoaispByName(tenLsp);
+    if (maLsp != 0) {
+      SanPham sanpham = new SanPham(maSp, tenSp, giaBan, tgbh, hangSx, slTon, mota, maLsp, tenLsp);
+      return SanPhamDAL.capnhatSanPham(sanpham);
+    }
+    return false;
   }
   
 }
