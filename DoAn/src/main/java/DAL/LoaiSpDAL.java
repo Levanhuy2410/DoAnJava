@@ -48,6 +48,12 @@ public class LoaiSpDAL {
     }
     return 0;
   }
+  public static boolean themLoaiSp(LoaiSP loaisp) {
+    String query = "INSERT INTO LOAISP VALUES (ID_MALSP.NEXTVAL, ?)";
+    ArrayList<Object> arr = new ArrayList<>();
+    arr.add(loaisp.tenLSp);
+    return JdbcConnection.executeUpdate(query, arr);     
+  }
   public static void main(String[] args) {
     System.out.println(LoaiSpDAL.getIdLoaispByName("RAM DDR4"));
   }

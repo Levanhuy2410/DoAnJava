@@ -29,7 +29,7 @@ public class SanPhamThem extends javax.swing.JFrame {
       LoaiSpBLL loaiSpBLL = new LoaiSpBLL();
       List<LoaiSP> allLoaiSp = loaiSpBLL.getAllLoaiSp();
       allLoaiSp.forEach((LoaiSP action) -> {
-        tenLoaiTxt.addItem(action.getTenLSp());
+        tenLoaiTxt.addItem(action.tenLSp);
       });
     }
     /** This method is called from within the constructor to
