@@ -11,8 +11,6 @@ package DAL;
  */
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,7 +20,7 @@ public class JdbcConnection {
 
     // Mở kết nối đến database
     public static Connection getConnection() {
-        final String url = "jdbc:oracle:thin:@localhost:1521/ORCLCDB.localdomain";
+        final String url = "jdbc:oracle:thin:@localhost:1521/orcl";
         final String user = "doan";
         final String password = "doan";
 
@@ -30,7 +28,7 @@ public class JdbcConnection {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             return DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(JdbcConnection.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return null;
     }

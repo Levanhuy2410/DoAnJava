@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import DTO.SanPham;
+import static GUI.QuanLySanPham.sanPhamBLL;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 
 
 /**
@@ -18,8 +23,20 @@ public class KiemKeThem extends javax.swing.JFrame {
      */
     public KiemKeThem() {
         initComponents();
+        this.loadAllSanpham();
     }
-
+    public void loadAllSanpham() {
+      DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
+        while (tableSanPham.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+        List<SanPham> listSanPham = sanPhamBLL.getAllSanPham();
+        for (SanPham sp : listSanPham) {
+          Object[] row = { sp.maSp, sp.tenSp, sp.slTon, sp.mota, sp.tenLsp};
+          model.addRow(row);
+        }
+        tableSanPham.setModel(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,7 +67,7 @@ public class KiemKeThem extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableSanPham = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
 
@@ -79,8 +96,6 @@ public class KiemKeThem extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setSelectionBackground(new java.awt.Color(0, 168, 232));
-        jTable1.setSelectionForeground(new java.awt.Color(0, 168, 232));
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
@@ -210,18 +225,18 @@ public class KiemKeThem extends javax.swing.JFrame {
         jTextField7.setEnabled(false);
         jTextField7.setFocusable(false);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng Tồn"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng Tồn", "Tên Loại Sản Phẩm"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tableSanPham);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel11.setText("LOẠI SẢN PHẨM");
@@ -389,11 +404,11 @@ public class KiemKeThem extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    public static javax.swing.JTable tableSanPham;
     // End of variables declaration//GEN-END:variables
 }
