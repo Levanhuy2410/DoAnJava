@@ -10,7 +10,7 @@ package DTO;
  * @author USER
  */
 public class NhanVien {
-    public String maNV;
+    public int maNV;
     public String tenNV;
     public String chucVu;
     public String ngayVL;
@@ -18,12 +18,12 @@ public class NhanVien {
     public String sdt;
     public String email;
     public int mucLuong;
-    public String username;
+    
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, int mucLuong, String username) {
+    public NhanVien(int maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, int mucLuong) {
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.chucVu = chucVu;
@@ -32,7 +32,16 @@ public class NhanVien {
         this.sdt = sdt;
         this.email = email;
         this.mucLuong = mucLuong;
-        this.username = username;
+    }
+
+    public NhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, int mucLuong) {
+        this.tenNV = tenNV;
+        this.chucVu = chucVu;
+        this.ngayVL = ngayVL;
+        this.ngaySinh = ngaySinh;
+        this.sdt = sdt;
+        this.email = email;
+        this.mucLuong = mucLuong;
     }
     
 }

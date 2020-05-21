@@ -19,8 +19,9 @@ public class TaiKhoanBLL {
     public ArrayList<String> getThongTinNhanVien(String username){
         return TaiKhoanDAL.getThongTinNhanVien(username);
     }
-    public boolean insertTaiKhoan(String username, String password, String loaiTK){
-        return TaiKhoanDAL.insertTaiKhoan(username, password, loaiTK);
+    public boolean insertTaiKhoan(String username, String password, String loaiTK, int maNV){
+        TaiKhoan tk = new TaiKhoan(username, password, loaiTK, maNV);
+        return TaiKhoanDAL.insertTaiKhoan(tk);
     }
     public boolean kiemTraTrungUsername(String username){
         return TaiKhoanDAL.kiemTraTrungUsername(username);

@@ -8,8 +8,6 @@ import DTO.NhanVien;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author USER
@@ -24,7 +22,7 @@ public class NhanVienDAL {
             JdbcConnection.getConnection();
             ResultSet rs = JdbcConnection.executeQuery(query, arr);
             while (rs.next()){
-                String maNV = rs.getString("MANV");
+                int maNV = rs.getInt("MANV");
                 String tenNV = rs.getString("TENNV");
                 String chucVu = rs.getString("CHUCVU");
                 String ngayVL = rs.getString("NGAYVL");
@@ -32,31 +30,64 @@ public class NhanVienDAL {
                 String sdt = rs.getString("SDT");
                 String email = rs.getString("EMAIL");
                 int mucLuong = rs.getInt("MUCLUONG");
-                String username = rs.getString("USERNAME");
-                result.add(new NhanVien(maNV, tenNV, chucVu, ngayVL, ngaySinh, sdt, email, mucLuong, username));
+//                String username = rs.getString("USERNAME");
+                result.add(new NhanVien(maNV, tenNV, chucVu, ngayVL, ngaySinh, sdt, email, mucLuong));
             }
             JdbcConnection.closeConnection();
         } catch (SQLException ex) {
-            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return result;
-    }
-    // Hàm tạo nhân viên
-    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, String mucLuong, String username){
-        boolean result = false;
-        try {   
-            String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG, USERNAME) "
-                    + "VALUES (id_manv.NEXTVAL,'" + tenNV + "','" + chucVu + "', TO_DATE('" + ngayVL + "','YYYY-MM-DD'), TO_DATE('" + ngaySinh + "','YYYY-MM-DD'),'" 
-                    + sdt + "','" + email + "','" + mucLuong + "','" + username +"')";
-            ArrayList<Object> arr = new ArrayList<>();
-            JdbcConnection.getConnection();
-            result = JdbcConnection.executeUpdate(query, arr);
-            JdbcConnection.closeConnection();
-        } catch (Exception ex){
             ex.printStackTrace();
         }
         return result;
     }
+//    // Hàm tạo nhân viên
+    public boolean insertNhanVien(NhanVien nv){
+        boolean result = false;
+        
+        try {
+            String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG) "
+                    + "VALUES (id_manv.NEXTVAL,'" + nv.tenNV + "','" + nv.chucVu + "', TO_DATE('" + nv.ngayVL + "','YYYY-MM-DD'), TO_DATE('" + nv.ngaySinh + "','YYYY-MM-DD'),'" 
+                    + nv.sdt + "','" + nv.email + "','" + nv.mucLuong  +"')";
+            ArrayList<Object> arr = new ArrayList<>();
+            JdbcConnection.getConnection();
+            result = JdbcConnection.executeUpdate(query, arr);
+            JdbcConnection.closeConnection();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    // Hàm lấy mã nhân viên
+    public int getMaNV(String tenNV, String chucVu){
+        int maNV = 0;
+        String query = "SELECT MANV FROM NHANVIEN WHERE TENNV = '" + tenNV + "' AND CHUCVU = '" + chucVu + "'";
+        ArrayList<Object> arr = new ArrayList<>();
+        try {
+            JdbcConnection.getConnection();
+            ResultSet rs = JdbcConnection.executeQuery(query, arr);
+            if (rs.next()){
+                maNV = rs.getInt("MANV");
+            }
+            JdbcConnection.closeConnection();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return maNV;
+    }
+//    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, String mucLuong, String username){
+//        boolean result = false;
+//        try {   
+//            String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG, USERNAME) "
+//                    + "VALUES (id_manv.NEXTVAL,'" + tenNV + "','" + chucVu + "', TO_DATE('" + ngayVL + "','YYYY-MM-DD'), TO_DATE('" + ngaySinh + "','YYYY-MM-DD'),'" 
+//                    + sdt + "','" + email + "','" + mucLuong + "','" + username +"')";
+//            ArrayList<Object> arr = new ArrayList<>();
+//            JdbcConnection.getConnection();
+//            result = JdbcConnection.executeUpdate(query, arr);
+//            JdbcConnection.closeConnection();
+//        } catch (Exception ex){
+//            ex.printStackTrace();
+//        }
+//        return result;
+//    }
     // Ham` xoa' nhan vien
     public boolean deleteNhanVien(String MaNV){
         boolean result = false;
@@ -73,12 +104,12 @@ public class NhanVienDAL {
         return result;
     }
     // Hàm update nhân viên
-    public boolean updateNhanVien(String maNV, String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, String mucLuong){
+    public boolean updateNhanVien(NhanVien nv){
         boolean result = false;
         try {
-            String query = "UPDATE NHANVIEN SET TENNV = '" + tenNV + "'," 
-                    + "CHUCVU = '" + chucVu + "', NGAYVL = TO_DATE('" + ngayVL + "','YYYY-MM-DD HH24:MI:SS'), NGAYSINH = TO_DATE('" + ngaySinh + 
-                    "', 'YYYY-MM-DD HH24:MI:SS'), SDT = '" + sdt + "', EMAIL = '" + email + "'," + "MUCLUONG = '" + mucLuong + "' WHERE MANV = '" + maNV + "'";
+            String query = "UPDATE NHANVIEN SET TENNV = '" + nv.tenNV + "'," 
+                    + "CHUCVU = '" + nv.chucVu + "', NGAYVL = TO_DATE('" + nv.ngayVL + "','YYYY-MM-DD HH24:MI:SS'), NGAYSINH = TO_DATE('" + nv.ngaySinh + 
+                    "', 'YYYY-MM-DD HH24:MI:SS'), SDT = '" + nv.sdt + "', EMAIL = '" + nv.email + "'," + "MUCLUONG = '" + nv.mucLuong + "' WHERE MANV = '" + nv.maNV + "'";
             ArrayList<Object> arr = new ArrayList<>();
             JdbcConnection.getConnection();
             result = JdbcConnection.executeUpdate(query, arr);
@@ -88,21 +119,21 @@ public class NhanVienDAL {
         }
         return result;
     }
-    // Ham get ma nhan vien
-    public int getMaNV(String username){
-        int maNV = 0;
-        String query = "SELECT MANV FROM NHANVIEN WHERE USERNAME = '" + username + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-        try {
-            JdbcConnection.getConnection();
-            ResultSet rs = JdbcConnection.executeQuery(query, arr);
-            if (rs.next()){
-                maNV = rs.getInt("MANV");
-            }
-            JdbcConnection.closeConnection();
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return maNV;
-    }
+//    // Ham get ma nhan vien
+//    public int getMaNV(String username){
+//        int maNV = 0;
+//        String query = "SELECT MANV FROM NHANVIEN WHERE USERNAME = '" + username + "'";
+//        ArrayList<Object> arr = new ArrayList<>();
+//        try {
+//            JdbcConnection.getConnection();
+//            ResultSet rs = JdbcConnection.executeQuery(query, arr);
+//            if (rs.next()){
+//                maNV = rs.getInt("MANV");
+//            }
+//            JdbcConnection.closeConnection();
+//        } catch (Exception ex){
+//            ex.printStackTrace();
+//        }
+//        return maNV;
+//    }
 }

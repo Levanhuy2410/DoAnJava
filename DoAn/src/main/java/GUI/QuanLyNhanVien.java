@@ -29,10 +29,10 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
      */
     public QuanLyNhanVien() {
         initComponents();
-        TableThongTinNhanVien();
+        this.TableThongTinNhanVien();
     }
 
-    public static void TableThongTinNhanVien() {
+    public void TableThongTinNhanVien() {
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
         while (JTableNhanVien.getRowCount() > 0) {
             model.removeRow(0);
@@ -41,7 +41,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         ArrayList<NhanVien> nvarr = BLL.NhanVienBLL.NhanVienAll();
         for (int i = 0; i < nvarr.size(); i++) {
             nv = nvarr.get(i);
-            String maNV = nv.maNV;
+            int maNV = nv.maNV;
             String tenNV = nv.tenNV;
             String chucVu = nv.chucVu;
             String ngaySinh = nv.ngaySinh;
@@ -59,6 +59,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     public static void AddRowToTable(Object[] dataRow) {
         DefaultTableModel model = (DefaultTableModel) JTableNhanVien.getModel();
         model.addRow(dataRow);
+        JOptionPane.showMessageDialog(JTableNhanVien, "Thêm nhân viên thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
     }
 
     // Update 1 row trên table
@@ -72,6 +73,8 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         model.setValueAt(row[4], indexTB, 5);
         model.setValueAt(row[5], indexTB, 6);
         model.setValueAt(row[6], indexTB, 7);
+        // Xuất hiện thông báo thành công
+        JOptionPane.showMessageDialog(JTableNhanVien, "Cập nhật thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
     }
 
     // Filter theo tên
@@ -119,7 +122,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(118, 118, 118)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE)
                 .addGap(117, 117, 117))
         );
         jPanel1Layout.setVerticalGroup(
@@ -130,7 +133,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 120));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 120));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -213,14 +216,14 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                         .addComponent(BTXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(BTCapNhat)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(66, 66, 66)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1033, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -241,7 +244,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1010, 460));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1160, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -269,21 +272,21 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
         } else {
             // Lấy dữ liệu dòng đang chọn hiện lên 
-            String MANV = JTableNhanVien.getModel().getValueAt(selected, 0).toString();
+            int MANV = Integer.parseInt(JTableNhanVien.getModel().getValueAt(selected, 0).toString());
             String TENNV = JTableNhanVien.getModel().getValueAt(selected, 1).toString();
             String CHUCVU = JTableNhanVien.getModel().getValueAt(selected, 2).toString();
             String NGAYVL = JTableNhanVien.getModel().getValueAt(selected, 3).toString();
             String NGAYSINH = JTableNhanVien.getModel().getValueAt(selected, 4).toString();
             String SDT = JTableNhanVien.getModel().getValueAt(selected, 5).toString();
             String EMAIL = JTableNhanVien.getModel().getValueAt(selected, 6).toString();
-            String MUCLUONG = JTableNhanVien.getModel().getValueAt(selected, 7).toString();
+            int MUCLUONG = Integer.parseInt(JTableNhanVien.getModel().getValueAt(selected, 7).toString());
             // Hiện lên JFrame cập nhật
-            capnhat.maNV.setText(MANV);
+            capnhat.maNV.setText(String.valueOf(MANV));
             capnhat.tenNV.setText(TENNV);
             capnhat.chucVu.setSelectedItem(CHUCVU);
             capnhat.ngayVL.setText(NGAYVL);
             capnhat.ngaySinh.setText(NGAYSINH);
-            capnhat.mucLuong.setText(MUCLUONG);
+            capnhat.mucLuong.setText(String.valueOf(MUCLUONG));
             capnhat.sdt.setText(SDT);
             capnhat.email.setText(EMAIL);
             capnhat.setVisible(true);
@@ -300,14 +303,12 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             // Lay du lieu tu dong dang chon.
             String maNV = JTableNhanVien.getModel().getValueAt(indexTB, 0).toString();
             // Delete dong du lieu
-            if (TaiKhoanBLL.deleteTaiKhoan(maNV)) {
-                if (NhanVienBLL.deleteNhanVien(maNV)) {
-                    model.removeRow(indexTB);
-                    // Thông báo thành công
-                    JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
-                }
+            if (NhanVienBLL.deleteNhanVien(maNV)) {
+                model.removeRow(indexTB);
+                // Thông báo thành công
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_BTXoaActionPerformed

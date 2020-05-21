@@ -10,15 +10,13 @@ import DTO.ThanhVien;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author USER
  */
 public class ThanhVienDAL {
-
+    
     // Hàm hiện danh sách thành viên
     public static ArrayList<ThanhVien> getListThanhVien() {
         ArrayList<ThanhVien> result = new ArrayList<>();
@@ -28,7 +26,7 @@ public class ThanhVienDAL {
             JdbcConnection.getConnection();
             ResultSet rs = JdbcConnection.executeQuery(query, arr);
             while (rs.next()) {
-                String maTV = rs.getString("MATV");
+                int maTV = rs.getInt("MATV");
                 String tenTV = rs.getString("TENTV");
                 String loaiTV = rs.getString("LOAITV");
                 String sdt = rs.getString("SDT");
@@ -38,10 +36,81 @@ public class ThanhVienDAL {
                 result.add(tv);
             }
             JdbcConnection.closeConnection();
-        } catch (SQLException ex) {
-            Logger.getLogger(NhanVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return result;
     }
-
+    // Hàm insert thành viên
+    public boolean insertThanhVien(ThanhVien tv){
+        boolean result = false;
+        try {
+            String query = "INSERT INTO KHTHANHVIEN VALUES(id_matv.NEXTVAL,?,?,?,?,?)";
+            ArrayList<Object> arr = new ArrayList<>();
+            arr.add(tv.tenTV);
+            arr.add(tv.loaiTV);
+            arr.add(tv.sdt);
+            arr.add(tv.email);
+            arr.add(tv.diemTV);
+            JdbcConnection.getConnection();
+            result = JdbcConnection.executeUpdate(query, arr);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    // Hàm delete thành viên
+    public boolean deleteThanhVien(String maTV){
+        boolean result = false;
+        try {
+            String query = "DELETE FROM KHTHANHVIEN WHERE MATV = ?";
+            ArrayList<Object> arr = new ArrayList<>();
+            arr.add(maTV);
+            JdbcConnection.getConnection();
+            result = JdbcConnection.executeUpdate(query, arr);
+            JdbcConnection.closeConnection();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+    }
+    // Hàm update thành viên
+    public boolean updateThanhVien(ThanhVien tv){
+        boolean result = false;
+        try {
+            String query = "UPDATE KHTHANHVIEN SET TENTV = ?, LOAITV = ?, SDT = ?, EMAIL = ?, DIEMTV = ? WHERE MATV = ?";
+            ArrayList<Object> arr = new ArrayList<>();
+            arr.add(tv.tenTV);
+            arr.add(tv.loaiTV);
+            arr.add(tv.sdt);
+            arr.add(tv.email);
+            arr.add(tv.diemTV);
+            arr.add(tv.maTV);
+            JdbcConnection.getConnection();
+            result = JdbcConnection.executeUpdate(query, arr);
+            JdbcConnection.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    // Hàm get id thành viên
+    public int getMaTV(String tenTV, String loaiTV, String sdt, String email, int diemTV){
+        int maTV = 0;
+        String query = "SELECT MATV FROM KHTHANHVIEN WHERE TENTV = '" + tenTV + "' AND LOAITV = '" + loaiTV 
+                + "' AND SDT = '" + sdt + "' AND EMAIL = '" + email + "' AND DIEMTV='" + diemTV + "'";
+        ArrayList<Object> arr = new ArrayList<>();
+        try {
+            JdbcConnection.getConnection();
+            ResultSet rs = JdbcConnection.executeQuery(query, arr);
+            if (rs.next()){
+                maTV = rs.getInt("MATV");
+            }
+            JdbcConnection.closeConnection();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return maTV;
+    }
 }

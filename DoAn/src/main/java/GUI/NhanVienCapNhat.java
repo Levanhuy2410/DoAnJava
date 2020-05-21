@@ -6,7 +6,6 @@
 package GUI;
 
 import BLL.NhanVienBLL;
-import javax.swing.JOptionPane;
 
 
 /**
@@ -240,12 +239,12 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
         // Lấy thông tin cập nhật
-        String MANV = maNV.getText().trim();
+        int MANV = Integer.parseInt(maNV.getText().trim());
         String TENNV = tenNV.getText().trim();
         String CHUCVU = chucVu.getSelectedItem().toString().trim();
         String NGAYVL = ngayVL.getText().trim();
         String NGAYSINH = ngaySinh.getText().trim();
-        String MUCLUONG = mucLuong.getText().trim();
+        int MUCLUONG = Integer.parseInt(mucLuong.getText().trim());
         String SDT = sdt.getText().trim();
         String EMAIL = email.getText().trim();
         // Kiểm tra các ô nhập liệu có để trống hay không
@@ -253,8 +252,6 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
             Object[] data = {TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG};
             // Update row cần tìm
             QuanLyNhanVien.UpdateRow(data);
-            // Xuất hiện thông báo thành công
-            JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         } 
     }//GEN-LAST:event_BTCapNhatActionPerformed
 

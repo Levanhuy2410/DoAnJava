@@ -10,7 +10,7 @@ package DTO;
  * @author USER
  */
 public class ThanhVien {
-    public String maTV;
+    public int maTV;
     public String tenTV;
     public String loaiTV;
     public String sdt;
@@ -20,8 +20,16 @@ public class ThanhVien {
     public ThanhVien() {
     }
 
-    public ThanhVien(String maTV, String tenTV, String loaiTV, String sdt, String email, int diemTV) {
+    public ThanhVien(int maTV, String tenTV, String loaiTV, String sdt, String email, int diemTV) {
         this.maTV = maTV;
+        this.tenTV = tenTV;
+        this.loaiTV = loaiTV;
+        this.sdt = sdt;
+        this.email = email;
+        this.diemTV = diemTV;
+    }
+
+    public ThanhVien(String tenTV, String loaiTV, String sdt, String email, int diemTV) {
         this.tenTV = tenTV;
         this.loaiTV = loaiTV;
         this.sdt = sdt;

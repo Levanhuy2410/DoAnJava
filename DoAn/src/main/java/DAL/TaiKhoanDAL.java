@@ -6,12 +6,11 @@
 package DAL;
 
 import DTO.TaiKhoan;
-import DTO.NhanVien;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -56,32 +55,11 @@ public class TaiKhoanDAL {
         return false;
     }
 
-    // Hàm lấy tài khoản từ username, password
-    public TaiKhoan getTaiKhoan(String username, String password) {
-        TaiKhoan result = null;
-        String query = "SELECT * FROM TAIKHOAN WHERE USERNAME = " + username + "AND PASSWORD = " + password;
-        ArrayList<Object> TKarr = new ArrayList<>();
-        try {
-            JdbcConnection.getConnection();
-            ResultSet rs = JdbcConnection.executeQuery(query, TKarr);
-            if (rs.next()) {
-                result = new TaiKhoan(rs.getString("username"),
-                        rs.getString("password"),
-                        rs.getString("loaiTK"));
-            } else {
-                result = null;
-            }
-            JdbcConnection.closeConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    //  Hàm lấy thông tin nhân viên từ username
+    // Hàm lấy thông tin nhân viên từ username
     public ArrayList<String> getThongTinNhanVien(String username) {
         ArrayList<String> result = new ArrayList<>();
-        String query = "SELECT TENNV, CHUCVU, SDT, EMAIL FROM NHANVIEN WHERE USERNAME = '" + username + "'";
+        String query = "SELECT TENNV, CHUCVU, SDT, EMAIL FROM NHANVIEN nv JOIN"
+                + " TAIKHOAN tk ON nv.manv = tk.manv WHERE tk.USERNAME = '" + username + "'";
         ArrayList<Object> nv = new ArrayList<>();
         try {
             JdbcConnection.getConnection();
@@ -96,20 +74,20 @@ public class TaiKhoanDAL {
             }
             JdbcConnection.closeConnection();
         } catch (SQLException ex) {
-            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return result;
     }
 
     // Hàm tạo tài khoản
-    public boolean insertTaiKhoan(String username, String password, String loaiTK) {
+    public boolean insertTaiKhoan(TaiKhoan tk) {
         boolean result = false;
         try {
-            String query = "INSERT INTO TAIKHOAN(USERNAME, PASSWORD, LOAITK) "
-                    + "VALUES ('" + username + "','" + password + "','" + loaiTK + "')";
-            ArrayList<Object> tk = new ArrayList<>();
+            String query = "INSERT INTO TAIKHOAN(USERNAME, PASSWORD, LOAITK, MANV) "
+                    + "VALUES ('" + tk.username + "','" + tk.password + "','" + tk.loaiTK + "','" + tk.maNV +"')";
+            ArrayList<Object> arr = new ArrayList<>();
             JdbcConnection.getConnection();
-            result = JdbcConnection.executeUpdate(query, tk);
+            result = JdbcConnection.executeUpdate(query, arr);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

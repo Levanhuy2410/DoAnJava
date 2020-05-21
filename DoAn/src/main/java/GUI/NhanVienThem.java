@@ -299,29 +299,51 @@ public class NhanVienThem extends javax.swing.JFrame {
     }//GEN-LAST:event_BTThoatActionPerformed
 
     private void BTThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemActionPerformed
-        // TODO add your handling code here:
-        // Lấy thông tin của nhân viên
+//        // TODO add your handling code here:
+//        // Lấy thông tin của nhân viên
+//        String TENNV = tenNV.getText().trim();
+//        String CHUCVU = chucVu.getSelectedItem().toString().trim();
+//        String NGAYVL = ngayVL.getText().trim();
+//        String NGAYSINH = ngaySinh.getText().trim();
+//        String MUCLUONG = mucLuong.getText().trim();
+//        String SDT = sdt.getText().trim();
+//        String EMAIL = email.getText().trim();
+//        // Lấy thông tin tài khoản 
+
+//        // Insert into NhanVien
+//        if (NhanVienBLL.insertNhanVien(TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG, USERNAME, PASSWORD, REPASSWORD)) {
+//            // Insert into TaiKhoan
+//            TaiKhoanBLL.insertTaiKhoan(USERNAME, PASSWORD, CHUCVU);
+//            // Add 1 dong len jtable
+//            int MANV = NhanVienBLL.getMaNV(USERNAME);
+//            Object[] row = {MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG};
+//            QuanLyNhanVien.AddRowToTable(row);
+//        }
+        // Lấy thông tin nhân viên
         String TENNV = tenNV.getText().trim();
         String CHUCVU = chucVu.getSelectedItem().toString().trim();
         String NGAYVL = ngayVL.getText().trim();
         String NGAYSINH = ngaySinh.getText().trim();
-        String MUCLUONG = mucLuong.getText().trim();
+        int MUCLUONG = Integer.parseInt(mucLuong.getText().trim());
         String SDT = sdt.getText().trim();
         String EMAIL = email.getText().trim();
-        // Lấy thông tin tài khoản 
+        // Lấy thông tin tài khoản
         String USERNAME = username.getText().trim();
         String PASSWORD = new String(password.getPassword()).trim();
         String REPASSWORD = new String(repassword.getPassword()).trim();
-        // Insert into NhanVien
-        if (NhanVienBLL.insertNhanVien(TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG, USERNAME, PASSWORD, REPASSWORD)) {
-            // Insert into TaiKhoan
-            TaiKhoanBLL.insertTaiKhoan(USERNAME, PASSWORD, CHUCVU);
-            // Add 1 dong len jtable
-            int MANV = NhanVienBLL.getMaNV(USERNAME);
-            Object[] row = {MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG};
-            QuanLyNhanVien.AddRowToTable(row);
-            // Thông báo thành công
-            JOptionPane.showMessageDialog(rootPane, "Thêm nhân viên thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        // Insert 
+        if (TaiKhoanBLL.kiemTraTrungUsername(USERNAME)) {
+            JOptionPane.showMessageDialog(rootPane, "Username bị trùng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (NhanVienBLL.insertNhanVien(TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG)) {
+                // Get mã nhân viên
+                int MANV = NhanVienBLL.getMaNV(TENNV, CHUCVU);
+                // Insert into TaiKhoan
+                TaiKhoanBLL.insertTaiKhoan(USERNAME, PASSWORD, CHUCVU, MANV);
+                // Add 1 dòng lên table
+                Object[] row = {MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG};
+                QuanLyNhanVien.AddRowToTable(row);
+            }
         }
     }//GEN-LAST:event_BTThemActionPerformed
 

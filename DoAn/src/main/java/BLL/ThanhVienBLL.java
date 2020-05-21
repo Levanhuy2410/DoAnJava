@@ -8,13 +8,39 @@ package BLL;
 import DTO.ThanhVien;
 import DAL.ThanhVienDAL;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author USER
  */
 public class ThanhVienBLL {
-    public static ArrayList<ThanhVien> ThanhVienALL(){
-        return ThanhVienDAL.getListThanhVien();
+
+    ThanhVienDAL ThanhVienDAL = new ThanhVienDAL();
+
+    public static ArrayList<ThanhVien> ThanhVienALL() {
+        return DAL.ThanhVienDAL.getListThanhVien();
+    }
+
+    public boolean insertThanhVien(String tenTV, String loaiTV, String sdt, String email, int diemTV) {
+        ThanhVien tv = new ThanhVien(tenTV, loaiTV, sdt, email, diemTV);
+        if (tv.tenTV.isEmpty() || tv.loaiTV.isEmpty() || tv.email.isEmpty() || tv.sdt.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Không được để trống các ô dữ liệu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return ThanhVienDAL.insertThanhVien(tv);
+    }
+
+    public int getMaTV(String tenTV, String loaiTV, String sdt, String email, int diemTV) {
+        return ThanhVienDAL.getMaTV(tenTV, loaiTV, sdt, email, diemTV);
+    }
+
+    public boolean deleteThanhVien(String maTV) {
+        return ThanhVienDAL.deleteThanhVien(maTV);
+    }
+    
+    public boolean updateThanhVien(int maTV, String tenTV, String loaiTV, String sdt, String email, int diemTV){
+        ThanhVien tv = new ThanhVien(maTV, tenTV, loaiTV, sdt, email, diemTV);
+        return ThanhVienDAL.updateThanhVien(tv);
     }
 }
