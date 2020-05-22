@@ -67,8 +67,8 @@ CREATE TABLE khthanhvien (
     matv    NUMBER NOT NULL,
     tentv   VARCHAR2(50),
     loaitv  VARCHAR2(50),
-    sdt       VARCHAR2(50),
-    email     VARCHAR2(50),
+    sdt     VARCHAR2(50),
+    email   VARCHAR2(50),
     diemtv  INTEGER
 );
 alter table khthanhvien modify matv number;
@@ -92,16 +92,13 @@ CREATE TABLE nhanvien (
     ngaysinh  DATE,
     sdt       VARCHAR2(50),
     email     VARCHAR2(50),
-    mucluong  NUMBER(10),
-    username  VARCHAR2(50)
+    mucluong  NUMBER(10)
 );
-alter table nhanvien modify manv number;
-alter table nhanvien modify tennv varchar2(30);
-alter table nhanvien modify mucluong number(15);
-alter table nhanvien add sdt varchar2(20);
-alter table nhanvien add email varchar2(50);
-ALTER TABLE nhanvien ADD CONSTRAINT nhanvien_pk PRIMARY KEY ( manv );
+ALTER Table nhanvien drop column username;
 
+ALTER Table nhanvien add username varchar2(50);
+ALTER TABLE nhanvien ADD CONSTRAINT nhanvien_pk PRIMARY KEY ( manv );
+ALTER TABLE nhanvien DROP CONSTRAINT nhanvien_pk;
 CREATE TABLE phieukk (
     makk     NUMBER NOT NULL,
     ngaytao  DATE
@@ -146,7 +143,7 @@ CREATE TABLE taikhoan (
     password  VARCHAR2(50),
     loaitk    VARCHAR2(50)
 );
-ALTER TABLE taikhoan modify loaitk varchar2(23);
+alter table taikhoan modify manv number;
 
 ALTER TABLE taikhoan ADD CONSTRAINT taikhoan_pk PRIMARY KEY ( username );
 
@@ -190,14 +187,16 @@ ALTER TABLE hoadon
     ADD CONSTRAINT hoadon_nhanvien_fk FOREIGN KEY ( manv )
         REFERENCES nhanvien ( manv );
 
-ALTER TABLE nhanvien
-    ADD CONSTRAINT nhanvien_taikhoan_fk FOREIGN KEY ( username )
-        REFERENCES taikhoan ( username );
-
+ALTER TABLE taikhoan
+    ADD CONSTRAINT taikhoan_nhanvien_fk FOREIGN KEY ( manv )
+        REFERENCES nhanvien ( manv ) ON DELETE CASCADE;
+        
+alter table nhanvien drop CONSTRAINT nhanvien_taikhoan_fk;
 ALTER TABLE sanpham
     ADD CONSTRAINT sanpham_loaisp_fk FOREIGN KEY ( malsp )
         REFERENCES loaisp ( malsp );
-        
+alter table sanpham drop constraint sanpham_loaisp_fk;
+ALTER TABLE SANPHAM MODIFY MALSP NUMBER;      
 drop sequence id_manv;
 drop sequence id_mahd;
 drop sequence id_malsp;
@@ -288,6 +287,12 @@ CREATE SEQUENCE id_malsp
 INSERT INTO NHANVIEN (MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG) VALUES(id_manv.NEXTVAL, 'Hùng', 'Qu?n lý',
             TO_DATE('2020-10-10','YYYY-MM-DD'), TO_DATE('2000-10-02','YYYY-MM-DD'), '1500000');
 -- Oracle SQL Developer Data Modeler Summary Report: 
+alter table taikhoan add manv number not null;
+
+SELECT TENNV, CHUCVU, EMAIL, SDT
+FROM NHANVIEN nv JOIN TAIKHOAN tk
+ON nv.manv = tk.manv
+where tk.username = 'Huy';
 -- 
 -- CREATE TABLE                            13
 -- CREATE INDEX                             0
