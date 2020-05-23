@@ -33,5 +33,4 @@ public class SanPhamBLL {
     }
     return false;
   }
-  
 }
