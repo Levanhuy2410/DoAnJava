@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class SanPhamBLL {
   public boolean themSanPham(String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, int maLsp) {
+      System.out.println(maLsp);
     SanPham sanpham = new SanPham(tenSp, giaBan, tgbh, hangSx, slTon, mota, maLsp);
     return SanPhamDAL.themSanPham(sanpham);
   }

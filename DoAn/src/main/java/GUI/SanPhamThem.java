@@ -256,7 +256,7 @@ public class SanPhamThem extends javax.swing.JFrame {
           String soluong = soluongTxt.getText().trim();
           String mota = moTaTxt.getText().trim();
           String tenLsp = tenLoaiTxt.getSelectedItem().toString().trim();
-           
+            System.out.println(tenLsp);
           if (tenSp.isEmpty() || giaBan.isEmpty() || tgbh.isEmpty() || soluong.isEmpty() || hangSx.isEmpty() || mota.isEmpty() || tenLsp.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;

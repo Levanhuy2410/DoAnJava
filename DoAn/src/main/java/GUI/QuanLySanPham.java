@@ -123,6 +123,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
         });
 
         tableSanPham.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tableSanPham.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         tableSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
