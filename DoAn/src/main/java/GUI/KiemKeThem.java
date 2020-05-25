@@ -5,9 +5,12 @@
  */
 package GUI;
 
+import BLL.CTKiemKeBLL;
+import BLL.KiemKeBLL;
 import DTO.SanPham;
 import static GUI.QuanLySanPham.sanPhamBLL;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -17,7 +20,8 @@ import javax.swing.table.TableRowSorter;
  * @author USER
  */
 public class KiemKeThem extends javax.swing.JFrame {
-    public int index = 1;
+    public KiemKeBLL KiemKeBLL = new KiemKeBLL();
+    public CTKiemKeBLL CTKiemKeBLL = new CTKiemKeBLL();
     /**
      * Creates new form QuanLySanPham
      */
@@ -60,18 +64,20 @@ public class KiemKeThem extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         slHeThong = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        slThuc = new javax.swing.JTextField();
+        slTon = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         lyDo = new javax.swing.JTextField();
         BTThemCTKK = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         Filter = new javax.swing.JTextField();
-        tenSP = new javax.swing.JTextField();
+        maSP = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableSanPham = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         loaiSP = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        tenSP = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,11 +90,11 @@ public class KiemKeThem extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Tên Sản Phẩm", "Số Lượng Hệ Thống ", "Số Lượng Thực", "Chênh Lệch", "Lý Do", "Loại Sản Phẩm"
+                "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng Hệ Thống ", "Số Lượng Thực", "Chênh Lệch", "Lý Do", "Loại Sản Phẩm"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -145,7 +151,7 @@ public class KiemKeThem extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -154,16 +160,16 @@ public class KiemKeThem extends javax.swing.JFrame {
                 .addComponent(BTLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98)
                 .addComponent(BTThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(140, 140, 140))
+                .addGap(109, 109, 109))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(74, 74, 74)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTXoaCTKK)
                     .addComponent(BTLuu)
@@ -171,12 +177,12 @@ public class KiemKeThem extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 900, 770));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 0, 900, 860));
 
         jPanel3.setBackground(new java.awt.Color(250, 250, 250));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel4.setText("TÊN SẢN PHẨM");
+        jLabel4.setText("MÃ SẢN PHẨM");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel5.setText("SỐ LƯỢNG HỆ THỐNG");
@@ -188,7 +194,7 @@ public class KiemKeThem extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel6.setText("SỐ LƯỢNG THỰC");
 
-        slThuc.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        slTon.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel7.setText("LÝ DO");
@@ -218,11 +224,11 @@ public class KiemKeThem extends javax.swing.JFrame {
             }
         });
 
-        tenSP.setEditable(false);
-        tenSP.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        tenSP.setToolTipText("");
-        tenSP.setEnabled(false);
-        tenSP.setFocusable(false);
+        maSP.setEditable(false);
+        maSP.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        maSP.setToolTipText("");
+        maSP.setEnabled(false);
+        maSP.setFocusable(false);
 
         tableSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -251,6 +257,15 @@ public class KiemKeThem extends javax.swing.JFrame {
         loaiSP.setEnabled(false);
         loaiSP.setFocusable(false);
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        jLabel12.setText("TÊN SẢN PHẨM");
+
+        tenSP.setEditable(false);
+        tenSP.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        tenSP.setToolTipText("");
+        tenSP.setEnabled(false);
+        tenSP.setFocusable(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -264,14 +279,16 @@ public class KiemKeThem extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tenSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(maSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(slHeThong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slThuc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(slTon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lyDo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loaiSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(loaiSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tenSP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(166, 166, 166)
                         .addComponent(BTThemCTKK)))
@@ -294,15 +311,19 @@ public class KiemKeThem extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(maSP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -315,17 +336,17 @@ public class KiemKeThem extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(slThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(slTon, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lyDo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(38, 38, 38)
                 .addComponent(BTThemCTKK)
-                .addGap(46, 46, 46))
+                .addGap(30, 30, 30))
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 770));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -333,17 +354,36 @@ public class KiemKeThem extends javax.swing.JFrame {
     private void BTThemCTKKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemCTKKActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tableCTKK.getModel();
+        String MASP = maSP.getText();
         String TENSP = tenSP.getText();
         int SLHT = Integer.parseInt(slHeThong.getText());
-        int SLT = Integer.parseInt(slThuc.getText());
+        int SLT = Integer.parseInt(slTon.getText());
         String LYDO = lyDo.getText();
         String LOAISP = loaiSP.getText();
-        Object [] row = {index++, TENSP, SLHT, SLT, SLHT-SLT, LYDO, LOAISP};
+        Object[] row = {MASP, TENSP, SLHT, SLT, SLHT - SLT, LYDO, LOAISP};
         model.addRow(row);
     }//GEN-LAST:event_BTThemCTKKActionPerformed
 
     private void BTLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTLuuActionPerformed
         // TODO add your handling code here:
+        // Insert phieu kk
+        if (KiemKeBLL.insertKiemKe()) {
+            // Get ma id vua insert
+            int MAKK = KiemKeBLL.getMaKK();
+            // Get tổng số dòng
+            int rows = tableCTKK.getRowCount();
+            for (int row = 0; row < rows; row++) {
+                int MASP = Integer.parseInt(tableCTKK.getValueAt(row, 0).toString());
+                int SLHETHONG = Integer.parseInt(tableCTKK.getValueAt(row, 2).toString());
+                int SLTON = Integer.parseInt((tableCTKK.getValueAt(row, 3).toString()));
+                String LYDO =  tableCTKK.getValueAt(row, 5).toString();
+                CTKiemKeBLL.insertCTKiemKe(MASP, MAKK, SLHETHONG, SLTON, LYDO);
+                // Reload list
+                QuanLyKiemKe.loadAllKiemKe();
+            }
+            JOptionPane.showMessageDialog(rootPane, "Thêm phiếu kiểm kê thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+        }
+//        System.out.println(id);
     }//GEN-LAST:event_BTLuuActionPerformed
 
     private void BTThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThoatActionPerformed
@@ -356,11 +396,11 @@ public class KiemKeThem extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tableCTKK.getModel();
         int[] selected = tableCTKK.getSelectedRows();
         int del = 1;
-        for (int i=0; i < selected.length; i++){
+        for (int i = 0; i < selected.length; i++) {
             model.removeRow(selected[i]);
-            if (i < selected.length - 1){
-                selected[i+1] = selected[i+1] - del;
-                del = del+1;
+            if (i < selected.length - 1) {
+                selected[i + 1] = selected[i + 1] - del;
+                del = del + 1;
             }
         }
     }//GEN-LAST:event_BTXoaCTKKActionPerformed
@@ -369,6 +409,7 @@ public class KiemKeThem extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selected = tableSanPham.getSelectedRow();
         if (selected != -1) {
+            maSP.setText(String.valueOf(tableSanPham.getModel().getValueAt(selected, 0)));
             tenSP.setText(String.valueOf(tableSanPham.getModel().getValueAt(selected, 1)));
             slHeThong.setText(String.valueOf(tableSanPham.getModel().getValueAt(selected, 2)));
             loaiSP.setText(String.valueOf(tableSanPham.getModel().getValueAt(selected, 3)));
@@ -430,6 +471,7 @@ public class KiemKeThem extends javax.swing.JFrame {
     private javax.swing.JTextField Filter;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -442,8 +484,9 @@ public class KiemKeThem extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField loaiSP;
     private javax.swing.JTextField lyDo;
+    private javax.swing.JTextField maSP;
     private javax.swing.JTextField slHeThong;
-    private javax.swing.JTextField slThuc;
+    private javax.swing.JTextField slTon;
     private javax.swing.JTable tableCTKK;
     public static javax.swing.JTable tableSanPham;
     private javax.swing.JTextField tenSP;

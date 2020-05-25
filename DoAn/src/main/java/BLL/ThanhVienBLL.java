@@ -31,8 +31,8 @@ public class ThanhVienBLL {
         return ThanhVienDAL.insertThanhVien(tv);
     }
 
-    public int getMaTV(String tenTV, String loaiTV, String sdt, String email, int diemTV) {
-        return ThanhVienDAL.getMaTV(tenTV, loaiTV, sdt, email, diemTV);
+    public int getMaTV() {
+        return ThanhVienDAL.getMaTV();
     }
 
     public boolean deleteThanhVien(String maTV) {

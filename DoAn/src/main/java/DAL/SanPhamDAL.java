@@ -85,6 +85,22 @@ public class SanPhamDAL {
         arr.add(sanpham.maSp);
         return JdbcConnection.executeUpdate(query, arr);
     }
+    // Hàm lấy tên sản phẩm từ mã sản phẩm
+    public static String getTenSanPham(int maSP){
+        String tenSP = null;
+        String query = "SELECT TENSP FROM SANPHAM WHERE MASP = ?";
+        ArrayList<Object> arr = new ArrayList<>();
+        arr.add(maSP);
+        ResultSet rs = JdbcConnection.executeQuery(query, arr);
+        try {
+            if (rs.next()){
+                tenSP = rs.getString(1);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return tenSP;
+    }
 //  public static void main(String[] args) {
 //    SanPham a = new SanPham(23, "COng update", 14000, 36, "CONGCOMPANY", 1, "afs", 2, "RAM DDR4");
 //    System.out.println(SanPhamDAL.capnhatSanPham(a));

@@ -23,4 +23,7 @@ public class LoaiSpBLL {
     public int getIdLoaispByName(String tenLsp) {
       return loaiSpDAL.getIdLoaispByName(tenLsp);
     }
+    public static boolean themLoaisp(LoaiSP loaisp) {
+      return LoaiSpDAL.themLoaiSp(loaisp);
+    }
 }

@@ -337,7 +337,7 @@ public class NhanVienThem extends javax.swing.JFrame {
         } else {
             if (NhanVienBLL.insertNhanVien(TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG)) {
                 // Get mã nhân viên
-                int MANV = NhanVienBLL.getMaNV(TENNV, CHUCVU);
+                int MANV = NhanVienBLL.getMaNV();
                 // Insert into TaiKhoan
                 TaiKhoanBLL.insertTaiKhoan(USERNAME, PASSWORD, CHUCVU, MANV);
                 // Add 1 dòng lên table

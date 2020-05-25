@@ -57,21 +57,9 @@ public class NhanVienDAL {
         return result;
     }
     // Hàm lấy mã nhân viên
-    public int getMaNV(String tenNV, String chucVu){
-        int maNV = 0;
-        String query = "SELECT MANV FROM NHANVIEN WHERE TENNV = '" + tenNV + "' AND CHUCVU = '" + chucVu + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-        try {
-            JdbcConnection.getConnection();
-            ResultSet rs = JdbcConnection.executeQuery(query, arr);
-            if (rs.next()){
-                maNV = rs.getInt("MANV");
-            }
-            JdbcConnection.closeConnection();
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
-        return maNV;
+    public int getMaNV(){
+        String query = "SELECT id_manv.currval from dual";
+        return JdbcConnection.getId(query);
     }
 //    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, String mucLuong, String username){
 //        boolean result = false;

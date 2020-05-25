@@ -96,21 +96,20 @@ public class ThanhVienDAL {
         return result;
     }
     // Hàm get id thành viên
-    public int getMaTV(String tenTV, String loaiTV, String sdt, String email, int diemTV){
-        int maTV = 0;
-        String query = "SELECT MATV FROM KHTHANHVIEN WHERE TENTV = '" + tenTV + "' AND LOAITV = '" + loaiTV 
-                + "' AND SDT = '" + sdt + "' AND EMAIL = '" + email + "' AND DIEMTV='" + diemTV + "'";
-        ArrayList<Object> arr = new ArrayList<>();
-        try {
-            JdbcConnection.getConnection();
-            ResultSet rs = JdbcConnection.executeQuery(query, arr);
-            if (rs.next()){
-                maTV = rs.getInt("MATV");
-            }
-            JdbcConnection.closeConnection();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        return maTV;
+    public int getMaTV(){
+//        int maTV = 0;
+        String query = "SELECT id_matv.currval from dual";
+//        ArrayList<Object> arr = new ArrayList<>();
+//        try {
+//            JdbcConnection.getConnection();
+//            ResultSet rs = JdbcConnection.executeQuery(query, arr);
+//            if (rs.next()){
+//                maTV = rs.getInt("MATV");
+//            }
+//            JdbcConnection.closeConnection();
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+        return JdbcConnection.getId(query);
     }
 }

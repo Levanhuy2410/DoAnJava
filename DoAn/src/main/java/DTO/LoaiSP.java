@@ -10,39 +10,13 @@ package DTO;
  * @author Cong
  */
 public class LoaiSP {
-  private String maLSp;
-  private String tenLSp;
+  public String maLSp;
+  public String tenLSp;
   public LoaiSP(String maLSp, String tenLSp) {
     this.maLSp = maLSp;
     this.tenLSp = tenLSp;
   }
-  /**
-   * @return the maLSp
-   */
-  public String getMaLSp() {
-    return maLSp;
-  }
-
-  /**
-   * @param maLSp the maLSp to set
-   */
-  public void setMaLSp(String maLSp) {
-    this.maLSp = maLSp;
-  }
-
-  /**
-   * @return the tenLSp
-   */
-  public String getTenLSp() {
-    return tenLSp;
-  }
-
-  /**
-   * @param tenLSp the tenLSp to set
-   */
-  public void setTenLSp(String tenLSp) {
+  public LoaiSP( String tenLSp) {
     this.tenLSp = tenLSp;
   }
-  
-  
 }

@@ -194,7 +194,7 @@ public class ThanhVienThem extends javax.swing.JFrame {
         if (ThanhVienBLL.insertThanhVien(TENTV, LOAITV, SDT, EMAIL, DIEMTV));
         {
             // Lấy mã thành viên
-            int MATV = ThanhVienBLL.getMaTV(TENTV,LOAITV,SDT,EMAIL,DIEMTV);
+            int MATV = ThanhVienBLL.getMaTV();
             // Add 1 dòng lên table
             Object[] dataRow = {MATV, TENTV, LOAITV, SDT, EMAIL, DIEMTV};
             QuanLyThanhVien.AddRowToTable(dataRow);

@@ -27,7 +27,7 @@ public class SanPhamCapNhat extends javax.swing.JFrame {
       LoaiSpBLL loaiSpBLL = new LoaiSpBLL();
       List<LoaiSP> allLoaiSp = loaiSpBLL.getAllLoaiSp();
       allLoaiSp.forEach((LoaiSP action) -> {
-        loaiSpTxt.addItem(action.getTenLSp());
+        loaiSpTxt.addItem(action.tenLSp);
       });
     }
     /** This method is called from within the constructor to

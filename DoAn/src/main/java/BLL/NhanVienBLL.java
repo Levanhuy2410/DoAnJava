@@ -28,8 +28,8 @@ public class NhanVienBLL {
         NhanVien nv = new NhanVien(tenNV, chucVu, ngayVL, ngaySinh, sdt, email, mucLuong);
         return NhanVienDAL.insertNhanVien(nv);
     }
-    public int getMaNV(String tenNV, String chucVu){
-       return NhanVienDAL.getMaNV(tenNV, chucVu);
+    public int getMaNV(){
+       return NhanVienDAL.getMaNV();
     }
 //    public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, String mucLuong, String username, String password, String repass) {
 //        if (tenNV.isEmpty() || chucVu.isEmpty() || ngayVL.isEmpty() || ngaySinh.isEmpty() || mucLuong.isEmpty() || username.isEmpty()) {

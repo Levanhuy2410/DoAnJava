@@ -5,10 +5,30 @@
  */
 package BLL;
 
+import DAL.KiemKeDAL;
+import DTO.KiemKe;
+import java.util.ArrayList;
+
 /**
  *
  * @author USER
  */
 public class KiemKeBLL {
-    
+
+    public KiemKeDAL KiemKeDAL = new KiemKeDAL();
+
+    public static ArrayList<KiemKe> getAllKiemKe() {
+        return DAL.KiemKeDAL.getAllKiemKe();
+    }
+
+    public boolean insertKiemKe() {
+        return KiemKeDAL.insertKiemKe();
+    }
+
+    public int getMaKK() {
+        return KiemKeDAL.getMaKK();
+    }
+    public boolean deleteKiemKe(int maKK){
+        return KiemKeDAL.deleteKiemKe(maKK);
+    }
 }

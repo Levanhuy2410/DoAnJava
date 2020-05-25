@@ -8,6 +8,8 @@ package GUI;
 
 import BLL.LoaiSpBLL;
 import BLL.SanPhamBLL;
+import DAL.LoaiSpDAL;
+import DTO.SanPham;
 import DTO.LoaiSP;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -25,10 +27,9 @@ public class SanPhamThem extends javax.swing.JFrame {
       
     }
     public void loadLoaisp() {
-      LoaiSpBLL loaiSpBLL = new LoaiSpBLL();
-      List<LoaiSP> allLoaiSp = loaiSpBLL.getAllLoaiSp();
+      List<LoaiSP> allLoaiSp = LoaiSpDAL.getAllLoaiSp();
       allLoaiSp.forEach((LoaiSP action) -> {
-        tenLoaiTxt.addItem(action.getTenLSp());
+        tenLoaiTxt.addItem(action.tenLSp);
       });
     }
     /** This method is called from within the constructor to

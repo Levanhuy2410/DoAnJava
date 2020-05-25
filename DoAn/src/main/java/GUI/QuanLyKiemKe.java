@@ -5,7 +5,11 @@
  */
 package GUI;
 
+import BLL.KiemKeBLL;
+import DTO.KiemKe;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +17,27 @@ import javax.swing.JOptionPane;
  */
 public class QuanLyKiemKe extends javax.swing.JFrame {
 
+    public KiemKeBLL KiemKeBLL = new KiemKeBLL();
+
     /**
      * Creates new form QuanLySanPham
      */
     public QuanLyKiemKe() {
         initComponents();
+        this.loadAllKiemKe();
+    }
+
+    public static void loadAllKiemKe() {
+        DefaultTableModel model = (DefaultTableModel) tableKiemKe.getModel();
+        while (tableKiemKe.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+        ArrayList<KiemKe> listKiemKe = BLL.KiemKeBLL.getAllKiemKe();
+        for (KiemKe kk : listKiemKe) {
+            Object[] row = {kk.maKK, kk.ngayTao};
+            model.addRow(row);
+        }
+        tableKiemKe.setModel(model);
     }
 
     /**
@@ -33,13 +53,13 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         BTThem = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BTXoa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableKiemKe = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
-        BTCapNhat1 = new javax.swing.JButton();
+        BTXemCTKK = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -81,14 +101,19 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
-        jButton2.setText("  XÓA");
+        BTXoa.setBackground(new java.awt.Color(255, 0, 0));
+        BTXoa.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        BTXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
+        BTXoa.setText("  XÓA");
+        BTXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTXoaActionPerformed(evt);
+            }
+        });
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableKiemKe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tableKiemKe.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        tableKiemKe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -99,8 +124,8 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                 "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getAccessibleContext().setAccessibleName("");
+        jScrollPane1.setViewportView(tableKiemKe);
+        tableKiemKe.getAccessibleContext().setAccessibleName("");
 
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -115,10 +140,15 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             }
         });
 
-        BTCapNhat1.setBackground(new java.awt.Color(0, 102, 204));
-        BTCapNhat1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        BTCapNhat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-view-35.png"))); // NOI18N
-        BTCapNhat1.setText("  XEM CTKK");
+        BTXemCTKK.setBackground(new java.awt.Color(0, 102, 204));
+        BTXemCTKK.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        BTXemCTKK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-view-35.png"))); // NOI18N
+        BTXemCTKK.setText("  XEM CTKK");
+        BTXemCTKK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTXemCTKKActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -139,9 +169,9 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BTXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50)
-                                .addComponent(BTCapNhat1)
+                                .addComponent(BTXemCTKK)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -156,9 +186,9 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BTThem)
-                        .addComponent(jButton2)
+                        .addComponent(BTXoa)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BTCapNhat1)))
+                        .addComponent(BTXemCTKK)))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -183,6 +213,34 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         mhchinh.setVisible(true);
         dispose();
     }//GEN-LAST:event_BTReturnActionPerformed
+
+    private void BTXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXoaActionPerformed
+        // TODO add your handling code here:
+        int selected = tableKiemKe.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tableKiemKe.getModel();
+        if (selected == -1) {
+            JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để xóa", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int MaKK = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
+            KiemKeBLL.deleteKiemKe(MaKK);
+            model.removeRow(selected);
+        }
+        tableKiemKe.setModel(model);
+    }//GEN-LAST:event_BTXoaActionPerformed
+
+    private void BTXemCTKKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXemCTKKActionPerformed
+        // TODO add your handling code here:
+        int selected = tableKiemKe.getSelectedRow();
+        if (selected == -1){
+            JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để xem", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            XemCTKK ctkk = new XemCTKK();
+            int maKK = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
+            ctkk.loadAllCTKK(maKK);
+            ctkk.setVisible(true);
+        }
+    }//GEN-LAST:event_BTXemCTKKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,16 +281,16 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTCapNhat1;
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton BTXemCTKK;
+    private javax.swing.JButton BTXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTable tableKiemKe;
     // End of variables declaration//GEN-END:variables
 }
