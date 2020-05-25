@@ -48,7 +48,23 @@ public class SanPhamDAL {
         arr.add(sanpham.maLsp);
         return JdbcConnection.executeUpdate(query, arr);
     }
-
+//    // Hàm get id mã loại sản phẩm
+//    public static int getMaLSP(String tenLSP){
+//        int maLSP = 0;
+//        String query = "SELECT MALSP FROM LOAISP WHERE TENLSP = ?";
+//        ArrayList<Object> arr = new ArrayList<>();
+//        try {
+//            arr.add(tenLSP);
+//            ResultSet rs = JdbcConnection.executeQuery(query, arr);
+//            if (rs.next()){
+//                maLSP = rs.getInt("MALSP");
+//            }
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return maLSP;
+//    }
+    // Hàm xóa sản phẩm
     public static boolean xoaSanPham(String idSanPham) {
         String query = "DELETE FROM SANPHAM WHERE masp = ?";
         ArrayList<Object> arr = new ArrayList<>();

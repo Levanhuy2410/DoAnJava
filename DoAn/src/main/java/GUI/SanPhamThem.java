@@ -8,8 +8,11 @@ package GUI;
 
 import BLL.LoaiSpBLL;
 import BLL.SanPhamBLL;
+<<<<<<< HEAD
 import DAL.LoaiSpDAL;
 import DTO.SanPham;
+=======
+>>>>>>> aee64a984b04506f733cc80022b17c1d631875cf
 import DTO.LoaiSP;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -257,7 +260,7 @@ public class SanPhamThem extends javax.swing.JFrame {
           String soluong = soluongTxt.getText().trim();
           String mota = moTaTxt.getText().trim();
           String tenLsp = tenLoaiTxt.getSelectedItem().toString().trim();
-
+           
           if (tenSp.isEmpty() || giaBan.isEmpty() || tgbh.isEmpty() || soluong.isEmpty() || hangSx.isEmpty() || mota.isEmpty() || tenLsp.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
