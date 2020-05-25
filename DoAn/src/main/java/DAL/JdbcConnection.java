@@ -17,9 +17,10 @@ import java.util.ArrayList;
  * @author Cong
  */
 public class JdbcConnection {
-
+    public static Connection connection = getConnection();
     // Mở kết nối đến database
     public static Connection getConnection() {
+      
         final String url = "jdbc:oracle:thin:@localhost:1521/ORCLCDB.localdomain";
         final String user = "doan";
         final String password = "doan";
@@ -33,12 +34,13 @@ public class JdbcConnection {
         return null;
     }
 
+
     // Truy xuất các dòng dữ liệu
     public static ResultSet executeQuery(String sql, ArrayList<Object> arr) { // Dành cho các câu lệnh SELECT
         ResultSet rs = null;
         try {
             PreparedStatement stm;
-            stm = JdbcConnection.getConnection().prepareStatement(sql);
+            stm = JdbcConnection.connection.prepareStatement(sql);
             if (arr.size() > 0) {
                 for (int i = 0; i < arr.size(); i++) {
                     stm.setObject(i + 1, arr.get(i));
@@ -54,7 +56,7 @@ public class JdbcConnection {
     public static boolean executeUpdate(String sql, ArrayList<Object> arr){
         try {
             PreparedStatement stm;
-            stm = JdbcConnection.getConnection().prepareStatement(sql);
+            stm = JdbcConnection.connection.prepareStatement(sql);
             if (arr.size() > 0) {
                 for (int i = 0; i < arr.size(); i++) {
                     stm.setObject(i + 1, arr.get(i));
