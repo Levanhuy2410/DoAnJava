@@ -101,6 +101,15 @@ public class SanPhamDAL {
         }
         return tenSP;
     }
+    // Hàm update số lượng tồn sau khi kiểm kê
+    public boolean updateSoLuongTon(int slTon, int maSP){
+        String query = "UPDATE SANPHAM SET SLTON = ? WHERE MASP = ?";
+        ArrayList<Object> arr = new ArrayList<>();
+        arr.add(slTon);
+        arr.add(maSP);
+        return JdbcConnection.executeUpdate(query, arr);
+    }   
+            
 //  public static void main(String[] args) {
 //    SanPham a = new SanPham(23, "COng update", 14000, 36, "CONGCOMPANY", 1, "afs", 2, "RAM DDR4");
 //    System.out.println(SanPhamDAL.capnhatSanPham(a));

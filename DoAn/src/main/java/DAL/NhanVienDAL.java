@@ -19,7 +19,6 @@ public class NhanVienDAL {
         String query = "SELECT * FROM NHANVIEN";
         ArrayList<Object> arr = new ArrayList<>();
         try {
-            JdbcConnection.getConnection();
             ResultSet rs = JdbcConnection.executeQuery(query, arr);
             while (rs.next()){
                 int maNV = rs.getInt("MANV");
@@ -48,7 +47,7 @@ public class NhanVienDAL {
                     + "VALUES (id_manv.NEXTVAL,'" + nv.tenNV + "','" + nv.chucVu + "', TO_DATE('" + nv.ngayVL + "','YYYY-MM-DD'), TO_DATE('" + nv.ngaySinh + "','YYYY-MM-DD'),'" 
                     + nv.sdt + "','" + nv.email + "','" + nv.mucLuong  +"')";
             ArrayList<Object> arr = new ArrayList<>();
-            JdbcConnection.getConnection();
+            
             result = JdbcConnection.executeUpdate(query, arr);
             JdbcConnection.closeConnection();
         } catch (Exception ex) {
@@ -82,7 +81,7 @@ public class NhanVienDAL {
         try {
             String query = "DELETE FROM NHANVIEN WHERE MANV ='" + MaNV + "'";
             ArrayList<Object> arr = new ArrayList<>();
-            JdbcConnection.getConnection();
+            
             // Xóa tài khoản của nhân viên
             result = JdbcConnection.executeUpdate(query, arr);
             JdbcConnection.closeConnection();
@@ -99,7 +98,7 @@ public class NhanVienDAL {
                     + "CHUCVU = '" + nv.chucVu + "', NGAYVL = TO_DATE('" + nv.ngayVL + "','YYYY-MM-DD HH24:MI:SS'), NGAYSINH = TO_DATE('" + nv.ngaySinh + 
                     "', 'YYYY-MM-DD HH24:MI:SS'), SDT = '" + nv.sdt + "', EMAIL = '" + nv.email + "'," + "MUCLUONG = '" + nv.mucLuong + "' WHERE MANV = '" + nv.maNV + "'";
             ArrayList<Object> arr = new ArrayList<>();
-            JdbcConnection.getConnection();
+            
             result = JdbcConnection.executeUpdate(query, arr);
             JdbcConnection.closeConnection();
         } catch (Exception ex){

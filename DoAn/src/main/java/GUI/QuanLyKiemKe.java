@@ -218,6 +218,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selected = tableKiemKe.getSelectedRow();
         DefaultTableModel model = (DefaultTableModel) tableKiemKe.getModel();
+        // Check có đang chọn 1 dòng hay không
         if (selected == -1) {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để xóa", "Lỗi", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -226,15 +227,17 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             model.removeRow(selected);
         }
         tableKiemKe.setModel(model);
+        // Xuất hiện thông báo xóa thành công
+        JOptionPane.showMessageDialog(rootPane, "Xóa phiếu kiểm kê thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_BTXoaActionPerformed
 
     private void BTXemCTKKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXemCTKKActionPerformed
         // TODO add your handling code here:
         int selected = tableKiemKe.getSelectedRow();
-        if (selected == -1){
+        if (selected == -1) {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để xem", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
-        else {
+        } else {
             XemCTKK ctkk = new XemCTKK();
             int maKK = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
             ctkk.loadAllCTKK(maKK);

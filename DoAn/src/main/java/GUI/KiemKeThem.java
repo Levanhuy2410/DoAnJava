@@ -8,6 +8,7 @@ package GUI;
 import BLL.CTKiemKeBLL;
 import BLL.KiemKeBLL;
 import DTO.SanPham;
+import BLL.SanPhamBLL;
 import static GUI.QuanLySanPham.sanPhamBLL;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,8 +21,11 @@ import javax.swing.table.TableRowSorter;
  * @author USER
  */
 public class KiemKeThem extends javax.swing.JFrame {
+
     public KiemKeBLL KiemKeBLL = new KiemKeBLL();
     public CTKiemKeBLL CTKiemKeBLL = new CTKiemKeBLL();
+    public SanPhamBLL SanPhamBLL = new SanPhamBLL();
+
     /**
      * Creates new form QuanLySanPham
      */
@@ -376,8 +380,15 @@ public class KiemKeThem extends javax.swing.JFrame {
                 int MASP = Integer.parseInt(tableCTKK.getValueAt(row, 0).toString());
                 int SLHETHONG = Integer.parseInt(tableCTKK.getValueAt(row, 2).toString());
                 int SLTON = Integer.parseInt((tableCTKK.getValueAt(row, 3).toString()));
-                String LYDO =  tableCTKK.getValueAt(row, 5).toString();
+                int CHENHLECH = Integer.parseInt((tableCTKK.getValueAt(row, 4).toString()));
+                String LYDO = tableCTKK.getValueAt(row, 5).toString();
+                // Insert chi tiết kiếm kê vào phiếu kiểm kê
                 CTKiemKeBLL.insertCTKiemKe(MASP, MAKK, SLHETHONG, SLTON, LYDO);
+                // Cập nhật số lượng tồn cho sản phẩm nếu có sự thay đổi
+                if (CHENHLECH != 0) {
+                    SanPhamBLL.updateSoLuongTon(SLTON, MASP);
+                }
+
                 // Reload list
                 QuanLyKiemKe.loadAllKiemKe();
             }
@@ -403,6 +414,9 @@ public class KiemKeThem extends javax.swing.JFrame {
                 del = del + 1;
             }
         }
+        // Xuất hiện thông báo xóa thành công
+        JOptionPane.showMessageDialog(rootPane, "Xóa phiếu kiểm kê thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+
     }//GEN-LAST:event_BTXoaCTKKActionPerformed
 
     private void tableSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMouseClicked

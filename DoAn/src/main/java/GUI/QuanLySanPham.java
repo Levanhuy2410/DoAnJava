@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Cong
  */
 public class QuanLySanPham extends javax.swing.JFrame {
-
+    public SanPhamBLL SanPhamBLL = new SanPhamBLL();
     /**
      * Creates new form QuanLySanPham
      */

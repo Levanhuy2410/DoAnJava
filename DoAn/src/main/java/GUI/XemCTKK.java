@@ -65,7 +65,7 @@ public class XemCTKK extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Mã Sản Phẩm", "Số Lượng Hệ Thống", "Số Lượng Thực", "Lý Do"
+                "Tên Sản Phẩm", "Số Lượng Hệ Thống", "Số Lượng Thực", "Lý Do"
             }
         ));
         jScrollPane1.setViewportView(tableCTKK);
