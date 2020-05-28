@@ -10,6 +10,8 @@ import DTO.TaiKhoan;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -110,4 +112,18 @@ public class TaiKhoanDAL {
         }
         return result;
     }
+  public static int getManvByUsername(String username) {
+    try {
+      String query = "SELECT MANV FROM TAIKHOAN WHERE USERNAME = ?";
+      ArrayList<Object> arr = new ArrayList<>();
+      arr.add(username);
+      ResultSet rs = JdbcConnection.executeQuery(query, arr);
+      while (rs.next()) {
+        return rs.getInt("MANV");
+      }
+    } catch (SQLException ex) {
+      Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return -1;
+  }
 }
