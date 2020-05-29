@@ -22,10 +22,12 @@ public class KiemKeDAL {
         String query = "SELECT * FROM PHIEUKK";
         ArrayList<KiemKe> listKiemKe = new ArrayList<>();
         ArrayList<Object> arr = new ArrayList<>();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         ResultSet rs = JdbcConnection.executeQuery(query, arr);
         try {
             while (rs.next()) {
-                KiemKe kiemke = new KiemKe(rs.getInt(1), rs.getString(2));
+                String ngayKK = df.format(rs.getDate(2));
+                KiemKe kiemke = new KiemKe(rs.getInt(1), ngayKK);
                 listKiemKe.add(kiemke);
             }
         } catch (SQLException ex) {
@@ -36,7 +38,7 @@ public class KiemKeDAL {
 
     // Hàm thêm phiếu kiểm kê
     public boolean insertKiemKe() {
-        String query = "INSERT INTO PHIEUKK VALUES(id_phieukk.nextval, TO_DATE(?, 'YYYY-MM-DD'))";
+        String query = "INSERT INTO PHIEUKK VALUES(id_phieukk.nextval, TO_DATE(?, 'dd/MM/yyyy'))";
         ArrayList<Object> arr = new ArrayList<>();
         String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
         arr.add(timeStamp);

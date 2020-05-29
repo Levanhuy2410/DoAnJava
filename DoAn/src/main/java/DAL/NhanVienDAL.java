@@ -7,6 +7,7 @@ package DAL;
 import DTO.NhanVien;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 /**
  *
@@ -18,14 +19,15 @@ public class NhanVienDAL {
         ArrayList<NhanVien> result = new ArrayList<>();
         String query = "SELECT * FROM NHANVIEN";
         ArrayList<Object> arr = new ArrayList<>();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         try {
             ResultSet rs = JdbcConnection.executeQuery(query, arr);
             while (rs.next()){
                 int maNV = rs.getInt("MANV");
                 String tenNV = rs.getString("TENNV");
                 String chucVu = rs.getString("CHUCVU");
-                String ngayVL = rs.getString("NGAYVL");
-                String ngaySinh = rs.getString("NGAYSINH");
+                String ngayVL = df.format(rs.getDate("NGAYVL"));
+                String ngaySinh = df.format(rs.getDate("NGAYSINH"));
                 String sdt = rs.getString("SDT");
                 String email = rs.getString("EMAIL");
                 int mucLuong = rs.getInt("MUCLUONG");
@@ -44,7 +46,7 @@ public class NhanVienDAL {
         
         try {
             String query = "INSERT INTO NHANVIEN(MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, SDT, EMAIL, MUCLUONG) "
-                    + "VALUES (id_manv.NEXTVAL,'" + nv.tenNV + "','" + nv.chucVu + "', TO_DATE('" + nv.ngayVL + "','YYYY-MM-DD'), TO_DATE('" + nv.ngaySinh + "','YYYY-MM-DD'),'" 
+                    + "VALUES (id_manv.NEXTVAL,'" + nv.tenNV + "','" + nv.chucVu + "', TO_DATE('" + nv.ngayVL + "','DD/MM/YYYY'), TO_DATE('" + nv.ngaySinh + "','DD/MM/YYYY'),'" 
                     + nv.sdt + "','" + nv.email + "','" + nv.mucLuong  +"')";
             ArrayList<Object> arr = new ArrayList<>();
             
@@ -95,8 +97,8 @@ public class NhanVienDAL {
         boolean result = false;
         try {
             String query = "UPDATE NHANVIEN SET TENNV = '" + nv.tenNV + "'," 
-                    + "CHUCVU = '" + nv.chucVu + "', NGAYVL = TO_DATE('" + nv.ngayVL + "','YYYY-MM-DD HH24:MI:SS'), NGAYSINH = TO_DATE('" + nv.ngaySinh + 
-                    "', 'YYYY-MM-DD HH24:MI:SS'), SDT = '" + nv.sdt + "', EMAIL = '" + nv.email + "'," + "MUCLUONG = '" + nv.mucLuong + "' WHERE MANV = '" + nv.maNV + "'";
+                    + "CHUCVU = '" + nv.chucVu + "', NGAYVL = TO_DATE('" + nv.ngayVL + "','DD/MM/YYYY'), NGAYSINH = TO_DATE('" + nv.ngaySinh + 
+                    "', 'DD/MM/YYYY'), SDT = '" + nv.sdt + "', EMAIL = '" + nv.email + "'," + "MUCLUONG = '" + nv.mucLuong + "' WHERE MANV = '" + nv.maNV + "'";
             ArrayList<Object> arr = new ArrayList<>();
             
             result = JdbcConnection.executeUpdate(query, arr);
