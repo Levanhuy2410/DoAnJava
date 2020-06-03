@@ -27,7 +27,7 @@ public class KiemKeDAL {
         try {
             while (rs.next()) {
                 String ngayKK = df.format(rs.getDate(2));
-                KiemKe kiemke = new KiemKe(rs.getInt(1), ngayKK);
+                KiemKe kiemke = new KiemKe(rs.getInt(1), ngayKK, rs.getInt(3));
                 listKiemKe.add(kiemke);
             }
         } catch (SQLException ex) {
@@ -37,14 +37,15 @@ public class KiemKeDAL {
     }
 
     // Hàm thêm phiếu kiểm kê
-    public boolean insertKiemKe() {
-        String query = "INSERT INTO PHIEUKK VALUES(id_phieukk.nextval, TO_DATE(?, 'dd/MM/yyyy'))";
+    public boolean insertKiemKe(int maNV) {
+        String query = "INSERT INTO PHIEUKK VALUES(id_phieukk.nextval, TO_DATE(?, 'dd/MM/yyyy'), ?)";
         ArrayList<Object> arr = new ArrayList<>();
-        String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("dd/MM/yyyy").format(Calendar.getInstance().getTime());
         arr.add(timeStamp);
+        arr.add(maNV);
         return JdbcConnection.executeUpdate(query, arr);
     }
-
+//
     // Hàm get mã kiểm kê
     public int getMaKK() {
         String query = "SELECT id_phieukk.CURRVAL FROM DUAL";

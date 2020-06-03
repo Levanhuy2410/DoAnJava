@@ -14,16 +14,23 @@ package DTO;
 public class KiemKe {
     public int maKK;
     public String ngayTao;
+    public int maNV;
 
-    public KiemKe(int maKK, String ngayTao) {
+    public KiemKe(int maKK, String ngayTao, int maNV) {
         this.maKK = maKK;
         this.ngayTao = ngayTao;
+        this.maNV = maNV;
     }
 
     public KiemKe(String ngayTao) {
         this.ngayTao = ngayTao;
     }
 
+    public KiemKe(String ngayTao, int maNV) {
+        this.ngayTao = ngayTao;
+        this.maNV = maNV;
+    }
+    
     public KiemKe() {
     }
     

@@ -43,11 +43,11 @@ public class CTKiemKeDAL {
         }
         return listCTKiemKe;
     }
-    // Hàm xóa chi tiết kiểm kê
-//    public boolean deleteCTKiemKe(int maKK){
-//        String query = "DELETE FROM CTPHIEUKK WHERE MAKK = ?";
-//        ArrayList<Object> arr = new ArrayList<>();
-//        arr.add(maKK);
-//        return JdbcConnection.executeUpdate(query, arr);
-//    }    
+     //Hàm xóa chi tiết kiểm kê
+    public boolean deleteCTKiemKe(int maKK){
+        String query = "DELETE FROM CTPHIEUKK WHERE MAKK = ?";
+        ArrayList<Object> arr = new ArrayList<>();
+        arr.add(maKK);
+        return JdbcConnection.executeUpdate(query, arr);
+    }    
 }

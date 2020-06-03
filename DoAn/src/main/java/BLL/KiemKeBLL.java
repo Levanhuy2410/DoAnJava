@@ -21,8 +21,8 @@ public class KiemKeBLL {
         return DAL.KiemKeDAL.getAllKiemKe();
     }
 
-    public boolean insertKiemKe() {
-        return KiemKeDAL.insertKiemKe();
+    public boolean insertKiemKe(int maNV) {
+        return KiemKeDAL.insertKiemKe(maNV);
     }
 
     public int getMaKK() {

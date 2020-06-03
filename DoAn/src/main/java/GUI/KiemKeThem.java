@@ -371,7 +371,7 @@ public class KiemKeThem extends javax.swing.JFrame {
     private void BTLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTLuuActionPerformed
         // TODO add your handling code here:
         // Insert phieu kk
-        if (KiemKeBLL.insertKiemKe()) {
+        if (KiemKeBLL.insertKiemKe(ManHinhChinh.maNV)) {
             // Get ma id vua insert
             int MAKK = KiemKeBLL.getMaKK();
             // Get tổng số dòng
@@ -388,7 +388,6 @@ public class KiemKeThem extends javax.swing.JFrame {
                 if (CHENHLECH != 0) {
                     SanPhamBLL.updateSoLuongTon(SLTON, MASP);
                 }
-
                 // Reload list
                 QuanLyKiemKe.loadAllKiemKe();
             }

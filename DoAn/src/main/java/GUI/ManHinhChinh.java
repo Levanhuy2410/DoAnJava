@@ -17,7 +17,8 @@ public class ManHinhChinh extends javax.swing.JFrame {
     /**
      * Creates new form ManHinhChinh
      */
-    
+//    public String tenNV = TenNV.getText();
+    public static int maNV;
     public ManHinhChinh() {
         initComponents();
         loadThongTinNhanVien(Login.username);
@@ -35,10 +36,12 @@ public class ManHinhChinh extends javax.swing.JFrame {
             SDT.setText("");
         }
         else {
-            TenNV.setText(nv.get(0));
-            ChucVu.setText(nv.get(1));
-            Email.setText(nv.get(2));
-            SDT.setText(nv.get(3));
+            maNV = Integer.parseInt(nv.get(0).toString());
+            TenNV.setText(nv.get(1));
+            ChucVu.setText(nv.get(2));
+            Email.setText(nv.get(3));
+            SDT.setText(nv.get(4));
+            
         }
     }
     /**
@@ -102,7 +105,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(234, 234, 234)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                 .addGap(234, 234, 234))
         );
         jPanel1Layout.setVerticalGroup(
@@ -110,7 +113,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 0, 950, 140));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 0, 960, 140));
 
         jPanel2.setBackground(new java.awt.Color(0, 168, 232));
 
@@ -269,7 +272,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BTReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(BTQuanLyNhapKho, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTQuanLyXuatKho, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)

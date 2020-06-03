@@ -48,10 +48,10 @@ public class HoaDonDAL {
     }
 
     public static int getMaHd() {
-        String query = "select HOADON_SEQ.nextval from dual";
+        String query = "select id_mahd.nextval from dual";
         return JdbcConnection.getId(query);
     }
-
+    
     public static boolean themCTHD(CTHD ct) {
         String query = "INSERT INTO CTHOADON VALUES (?, ?, ?, ?)";
         ArrayList<Object> arr = new ArrayList<>();
@@ -62,7 +62,7 @@ public class HoaDonDAL {
         return JdbcConnection.executeUpdate(query, arr);
     }
 
-    public static void main(String[] args) {
-        System.out.println(HoaDonDAL.getAllHoaDon());
-    }
+//    public static void main(String[] args) {
+//        System.out.println(HoaDonDAL.getAllHoaDon());
+//    }
 }

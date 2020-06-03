@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author USER
@@ -60,13 +59,14 @@ public class TaiKhoanDAL {
     // Hàm lấy thông tin nhân viên từ username
     public ArrayList<String> getThongTinNhanVien(String username) {
         ArrayList<String> result = new ArrayList<>();
-        String query = "SELECT TENNV, CHUCVU, SDT, EMAIL FROM NHANVIEN nv JOIN"
-                + " TAIKHOAN tk ON nv.manv = tk.manv WHERE tk.USERNAME = '" + username + "'";
+        String query = "SELECT nv.MANV, TENNV, CHUCVU, SDT, EMAIL FROM NHANVIEN nv JOIN"
+                    + " TAIKHOAN tk ON nv.manv = tk.manv WHERE tk.USERNAME = '" + username + "'";
         ArrayList<Object> nv = new ArrayList<>();
         try {
             JdbcConnection.getConnection();
             ResultSet rs = JdbcConnection.executeQuery(query, nv);
             if (rs.next()) {
+                result.add(rs.getString("MANV"));
                 result.add(rs.getString("TENNV"));
                 result.add(rs.getString("CHUCVU"));
                 result.add(rs.getString("SDT"));
@@ -86,7 +86,7 @@ public class TaiKhoanDAL {
         boolean result = false;
         try {
             String query = "INSERT INTO TAIKHOAN(USERNAME, PASSWORD, LOAITK, MANV) "
-                    + "VALUES ('" + tk.username + "','" + tk.password + "','" + tk.loaiTK + "','" + tk.maNV +"')";
+                    + "VALUES ('" + tk.username + "','" + tk.password + "','" + tk.loaiTK + "','" + tk.maNV + "')";
             ArrayList<Object> arr = new ArrayList<>();
             JdbcConnection.getConnection();
             result = JdbcConnection.executeUpdate(query, arr);
@@ -95,7 +95,7 @@ public class TaiKhoanDAL {
         }
         return result;
     }
-    
+
     // Hàm xóa tài khoản từ mã nhân viên
     public boolean deleteTaiKhoan(String maNV) {
         boolean result = false;
@@ -103,7 +103,7 @@ public class TaiKhoanDAL {
             String query = "DELETE FROM TAIKHOAN WHERE EXISTS("
                     + " SELECT NHANVIEN.manv FROM NHANVIEN"
                     + " WHERE NHANVIEN.username = TAIKHOAN.username"
-                    + " AND MANV = " + maNV + ")"; 
+                    + " AND MANV = " + maNV + ")";
             ArrayList<Object> tk = new ArrayList<>();
             JdbcConnection.getConnection();
             result = JdbcConnection.executeUpdate(query, tk);
@@ -112,18 +112,22 @@ public class TaiKhoanDAL {
         }
         return result;
     }
-  public static int getManvByUsername(String username) {
-    try {
-      String query = "SELECT MANV FROM TAIKHOAN WHERE USERNAME = ?";
-      ArrayList<Object> arr = new ArrayList<>();
-      arr.add(username);
-      ResultSet rs = JdbcConnection.executeQuery(query, arr);
-      while (rs.next()) {
-        return rs.getInt("MANV");
-      }
-    } catch (SQLException ex) {
-      Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
+
+    public static int getManvByUsername(String username) {
+        try {
+            String query = "SELECT MANV FROM TAIKHOAN WHERE USERNAME = ?";
+            ArrayList<Object> arr = new ArrayList<>();
+            arr.add(username);
+            ResultSet rs = JdbcConnection.executeQuery(query, arr);
+            while (rs.next()) {
+                return rs.getInt("MANV");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TaiKhoanDAL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
     }
-    return -1;
-  }
+//    public static void main(String args[]){
+//        
+//    }
 }

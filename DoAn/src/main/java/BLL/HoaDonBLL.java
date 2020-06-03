@@ -20,6 +20,7 @@ import java.util.List;
 public class HoaDonBLL {
   public static int themHoaDon(int maKh, String username, int triGia) {
     int maHd = HoaDonDAL.getMaHd();
+      System.out.println(maHd);
     int maNv = TaiKhoanDAL.getManvByUsername(username);
     String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
     HoaDon hoadon = new HoaDon(maHd, timeStamp, maKh, maNv, triGia);

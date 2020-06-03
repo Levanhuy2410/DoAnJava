@@ -17,7 +17,6 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
@@ -46,7 +45,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         }
         ArrayList<KiemKe> listKiemKe = BLL.KiemKeBLL.getAllKiemKe();
         for (KiemKe kk : listKiemKe) {
-            Object[] row = {kk.maKK, kk.ngayTao};
+            Object[] row = {kk.maKK, kk.ngayTao, kk.maNV};
             model.addRow(row);
         }
         tableKiemKe.setModel(model);
@@ -128,13 +127,13 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         tableKiemKe.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         tableKiemKe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê"
+                "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê", "Mã Nhân Viên"
             }
         ));
         jScrollPane1.setViewportView(tableKiemKe);
@@ -163,9 +162,8 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             }
         });
 
-        BTXemCTKK1.setBackground(new java.awt.Color(0, 102, 204));
         BTXemCTKK1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        BTXemCTKK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-view-35.png"))); // NOI18N
+        BTXemCTKK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-print-35.png"))); // NOI18N
         BTXemCTKK1.setText(" IN PHIEU");
         BTXemCTKK1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,27 +179,24 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(66, 66, 66)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 48, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(BTReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(BTReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50)
                                 .addComponent(BTXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50)
                                 .addComponent(BTXemCTKK)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(50, 50, 50)
                                 .addComponent(BTXemCTKK1)
                                 .addGap(37, 37, 37)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +214,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTReturn)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1010, 460));
@@ -242,55 +237,61 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
 
     private void BTXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXoaActionPerformed
         // TODO add your handling code here:
-        int selected = tableKiemKe.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) tableKiemKe.getModel();
-        // Check có đang chọn 1 dòng hay không
-        if (selected == -1) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để xóa", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        } else {
-            int MaKK = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
-            KiemKeBLL.deleteKiemKe(MaKK);
-            model.removeRow(selected);
+        int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này hay không", "Xóa phiếu", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION){
+            int selected = tableKiemKe.getSelectedRow();
+            DefaultTableModel model = (DefaultTableModel) tableKiemKe.getModel();
+            // Check có đang chọn 1 dòng hay không
+            if (selected == -1) {
+                JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để xóa", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            } else {
+                int MaKK = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
+                KiemKeBLL.deleteKiemKe(MaKK);
+                model.removeRow(selected);
+            }
+            tableKiemKe.setModel(model);
+            // Xuất hiện thông báo xóa thành công
+            JOptionPane.showMessageDialog(rootPane, "Xóa phiếu kiểm kê thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         }
-        tableKiemKe.setModel(model);
-        // Xuất hiện thông báo xóa thành công
-        JOptionPane.showMessageDialog(rootPane, "Xóa phiếu kiểm kê thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
-
     }//GEN-LAST:event_BTXoaActionPerformed
 
     private void BTXemCTKKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXemCTKKActionPerformed
         // TODO add your handling code here:
-        int selected = tableKiemKe.getSelectedRow();
-        if (selected == -1) {
-            JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để xem", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        } else {
-            XemCTKK ctkk = new XemCTKK();
-            int maKK = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
-            ctkk.loadAllCTKK(maKK);
-            ctkk.setVisible(true);
-        }
+//        int selected = tableKiemKe.getSelectedRow();
+//        if (selected == -1) {
+//            JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để xem", "Lỗi", JOptionPane.ERROR_MESSAGE);
+//        } else {
+//            XemCTKK ctkk = new XemCTKK();
+//            int maKK = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
+//            ctkk.loadAllCTKK(maKK);
+//            ctkk.setVisible(true);
+//        }
     }//GEN-LAST:event_BTXemCTKKActionPerformed
 
     private void BTXemCTKK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXemCTKK1ActionPerformed
         // TODO add your handling code here:
         try {
             int selected = tableKiemKe.getSelectedRow();
-            int makk = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
-            System.out.println(makk);
-            Map<String, Object> parameters = new HashMap<String, Object>();
-            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJavaMaven\\DoAnJava\\DoAn\\src\\main\\java\\Report\\report1.jrxml");
-            parameters.put("MAKK", makk);
-//            String query = "SELECT MASP, SLHETHONG, SLT, LYDO FROM CTPHIEUKK WHERE MAKK = '" + makk + "'";
-//            System.out.println(query);
-//            JRDesignQuery updateQuery = new JRDesignQuery();
-//            updateQuery.setText(query);
-//
-//            jdesign.setQuery(updateQuery);
+            if (selected != -1){
+                int makk = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
 
-            JasperReport jreport = JasperCompileManager.compileReport(jdesign);
-            JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
+                System.out.println(makk);
+                Map<String, Object> parameters = new HashMap<String, Object>();
+                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJavaMaven\\DoAnJava\\DoAn\\src\\main\\java\\Report\\PhieuKiemKe.jrxml");
+                parameters.put("MAKK", makk);
+    //            String query = "SELECT MASP, SLHETHONG, SLT, LYDO FROM CTPHIEUKK WHERE MAKK = '" + makk + "'";
+    //            System.out.println(query);
+    //            JRDesignQuery updateQuery = new JRDesignQuery();
+    //            updateQuery.setText(query);
+    //
+    //            jdesign.setQuery(updateQuery);
+
+                JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+                JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
+
+                JasperViewer.viewReport(jprint, false);
+            }
             
-            JasperViewer.viewReport(jprint);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

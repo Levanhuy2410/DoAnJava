@@ -80,7 +80,7 @@ public class HoaDonThem extends javax.swing.JFrame {
         }
         List<SanPham> listSanPham = sanPhamBLL.getAllSanPham();
         for (SanPham sp : listSanPham) {
-            Object[] row = {sp.maSp, sp.tenSp, sp.giaBan};
+            Object[] row = {sp.maSp, sp.tenSp, sp.slTon, sp.giaBan};
             model.addRow(row);
         }
         tableSanpham.setModel(model);
@@ -462,7 +462,7 @@ public class HoaDonThem extends javax.swing.JFrame {
             }
             String masp = tableSanpham.getValueAt(selected, 0).toString().trim();
             String tensp = tableSanpham.getValueAt(selected, 1).toString().trim();
-            int giaban = Integer.parseInt(tableSanpham.getValueAt(selected, 2).toString());
+            int giaban = Integer.parseInt(tableSanpham.getValueAt(selected, 3).toString());
             int soluong = Integer.parseInt(soluongTxt.getText().toString().trim());
 
             addRowCTHD(masp, tensp, soluong, giaban);
