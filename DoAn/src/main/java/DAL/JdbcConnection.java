@@ -21,19 +21,26 @@ import io.github.cdimascio.dotenv.*;
  */
 public class JdbcConnection {
 
-    public static Connection connection = getConnection();
-    public static Dotenv dotenv = Dotenv.load();
-    private static String url = dotenv.get("CONNECTION_STRING");
-    private static String user = dotenv.get("DB_USER");
-    private static String password = dotenv.get("DB_PASSWORD");
+    public static Connection connection;
+    public static Dotenv dotenv;
+    public static String url;
+    public static String user;
+    public static String password;
     
+    static {
+        JdbcConnection.dotenv = Dotenv.load();
+        JdbcConnection.url = dotenv.get("CONNECTION_STRING");
+        JdbcConnection.user = dotenv.get("DB_USER");
+        JdbcConnection.password = dotenv.get("DB_PASSWORD");
+        connection = getConnection();
+    }
    
     
     // Mở kết nối đến database
     public static Connection getConnection() {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            return DriverManager.getConnection(url, user, password);
+            return DriverManager.getConnection(JdbcConnection.url, JdbcConnection.user, JdbcConnection.password);
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
