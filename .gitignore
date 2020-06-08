@@ -1,3 +1,4 @@
-DoAn/src/main/java/DAL/JdbcConnection.java
-DoAn/target/classes/DAL/JdbcConnection.class
 /DoAn/target/
+./DoAn/.env
+
+DoAn/.env

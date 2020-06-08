@@ -27,7 +27,6 @@ public class TaiKhoanDAL {
         ArrayList<Object> TKarr = new ArrayList<>();
         String query = "SELECT * FROM TAIKHOAN WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "'";
         try {
-            JdbcConnection.getConnection();
             ResultSet rs = JdbcConnection.executeQuery(query, TKarr);
             if (rs.next()) {
                 return true;
