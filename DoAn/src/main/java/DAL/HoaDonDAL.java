@@ -61,8 +61,14 @@ public class HoaDonDAL {
         arr.add(ct.triGia);
         return JdbcConnection.executeUpdate(query, arr);
     }
+    public static boolean xoaHoaDon(String maHd) {
+      String query = "DELETE FROM HOADON WHERE MAHD = ?";
+      ArrayList<Object> arr = new ArrayList<>();
+      arr.add(maHd);
+      return JdbcConnection.executeUpdate(query, arr);
+    }
 
 //    public static void main(String[] args) {
-//        System.out.println(HoaDonDAL.getAllHoaDon());
+//        System.out.println(HoaDonDAL.xoaHoaDon("19"));
 //    }
 }

@@ -102,7 +102,7 @@ public class SanPhamDAL {
         return tenSP;
     }
     // Hàm update số lượng tồn sau khi kiểm kê
-    public boolean updateSoLuongTon(int slTon, int maSP){
+    public static boolean updateSoLuongTon(int slTon, int maSP){
         String query = "UPDATE SANPHAM SET SLTON = ? WHERE MASP = ?";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(slTon);

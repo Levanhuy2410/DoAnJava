@@ -9,7 +9,6 @@ package GUI;
 import BLL.LoaiSpBLL;
 import BLL.SanPhamBLL;
 import DAL.LoaiSpDAL;
-import DTO.SanPham;
 import DTO.LoaiSP;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -263,8 +262,7 @@ public class SanPhamThem extends javax.swing.JFrame {
             return;
           }
 
-          SanPhamBLL sanphamBLL = new SanPhamBLL();
-          boolean result = sanphamBLL.themSanPham(tenSp, Integer.parseInt(giaBan), Integer.parseInt(tgbh), hangSx, Integer.parseInt(soluong), mota, loaiSpBLL.getIdLoaispByName(tenLsp));
+          boolean result = SanPhamBLL.themSanPham(tenSp, Integer.parseInt(giaBan), Integer.parseInt(tgbh), hangSx, Integer.parseInt(soluong), mota, loaiSpBLL.getIdLoaispByName(tenLsp));
           if (result) {
             QuanLySanPham.loadAllSanpham();
             JOptionPane.showMessageDialog(rootPane, "Thêm sản phẩm thành công !");
@@ -322,7 +320,7 @@ public class SanPhamThem extends javax.swing.JFrame {
     }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
-  private javax.swing.JButton BTThem;
+  public static javax.swing.JButton BTThem;
   private javax.swing.JButton BTThoat;
   private javax.swing.JTextField TgbhTxt;
   private javax.swing.JTextField giaBanTxt;
