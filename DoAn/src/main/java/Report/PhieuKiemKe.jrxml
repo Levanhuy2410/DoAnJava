@@ -17,15 +17,19 @@
 	<parameter name="TenNhanVienLap" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
+NV.TENNV,
      SP.TENSP,
      CTKK.SLHETHONG,
      CTKK.SLT,
      CTKK.LYDO
 FROM
-     CTPHIEUKK CTKK JOIN SANPHAM SP ON CTKK.MASP = SP.MASP
+PHIEUKK KK JOIN CTPHIEUKK CTKK ON KK.MAKK = CTKK.MAKK
+JOIN SANPHAM SP ON CTKK.MASP = SP.MASP
+		JOIN NHANVIEN NV ON NV.MANV = KK.MANV
 WHERE
      CTKK.MAKK = $P{MAKK}]]>
 	</queryString>
+	<field name="TENNV" class="java.lang.String"/>
 	<field name="TENSP" class="java.lang.String"/>
 	<field name="SLHETHONG" class="java.math.BigDecimal"/>
 	<field name="SLT" class="java.math.BigDecimal"/>
@@ -39,15 +43,15 @@ WHERE
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="552" height="95" backcolor="#000000" uuid="5b1a3c61-5ad8-4a72-98ee-608aeddd7bf2"/>
 				<staticText>
-					<reportElement style="Title" x="0" y="0" width="552" height="95" uuid="d275c5f1-6ec4-431e-a751-e0c0c3497a5d"/>
+					<reportElement style="Title" x="0" y="0" width="552" height="95" backcolor="#0066FF" uuid="d275c5f1-6ec4-431e-a751-e0c0c3497a5d"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="false"/>
+						<font isBold="true" isItalic="false"/>
 					</textElement>
 					<text><![CDATA[PHIẾU KIỂM KÊ]]></text>
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="100" width="552" height="32" forecolor="#000000" backcolor="#CC0000" uuid="25335d9c-c88c-4b87-af5e-baa3c900970e"/>
+				<reportElement mode="Opaque" x="0" y="100" width="552" height="32" forecolor="#000000" backcolor="#0066FF" uuid="25335d9c-c88c-4b87-af5e-baa3c900970e"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement x="408" y="0" width="144" height="32" forecolor="#FFFFFF" uuid="c2c8b809-c25f-492d-921c-75e7af16975c"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -63,11 +67,11 @@ WHERE
 					<text><![CDATA[Tên Nhân Viên Lập:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="128" y="0" width="133" height="29" forecolor="#FFFFFF" uuid="baf1d785-2f4f-469e-996f-791d37c2529f"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<reportElement x="128" y="0" width="100" height="29" forecolor="#FFFFFF" uuid="df7c6877-ed92-4b44-847d-456b921bf692"/>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="14"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$P{TenNhanVienLap}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{TENNV}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
@@ -173,7 +177,7 @@ WHERE
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement style="Column header" x="2" y="1" width="197" height="23" forecolor="#FFFFFF" uuid="25aab9b6-68ff-4e8c-8013-161cc5c4d21f"/>
 					<textElement verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
+						<font size="11" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>

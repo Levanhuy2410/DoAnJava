@@ -277,7 +277,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
 
                 System.out.println(makk);
                 Map<String, Object> parameters = new HashMap<String, Object>();
-                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJavaMaven\\DoAnJava\\DoAn\\src\\main\\java\\Report\\PhieuKiemKe.jrxml");
+                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\PhieuKiemKe.jrxml");
                 parameters.put("MAKK", makk);
     //            String query = "SELECT MASP, SLHETHONG, SLT, LYDO FROM CTPHIEUKK WHERE MAKK = '" + makk + "'";
     //            System.out.println(query);

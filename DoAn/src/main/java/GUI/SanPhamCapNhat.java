@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author USER
  */
 public class SanPhamCapNhat extends javax.swing.JFrame {
-    public SanPhamBLL SanPhamBLL = new SanPhamBLL();
+//    public SanPhamBLL SanPhamBLL = new SanPhamBLL();
 
     /** Creates new form ThemSanPham */
     public SanPhamCapNhat() {

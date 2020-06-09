@@ -11,6 +11,11 @@
             <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
             <url>file:${project.basedir}/lib</url>
         </repository>
+        <repository>
+            <id>netbeans</id>
+            <name>Netbeans rep</name>
+            <url>http://bits.netbeans.org/maven2/</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>
@@ -43,8 +48,13 @@
             <artifactId>java-dotenv</artifactId>
             <version>5.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE802</version>
+        </dependency>
         <!-- Thanks for using https://jar-download.com -->
-
+        
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
