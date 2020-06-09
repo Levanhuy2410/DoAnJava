@@ -17,11 +17,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Cong
  */
 public class QuanLySanPham extends javax.swing.JFrame {
-    public SanPhamBLL SanPhamBLL = new SanPhamBLL();
     /**
      * Creates new form QuanLySanPham
      */
-    public static SanPhamBLL sanPhamBLL = new SanPhamBLL();
     public QuanLySanPham() {
         initComponents();
         loadAllSanpham();
@@ -32,7 +30,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
         while (tableSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
-        List<SanPham> listSanPham = sanPhamBLL.getAllSanPham();
+        List<SanPham> listSanPham = SanPhamBLL.getAllSanPham();
         for (SanPham sp : listSanPham) {
           Object[] row = { sp.maSp, sp.tenSp, sp.giaBan, sp.tgbh, sp.hangSx, sp.slTon, sp.mota, sp.tenLsp};
           model.addRow(row);
@@ -260,6 +258,11 @@ public class QuanLySanPham extends javax.swing.JFrame {
 
   private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
     // TODO add your handling code here:
+    int selectedRow = tableSanPham.getSelectedRow();
+    if (selectedRow < 0) {
+      JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 dòng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
     int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
     if (reply == JOptionPane.YES_OPTION) {
       String idSanPham = tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString();

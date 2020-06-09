@@ -8,7 +8,6 @@ package GUI;
 import BLL.HoaDonBLL;
 import DTO.HoaDon;
 import DTO.SanPham;
-import static GUI.QuanLySanPham.sanPhamBLL;
 import static GUI.QuanLySanPham.tableSanPham;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -52,7 +51,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
     jLabel1 = new javax.swing.JLabel();
     jPanel2 = new javax.swing.JPanel();
     BTThem = new javax.swing.JButton();
-    jButton2 = new javax.swing.JButton();
+    btnDelete = new javax.swing.JButton();
     BTCapNhat = new javax.swing.JButton();
     jScrollPane1 = new javax.swing.JScrollPane();
     tableHoaDon = new javax.swing.JTable();
@@ -101,10 +100,15 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
       }
     });
 
-    jButton2.setBackground(new java.awt.Color(255, 0, 0));
-    jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
-    jButton2.setText("  XÓA");
+    btnDelete.setBackground(new java.awt.Color(255, 0, 0));
+    btnDelete.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+    btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
+    btnDelete.setText("  XÓA");
+    btnDelete.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDeleteActionPerformed(evt);
+      }
+    });
 
     BTCapNhat.setBackground(new java.awt.Color(51, 255, 51));
     BTCapNhat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -177,7 +181,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
               .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(BTCapNhat)
                 .addGap(50, 50, 50)
@@ -196,7 +200,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
           .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
             .addComponent(BTThem)
-            .addComponent(jButton2)
+            .addComponent(btnDelete)
             .addComponent(BTCapNhat)
             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addComponent(BTCapNhat1)))
@@ -232,6 +236,20 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
     private void BTCapNhat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhat1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BTCapNhat1ActionPerformed
+
+  private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    // TODO add your handling code here:
+    int selectedRow = tableHoaDon.getSelectedRow();
+    System.out.println(selectedRow);
+    if (selectedRow < 0) {
+      JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 dòng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
+    if (reply == JOptionPane.YES_OPTION) {
+      
+    }
+  }//GEN-LAST:event_btnDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,7 +292,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
   private javax.swing.JButton BTCapNhat1;
   private javax.swing.JButton BTReturn;
   private javax.swing.JButton BTThem;
-  private javax.swing.JButton jButton2;
+  private javax.swing.JButton btnDelete;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JPanel jPanel1;
