@@ -361,6 +361,11 @@ public class HoaDonThem extends javax.swing.JFrame {
       }
     ));
     tableSanPham.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    tableSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tableSanPhamMouseClicked(evt);
+      }
+    });
     jScrollPane1.setViewportView(tableSanPham);
 
     jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
