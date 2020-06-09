@@ -134,12 +134,12 @@ public class HoaDonThem extends javax.swing.JFrame {
     jLabel2 = new javax.swing.JLabel();
     jLabel6 = new javax.swing.JLabel();
     soluongTxt = new javax.swing.JTextField();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    tableSanPham = new javax.swing.JTable();
     jLabel4 = new javax.swing.JLabel();
     btnThemsanpham = new javax.swing.JButton();
     jLabel5 = new javax.swing.JLabel();
     Filter = new javax.swing.JTextField();
-    jScrollPane4 = new javax.swing.JScrollPane();
-    tableSanPham = new javax.swing.JTable();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setBackground(new java.awt.Color(255, 255, 255));
@@ -172,10 +172,13 @@ public class HoaDonThem extends javax.swing.JFrame {
         "STT", "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng", "Giá Bán", "Thành Tiền"
       }
     ));
+    tableCTHD.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tableCTHDMouseClicked(evt);
+      }
+    });
     jScrollPane2.setViewportView(tableCTHD);
     if (tableCTHD.getColumnModel().getColumnCount() > 0) {
-      tableCTHD.getColumnModel().getColumn(0).setHeaderValue("STT");
-      tableCTHD.getColumnModel().getColumn(1).setHeaderValue("Mã Sản Phẩm");
       tableCTHD.getColumnModel().getColumn(2).setPreferredWidth(120);
     }
 
@@ -208,10 +211,15 @@ public class HoaDonThem extends javax.swing.JFrame {
       }
     ));
     tableThanhvien.setRowMargin(0);
+    tableThanhvien.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tableThanhvienMouseClicked(evt);
+      }
+    });
     jScrollPane3.setViewportView(tableThanhvien);
 
     jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-    jLabel9.setText("TÌM KIẾM THÀNH VIÊN ( Nếu Có)");
+    jLabel9.setText("TÌM KIẾM MÃ THÀNH VIÊN ( Nếu Có)");
 
     jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-search-35.png"))); // NOI18N
 
@@ -237,6 +245,11 @@ public class HoaDonThem extends javax.swing.JFrame {
       }
       public void focusLost(java.awt.event.FocusEvent evt) {
         memberFilterFocusLost(evt);
+      }
+    });
+    memberFilter.addMouseListener(new java.awt.event.MouseAdapter() {
+      public void mouseClicked(java.awt.event.MouseEvent evt) {
+        memberFilterMouseClicked(evt);
       }
     });
     memberFilter.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -336,6 +349,20 @@ public class HoaDonThem extends javax.swing.JFrame {
 
     soluongTxt.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
+    tableSanPham.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null},
+        {null, null, null, null}
+      },
+      new String [] {
+        "Mã Sản Phẩm", "Tên Sản Phẩm", "Số Lượng Tồn", "Giá Bán"
+      }
+    ));
+    tableSanPham.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    jScrollPane1.setViewportView(tableSanPham);
+
     jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
     jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel4.setText("CHỌN SẢN PHẨM");
@@ -371,27 +398,6 @@ public class HoaDonThem extends javax.swing.JFrame {
       }
     });
 
-    tableSanPham.setModel(new javax.swing.table.DefaultTableModel(
-      new Object [][] {
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null}
-      },
-      new String [] {
-        "Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Giá bán"
-      }
-    ));
-    tableSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
-      public void mouseClicked(java.awt.event.MouseEvent evt) {
-        tableSanPhamMouseClicked(evt);
-      }
-    });
-    jScrollPane4.setViewportView(tableSanPham);
-    if (tableSanPham.getColumnModel().getColumnCount() > 0) {
-      tableSanPham.getColumnModel().getColumn(0).setPreferredWidth(120);
-    }
-
     javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
     jPanel3.setLayout(jPanel3Layout);
     jPanel3Layout.setHorizontalGroup(
@@ -410,17 +416,14 @@ public class HoaDonThem extends javax.swing.JFrame {
               .addComponent(btnThemsanpham))
             .addGap(34, 34, 34))
           .addGroup(jPanel3Layout.createSequentialGroup()
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-              .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+              .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
               .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGap(29, 29, 29))))
-      .addGroup(jPanel3Layout.createSequentialGroup()
-        .addGap(16, 16, 16)
-        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(0, 0, Short.MAX_VALUE))
     );
     jPanel3Layout.setVerticalGroup(
       jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,9 +434,9 @@ public class HoaDonThem extends javax.swing.JFrame {
         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(Filter))
-        .addGap(27, 27, 27)
-        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+        .addGap(18, 18, 18)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(maspTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -590,6 +593,23 @@ public class HoaDonThem extends javax.swing.JFrame {
     }
   }//GEN-LAST:event_tableSanPhamMouseClicked
 
+  private void memberFilterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_memberFilterMouseClicked
+    // TODO add your handling code here:
+    
+  }//GEN-LAST:event_memberFilterMouseClicked
+
+  private void tableCTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCTHDMouseClicked
+    // TODO add your handling code here:
+  }//GEN-LAST:event_tableCTHDMouseClicked
+
+  private void tableThanhvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableThanhvienMouseClicked
+    // TODO add your handling code here:
+    int selected = tableThanhvien.getSelectedRow();
+    if (selected != -1) {
+      mathanhvienTxt.setText(tableThanhvien.getValueAt(selected, 0).toString());
+    }
+  }//GEN-LAST:event_tableThanhvienMouseClicked
+
   /**
    * @param args the command line arguments
    */
@@ -645,17 +665,17 @@ public class HoaDonThem extends javax.swing.JFrame {
   private javax.swing.JPanel jPanel2;
   private javax.swing.JPanel jPanel3;
   private javax.swing.JPanel jPanel4;
+  private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JScrollPane jScrollPane3;
-  private javax.swing.JScrollPane jScrollPane4;
   private javax.swing.JTextField maspTxt;
   private javax.swing.JTextField mathanhvienTxt;
   private javax.swing.JTextField memberFilter;
   private javax.swing.JTextField soluongTxt;
-  public static javax.swing.JTable tableCTHD;
-  public static javax.swing.JTable tableSanPham;
+  private javax.swing.JTable tableCTHD;
+  private javax.swing.JTable tableSanPham;
   private javax.swing.JTable tableThanhvien;
-  public static javax.swing.JTextField tongtienTxt;
+  private javax.swing.JTextField tongtienTxt;
   // End of variables declaration//GEN-END:variables
 
 }

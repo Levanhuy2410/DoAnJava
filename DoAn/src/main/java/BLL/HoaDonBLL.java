@@ -34,4 +34,7 @@ public class HoaDonBLL {
   public static List<HoaDon> getAllHoaDon() {
     return HoaDonDAL.getAllHoaDon();
   }
+  public static boolean xoaHoaDon(String maHd) {
+    return HoaDonDAL.xoaHoaDon(maHd);
+  }
 }

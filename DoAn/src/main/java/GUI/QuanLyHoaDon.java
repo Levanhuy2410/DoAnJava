@@ -247,7 +247,13 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
     }
     int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
     if (reply == JOptionPane.YES_OPTION) {
-      
+      String maHd = tableHoaDon.getValueAt(selectedRow, 0).toString();
+      boolean result = HoaDonBLL.xoaHoaDon(maHd);
+      if (result) {
+        QuanLyHoaDon.loadAllHoaDon();
+        JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+      }
+      else JOptionPane.showMessageDialog(rootPane, "Xóa lỗi, thử lại sau", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
   }//GEN-LAST:event_btnDeleteActionPerformed
 
