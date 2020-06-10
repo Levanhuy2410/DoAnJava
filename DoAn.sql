@@ -51,7 +51,7 @@ CREATE TABLE hoadon (
     makh    NUMBER NOT NULL,
     manv    NUMBER NOT NULL
 );
-
+alter table hoadon add loinhuan number;
 alter table hoadon modify mahd number;
 alter table hoadon modify makh number;
 alter table hoadon modify manv number;
@@ -124,6 +124,7 @@ CREATE TABLE sanpham (
     mota    VARCHAR2(50),
     malsp   VARCHAR2(50) NOT NULL
 );
+alter table sanpham add gianhap number;
 alter table sanpham modify masp number;
 
 ALTER TABLE sanpham ADD CONSTRAINT sanpham_pk PRIMARY KEY ( masp );
@@ -285,7 +286,7 @@ CREATE SEQUENCE id_malsp
     NOCYCLE
     NOCACHE;
     
---INSERT INTO NHANVIEN (MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG) VALUES(id_manv.NEXTVAL, 'H˘ng', 'Qu?n l˝',
+--INSERT INTO NHANVIEN (MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG) VALUES(id_manv.NEXTVAL, 'H√πng', 'Qu?n l√Ω',
 --            TO_DATE('2020-10-10','YYYY-MM-DD'), TO_DATE('2000-10-02','YYYY-MM-DD'), '1500000');
 -- Oracle SQL Developer Data Modeler Summary Report: 
 alter table taikhoan add manv number not null;
@@ -315,7 +316,7 @@ AS
     END LOOP;
 end;
 
--- PROCEDURE N¬NG C?P TH¿NH VI N T? STANDARD L N VIP N?U ?I?M TV > 100
+-- PROCEDURE N√ÇNG C?P TH√ÄNH VI√äN T? STANDARD L√äN VIP N?U ?I?M TV > 100
 SELECT DIEMTV, LOAITV FROM KHTHANHVIEN WHERE MATV = '6';
 CREATE OR REPLACE PROCEDURE UPGRADE_LOAITV
 AS 
@@ -361,7 +362,7 @@ END;
 
 insert into khthanhvien values(id_matv.nextval,'Linh','Vip',1, 1, '100');
 commit;
--- PROCEDURE L?Y RA T?NG S? TI?N M¿ KHTHANHVIEN ?√ CHI V¿O C¡C H”A ??N
+-- PROCEDURE L?Y RA T?NG S? TI?N M√Ä KHTHANHVIEN ?√É CHI V√ÄO C√ÅC H√ìA ??N
 CREATE OR REPLACE function TOTAL_COST_FOR_MEMBER (V_MATV KHTHANHVIEN.MATV%TYPE)
 return CTHOADON.TRIGIA%TYPE
 AS
@@ -377,9 +378,9 @@ BEGIN
 END;
 
 BEGIN
-    dbms_output.PUT_LINE('T?ng s? ti?n th‡nh viÍn n‡y ?„ chi cho c?a h‡ng '||total_cost_for_member(99));
+    dbms_output.PUT_LINE('T?ng s? ti?n th√†nh vi√™n n√†y ?√£ chi cho c?a h√†ng '||total_cost_for_member(99));
 END;
--- Procedure in ra c·c hÛa ??n m‡ nh‚n viÍn ?„ l?p
+-- Procedure in ra c√°c h√≥a ??n m√† nh√¢n vi√™n ?√£ l?p
 CREATE OR REPLACE PROCEDURE NHANVIEN_HOADON
 IS
     V_MANV  NHANVIEN.MANV%TYPE;
@@ -407,7 +408,7 @@ BEGIN
                 FETCH C_2 INTO V_MAHD, TONG_TIEN;
                 EXIT WHEN C_2%NOTFOUND;
                 IF C_2%FOUND THEN
-                    DBMS_OUTPUT.PUT_LINE('HÛa ??n: '||V_MAHD||' cÛ t?ng ti?n l‡: '||TONG_TIEN);
+                    DBMS_OUTPUT.PUT_LINE('H√≥a ??n: '||V_MAHD||' c√≥ t?ng ti?n l√†: '||TONG_TIEN);
                 END IF;
             END LOOP;
             CLOSE C_2;
