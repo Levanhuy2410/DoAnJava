@@ -7,16 +7,15 @@
 --SELECT id_phieukk.currval from dual;
 --DELETE FROM CTPHIEUKK WHERE MAKK = 31;
 --SELECT MALSP FROM LOAISP WHERE TENLSP = 'Chip ';
+
 CREATE TABLE cthoadon (
     masp    NUMBER NOT NULL,
     mahd    NUMBER NOT NULL,
     sl      INTEGER,
-    trigia  NUMBER(8)
+    trigia  NUMBER
 );
-alter table cthoadon modify mahd number;
-alter table cthoadon modify masp number;
-ALTER TABLE cthoadon ADD CONSTRAINT cthoadon_pk PRIMARY KEY ( mahd,
-                                                              masp );
+
+ALTER TABLE cthoadon ADD CONSTRAINT cthoadon_pk PRIMARY KEY ( mahd, masp );
 --SELECT MASP, SLHETHONG, SLT, LYDO FROM CTPHIEUKK WHERE MAKK = '45';
 CREATE TABLE ctphieukk (
     masp       NUMBER NOT NULL,
@@ -25,36 +24,27 @@ CREATE TABLE ctphieukk (
     slt        INTEGER,
     lydo       VARCHAR2(50)
 );
-alter table ctphieukk modify masp number;
-alter table ctphieukk modify makk number;
 
-ALTER TABLE ctphieukk ADD CONSTRAINT ctphieunhapv1_pk PRIMARY KEY ( masp,
-                                                                    makk );
+ALTER TABLE ctphieukk ADD CONSTRAINT ctphieunhapv1_pk PRIMARY KEY ( masp, makk );
 
 CREATE TABLE ctphieunhap (
     masp     NUMBER NOT NULL,
     manh     NUMBER NOT NULL,
     slnhap   INTEGER,
-    gianhap  NUMBER(8)
+    gianhap  NUMBER
 );
-alter table ctphieunhap modify manh number;
-alter table ctphieunhap modify masp number;
 
 ALTER TABLE ctphieunhap ADD CONSTRAINT ctphieunhap_pk PRIMARY KEY ( masp,
                                                                     manh );
-
-
 
 CREATE TABLE hoadon (
     mahd    NUMBER NOT NULL,
     ngayhd  DATE,
     makh    NUMBER NOT NULL,
-    manv    NUMBER NOT NULL
+    manv    NUMBER NOT NULL,
+    tongtien  NUMBER
 );
-alter table hoadon add loinhuan number;
-alter table hoadon modify mahd number;
-alter table hoadon modify makh number;
-alter table hoadon modify manv number;
+
 ALTER TABLE hoadon ADD CONSTRAINT hoadon_pk PRIMARY KEY ( mahd );
 
 CREATE TABLE khthanhvien (
@@ -65,7 +55,6 @@ CREATE TABLE khthanhvien (
     email   VARCHAR2(50),
     diemtv  INTEGER
 );
-alter table khthanhvien modify matv number;
 
 ALTER TABLE khthanhvien ADD CONSTRAINT khthanhvien_pk PRIMARY KEY ( matv );
 
@@ -73,13 +62,10 @@ CREATE TABLE loaisp (
     malsp   NUMBER NOT NULL,
     tenlsp  VARCHAR2(50)
 );
-alter table loaisp modify malsp number;
-
 ALTER TABLE loaisp ADD CONSTRAINT loaisp_pk PRIMARY KEY ( malsp );
 
 CREATE TABLE nhanvien (
-    manv      NUMBER
-        CONSTRAINT nnc_nhanvien_manv NOT NULL,
+    manv      NUMBER NOT NULL,
     tennv     VARCHAR2(50),
     chucvu    VARCHAR2(50),
     ngayvl    DATE,
@@ -88,30 +74,24 @@ CREATE TABLE nhanvien (
     email     VARCHAR2(50),
     mucluong  NUMBER(10)
 );
-ALTER Table nhanvien drop column username;
-
-ALTER Table nhanvien add username varchar2(50);
 ALTER TABLE nhanvien ADD CONSTRAINT nhanvien_pk PRIMARY KEY ( manv );
-ALTER TABLE nhanvien DROP CONSTRAINT nhanvien_pk;
 CREATE TABLE phieukk (
     makk     NUMBER NOT NULL,
     ngaytao  DATE,
     manv     NUMBER
 );
-alter table phieukk modify makk number;
-alter table phieukk add manv number;
-ALTER TABLE phieukk ADD CONSTRAINT phieuxhv1_pk PRIMARY KEY ( makk );
+
+ALTER TABLE phieukk ADD CONSTRAINT phieukk_pk PRIMARY KEY ( makk );
 
 CREATE TABLE phieunh (
     manh    NUMBER NOT NULL,
     ngaynh  DATE,
     nhacc   VARCHAR2(50),
-    manv    NUMBER
+    manv    NUMBER,
+    tongtien NUMBER
 );
-alter table phieunh modify manh number;
-alter table phieunh add manv number;
-ALTER TABLE phieunh ADD CONSTRAINT phieunh_pk PRIMARY KEY ( manh );
 
+ALTER TABLE phieunh ADD CONSTRAINT phieunh_pk PRIMARY KEY ( manh );
 
 
 CREATE TABLE sanpham (
@@ -124,8 +104,6 @@ CREATE TABLE sanpham (
     mota    VARCHAR2(50),
     malsp   VARCHAR2(50) NOT NULL
 );
-alter table sanpham add gianhap number;
-alter table sanpham modify masp number;
 
 ALTER TABLE sanpham ADD CONSTRAINT sanpham_pk PRIMARY KEY ( masp );
 
@@ -135,13 +113,67 @@ CREATE TABLE taikhoan (
     loaitk    VARCHAR2(50),
     manv      NUMBER
 );
-alter table taikhoan add manv number;
 
 ALTER TABLE taikhoan ADD CONSTRAINT taikhoan_pk PRIMARY KEY ( username );
 
+--  DDL for Table SANPHAM
+--------------------------------------------------------
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (18,'RAM CORSAIR Vengeance',990000,24,'CORSAIR',20,'(1x8GB) DDR4 2666MHz',2);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (19,'T?n kh� Cooler Master Hyper 212',820000,12,'Cooler Master',20,'LED Turbo (??)',4);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (20,'Mainboard ASUS PRIME B365M-K',1690000,24,'Asus',20,'Micro-ATX, Socket: LGA 1151-v2, Chipset: B365',3);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (23,'SSD Samsung 860 EVO 1TB M.2 Sata',4990000,24,'Samsung',20,'K?t n?i: M.2 Sata, ??c/ghi: 550MB/s|520MB/s',5);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (15,'CPU AMD Ryzen 3 3200g',2490000,24,'AMD',10,'(4C/4T, 3.6 GHz - 4.0 GHz)',1);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (24,'HDD Western Digital Blue 1TB 3.5" SATA 3',990000,24,'Western Digital',20,'K?t n?i: SATA 3, T?c ??: 7200RPM',5);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (25,'Asus TUF Gaming GeForce GTX 1650',5010000,36,'Asus',20,'4GB GDDR5',6);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (26,'MSI GeForce GTX 1660 Super Gaming X',7850000,36,'MSI',20,'6GB GDDR6',6);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (27,'Ngu?n m�y t�nh Acbel HK+400',495000,12,'Acbel',20,'C�ng su?t: 400W',7);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (14,'CPU Intel Core i3 9100',3190000,24,'Intel',20,'(4C/4T,3.6GHz-4.2GHz)',1);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (16,'RAM Kingston Fury Black',1030000,24,'Kingston',20,'(1x8gb) DDR4 2666MHz',2);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (11,'RAM Kingston Fury Black',1030000,24,'Kingston',20,'(1x8gb) DDR4 2666MHz',2);
+
+--  DDL for Table LOAISP
+--------------------------------------------------------
+Insert into DOAN.LOAISP (MALSP,TENLSP) values (4,'T?n nhi?t');
+Insert into DOAN.LOAISP (MALSP,TENLSP) values (5,'? c?ng');
+Insert into DOAN.LOAISP (MALSP,TENLSP) values (6,'VGA');
+Insert into DOAN.LOAISP (MALSP,TENLSP) values (7,'PSU');
+Insert into DOAN.LOAISP (MALSP,TENLSP) values (1,'CPU');
+Insert into DOAN.LOAISP (MALSP,TENLSP) values (2,'RAM');
+Insert into DOAN.LOAISP (MALSP,TENLSP) values (3,'Mainboard');
+--------------------------------------------------------
+-- REM INSERTING into DOAN.HOADON
+Insert into DOAN.HOADON (MAHD,NGAYHD,MAKH,MANV,TRIGIA) values (19,to_date('11-JUN-20','DD-MON-RR'),6,2,9660000);
+Insert into DOAN.HOADON (MAHD,NGAYHD,MAKH,MANV,TRIGIA) values (18,to_date('11-JUN-20','DD-MON-RR'),1,2,1485000);
+-- REM INSERTING into DOAN.CTHOADON
+Insert into DOAN.CTHOADON (MASP,MAHD,SL,TRIGIA) values (27,18,1,495000);
+Insert into DOAN.CTHOADON (MASP,MAHD,SL,TRIGIA) values (26,19,1,7850000);
+Insert into DOAN.CTHOADON (MASP,MAHD,SL,TRIGIA) values (24,19,1,990000);
+Insert into DOAN.CTHOADON (MASP,MAHD,SL,TRIGIA) values (19,19,1,820000);
+Insert into DOAN.CTHOADON (MASP,MAHD,SL,TRIGIA) values (24,18,1,990000);
+-- REM INSERTING into DOAN.CTPHIEUKK
+Insert into DOAN.CTPHIEUKK (MASP,MAKK,SLHETHONG,SLT,LYDO) values (25,50,20,19,'H? h?ng');
+Insert into DOAN.CTPHIEUKK (MASP,MAKK,SLHETHONG,SLT,LYDO) values (27,51,20,19,null);
+Insert into DOAN.CTPHIEUKK (MASP,MAKK,SLHETHONG,SLT,LYDO) values (26,51,20,19,null);
+Insert into DOAN.CTPHIEUKK (MASP,MAKK,SLHETHONG,SLT,LYDO) values (23,50,20,19,null);
+Insert into DOAN.CTPHIEUKK (MASP,MAKK,SLHETHONG,SLT,LYDO) values (19,50,20,19,'H? h?ng');
+Insert into DOAN.CTPHIEUKK (MASP,MAKK,SLHETHONG,SLT,LYDO) values (16,51,20,19,null);
+Insert into DOAN.CTPHIEUKK (MASP,MAKK,SLHETHONG,SLT,LYDO) values (20,51,20,19,null);
+Insert into DOAN.CTPHIEUKK (MASP,MAKK,SLHETHONG,SLT,LYDO) values (14,51,20,19,null);
+-- REM INSERTING into DOAN.PHIEUKK
+Insert into DOAN.PHIEUKK (MAKK,NGAYTAO,MANV) values (50,to_date('11-JUN-20','DD-MON-RR'),2);
+Insert into DOAN.PHIEUKK (MAKK,NGAYTAO,MANV) values (51,to_date('11-JUN-20','DD-MON-RR'),2);
+-- INSERTING into DOAN.KHTHANHVIEN
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (1,'Nguy?n Mai Linh','Standard','0902456789','linh@gmail.com',0);
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (4,'L� V?n Ho�ng','Standard','0966873489','levanhoang@gmail.com',0);
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (7,'Tr?n Th? Di?m Th�y','Standard','0902524989','Thuytran@gmail.com',0);
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (8,'L� Th? Nh? �','Standard','0934823555','y@gmail.com',0);
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (6,'L� V?n H�ng','Standard','0934823489','hung@gmail.com',0);
+
+
+
 ALTER TABLE cthoadon
     ADD CONSTRAINT cthoadon_hoadon_fk FOREIGN KEY ( mahd )
-        REFERENCES hoadon ( mahd );
+        REFERENCES hoadon ( mahd ) ON DELETE CASCADE;
 
 ALTER TABLE cthoadon
     ADD CONSTRAINT cthoadon_sanpham_fk FOREIGN KEY ( masp )
@@ -155,7 +187,6 @@ ALTER TABLE phieunh
     ADD CONSTRAINT phieunh_nhanvien_fk FOREIGN KEY ( manv )
         REFERENCES nhanvien ( manv );        
 
---alter table phieukk drop constraint phieukk_nhanvien_fk;
 ALTER TABLE ctphieukk
     ADD CONSTRAINT ctphieukk_phieukk_fk FOREIGN KEY ( makk )
         REFERENCES phieukk ( makk ) ON DELETE CASCADE;
@@ -172,14 +203,6 @@ ALTER TABLE ctphieunhap
     ADD CONSTRAINT ctphieunhap_sanpham_fk FOREIGN KEY ( masp )
         REFERENCES sanpham ( masp );
 
-ALTER TABLE ctphieuxuat
-    ADD CONSTRAINT ctphieuxuat_phieuxh_fk FOREIGN KEY ( maxh )
-        REFERENCES phieuxh ( maxh );
-
-ALTER TABLE ctphieuxuat
-    ADD CONSTRAINT ctphieuxuat_sanpham_fk FOREIGN KEY ( masp )
-        REFERENCES sanpham ( masp );
-
 ALTER TABLE hoadon
     ADD CONSTRAINT hoadon_khthanhvien_fk FOREIGN KEY ( makh )
         REFERENCES khthanhvien ( matv );
@@ -192,12 +215,10 @@ ALTER TABLE taikhoan
     ADD CONSTRAINT taikhoan_nhanvien_fk FOREIGN KEY ( manv )
         REFERENCES nhanvien ( manv ) ON DELETE CASCADE;
         
---alter table nhanvien drop CONSTRAINT nhanvien_taikhoan_fk;
 ALTER TABLE sanpham
     ADD CONSTRAINT sanpham_loaisp_fk FOREIGN KEY ( malsp )
         REFERENCES loaisp ( malsp );
---alter table sanpham drop constraint sanpham_loaisp_fk;
---ALTER TABLE SANPHAM MODIFY MALSP NUMBER;      
+     
 drop sequence id_manv;
 drop sequence id_mahd;
 drop sequence id_malsp;
@@ -210,14 +231,12 @@ drop sequence id_masp;
 drop table CTHOADON;
 drop table CTPHIEUKK;
 drop table CTPHIEUNHAP;
-drop table CTPHIEUXUAT;
 drop table HOADON;
 drop table KHTHANHVIEN;
 drop table LOAISP;
 drop table NHANVIEN;
 drop table PHIEUKK;
 drop table PHIEUNH;
-drop table PHIEUXH;
 drop table SANPHAM;
 drop table TAIKHOAN;
 -- MANV SEQUENCE
@@ -236,7 +255,6 @@ CREATE SEQUENCE id_mahd
     MAXVALUE 10000
     NOCYCLE
     NOCACHE;
-select id_mahd.nextval from dual;
 -- MAPN SEQUENCE
 CREATE SEQUENCE id_phieunhap
     INCREMENT BY 1
@@ -286,157 +304,9 @@ CREATE SEQUENCE id_malsp
     NOCYCLE
     NOCACHE;
     
---INSERT INTO NHANVIEN (MANV, TENNV, CHUCVU, NGAYVL, NGAYSINH, MUCLUONG) VALUES(id_manv.NEXTVAL, 'Hùng', 'Qu?n lý',
---            TO_DATE('2020-10-10','YYYY-MM-DD'), TO_DATE('2000-10-02','YYYY-MM-DD'), '1500000');
 -- Oracle SQL Developer Data Modeler Summary Report: 
-alter table taikhoan add manv number not null;
 
---SELECT TENNV, CHUCVU, EMAIL, SDT
---FROM NHANVIEN nv JOIN TAIKHOAN tk
---ON nv.manv = tk.manv
---where tk.username = 'Huy';
----- 
---SELECT * FROM SANPHAM S JOIN LOAISP L on S.MALSP = L.MALSP;
---
---SELECT MALSP FROM LOAISP WHERE TENLSP = 'RAM';
---
---select tentv, loaitv, diemtv from khthanhvien where matv = 6;
---
---INSERT INTO HOADON VALUES(id_mahd.nextval, TO_DATE('2020-05-05', 'yyyy-MM-dd'), 6, 65);
--- PROCEDURE SLEEP
-CREATE OR REPLACE PROCEDURE sleep (in_time number)
-AS
-    v_now date;
-    BEGIN
-        SELECT SYSDATE
-        INTO v_now
-        FROM DUAL;
-    LOOP
-    EXIT WHEN v_now + (in_time * (1/86400)) <= SYSDATE;
-    END LOOP;
-end;
-
--- PROCEDURE NÂNG C?P THÀNH VIÊN T? STANDARD LÊN VIP N?U ?I?M TV > 100
-SELECT DIEMTV, LOAITV FROM KHTHANHVIEN WHERE MATV = '6';
-CREATE OR REPLACE PROCEDURE UPGRADE_LOAITV
-AS 
-    V_MATV      KHTHANHVIEN.MATV%TYPE;
-    V_TENTV     KHTHANHVIEN.TENTV%TYPE;
-    V_LOAITV    KHTHANHVIEN.LOAITV%TYPE;
-    V_DIEMTV    KHTHANHVIEN.DIEMTV%TYPE;
-    CURSOR cur IS SELECT MATV, TENTV, LOAITV, DIEMTV
-                FROM KHTHANHVIEN;
-BEGIN
-    OPEN cur;
-    LOOP
-        FETCH cur INTO V_MATV, V_TENTV, V_LOAITV, V_DIEMTV;
-        EXIT WHEN cur%FOUND = FALSE;
-        IF V_DIEMTV > 100 THEN
-            UPDATE KHTHANHVIEN
-            SET LOAITV = 'Vip'
-            WHERE V_MATV = MATV;
-            DBMS_OUTPUT.PUT_LINE(V_MATV||' '||V_TENTV);
-        END IF;
-    END LOOP;
-    CLOSE cur;
-    sleep(17);
-    commit;
-END;
-EXEC UPGRADE_LOAITV;
-
-
-CREATE OR REPLACE TRIGGER SET_LOAITV
-BEFORE UPDATE OR INSERT
-ON KHTHANHVIEN
-FOR EACH ROW
-DECLARE 
-    V_LOAITV KHTHANHVIEN.LOAITV%TYPE;
-BEGIN
-    IF :NEW.DIEMTV >= 100 THEN
-        :NEW.LOAITV := 'Vip';
-    ELSE 
-        :NEW.LOAITV := 'Standard';
-    END IF;
-    SLEEP(14);
-END;
-
-insert into khthanhvien values(id_matv.nextval,'Linh','Vip',1, 1, '100');
-commit;
--- PROCEDURE L?Y RA T?NG S? TI?N MÀ KHTHANHVIEN ?Ã CHI VÀO CÁC HÓA ??N
-CREATE OR REPLACE function TOTAL_COST_FOR_MEMBER (V_MATV KHTHANHVIEN.MATV%TYPE)
-return CTHOADON.TRIGIA%TYPE
-AS
-    V_TOTAL_COST CTHOADON.TRIGIA%TYPE;
-BEGIN
-    SELECT  SUM(CTHD.TRIGIA) INTO V_TOTAL_COST
-    FROM    (KHTHANHVIEN TV JOIN HOADON HD ON HD.MAKH = TV.MATV)
-            JOIN CTHOADON CTHD ON CTHD.MAHD = HD.MAHD
-    WHERE   TV.MATV = V_MATV;
-    RETURN V_TOTAL_COST;
-    EXCEPTION
-        WHEN NO_DATA_FOUND THEN RETURN NULL;       
-END;
-
-BEGIN
-    dbms_output.PUT_LINE('T?ng s? ti?n thành viên này ?ã chi cho c?a hàng '||total_cost_for_member(99));
-END;
--- Procedure in ra các hóa ??n mà nhân viên ?ã l?p
-CREATE OR REPLACE PROCEDURE NHANVIEN_HOADON
-IS
-    V_MANV  NHANVIEN.MANV%TYPE;
-    V_TENNV NHANVIEN.TENNV%TYPE;
-    
-    CURSOR C_1 IS SELECT MANV, TENNV
-                FROM NHANVIEN;
-BEGIN
-    OPEN C_1;
-    LOOP 
-        FETCH C_1 INTO V_MANV, V_TENNV;
-        EXIT WHEN C_1%NOTFOUND;
-        DBMS_OUTPUT.PUT_LINE(V_MANV||' '||V_TENNV);
-        DECLARE
-            CURSOR C_2 IS   SELECT HD.MAHD, SUM(CTHD.TRIGIA) as tong
-            FROM            HOADON HD JOIN CTHOADON CTHD ON HD.MAHD = CTHD.MAHD
-            WHERE           HD.MANV = V_MANV
-            GROUP BY        HD.MAHD;
-            
-            V_MAHD          HOADON.MAHD%TYPE;
-            TONG_TIEN       NUMBER;
-        BEGIN
-            OPEN C_2;
-            LOOP
-                FETCH C_2 INTO V_MAHD, TONG_TIEN;
-                EXIT WHEN C_2%NOTFOUND;
-                IF C_2%FOUND THEN
-                    DBMS_OUTPUT.PUT_LINE('Hóa ??n: '||V_MAHD||' có t?ng ti?n là: '||TONG_TIEN);
-                END IF;
-            END LOOP;
-            CLOSE C_2;
-        END;
-    END LOOP;
-    CLOSE C_1;
-END;
-EXEC NHANVIEN_HOADON();
---select matv, diemtv from khthanhvien where matv = 6;
---SET AUTOCOMMIT OFF;
---update khthanhvsien set diemtv=diemtv+10 where matv = 6;
---commit;
-
---declare
---    v_slton SANPHAM.SLTON%TYPE;
---begin
---    SELECT slton into v_slton from sanpham where masp = 15;
---    v_slton:=v_slton-2;
---    update sanpham set slton=v_slton where masp = 15;
---    dbms_output.put_line(v_slton);
---end;
-SELECT slton from sanpham where masp = 15;
---set transaction isolation level serializable;
---SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-
-
--- LOST UPDATE
--- TRIGGER UPDATE SANPHAM KHI THEM CTHD
+-- TRIGGER UPDATE SANPHAM KHI THEM CTHD (cai nay cho lost update)
 CREATE OR REPLACE TRIGGER UPDATE_QUANTITY_SP
 BEFORE INSERT OR UPDATE ON CTHOADON
 FOR EACH ROW
@@ -446,27 +316,15 @@ BEGIN
     lock table sanpham in exclusive mode;
     SELECT SLTON INTO v_slton FROM SANPHAM WHERE MASP = 15;
     IF INSERTING THEN
-        sleep(12);
+        sleep(10);
         UPDATE sanpham
         SET SLTON = v_slton-:new.SL
         WHERE MASP = :NEW.MASP;
     END IF;
 END;
 COMMIT;
-INSERT INTO CTHOADON VALUES(15,6,2,150000);
 
-declare
-    v_slton SANPHAM.SLTON%TYPE;
-begin
-    select slton into v_slton from sanpham where masp = 15;
-    v_slton:=v_slton-2;
-    sleep(7);
-    update sanpham set slton=v_slton where masp = 15;
-    commit;
-end;
-    
 
---SELECT MASP, SLHETHONG, SLT, LYDO FROM CTPHIEUKK WHERE MAKK = 40;
 -- CREATE TABLE                            13
 -- CREATE INDEX                             0
 -- ALTER TABLE                             25
