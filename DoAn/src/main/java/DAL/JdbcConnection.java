@@ -27,15 +27,10 @@ public class JdbcConnection {
     public static String password;
     
     static {
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        dotenv = Dotenv.load();
-        url = dotenv.get("CONNECTION_STRING");
-        user = dotenv.get("DB_USER");
-        password = dotenv.get("DB_PASSWORD");
+        JdbcConnection.dotenv = Dotenv.load();
+        JdbcConnection.url = dotenv.get("CONNECTION_STRING");
+        JdbcConnection.user = dotenv.get("DB_USER");
+        JdbcConnection.password = dotenv.get("DB_PASSWORD");
         connection = getConnection();
     }
    
@@ -43,11 +38,9 @@ public class JdbcConnection {
     // Mở kết nối đến database
     public static Connection getConnection() {
         try {
-            if (connection != null) {
-                return connection;
-            }
-            return DriverManager.getConnection(url, user, password);
-        } catch (SQLException ex) {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            return DriverManager.getConnection(JdbcConnection.url, JdbcConnection.user, JdbcConnection.password);
+        } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }
         return null;
@@ -58,7 +51,7 @@ public class JdbcConnection {
         ResultSet rs = null;
         try {
             PreparedStatement stm;
-            stm = connection.prepareStatement(sql);
+            stm = JdbcConnection.connection.prepareStatement(sql);
             if (arr.size() > 0) {
                 for (int i = 0; i < arr.size(); i++) {
                     stm.setObject(i + 1, arr.get(i));
@@ -87,7 +80,8 @@ public class JdbcConnection {
     // Dành cho các câu lệnh Update, Insert
     public static boolean executeUpdate(String sql, ArrayList<Object> arr) {
         try {
-            PreparedStatement stm = connection.prepareStatement(sql);
+            PreparedStatement stm;
+            stm = JdbcConnection.connection.prepareStatement(sql);
             if (arr.size() > 0) {
                 for (int i = 0; i < arr.size(); i++) {
                     stm.setObject(i + 1, arr.get(i));
@@ -101,14 +95,45 @@ public class JdbcConnection {
         return true;
     }
 
+//    public static int insertAndGetId(String insertSql, ArrayList<Object> arr) {
+//        ResultSet rs = null;
+//        int id = 0;
+//        try {
+//            PreparedStatement stm = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+//            stm.executeUpdate();
+//            rs = stm.getGeneratedKeys();
+//            if (rs.next()) {;
+//                id = rs.getInt(1);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return id;
+//    }
+
     public static void closeConnection() {
         try {
-            if (connection != null) {
-                connection.close();
-                connection = null;
+            if (JdbcConnection.getConnection() != null) {
+                JdbcConnection.getConnection().close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+//  public static void main(String[] args) throws SQLException {
+//    Connection connection = getConnection();
+//    if (connection != null) System.out.println("_________________________Connected______________________");
+//    else System.out.println("That bai");
+//    java.sql.Statement stmt = connection.createStatement();
+//    
+//    ResultSet rs = stmt.executeQuery("select * from TAIKHOAN");
+//    while(rs.next()) {
+//      System.out.println("*******************");
+//      String username = rs.getString(1);
+//      String password = rs.getString(2);
+//      String role = rs.getString(3);
+//      System.out.println("Username: " + username + "\nPassword: " + password + "\nRole: " + role);
+//    }
+//  }
 }
