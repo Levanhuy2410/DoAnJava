@@ -36,7 +36,7 @@ public class SanPhamDAL {
         return listSanPham;
     }
     // Hàm thêm sản phẩm
-    public static boolean themSanPham(SanPham sanpham) {
+    public static boolean insertSanPham(SanPham sanpham) {
         String query = "INSERT INTO SANPHAM VALUES(ID_MASP.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(sanpham.tenSp);
@@ -65,14 +65,14 @@ public class SanPhamDAL {
 //        return maLSP;
 //    }
     // Hàm xóa sản phẩm
-    public static boolean xoaSanPham(String idSanPham) {
+    public static boolean deleteSanPham(String idSanPham) {
         String query = "DELETE FROM SANPHAM WHERE masp = ?";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(idSanPham);
         return JdbcConnection.executeUpdate(query, arr);
     }
 
-    public static boolean capnhatSanPham(SanPham sanpham) {
+    public static boolean updateSanPham(SanPham sanpham) {
         String query = "UPDATE SANPHAM SET TENSP = ?, GIABAN = ?, TGBH = ?, HANGSX = ?, SLTON = ?, MOTA = ?, MALSP = ? WHERE MASP = ?";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(sanpham.tenSp);

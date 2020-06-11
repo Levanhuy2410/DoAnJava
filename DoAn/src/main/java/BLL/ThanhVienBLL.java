@@ -19,7 +19,7 @@ public class ThanhVienBLL {
     ThanhVienDAL ThanhVienDAL = new ThanhVienDAL();
 
     public static ArrayList<ThanhVien> ThanhVienALL() {
-        return DAL.ThanhVienDAL.getListThanhVien();
+        return DAL.ThanhVienDAL.getAllThanhVien();
     }
 
     public boolean insertThanhVien(String tenTV, String loaiTV, String sdt, String email, int diemTV) {

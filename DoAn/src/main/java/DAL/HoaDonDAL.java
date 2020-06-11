@@ -36,7 +36,7 @@ public class HoaDonDAL {
         return listHoadon;
     }
 
-    public static boolean taoHoaDon(HoaDon hoadon) {
+    public static boolean insertHoaDon(HoaDon hoadon) {
         String query = "INSERT INTO HOADON VALUES(?, TO_DATE(?, 'YYYY-MM-DD'), ?, ?, ?)";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(hoadon.maHd);
@@ -52,7 +52,7 @@ public class HoaDonDAL {
         return JdbcConnection.getId(query);
     }
     
-    public static boolean themCTHD(CTHD ct) {
+    public static boolean insertCTHD(CTHD ct) {
         String query = "INSERT INTO CTHOADON VALUES (?, ?, ?, ?)";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(ct.maSp);
@@ -61,7 +61,7 @@ public class HoaDonDAL {
         arr.add(ct.triGia);
         return JdbcConnection.executeUpdate(query, arr);
     }
-    public static boolean xoaHoaDon(String maHd) {
+    public static boolean deleteHoaDon(String maHd) {
       String query = "DELETE FROM HOADON WHERE MAHD = ?";
       ArrayList<Object> arr = new ArrayList<>();
       arr.add(maHd);

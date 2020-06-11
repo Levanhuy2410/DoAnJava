@@ -498,7 +498,7 @@ public class HoaDonThem extends javax.swing.JFrame {
         }
         String username = Login.username;
         int triGia = Integer.parseInt(tongtienTxt.getText());
-        int maHd = HoaDonBLL.themHoaDon(maKh, username, triGia);
+        int maHd = HoaDonBLL.insertHoaDon(maKh, username, triGia);
         if (tableCTHD.getRowCount() == 0) {
           JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn ít nhất 1 sản phẩm", "Chưa có sản phẩm", JOptionPane.ERROR_MESSAGE);
           return;
@@ -508,7 +508,7 @@ public class HoaDonThem extends javax.swing.JFrame {
           int soluong = (int) tableCTHD.getValueAt(i, 3);
           int giaban = (int) tableCTHD.getValueAt(i, 4);
           int thanhtien = soluong * giaban;
-          HoaDonBLL.themCTHD(maSp, Integer.toString(maHd), soluong, thanhtien);
+          HoaDonBLL.insertCTHD(maSp, Integer.toString(maHd), soluong, thanhtien);
         }
         tongtienTxt.setText("0");
         QuanLyHoaDon.loadAllHoaDon();

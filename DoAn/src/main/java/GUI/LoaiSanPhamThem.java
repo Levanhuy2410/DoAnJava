@@ -135,7 +135,7 @@ public class LoaiSanPhamThem extends javax.swing.JFrame {
           return; 
         }
         LoaiSP loaisp = new LoaiSP(tenLsp);
-        boolean result = LoaiSpBLL.themLoaisp(loaisp);
+        boolean result = LoaiSpBLL.insertLoaisp(loaisp);
         if (result) JOptionPane.showMessageDialog(rootPane, "Thêm loại sản phẩm thành công");
         else JOptionPane.showInternalMessageDialog(rootPane, "Vui lòng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_BTThemActionPerformed

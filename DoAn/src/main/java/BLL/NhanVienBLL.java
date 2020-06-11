@@ -21,7 +21,7 @@ public class NhanVienBLL {
     public TaiKhoanBLL TaiKhoanBLL = new TaiKhoanBLL();
 
     public static ArrayList<NhanVien> NhanVienAll() {
-        return DAL.NhanVienDAL.getListNhanVien();
+        return DAL.NhanVienDAL.getAllNhanVien();
     }
     private Component rootPane;
     public boolean insertNhanVien(String tenNV, String chucVu, String ngayVL, String ngaySinh, String sdt, String email, int mucLuong){

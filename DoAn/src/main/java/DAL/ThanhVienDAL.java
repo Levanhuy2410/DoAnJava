@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ThanhVienDAL {
     
     // Hàm hiện danh sách thành viên
-    public static ArrayList<ThanhVien> getListThanhVien() {
+    public static ArrayList<ThanhVien> getAllThanhVien() {
         ArrayList<ThanhVien> result = new ArrayList<>();
         String query = "SELECT * FROM KHTHANHVIEN";
         ArrayList<Object> arr = new ArrayList<>();

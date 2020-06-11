@@ -52,7 +52,7 @@ public class LoaiSpDAL {
 //    public static void main(String[] args) {
 //        System.out.println(LoaiSpDAL.getIdLoaispByName("RAM DDR4"));
 //    }
-  public static boolean themLoaiSp(LoaiSP loaisp) {
+  public static boolean insertLoaiSp(LoaiSP loaisp) {
     String query = "INSERT INTO LOAISP VALUES (ID_MALSP.NEXTVAL, ?)";
     ArrayList<Object> arr = new ArrayList<>();
     arr.add(loaisp.tenLSp);
