@@ -14,7 +14,6 @@ CREATE TABLE cthoadon (
     sl      INTEGER,
     trigia  NUMBER
 );
-
 ALTER TABLE cthoadon ADD CONSTRAINT cthoadon_pk PRIMARY KEY ( mahd, masp );
 --SELECT MASP, SLHETHONG, SLT, LYDO FROM CTPHIEUKK WHERE MAKK = '45';
 CREATE TABLE ctphieukk (
@@ -44,7 +43,7 @@ CREATE TABLE hoadon (
     manv    NUMBER NOT NULL,
     tongtien  NUMBER
 );
-
+ 
 ALTER TABLE hoadon ADD CONSTRAINT hoadon_pk PRIMARY KEY ( mahd );
 
 CREATE TABLE khthanhvien (
@@ -102,7 +101,7 @@ CREATE TABLE sanpham (
     hangsx  VARCHAR2(50),
     slton   INTEGER,
     mota    VARCHAR2(50),
-    malsp   VARCHAR2(50) NOT NULL
+    malsp   NUMBER NOT NULL
 );
 
 ALTER TABLE sanpham ADD CONSTRAINT sanpham_pk PRIMARY KEY ( masp );
@@ -130,7 +129,6 @@ Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (14,'CPU Intel Core i3 9100',3190000,24,'Intel',20,'(4C/4T,3.6GHz-4.2GHz)',1);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (16,'RAM Kingston Fury Black',1030000,24,'Kingston',20,'(1x8gb) DDR4 2666MHz',2);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (11,'RAM Kingston Fury Black',1030000,24,'Kingston',20,'(1x8gb) DDR4 2666MHz',2);
-
 --  DDL for Table LOAISP
 --------------------------------------------------------
 Insert into DOAN.LOAISP (MALSP,TENLSP) values (4,'T?n nhi?t');
@@ -142,8 +140,8 @@ Insert into DOAN.LOAISP (MALSP,TENLSP) values (2,'RAM');
 Insert into DOAN.LOAISP (MALSP,TENLSP) values (3,'Mainboard');
 --------------------------------------------------------
 -- REM INSERTING into DOAN.HOADON
-Insert into DOAN.HOADON (MAHD,NGAYHD,MAKH,MANV,TRIGIA) values (19,to_date('11-JUN-20','DD-MON-RR'),6,2,9660000);
-Insert into DOAN.HOADON (MAHD,NGAYHD,MAKH,MANV,TRIGIA) values (18,to_date('11-JUN-20','DD-MON-RR'),1,2,1485000);
+Insert into DOAN.HOADON (MAHD,NGAYHD,MAKH,MANV,TONGTIEN) values (19,to_date('11-JUN-20','DD-MON-RR'),6,2,9660000);
+Insert into DOAN.HOADON (MAHD,NGAYHD,MAKH,MANV,TONGTIEN) values (18,to_date('11-JUN-20','DD-MON-RR'),1,2,1485000);
 -- REM INSERTING into DOAN.CTHOADON
 Insert into DOAN.CTHOADON (MASP,MAHD,SL,TRIGIA) values (27,18,1,495000);
 Insert into DOAN.CTHOADON (MASP,MAHD,SL,TRIGIA) values (26,19,1,7850000);
@@ -168,7 +166,20 @@ Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (4,'Lê 
 Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (7,'Tr?n Th? Di?m Thúy','Standard','0902524989','Thuytran@gmail.com',0);
 Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (8,'Lê Th? Nh? Ý','Standard','0934823555','y@gmail.com',0);
 Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (6,'Lê V?n Hùng','Standard','0934823489','hung@gmail.com',0);
-
+-- REM INSERTING into DOAN.NHANVIEN
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (6,'Tr?n Thúy','Nhân Viên Kho',to_date('01-JAN-20','DD-MON-RR'),to_date('05-MAY-00','DD-MON-RR'),'0903844489','thuy@gmail.com',7000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (1,'Tr?n Thành Công','Qu?n Lý',to_date('09-JUN-20','DD-MON-RR'),to_date('10-DEC-01','DD-MON-RR'),'0961801013','cong@gmail.com',10000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (4,'Nguy?n Mai Linh','Nhân Viên Kho',to_date('06-FEB-20','DD-MON-RR'),to_date('10-OCT-96','DD-MON-RR'),'0934823489','linh@gmail.com',7000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (2,'Lê V?n Huy','Qu?n Lý',to_date('11-JUN-20','DD-MON-RR'),to_date('24-OCT-00','DD-MON-RR'),'0934823489','levanhuy5050@gmail.com',1000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (5,'Lê V?n Hung','Nhân Viên K? Toán',to_date('08-MAR-20','DD-MON-RR'),to_date('16-OCT-96','DD-MON-RR'),'0934823489','Hung@gmail.com',5000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (3,'Lê V?n Hoàng','Nhân Viên Bán Hàng',to_date('10-OCT-20','DD-MON-RR'),to_date('23-OCT-90','DD-MON-RR'),'0955993488','hoang@gmail.com',5000000);
+-- REM INSERTING into DOAN.TAIKHOAN
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('thuytran','123','Nhân Viên Kho',6);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('CongAdmin','admin','Qu?n Lý',1);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('Huy','123','Nhân Viên Kho',5);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('Linh','123','Nhân Viên Kho',4);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('HuyAdmin','admin','Qu?n Lý',2);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('Hoang','123','Nhân Viên Bán Hàng',3);
 
 
 ALTER TABLE cthoadon
@@ -242,7 +253,7 @@ drop table TAIKHOAN;
 -- MANV SEQUENCE
 CREATE SEQUENCE id_manv
     INCREMENT BY 1
-    START WITH 1
+    START WITH 50
     MINVALUE 1
     MAXVALUE 10000
     NOCYCLE
@@ -250,7 +261,7 @@ CREATE SEQUENCE id_manv
 -- MAHD SEQUENCE
 CREATE SEQUENCE id_mahd
     INCREMENT BY 1
-    START WITH 1
+    START WITH 50
     MINVALUE 1
     MAXVALUE 10000
     NOCYCLE
@@ -258,7 +269,7 @@ CREATE SEQUENCE id_mahd
 -- MAPN SEQUENCE
 CREATE SEQUENCE id_phieunhap
     INCREMENT BY 1
-    START WITH 1
+    START WITH 50
     MINVALUE 1
     MAXVALUE 10000
     NOCYCLE
@@ -266,7 +277,7 @@ CREATE SEQUENCE id_phieunhap
 -- MAPX SEQUENCE
 CREATE SEQUENCE id_phieuxuat
     INCREMENT BY 1
-    START WITH 1
+    START WITH 50
     MINVALUE 1
     MAXVALUE 10000
     NOCYCLE
@@ -274,7 +285,7 @@ CREATE SEQUENCE id_phieuxuat
 -- MAKK SEQUENCE
 CREATE SEQUENCE id_phieukk
     INCREMENT BY 1
-    START WITH 1
+    START WITH 50
     MINVALUE 1
     MAXVALUE 10000
     NOCYCLE
@@ -282,7 +293,7 @@ CREATE SEQUENCE id_phieukk
 -- MASP SEQUENCE
 CREATE SEQUENCE id_masp
     INCREMENT BY 1
-    START WITH 1
+    START WITH 50
     MINVALUE 1
     MAXVALUE 10000
     NOCYCLE
@@ -290,7 +301,7 @@ CREATE SEQUENCE id_masp
 -- MATV SEQUENCE
 CREATE SEQUENCE id_matv
     INCREMENT BY 1
-    START WITH 1
+    START WITH 50
     MINVALUE 1
     MAXVALUE 10000
     NOCYCLE
@@ -298,7 +309,7 @@ CREATE SEQUENCE id_matv
 -- MALSP SEQUENCE
 CREATE SEQUENCE id_malsp
     INCREMENT BY 1
-    START WITH 1
+    START WITH 50
     MINVALUE 1
     MAXVALUE 10000
     NOCYCLE
