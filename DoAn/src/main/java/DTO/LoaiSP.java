@@ -19,4 +19,8 @@ public class LoaiSP {
   public LoaiSP( String tenLSp) {
     this.tenLSp = tenLSp;
   }
+  @Override
+  public String toString(){
+      return tenLSp;
+  }
 }

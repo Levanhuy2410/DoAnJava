@@ -251,7 +251,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
         capnhat.hangSxTxt.setText(hangSx);
         capnhat.soluongTxt.setText(soluong);
         capnhat.motaTxt.setText(mota);
-        capnhat.loaiSpTxt.setSelectedItem(loaiSp);
+        capnhat.tenLoaiTxt.setSelectedItem(loaiSp);
         
         capnhat.setVisible(true);
     }//GEN-LAST:event_BTCapNhatActionPerformed
@@ -266,7 +266,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
     int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
     if (reply == JOptionPane.YES_OPTION) {
       String idSanPham = tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString();
-      if (SanPhamBLL.xoaSanPham(idSanPham)) {
+      if (SanPhamBLL.deleteSanPham(idSanPham)) {
         QuanLySanPham.loadAllSanpham();
         return;
       }

@@ -15,13 +15,9 @@ import java.util.List;
  */
 public class LoaiSpBLL {
 
-    LoaiSpDAL loaiSpDAL = new LoaiSpDAL();
 
     public List<LoaiSP> getAllLoaiSp() {
-        return loaiSpDAL.getAllLoaiSp();
-    }
-    public int getIdLoaispByName(String tenLsp) {
-      return loaiSpDAL.getIdLoaispByName(tenLsp);
+        return LoaiSpDAL.getAllLoaiSp();
     }
     public static boolean insertLoaisp(LoaiSP loaisp) {
       return LoaiSpDAL.insertLoaiSp(loaisp);

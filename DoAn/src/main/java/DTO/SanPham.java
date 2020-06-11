@@ -45,5 +45,15 @@ public class SanPham {
     this.mota = mota;
     this.maLsp = maLsp;
   }
+  public SanPham(int maSp, String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, int maLsp) {
+    this.tenSp = tenSp;
+    this.giaBan = giaBan;
+    this.tgbh = tgbh;
+    this.hangSx = hangSx;
+    this.slTon = slTon;
+    this.mota = mota;
+    this.maLsp = maLsp;
+    this.maSp = maSp;
+  }
   
 }

@@ -15,8 +15,7 @@ import java.util.List;
  * @author Cong
  */
 public class SanPhamBLL {
-    public static boolean themSanPham(String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, int maLsp) {
-        System.out.println(maLsp);
+    public static boolean insertSanPham(String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, int maLsp) {
         SanPham sanpham = new SanPham(tenSp, giaBan, tgbh, hangSx, slTon, mota, maLsp);
         return SanPhamDAL.insertSanPham(sanpham);
     }
@@ -25,14 +24,13 @@ public class SanPhamBLL {
         return SanPhamDAL.getAllSanPham();
     }
 
-    public static boolean xoaSanPham(String idSanPham) {
+    public static boolean deleteSanPham(String idSanPham) {
         return SanPhamDAL.deleteSanPham(idSanPham);
     }
 
-    public static boolean capnhatSanPham(int maSp, String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, String tenLsp) {
-        int maLsp = LoaiSpDAL.getIdLoaispByName(tenLsp);
+    public static boolean updateSanPham(int maSp, String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, int maLsp) {
         if (maLsp != 0) {
-            SanPham sanpham = new SanPham(maSp, tenSp, giaBan, tgbh, hangSx, slTon, mota, maLsp, tenLsp);
+            SanPham sanpham = new SanPham(maSp, tenSp, giaBan, tgbh, hangSx, slTon, mota, maLsp);
             return SanPhamDAL.updateSanPham(sanpham);
         }
         return false;

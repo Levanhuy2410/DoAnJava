@@ -10,6 +10,7 @@ import BLL.LoaiSpBLL;
 import BLL.SanPhamBLL;
 import DAL.LoaiSpDAL;
 import DTO.LoaiSP;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -22,14 +23,15 @@ public class SanPhamThem extends javax.swing.JFrame {
     /** Creates new form ThemSanPham */
     public SanPhamThem() {
       initComponents();
+      this.maLsp = new ArrayList<>();
       loadLoaisp();
-      
     }
     public void loadLoaisp() {
       List<LoaiSP> allLoaiSp = LoaiSpDAL.getAllLoaiSp();
-      allLoaiSp.forEach((LoaiSP action) -> {
-        tenLoaiTxt.addItem(action.tenLSp);
-      });
+      for (LoaiSP loaisp : allLoaiSp) {
+        tenLoaiTxt.addItem(loaisp.toString());
+        boolean add = this.maLsp.add(loaisp.maLSp);
+      } 
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -248,7 +250,7 @@ public class SanPhamThem extends javax.swing.JFrame {
     private void BTThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemActionPerformed
         // TODO add your handling code here:
         try {
-          LoaiSpBLL loaiSpBLL = new LoaiSpBLL();
+          int selectedIndex = tenLoaiTxt.getSelectedIndex();
           String tenSp = tenSpTxt.getText().trim();
           String giaBan = giaBanTxt.getText().trim();
           String tgbh = TgbhTxt.getText().trim();
@@ -256,13 +258,12 @@ public class SanPhamThem extends javax.swing.JFrame {
           String soluong = soluongTxt.getText().trim();
           String mota = moTaTxt.getText().trim();
           String tenLsp = tenLoaiTxt.getSelectedItem().toString().trim();
-            System.out.println(tenLsp);
           if (tenSp.isEmpty() || giaBan.isEmpty() || tgbh.isEmpty() || soluong.isEmpty() || hangSx.isEmpty() || mota.isEmpty() || tenLsp.isEmpty()) {
             JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
             return;
           }
 
-          boolean result = SanPhamBLL.themSanPham(tenSp, Integer.parseInt(giaBan), Integer.parseInt(tgbh), hangSx, Integer.parseInt(soluong), mota, loaiSpBLL.getIdLoaispByName(tenLsp));
+          boolean result = SanPhamBLL.insertSanPham(tenSp, Integer.parseInt(giaBan), Integer.parseInt(tgbh), hangSx, Integer.parseInt(soluong), mota, Integer.parseInt(maLsp.get(selectedIndex)));
           if (result) {
             QuanLySanPham.loadAllSanpham();
             JOptionPane.showMessageDialog(rootPane, "Thêm sản phẩm thành công !");
@@ -338,5 +339,5 @@ public class SanPhamThem extends javax.swing.JFrame {
   private javax.swing.JComboBox<String> tenLoaiTxt;
   private javax.swing.JTextField tenSpTxt;
   // End of variables declaration//GEN-END:variables
-
+  public List<String> maLsp;
 }

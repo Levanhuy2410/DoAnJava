@@ -85,22 +85,6 @@ public class SanPhamDAL {
         arr.add(sanpham.maSp);
         return JdbcConnection.executeUpdate(query, arr);
     }
-    // Hàm lấy tên sản phẩm từ mã sản phẩm
-    public static String getTenSanPham(int maSP){
-        String tenSP = null;
-        String query = "SELECT TENSP FROM SANPHAM WHERE MASP = ?";
-        ArrayList<Object> arr = new ArrayList<>();
-        arr.add(maSP);
-        ResultSet rs = JdbcConnection.executeQuery(query, arr);
-        try {
-            if (rs.next()){
-                tenSP = rs.getString(1);
-            }
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-        return tenSP;
-    }
     // Hàm update số lượng tồn sau khi kiểm kê
     public static boolean updateSoLuongTon(int slTon, int maSP){
         String query = "UPDATE SANPHAM SET SLTON = ? WHERE MASP = ?";

@@ -28,14 +28,14 @@ public class CTKiemKeDAL {
     }
     // Hàm get all chi tiết kiểm kê
     public ArrayList<CTKiemKe> getAllCTKiemKe(int maKK){
-        String query = "SELECT * FROM CTPHIEUKK WHERE MAKK = ?";
+        String query = "SELECT * FROM CTPHIEUKK CTKK JOIN SANPHAM SP ON CTKK.MASP = SP.MASP WHERE MAKK = ?";
         ArrayList<CTKiemKe> listCTKiemKe = new ArrayList<>();
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(maKK);
         ResultSet rs = JdbcConnection.executeQuery(query, arr);
         try {
             while (rs.next()) {
-                CTKiemKe ctkk = new CTKiemKe(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
+                CTKiemKe ctkk = new CTKiemKe(rs.getInt(1), rs.getString(7), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
                 listCTKiemKe.add(ctkk);
             }
         } catch (SQLException ex) {

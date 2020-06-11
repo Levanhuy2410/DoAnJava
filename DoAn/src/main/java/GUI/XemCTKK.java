@@ -30,8 +30,7 @@ public class XemCTKK extends javax.swing.JFrame {
         }
         ArrayList<CTKiemKe> listCTKiemKe = CTKiemKeBLL.getAllCTKiemKe(maKK);
         for (CTKiemKe ctkk : listCTKiemKe) {
-            String tenSP = SanPhamDAL.getTenSanPham(ctkk.maSP);
-            Object[] row = {tenSP, ctkk.slHeThong, ctkk.slTon, ctkk.lyDo};
+            Object[] row = {ctkk.tenSp, ctkk.slHeThong, ctkk.slTon, ctkk.lyDo};
             model.addRow(row);
         }
         tableCTKK.setModel(model);

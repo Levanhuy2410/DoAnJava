@@ -9,6 +9,7 @@ package GUI;
 import BLL.LoaiSpBLL;
 import BLL.SanPhamBLL;
 import DTO.LoaiSP;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -22,14 +23,16 @@ public class SanPhamCapNhat extends javax.swing.JFrame {
     /** Creates new form ThemSanPham */
     public SanPhamCapNhat() {
         initComponents();
+        this.maLsp = new ArrayList<>();
         loadLoaisp();
     }
     public void loadLoaisp() {
       LoaiSpBLL loaiSpBLL = new LoaiSpBLL();
       List<LoaiSP> allLoaiSp = loaiSpBLL.getAllLoaiSp();
-      allLoaiSp.forEach((LoaiSP action) -> {
-        loaiSpTxt.addItem(action.tenLSp);
-      });
+      for (LoaiSP loaisp : allLoaiSp) {
+        tenLoaiTxt.addItem(loaisp.toString());
+        boolean add = this.maLsp.add(loaisp.maLSp);
+      } 
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -49,7 +52,7 @@ public class SanPhamCapNhat extends javax.swing.JFrame {
     jLabel4 = new javax.swing.JLabel();
     jLabel3 = new javax.swing.JLabel();
     tenSpTxt = new javax.swing.JTextField();
-    loaiSpTxt = new javax.swing.JComboBox<>();
+    tenLoaiTxt = new javax.swing.JComboBox<>();
     giaBanTxt = new javax.swing.JTextField();
     tgbhTxt = new javax.swing.JTextField();
     jLabel5 = new javax.swing.JLabel();
@@ -94,7 +97,7 @@ public class SanPhamCapNhat extends javax.swing.JFrame {
 
     tenSpTxt.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
-    loaiSpTxt.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+    tenLoaiTxt.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
     giaBanTxt.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
@@ -166,7 +169,7 @@ public class SanPhamCapNhat extends javax.swing.JFrame {
               .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22)
-                .addComponent(loaiSpTxt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(tenLoaiTxt, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addContainerGap())
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
             .addComponent(btnCapnhat)
@@ -193,7 +196,7 @@ public class SanPhamCapNhat extends javax.swing.JFrame {
         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(hangSxTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(27, 27, 27)
+        .addGap(30, 30, 30)
         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
           .addComponent(soluongTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
           .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -203,7 +206,7 @@ public class SanPhamCapNhat extends javax.swing.JFrame {
           .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGap(36, 36, 36)
         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(loaiSpTxt)
+          .addComponent(tenLoaiTxt)
           .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         .addGap(67, 67, 67)
         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -238,18 +241,19 @@ public class SanPhamCapNhat extends javax.swing.JFrame {
   private void btnCapnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapnhatActionPerformed
     // TODO add your handling code here:
     try {
+      int selectedIndex = tenLoaiTxt.getSelectedIndex();
       String giaBan = giaBanTxt.getText().trim();
       String tgbh = tgbhTxt.getText().trim();
       String soluong = soluongTxt.getText().trim();
       String tenSp = tenSpTxt.getText().trim();
       String hangSx = hangSxTxt.getText().trim();
       String mota = motaTxt.getText().trim();
-      String loaiSp = loaiSpTxt.getSelectedItem().toString();
+      String loaiSp = tenLoaiTxt.getSelectedItem().toString();
       if (tenSp.isEmpty() || hangSx.isEmpty() || mota.isEmpty() || loaiSp.isEmpty() || giaBan.isEmpty() || tgbh.isEmpty() || soluong.isEmpty()) {
         JOptionPane.showMessageDialog(rootPane, "Không thành công, vui lồng kiểm tra lại thông tin", "Lỗi", JOptionPane.ERROR_MESSAGE);
         return;
       }
-      boolean result = SanPhamBLL.capnhatSanPham(maSp, tenSp, Integer.parseInt(giaBan), Integer.parseInt(tgbh), hangSx, Integer.parseInt(soluong), mota, loaiSp);
+      boolean result = SanPhamBLL.updateSanPham(maSp, tenSp, Integer.parseInt(giaBan), Integer.parseInt(tgbh), hangSx, Integer.parseInt(soluong), mota, Integer.parseInt(maLsp.get(selectedIndex)));
       if (result) {
         dispose();
         QuanLySanPham.loadAllSanpham();
@@ -315,11 +319,12 @@ public class SanPhamCapNhat extends javax.swing.JFrame {
   private javax.swing.JLabel jLabel6;
   private javax.swing.JLabel jLabel7;
   private javax.swing.JPanel jPanel2;
-  public javax.swing.JComboBox<String> loaiSpTxt;
   public javax.swing.JTextField motaTxt;
   public javax.swing.JTextField soluongTxt;
+  public javax.swing.JComboBox<String> tenLoaiTxt;
   public javax.swing.JTextField tenSpTxt;
   public javax.swing.JTextField tgbhTxt;
   // End of variables declaration//GEN-END:variables
   public int maSp;
+  public List<String> maLsp;
 }
