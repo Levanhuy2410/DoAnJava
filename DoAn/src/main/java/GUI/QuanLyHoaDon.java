@@ -229,7 +229,6 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
             if (selected != -1){
                 int mahd = Integer.parseInt(tableHoaDon.getValueAt(selected, 0).toString());
 
-                System.out.println(mahd);
                 Map<String, Object> parameters = new HashMap<String, Object>();
                 JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\HoaDon.jrxml");
                 parameters.put("MAHD", mahd);

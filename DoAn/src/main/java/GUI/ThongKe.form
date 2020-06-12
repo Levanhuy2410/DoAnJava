@@ -96,8 +96,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="302" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="BTThem1" min="-2" pref="537" max="-2" attributes="0"/>
-                              <Component id="BTThem" min="-2" pref="537" max="-2" attributes="0"/>
+                              <Component id="BTTop3" min="-2" pref="537" max="-2" attributes="0"/>
+                              <Component id="BTDoanhThuThangNam" min="-2" pref="537" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -111,9 +111,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="62" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="BTThem" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTDoanhThuThangNam" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                  <Component id="BTThem1" min="-2" max="-2" attributes="0"/>
+                  <Component id="BTTop3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                   <Component id="BTReturn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -144,7 +144,7 @@
             <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n ch&#x1ee9;c n&#x103;ng b&#xe1;o c&#xe1;o: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BTThem">
+        <Component class="javax.swing.JButton" name="BTDoanhThuThangNam">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e8" green="a8" red="0" type="rgb"/>
@@ -158,10 +158,10 @@
             <Property name="text" type="java.lang.String" value=" DOANH THU H&#xd3;A &#x110;&#x1a0;N THEO TH&#xc1;NG, N&#x102;M"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTThemActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTDoanhThuThangNamActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="BTThem1">
+        <Component class="javax.swing.JButton" name="BTTop3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e8" green="a8" red="0" type="rgb"/>
@@ -175,7 +175,7 @@
             <Property name="text" type="java.lang.String" value=" TOP 3 S&#x1ea2;N PH&#x1ea8;M &#x110;&#x1af;&#x1ee2;C B&#xc1;N NHI&#x1ec0;U NH&#x1ea4;T"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTThem1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTTop3ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
