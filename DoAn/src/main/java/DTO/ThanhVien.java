@@ -36,5 +36,13 @@ public class ThanhVien {
         this.email = email;
         this.diemTV = diemTV;
     }
+
+    public ThanhVien(int maTV, String tenTV, String loaiTV, String sdt, String email) {
+        this.maTV = maTV;
+        this.tenTV = tenTV;
+        this.loaiTV = loaiTV;
+        this.sdt = sdt;
+        this.email = email;
+    }
     
 }

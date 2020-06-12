@@ -8,7 +8,11 @@ package GUI;
 import DTO.NhanVien;
 import BLL.NhanVienBLL;
 import BLL.TaiKhoanBLL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -276,6 +280,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
         } else {
             // Lấy dữ liệu dòng đang chọn hiện lên 
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             int MANV = Integer.parseInt(JTableNhanVien.getModel().getValueAt(selected, 0).toString());
             String TENNV = JTableNhanVien.getModel().getValueAt(selected, 1).toString();
             String CHUCVU = JTableNhanVien.getModel().getValueAt(selected, 2).toString();
@@ -288,8 +293,13 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             capnhat.maNV.setText(String.valueOf(MANV));
             capnhat.tenNV.setText(TENNV);
             capnhat.chucVu.setSelectedItem(CHUCVU);
-            capnhat.ngayVL.setText(NGAYVL);
-            capnhat.ngaySinh.setText(NGAYSINH);
+            try {
+                capnhat.ngayVL.setDate(df.parse(NGAYVL));
+                capnhat.ngaySinh.setDate(df.parse(NGAYSINH));
+            } catch (ParseException ex) {
+                Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             capnhat.mucLuong.setText(String.valueOf(MUCLUONG));
             capnhat.sdt.setText(SDT);
             capnhat.email.setText(EMAIL);

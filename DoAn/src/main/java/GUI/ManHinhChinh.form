@@ -115,7 +115,7 @@
                               <Component id="BTQuanLyThongTinThanhVien" alignment="1" max="32767" attributes="0"/>
                               <Component id="BTQuanLyHoaDon" alignment="1" max="32767" attributes="0"/>
                               <Component id="jButton7" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jButton8" alignment="0" max="32767" attributes="0"/>
+                              <Component id="BTThongKe" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -153,7 +153,7 @@
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Component id="BTQuanLyThongTinThanhVien" min="-2" pref="61" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton8" min="-2" pref="61" max="-2" attributes="0"/>
+                  <Component id="BTThongKe" min="-2" pref="61" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
@@ -328,7 +328,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton8">
+        <Component class="javax.swing.JButton" name="BTThongKe">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e8" green="a8" red="0" type="rgb"/>
@@ -348,7 +348,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTThongKeActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BTReturn">

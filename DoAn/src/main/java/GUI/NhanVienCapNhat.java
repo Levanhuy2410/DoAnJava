@@ -6,6 +6,7 @@
 package GUI;
 
 import BLL.NhanVienBLL;
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -44,14 +45,14 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
         mucLuong = new javax.swing.JTextField();
         BTThoat = new javax.swing.JButton();
         BTCapNhat = new javax.swing.JButton();
-        ngaySinh = new javax.swing.JTextField();
-        ngayVL = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         maNV = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         sdt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
+        ngayVL = new com.toedter.calendar.JDateChooser();
+        ngaySinh = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -105,10 +106,6 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
             }
         });
 
-        ngaySinh.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
-        ngayVL.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Mã Nhân Viên");
@@ -128,6 +125,10 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
 
         email.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
+        ngayVL.setDateFormatString("dd/MM/yyyy");
+
+        ngaySinh.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -142,10 +143,6 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(chucVu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
                         .addComponent(mucLuong))
@@ -153,14 +150,6 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
                         .addComponent(tenNV))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(ngayVL))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(ngaySinh))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
@@ -172,7 +161,17 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22)
-                        .addComponent(email)))
+                        .addComponent(email))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ngayVL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chucVu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -191,14 +190,14 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ngayVL, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ngayVL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(ngaySinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sdt, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE))
@@ -239,11 +238,12 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
         // Lấy thông tin cập nhật
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         int MANV = Integer.parseInt(maNV.getText().trim());
         String TENNV = tenNV.getText().trim();
         String CHUCVU = chucVu.getSelectedItem().toString().trim();
-        String NGAYVL = ngayVL.getText().trim();
-        String NGAYSINH = ngaySinh.getText().trim();
+        String NGAYVL = df.format(ngayVL.getDate());
+        String NGAYSINH = df.format(ngaySinh.getDate());
         int MUCLUONG = Integer.parseInt(mucLuong.getText().trim());
         String SDT = sdt.getText().trim();
         String EMAIL = email.getText().trim();
@@ -313,8 +313,8 @@ public class NhanVienCapNhat extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     public javax.swing.JTextField maNV;
     public javax.swing.JTextField mucLuong;
-    public javax.swing.JTextField ngaySinh;
-    public javax.swing.JTextField ngayVL;
+    public com.toedter.calendar.JDateChooser ngaySinh;
+    public com.toedter.calendar.JDateChooser ngayVL;
     public javax.swing.JTextField sdt;
     public javax.swing.JTextField tenNV;
     // End of variables declaration//GEN-END:variables

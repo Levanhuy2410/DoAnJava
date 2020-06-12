@@ -79,13 +79,12 @@ public class ThanhVienDAL {
     public boolean updateThanhVien(ThanhVien tv){
         boolean result = false;
         try {
-            String query = "UPDATE KHTHANHVIEN SET TENTV = ?, LOAITV = ?, SDT = ?, EMAIL = ?, DIEMTV = ? WHERE MATV = ?";
+            String query = "UPDATE KHTHANHVIEN SET TENTV = ?, LOAITV = ?, SDT = ?, EMAIL = ? WHERE MATV = ?";
             ArrayList<Object> arr = new ArrayList<>();
             arr.add(tv.tenTV);
             arr.add(tv.loaiTV);
             arr.add(tv.sdt);
             arr.add(tv.email);
-            arr.add(tv.diemTV);
             arr.add(tv.maTV);
             JdbcConnection.getConnection();
             result = JdbcConnection.executeUpdate(query, arr);

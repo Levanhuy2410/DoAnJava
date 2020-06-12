@@ -65,7 +65,6 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
         model.setValueAt(row[1], indexTB, 2);
         model.setValueAt(row[2], indexTB, 3);
         model.setValueAt(row[3], indexTB, 4);
-        model.setValueAt(row[4], indexTB, 5);
         // Xuất hiện thông báo thành công
         JOptionPane.showMessageDialog(JTableThanhVien, "Cập nhật thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -264,7 +263,7 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
             capnhat.loaiTV.setSelectedItem(LOAITV);
             capnhat.sdt.setText(SDT);
             capnhat.email.setText(EMAIL);
-            capnhat.diemTV.setText(String.valueOf(DIEMTV));
+            
             capnhat.setVisible(true);
         }
     }//GEN-LAST:event_BTCapNhatActionPerformed

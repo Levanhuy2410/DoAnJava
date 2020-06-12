@@ -19,6 +19,7 @@
 		<![CDATA[SELECT
 NV.TENNV,
      SP.TENSP,
+	KK.NGAYTAO,
      CTKK.SLHETHONG,
      CTKK.SLT,
      CTKK.LYDO
@@ -31,48 +32,76 @@ WHERE
 	</queryString>
 	<field name="TENNV" class="java.lang.String"/>
 	<field name="TENSP" class="java.lang.String"/>
+	<field name="NGAYTAO" class="java.sql.Timestamp"/>
 	<field name="SLHETHONG" class="java.math.BigDecimal"/>
 	<field name="SLT" class="java.math.BigDecimal"/>
 	<field name="LYDO" class="java.lang.String"/>
 	<variable name="TenNhanVienLap" class="java.lang.String"/>
+	<variable name="SLT_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{SLT}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="132" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="552" height="95" backcolor="#000000" uuid="5b1a3c61-5ad8-4a72-98ee-608aeddd7bf2"/>
+				<reportElement mode="Opaque" x="0" y="0" width="552" height="95" backcolor="#FFFFFF" uuid="5b1a3c61-5ad8-4a72-98ee-608aeddd7bf2"/>
 				<staticText>
-					<reportElement style="Title" x="0" y="0" width="552" height="95" backcolor="#0066FF" uuid="d275c5f1-6ec4-431e-a751-e0c0c3497a5d"/>
+					<reportElement style="Title" x="247" y="0" width="305" height="95" forecolor="#000000" backcolor="#FFFFFF" uuid="d275c5f1-6ec4-431e-a751-e0c0c3497a5d"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true" isItalic="false"/>
+						<font size="30" isBold="true" isItalic="false"/>
 					</textElement>
 					<text><![CDATA[PHIẾU KIỂM KÊ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="0" width="245" height="53" uuid="0c2314db-dd9d-4460-b5ef-9d57558965bc"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="20" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CỬA HÀNG LINH KIỆN MÁY TÍNH ABC
+
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="53" width="100" height="15" uuid="2d20eda4-4413-4d02-8e61-da98d3b935db"/>
+					<text><![CDATA[info@gmail.com]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="68" width="100" height="20" uuid="5aaaa9d1-8fe2-4df6-a252-9420e544e04a"/>
+					<text><![CDATA[0934823489]]></text>
 				</staticText>
 			</frame>
 			<frame>
 				<reportElement mode="Opaque" x="0" y="100" width="552" height="32" forecolor="#000000" backcolor="#0066FF" uuid="25335d9c-c88c-4b87-af5e-baa3c900970e"/>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement x="408" y="0" width="144" height="32" forecolor="#FFFFFF" uuid="c2c8b809-c25f-492d-921c-75e7af16975c"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
 				<staticText>
 					<reportElement x="0" y="0" width="128" height="29" forecolor="#FFFFFF" uuid="19d4dcf0-02e7-4a9c-9cc7-3b6ce4cc4f19"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Times New Roman" size="14"/>
+						<font fontName="Times New Roman" size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Tên Nhân Viên Lập:]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="128" y="0" width="100" height="29" forecolor="#FFFFFF" uuid="df7c6877-ed92-4b44-847d-456b921bf692"/>
-					<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{TENNV}]]></textFieldExpression>
 				</textField>
+				<textField>
+					<reportElement x="414" y="0" width="138" height="32" forecolor="#FFFFFF" uuid="62de99cc-ea08-4f70-a3f0-927730a0ef6c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{NGAYTAO})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="340" y="0" width="74" height="32" forecolor="#FFFFFF" uuid="5e5d59dd-756e-4eeb-9fa3-775c2bcb3318"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ngày Lập: ]]></text>
+				</staticText>
 			</frame>
 		</band>
 	</title>
@@ -80,50 +109,50 @@ WHERE
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="25" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="0" width="138" height="25" forecolor="#000000" uuid="adae0848-73c4-4f9c-8aaf-38f99fab6138"/>
+				<reportElement style="Column header" x="0" y="0" width="128" height="25" forecolor="#000000" uuid="adae0848-73c4-4f9c-8aaf-38f99fab6138"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tên Sản Phẩm]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="138" y="0" width="157" height="25" forecolor="#000000" uuid="e3e9de8e-8d5a-45f1-82d3-46f43e60d89a"/>
+				<reportElement style="Column header" x="138" y="0" width="148" height="25" forecolor="#000000" uuid="e3e9de8e-8d5a-45f1-82d3-46f43e60d89a"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Số Lượng Hệ Thống]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="295" y="0" width="138" height="25" forecolor="#000000" uuid="7c40f70b-08ee-4a1e-ac6c-6628edb3eb06"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Số Lượng Thực]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="433" y="0" width="122" height="25" forecolor="#000000" uuid="d8aa5d1b-7451-40fa-b710-6fcf6d4aa9ed"/>
 				<textElement>
-					<font isBold="false"/>
+					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Lý Do]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="5d189064-3478-47c3-b257-54a89ef9f00e"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="138" height="18" uuid="ac6d5cdd-a048-4b68-97c9-8115c72c3bb8"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="128" height="18" uuid="ac6d5cdd-a048-4b68-97c9-8115c72c3bb8"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{TENSP}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="138" y="0" width="157" height="18" uuid="b4c9deb6-a435-4f57-8803-e385fb783d2b"/>
+					<reportElement style="Detail" positionType="Float" x="138" y="0" width="148" height="18" uuid="b4c9deb6-a435-4f57-8803-e385fb783d2b"/>
 					<textElement>
 						<font size="14"/>
 					</textElement>
@@ -147,13 +176,27 @@ WHERE
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="7" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="24211b00-0ee7-44eb-9b95-716f47a56743"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="295" y="3" width="173" height="32" forecolor="#000000" uuid="d3009066-ab69-454e-88f9-0dff8ca28b94"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<text><![CDATA[Tổng Số Lượng:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="468" y="4" width="84" height="31" uuid="11468138-8bce-416d-b039-ea5a20db5cc1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SLT_1}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>
@@ -179,7 +222,7 @@ WHERE
 					<textElement verticalAlignment="Middle">
 						<font size="11" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{NGAYTAO})]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

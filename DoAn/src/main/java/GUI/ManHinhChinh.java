@@ -67,7 +67,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
         BTQuanLyThongTinThanhVien = new javax.swing.JButton();
         BTQuanLyHoaDon = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        BTThongKe = new javax.swing.JButton();
         BTReturn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -217,17 +217,17 @@ public class ManHinhChinh extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(0, 168, 232));
-        jButton8.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-business-report-60.png"))); // NOI18N
-        jButton8.setText(" THỐNG KÊ   ");
-        jButton8.setBorderPainted(false);
-        jButton8.setContentAreaFilled(false);
-        jButton8.setFocusPainted(false);
-        jButton8.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        BTThongKe.setBackground(new java.awt.Color(0, 168, 232));
+        BTThongKe.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
+        BTThongKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-business-report-60.png"))); // NOI18N
+        BTThongKe.setText(" THỐNG KÊ   ");
+        BTThongKe.setBorderPainted(false);
+        BTThongKe.setContentAreaFilled(false);
+        BTThongKe.setFocusPainted(false);
+        BTThongKe.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        BTThongKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                BTThongKeActionPerformed(evt);
             }
         });
 
@@ -256,7 +256,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
                             .addComponent(BTQuanLyThongTinThanhVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTQuanLyHoaDon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(BTThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,7 +287,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(BTQuanLyThongTinThanhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BTThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(91, 91, 91)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
@@ -458,9 +458,12 @@ public class ManHinhChinh extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void BTThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThongKeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+        ThongKe tk = new ThongKe();
+        tk.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BTThongKeActionPerformed
 
     private void BTReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTReturnActionPerformed
         // TODO add your handling code here:
@@ -510,12 +513,12 @@ public class ManHinhChinh extends javax.swing.JFrame {
     private javax.swing.JButton BTQuanLyThongTinThanhVien;
     private javax.swing.JButton BTQuanLyXuatKho;
     private javax.swing.JButton BTReturn;
+    private javax.swing.JButton BTThongKe;
     public static javax.swing.JLabel ChucVu;
     private javax.swing.JLabel Email;
     private javax.swing.JLabel SDT;
     public static javax.swing.JLabel TenNV;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -39,8 +39,8 @@ public class ThanhVienBLL {
         return ThanhVienDAL.deleteThanhVien(maTV);
     }
     
-    public boolean updateThanhVien(int maTV, String tenTV, String loaiTV, String sdt, String email, int diemTV){
-        ThanhVien tv = new ThanhVien(maTV, tenTV, loaiTV, sdt, email, diemTV);
+    public boolean updateThanhVien(int maTV, String tenTV, String loaiTV, String sdt, String email){
+        ThanhVien tv = new ThanhVien(maTV, tenTV, loaiTV, sdt, email);
         return ThanhVienDAL.updateThanhVien(tv);
     }
 }
