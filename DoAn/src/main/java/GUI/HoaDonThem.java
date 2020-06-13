@@ -9,9 +9,12 @@ import BLL.HoaDonBLL;
 import DTO.SanPham;
 import DTO.ThanhVien;
 import BLL.SanPhamBLL;
+import BLL.ThanhVienBLL;
 import java.awt.Color;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +47,7 @@ public class HoaDonThem extends javax.swing.JFrame {
   }
   public void loadAllThanhVien() {
     DefaultTableModel Thanhvienmodel = (DefaultTableModel) tableThanhvien.getModel();
-    ArrayList<ThanhVien> listThanhvien = BLL.ThanhVienBLL.ThanhVienALL();
+    ArrayList<ThanhVien> listThanhvien = BLL.ThanhVienBLL.getAllThanhVien();
     while (tableThanhvien.getRowCount() > 0) {
       Thanhvienmodel.removeRow(0);
     }
@@ -79,10 +82,14 @@ public class HoaDonThem extends javax.swing.JFrame {
 
   public void tinhTongtien() {
     int tongtien = 0;
+    Locale localeEN = new Locale("en", "EN");
+    NumberFormat en = NumberFormat.getInstance(localeEN);
     for (int i = 0; i < tableCTHD.getRowCount(); i++) {
       tongtien += (int) tableCTHD.getValueAt(i, 3) * (int) tableCTHD.getValueAt(i, 4);
     }
-    tongtienTxt.setText(Integer.toString(tongtien));
+    if (memberType.equals("Standard")) tongtien = (int) (tongtien * 0.95);
+    else if (memberType == "Vip") tongtien = (int) (tongtien * 0.9);
+    tongtienTxt.setText(en.format(tongtien));
     return;
   }
 
@@ -129,6 +136,7 @@ public class HoaDonThem extends javax.swing.JFrame {
     jLabel1 = new javax.swing.JLabel();
     memberFilter = new javax.swing.JTextField();
     tongtienTxt = new javax.swing.JTextField();
+    xoaCTHD = new javax.swing.JButton();
     jPanel3 = new javax.swing.JPanel();
     maspTxt = new javax.swing.JTextField();
     jLabel2 = new javax.swing.JLabel();
@@ -179,7 +187,10 @@ public class HoaDonThem extends javax.swing.JFrame {
     });
     jScrollPane2.setViewportView(tableCTHD);
     if (tableCTHD.getColumnModel().getColumnCount() > 0) {
+      tableCTHD.getColumnModel().getColumn(0).setMaxWidth(70);
       tableCTHD.getColumnModel().getColumn(2).setPreferredWidth(120);
+      tableCTHD.getColumnModel().getColumn(3).setMaxWidth(60);
+      tableCTHD.getColumnModel().getColumn(5).setResizable(false);
     }
 
     jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -264,6 +275,16 @@ public class HoaDonThem extends javax.swing.JFrame {
     tongtienTxt.setEnabled(false);
     tongtienTxt.setFocusable(false);
 
+    xoaCTHD.setBackground(new java.awt.Color(255, 0, 0));
+    xoaCTHD.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+    xoaCTHD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
+    xoaCTHD.setText("  XÓA");
+    xoaCTHD.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        xoaCTHDActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
     jPanel2Layout.setHorizontalGroup(
@@ -271,16 +292,11 @@ public class HoaDonThem extends javax.swing.JFrame {
       .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
       .addGroup(jPanel2Layout.createSequentialGroup()
         .addContainerGap()
-        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addComponent(jLabel1)
-            .addGap(18, 18, 18)
-            .addComponent(tongtienTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-          .addComponent(jScrollPane3)
-          .addComponent(jScrollPane2)
-          .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addGroup(jPanel2Layout.createSequentialGroup()
+        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(18, 18, 18)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -290,12 +306,18 @@ public class HoaDonThem extends javax.swing.JFrame {
                 .addComponent(BTThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
               .addComponent(mathanhvienTxt))
             .addGap(0, 0, Short.MAX_VALUE))
-          .addGroup(jPanel2Layout.createSequentialGroup()
+          .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
             .addComponent(jLabel9)
             .addGap(42, 42, 42)
             .addComponent(jLabel10)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-            .addComponent(memberFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(memberFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(jPanel2Layout.createSequentialGroup()
+            .addComponent(xoaCTHD)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(tongtienTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
     jPanel2Layout.setVerticalGroup(
@@ -305,14 +327,12 @@ public class HoaDonThem extends javax.swing.JFrame {
         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(jPanel2Layout.createSequentialGroup()
-            .addGap(14, 14, 14)
-            .addComponent(jLabel1))
-          .addGroup(jPanel2Layout.createSequentialGroup()
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(tongtienTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGap(7, 7, 7)
+        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabel1)
+          .addComponent(xoaCTHD, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(tongtienTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(15, 15, 15)
         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,10 +349,10 @@ public class HoaDonThem extends javax.swing.JFrame {
         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(btnLuu)
           .addComponent(BTThoat))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap(61, Short.MAX_VALUE))
     );
 
-    getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 0, -1, 620));
+    getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(554, 0, -1, 660));
 
     jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -367,6 +387,15 @@ public class HoaDonThem extends javax.swing.JFrame {
       }
     });
     jScrollPane1.setViewportView(tableSanPham);
+    if (tableSanPham.getColumnModel().getColumnCount() > 0) {
+      tableSanPham.getColumnModel().getColumn(0).setMaxWidth(50);
+      tableSanPham.getColumnModel().getColumn(1).setPreferredWidth(150);
+      tableSanPham.getColumnModel().getColumn(1).setMaxWidth(350);
+      tableSanPham.getColumnModel().getColumn(2).setPreferredWidth(50);
+      tableSanPham.getColumnModel().getColumn(2).setMaxWidth(50);
+      tableSanPham.getColumnModel().getColumn(3).setPreferredWidth(100);
+      tableSanPham.getColumnModel().getColumn(3).setMaxWidth(100);
+    }
 
     jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
     jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -441,7 +470,7 @@ public class HoaDonThem extends javax.swing.JFrame {
           .addComponent(Filter))
         .addGap(18, 18, 18)
         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(maspTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -454,7 +483,7 @@ public class HoaDonThem extends javax.swing.JFrame {
         .addGap(65, 65, 65))
     );
 
-    getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 620));
+    getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 660));
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
@@ -610,10 +639,25 @@ public class HoaDonThem extends javax.swing.JFrame {
   private void tableThanhvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableThanhvienMouseClicked
     // TODO add your handling code here:
     int selected = tableThanhvien.getSelectedRow();
+    String maTv = tableThanhvien.getValueAt(selected, 0).toString();
     if (selected != -1) {
-      mathanhvienTxt.setText(tableThanhvien.getValueAt(selected, 0).toString());
+      mathanhvienTxt.setText(maTv);
     }
+    ThanhVien tv = ThanhVienBLL.getOneThanhVien(maTv);
+    memberType = tv.loaiTV;
+    tinhTongtien();
   }//GEN-LAST:event_tableThanhvienMouseClicked
+
+  private void xoaCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaCTHDActionPerformed
+    // TODO add your handling code here:
+    int selectedRow = tableCTHD.getSelectedRow();
+    if (selectedRow < 0) {
+      JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 dòng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    ((DefaultTableModel)tableCTHD.getModel()).removeRow(selectedRow);
+    tinhTongtien();
+  }//GEN-LAST:event_xoaCTHDActionPerformed
 
   /**
    * @param args the command line arguments
@@ -681,6 +725,7 @@ public class HoaDonThem extends javax.swing.JFrame {
   private javax.swing.JTable tableSanPham;
   private javax.swing.JTable tableThanhvien;
   private javax.swing.JTextField tongtienTxt;
+  private javax.swing.JButton xoaCTHD;
   // End of variables declaration//GEN-END:variables
-
+  public String memberType = "";
 }

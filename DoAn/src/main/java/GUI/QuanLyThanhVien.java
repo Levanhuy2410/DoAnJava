@@ -36,7 +36,7 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
             model.removeRow(0);
         }
         ThanhVien tv = new ThanhVien();
-        ArrayList<ThanhVien> tvarr = BLL.ThanhVienBLL.ThanhVienALL();
+        ArrayList<ThanhVien> tvarr = BLL.ThanhVienBLL.getAllThanhVien();
         for (int i = 0; i < tvarr.size(); i++) {
             tv = tvarr.get(i);
             int maTV = tv.maTV;

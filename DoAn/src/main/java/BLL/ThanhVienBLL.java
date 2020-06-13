@@ -18,8 +18,11 @@ public class ThanhVienBLL {
 
     ThanhVienDAL ThanhVienDAL = new ThanhVienDAL();
 
-    public static ArrayList<ThanhVien> ThanhVienALL() {
+    public static ArrayList<ThanhVien> getAllThanhVien() {
         return DAL.ThanhVienDAL.getAllThanhVien();
+    }
+    public static ThanhVien getOneThanhVien(String maTv) {
+      return DAL.ThanhVienDAL.getOneThanhVien(maTv);
     }
 
     public boolean insertThanhVien(String tenTV, String loaiTV, String sdt, String email, int diemTV) {

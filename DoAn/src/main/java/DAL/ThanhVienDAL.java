@@ -10,6 +10,8 @@ import DTO.ThanhVien;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,6 +42,28 @@ public class ThanhVienDAL {
             e.printStackTrace();
         }
         return result;
+    }
+    //Lấy thông tin 1 thành viên
+    public static ThanhVien getOneThanhVien(String maTv) {
+      try {
+        String query = "SELECT * FROM KHTHANHVIEN WHERE MATV = ?";
+        ArrayList<Object> arr = new ArrayList<>();
+        arr.add(maTv);
+        ResultSet rs = JdbcConnection.executeQuery(query, arr);
+        while (rs.next()) {
+          int maTV = rs.getInt("MATV");
+          String tenTV = rs.getString("TENTV");
+          String loaiTV = rs.getString("LOAITV");
+          String sdt = rs.getString("SDT");
+          String email = rs.getString("EMAIL");
+          int diemTV = rs.getInt("DIEMTV");
+          ThanhVien tv = new ThanhVien(maTV, tenTV, loaiTV, sdt, email, diemTV);
+          return tv;
+        }
+      } catch (SQLException ex) {
+        Logger.getLogger(ThanhVienDAL.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      return null;
     }
     // Hàm insert thành viên
     public boolean insertThanhVien(ThanhVien tv){
@@ -111,4 +135,8 @@ public class ThanhVienDAL {
 //        }
         return JdbcConnection.getId(query);
     }
+   public static void main(String[] args) {
+    ThanhVien tv = getOneThanhVien("1");
+     System.out.println(tv.loaiTV);
+  }
 }
