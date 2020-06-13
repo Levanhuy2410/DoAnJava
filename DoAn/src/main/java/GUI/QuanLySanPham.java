@@ -243,7 +243,6 @@ public class QuanLySanPham extends javax.swing.JFrame {
         
         String mota = tableSanPham.getValueAt(selectedRow, 6).toString();
         String loaiSp = tableSanPham.getValueAt(selectedRow, 7).toString();
-        
         //
         SanPhamCapNhat capnhat = new SanPhamCapNhat();
         capnhat.maSp = Integer.parseInt(idSanPham);
