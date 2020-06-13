@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import BLL.CTHDBLL;
+import BLL.CTHoaDonBLL;
 import BLL.HoaDonBLL;
 import DTO.SanPham;
 import DTO.ThanhVien;
@@ -540,7 +540,7 @@ public class HoaDonThem extends javax.swing.JFrame {
           int soluong = (int) tableCTHD.getValueAt(i, 3);
           int giaban = (int) tableCTHD.getValueAt(i, 4);
           int thanhtien = soluong * giaban;
-          CTHDBLL.insertCTHD(maSp, maHd, soluong, thanhtien);
+          CTHoaDonBLL.insertCTHD(maSp, maHd, soluong, thanhtien);
         }
         tongtienTxt.setText("0");
         QuanLyHoaDon.loadAllHoaDon();

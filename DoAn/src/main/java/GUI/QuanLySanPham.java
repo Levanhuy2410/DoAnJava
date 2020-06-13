@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Cong
  */
 public class QuanLySanPham extends javax.swing.JFrame {
+
     /**
      * Creates new form QuanLySanPham
      */
@@ -24,16 +25,17 @@ public class QuanLySanPham extends javax.swing.JFrame {
         initComponents();
         loadAllSanpham();
     }
+
     public static void loadAllSanpham() {
-      tableSanPham.setSelectionBackground(Color.darkGray);
-      DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
+        tableSanPham.setSelectionBackground(Color.darkGray);
+        DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
         while (tableSanPham.getRowCount() > 0) {
             model.removeRow(0);
         }
         List<SanPham> listSanPham = SanPhamBLL.getAllSanPham();
         for (SanPham sp : listSanPham) {
-          Object[] row = { sp.maSp, sp.tenSp, sp.giaBan, sp.tgbh, sp.hangSx, sp.slTon, sp.mota, sp.tenLsp};
-          model.addRow(row);
+            Object[] row = {sp.maSp, sp.tenSp, sp.giaBan, sp.tgbh, sp.hangSx, sp.slTon, sp.mota, sp.tenLsp};
+            model.addRow(row);
         }
         tableSanPham.setModel(model);
     }
@@ -228,7 +230,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
     private void BTCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTCapNhatActionPerformed
         // TODO add your handling code here:
         int selected = tableSanPham.getSelectedRow();
-        if (selected < 0){
+        if (selected < 0) {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
             return;
         }
@@ -238,10 +240,10 @@ public class QuanLySanPham extends javax.swing.JFrame {
         String giaBan = tableSanPham.getValueAt(selectedRow, 2).toString();
         String tgbh = tableSanPham.getValueAt(selectedRow, 3).toString();
         String hangSx = tableSanPham.getValueAt(selectedRow, 4).toString();
-        String soluong = tableSanPham.getValueAt(selectedRow, 5).toString();
+        
         String mota = tableSanPham.getValueAt(selectedRow, 6).toString();
         String loaiSp = tableSanPham.getValueAt(selectedRow, 7).toString();
-        System.out.println(idSanPham + tenSp + giaBan + tgbh + soluong + mota + loaiSp);
+        
         //
         SanPhamCapNhat capnhat = new SanPhamCapNhat();
         capnhat.maSp = Integer.parseInt(idSanPham);
@@ -249,30 +251,31 @@ public class QuanLySanPham extends javax.swing.JFrame {
         capnhat.giaBanTxt.setText(giaBan);
         capnhat.tgbhTxt.setText(tgbh);
         capnhat.hangSxTxt.setText(hangSx);
-        capnhat.soluongTxt.setText(soluong);
+        
         capnhat.motaTxt.setText(mota);
         capnhat.tenLoaiTxt.setSelectedItem(loaiSp);
-        
+
         capnhat.setVisible(true);
     }//GEN-LAST:event_BTCapNhatActionPerformed
 
   private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-    // TODO add your handling code here:
-    int selectedRow = tableSanPham.getSelectedRow();
-    if (selectedRow < 0) {
-      JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 dòng", "Lỗi", JOptionPane.ERROR_MESSAGE);
-      return;
-    }
-    int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
-    if (reply == JOptionPane.YES_OPTION) {
-      String idSanPham = tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString();
-      if (SanPhamBLL.deleteSanPham(idSanPham)) {
-        QuanLySanPham.loadAllSanpham();
-        return;
+      // TODO add your handling code here:
+      int selectedRow = tableSanPham.getSelectedRow();
+      if (selectedRow < 0) {
+          JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 dòng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+          return;
       }
-      JOptionPane.showMessageDialog(rootPane, "Xóa thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
-    
+      int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
+      if (reply == JOptionPane.YES_OPTION) {
+          String idSanPham = tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString();
+          if (SanPhamBLL.deleteSanPham(idSanPham)) {
+              QuanLySanPham.loadAllSanpham();
+              JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.PLAIN_MESSAGE);
+              return;
+          }
+          JOptionPane.showMessageDialog(rootPane, "Xóa thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+      }
+
   }//GEN-LAST:event_btnXoaActionPerformed
 
     private void BTThemLoaiSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemLoaiSPActionPerformed
@@ -315,7 +318,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTCapNhat;
     private javax.swing.JButton BTReturn;

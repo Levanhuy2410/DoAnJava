@@ -5,15 +5,16 @@
  */
 package DAL;
 
-import DTO.CTHD;
+import DTO.CTHoaDon;
 import java.util.ArrayList;
 
 /**
  *
  * @author Cong
  */
-public class CTHDDAL {
-  public static boolean insertCTHD(CTHD ct) {
+public class CTHoaDonDAL {
+
+    public static boolean insertCTHD(CTHoaDon ct) {
         String query = "INSERT INTO CTHOADON VALUES (?, ?, ?, ?)";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(ct.maSp);

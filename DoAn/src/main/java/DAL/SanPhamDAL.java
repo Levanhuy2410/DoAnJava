@@ -73,13 +73,12 @@ public class SanPhamDAL {
     }
 
     public static boolean updateSanPham(SanPham sanpham) {
-        String query = "UPDATE SANPHAM SET TENSP = ?, GIABAN = ?, TGBH = ?, HANGSX = ?, SLTON = ?, MOTA = ?, MALSP = ? WHERE MASP = ?";
+        String query = "UPDATE SANPHAM SET TENSP = ?, GIABAN = ?, TGBH = ?, HANGSX = ?, MOTA = ?, MALSP = ? WHERE MASP = ?";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(sanpham.tenSp);
         arr.add(sanpham.giaBan);
         arr.add(sanpham.tgbh);
         arr.add(sanpham.hangSx);
-        arr.add(sanpham.slTon);
         arr.add(sanpham.mota);
         arr.add(sanpham.maLsp);
         arr.add(sanpham.maSp);

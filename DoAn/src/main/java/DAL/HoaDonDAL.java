@@ -5,7 +5,7 @@
  */
 package DAL;
 
-import DTO.CTHD;
+import DTO.CTHoaDon;
 import DTO.HoaDon;
 import java.sql.ResultSet;
 import java.sql.SQLException;

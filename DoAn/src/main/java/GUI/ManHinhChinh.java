@@ -78,7 +78,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
         Email = new javax.swing.JLabel();
         SDT = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        TongSoHoaDon = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -376,12 +376,12 @@ public class ManHinhChinh extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(250, 250, 250));
         jPanel4.setLayout(new java.awt.GridLayout(2, 2, 15, 15));
 
-        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-paid-bill-100.png"))); // NOI18N
-        jLabel10.setText("<html>\n<br>\nTỔNG SỐ HÓA ĐƠN\n</html>");
-        jLabel10.setOpaque(true);
-        jPanel4.add(jLabel10);
+        TongSoHoaDon.setBackground(new java.awt.Color(255, 255, 255));
+        TongSoHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TongSoHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-paid-bill-100.png"))); // NOI18N
+        TongSoHoaDon.setText("<html> <br> TỔNG SỐ HÓA ĐƠN </html>");
+        TongSoHoaDon.setOpaque(true);
+        jPanel4.add(TongSoHoaDon);
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -518,9 +518,9 @@ public class ManHinhChinh extends javax.swing.JFrame {
     private javax.swing.JLabel Email;
     private javax.swing.JLabel SDT;
     public static javax.swing.JLabel TenNV;
+    private javax.swing.JLabel TongSoHoaDon;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;

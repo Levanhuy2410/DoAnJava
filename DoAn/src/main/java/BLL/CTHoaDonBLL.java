@@ -5,16 +5,16 @@
  */
 package BLL;
 
-import DAL.CTHDDAL;
-import DTO.CTHD;
+import DAL.CTHoaDonDAL;
+import DTO.CTHoaDon;
 
 /**
  *
  * @author Cong
  */
-public class CTHDBLL {
+public class CTHoaDonBLL {
   public static boolean insertCTHD(int maSp, int maHd, int soLuong, int triGia) {
-    CTHD ct = new CTHD(maSp, maHd, soLuong, triGia);
-    return CTHDDAL.insertCTHD(ct);
+    CTHoaDon ct = new CTHoaDon(maSp, maHd, soLuong, triGia);
+    return CTHoaDonDAL.insertCTHD(ct);
   }
 }

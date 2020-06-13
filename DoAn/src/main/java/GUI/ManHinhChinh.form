@@ -536,7 +536,7 @@
         <Property name="verticalGap" type="int" value="15"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel10">
+        <Component class="javax.swing.JLabel" name="TongSoHoaDon">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -545,7 +545,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/icons8-paid-bill-100.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;br&gt;&#xa;T&#x1ed4;NG S&#x1ed0; H&#xd3;A &#x110;&#x1a0;N&#xa;&lt;/html&gt;"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;br&gt; T&#x1ed4;NG S&#x1ed0; H&#xd3;A &#x110;&#x1a0;N &lt;/html&gt;"/>
             <Property name="opaque" type="boolean" value="true"/>
           </Properties>
         </Component>

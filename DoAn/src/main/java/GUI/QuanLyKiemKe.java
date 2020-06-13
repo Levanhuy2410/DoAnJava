@@ -70,7 +70,6 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
-        BTXemCTKK = new javax.swing.JButton();
         BTXemCTKK1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -152,16 +151,6 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             }
         });
 
-        BTXemCTKK.setBackground(new java.awt.Color(0, 102, 204));
-        BTXemCTKK.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        BTXemCTKK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-view-35.png"))); // NOI18N
-        BTXemCTKK.setText("  XEM CTKK");
-        BTXemCTKK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTXemCTKKActionPerformed(evt);
-            }
-        });
-
         BTXemCTKK1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         BTXemCTKK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-print-35.png"))); // NOI18N
         BTXemCTKK1.setText(" IN PHIEU");
@@ -188,15 +177,13 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                                 .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50)
                                 .addComponent(BTXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(BTXemCTKK)
-                                .addGap(50, 50, 50)
+                                .addGap(62, 62, 62)
                                 .addComponent(BTXemCTKK1)
-                                .addGap(37, 37, 37)
+                                .addGap(216, 216, 216)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,13 +195,12 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                         .addComponent(BTThem)
                         .addComponent(BTXoa)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(BTXemCTKK)
                         .addComponent(BTXemCTKK1)))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTReturn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1010, 460));
@@ -255,19 +241,6 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTXoaActionPerformed
 
-    private void BTXemCTKKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXemCTKKActionPerformed
-        // TODO add your handling code here:
-//        int selected = tableKiemKe.getSelectedRow();
-//        if (selected == -1) {
-//            JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để xem", "Lỗi", JOptionPane.ERROR_MESSAGE);
-//        } else {
-//            XemCTKK ctkk = new XemCTKK();
-//            int maKK = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
-//            ctkk.loadAllCTKK(maKK);
-//            ctkk.setVisible(true);
-//        }
-    }//GEN-LAST:event_BTXemCTKKActionPerformed
-
     private void BTXemCTKK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXemCTKK1ActionPerformed
         // TODO add your handling code here:
         try {
@@ -279,12 +252,6 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                 Map<String, Object> parameters = new HashMap<String, Object>();
                 JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\PhieuKiemKe.jrxml");
                 parameters.put("MAKK", makk);
-    //            String query = "SELECT MASP, SLHETHONG, SLT, LYDO FROM CTPHIEUKK WHERE MAKK = '" + makk + "'";
-    //            System.out.println(query);
-    //            JRDesignQuery updateQuery = new JRDesignQuery();
-    //            updateQuery.setText(query);
-    //
-    //            jdesign.setQuery(updateQuery);
 
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
                 JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
@@ -338,7 +305,6 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
-    private javax.swing.JButton BTXemCTKK;
     private javax.swing.JButton BTXemCTKK1;
     private javax.swing.JButton BTXoa;
     private javax.swing.JLabel jLabel1;

@@ -8,8 +8,6 @@ package GUI;
 import BLL.HoaDonBLL;
 import DAL.JdbcConnection;
 import DTO.HoaDon;
-import DTO.SanPham;
-import static GUI.QuanLySanPham.tableSanPham;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

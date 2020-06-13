@@ -28,9 +28,9 @@ public class SanPhamBLL {
         return SanPhamDAL.deleteSanPham(idSanPham);
     }
 
-    public static boolean updateSanPham(int maSp, String tenSp, int giaBan, int tgbh, String hangSx, int slTon, String mota, int maLsp) {
+    public static boolean updateSanPham(int maSp, String tenSp, int giaBan, int tgbh, String hangSx, String mota, int maLsp) {
         if (maLsp != 0) {
-            SanPham sanpham = new SanPham(maSp, tenSp, giaBan, tgbh, hangSx, slTon, mota, maLsp);
+            SanPham sanpham = new SanPham(maSp, tenSp, giaBan, tgbh, hangSx, mota, maLsp);
             return SanPhamDAL.updateSanPham(sanpham);
         }
         return false;
