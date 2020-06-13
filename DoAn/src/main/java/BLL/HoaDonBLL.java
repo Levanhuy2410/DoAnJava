@@ -7,7 +7,6 @@ package BLL;
 
 import DAL.HoaDonDAL;
 import DAL.TaiKhoanDAL;
-import DTO.CTHD;
 import DTO.HoaDon;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -20,16 +19,11 @@ import java.util.List;
 public class HoaDonBLL {
   public static int insertHoaDon(int maKh, String username, int triGia) {
     int maHd = HoaDonDAL.getMaHd();
-      System.out.println(maHd);
     int maNv = TaiKhoanDAL.getManvByUsername(username);
     String timeStamp = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
     HoaDon hoadon = new HoaDon(maHd, timeStamp, maKh, maNv, triGia);
     if (HoaDonDAL.insertHoaDon(hoadon)) return maHd;
     else return -1;
-  }
-  public static boolean insertCTHD(String maSp, String maHd, int soLuong, int triGia) {
-    CTHD ct = new CTHD(maSp, maHd, soLuong, triGia);
-    return HoaDonDAL.insertCTHD(ct);
   }
   public static List<HoaDon> getAllHoaDon() {
     return HoaDonDAL.getAllHoaDon();

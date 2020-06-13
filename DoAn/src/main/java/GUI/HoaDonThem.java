@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import BLL.CTHDBLL;
 import BLL.HoaDonBLL;
 import DTO.SanPham;
 import DTO.ThanhVien;
@@ -32,6 +33,7 @@ public class HoaDonThem extends javax.swing.JFrame {
    */
   private boolean clicked = false;
   public int stt = 0;
+  private int tongTien;
 
   public HoaDonThem() {
     initComponents();
@@ -89,6 +91,7 @@ public class HoaDonThem extends javax.swing.JFrame {
     }
     if (memberType.equals("Standard")) tongtien = (int) (tongtien * 0.95);
     else if (memberType == "Vip") tongtien = (int) (tongtien * 0.9);
+    this.tongTien = tongtien;
     tongtienTxt.setText(en.format(tongtien));
     return;
   }
@@ -526,18 +529,18 @@ public class HoaDonThem extends javax.swing.JFrame {
           maKh = Integer.parseInt(mathanhvienTxt.getText());
         }
         String username = Login.username;
-        int triGia = Integer.parseInt(tongtienTxt.getText());
+        int triGia = this.tongTien;
         int maHd = HoaDonBLL.insertHoaDon(maKh, username, triGia);
         if (tableCTHD.getRowCount() == 0) {
           JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn ít nhất 1 sản phẩm", "Chưa có sản phẩm", JOptionPane.ERROR_MESSAGE);
           return;
         }
         for (int i = 0; i < tableCTHD.getRowCount(); i++) {
-          String maSp = tableCTHD.getValueAt(i, 1).toString();
+          int maSp = Integer.parseInt(tableCTHD.getValueAt(i, 1).toString());
           int soluong = (int) tableCTHD.getValueAt(i, 3);
           int giaban = (int) tableCTHD.getValueAt(i, 4);
           int thanhtien = soluong * giaban;
-          HoaDonBLL.insertCTHD(maSp, Integer.toString(maHd), soluong, thanhtien);
+          CTHDBLL.insertCTHD(maSp, maHd, soluong, thanhtien);
         }
         tongtienTxt.setText("0");
         QuanLyHoaDon.loadAllHoaDon();

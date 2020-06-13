@@ -51,16 +51,6 @@ public class HoaDonDAL {
         String query = "select id_mahd.nextval from dual";
         return JdbcConnection.getId(query);
     }
-    
-    public static boolean insertCTHD(CTHD ct) {
-        String query = "INSERT INTO CTHOADON VALUES (?, ?, ?, ?)";
-        ArrayList<Object> arr = new ArrayList<>();
-        arr.add(ct.maSp);
-        arr.add(ct.maHd);
-        arr.add(ct.soLuong);
-        arr.add(ct.triGia);
-        return JdbcConnection.executeUpdate(query, arr);
-    }
     public static boolean deleteHoaDon(String maHd) {
       String query = "DELETE FROM HOADON WHERE MAHD = ?";
       ArrayList<Object> arr = new ArrayList<>();
