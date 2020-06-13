@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ba01a0b7-e317-4f11-bff3-370ec507061f">
-	<property name="ireport.zoom" value="1.2100000000000004"/>
+	<property name="ireport.zoom" value="1.3310000000000006"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
@@ -15,7 +15,7 @@
 	</style>
 	<parameter name="MAHD" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT NV.TENNV, HD.NGAYHD,SP.TENSP, CTHD.SL, CTHD.TRIGIA FROM CTHOADON CTHD JOIN HOADON HD ON HD.MAHD = CTHD.MAHD
+		<![CDATA[SELECT NV.TENNV, HD.NGAYHD,SP.TENSP, CTHD.SL, CTHD.TRIGIA, HD.TONGTIEN FROM CTHOADON CTHD JOIN HOADON HD ON HD.MAHD = CTHD.MAHD
                                                         JOIN SANPHAM SP ON CTHD.MASP = SP.MASP
                                                         JOIN NHANVIEN NV ON HD.MANV = NV.MANV
 WHERE HD.MAHD = $P{MAHD}]]>
@@ -25,6 +25,7 @@ WHERE HD.MAHD = $P{MAHD}]]>
 	<field name="TENSP" class="java.lang.String"/>
 	<field name="SL" class="java.math.BigDecimal"/>
 	<field name="TRIGIA" class="java.math.BigDecimal"/>
+	<field name="TONGTIEN" class="java.math.BigDecimal"/>
 	<variable name="TRIGIA_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{TRIGIA}]]></variableExpression>
 	</variable>
@@ -34,17 +35,36 @@ WHERE HD.MAHD = $P{MAHD}]]>
 	<title>
 		<band height="132" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="553" height="95" backcolor="#000000" uuid="bd0675a3-3167-444a-9421-063e7c28afa4"/>
+				<reportElement mode="Opaque" x="0" y="0" width="553" height="95" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="bd0675a3-3167-444a-9421-063e7c28afa4"/>
 				<staticText>
-					<reportElement style="Title" x="0" y="0" width="553" height="95" uuid="f22b0511-4add-4886-9942-5fa61bd4239b"/>
+					<reportElement style="Title" mode="Opaque" x="274" y="0" width="279" height="95" forecolor="#000000" uuid="f22b0511-4add-4886-9942-5fa61bd4239b"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[HÓA ĐƠN]]></text>
 				</staticText>
+				<staticText>
+					<reportElement x="2" y="0" width="272" height="53" uuid="a7d0700f-6859-46d5-94e9-dbf6f563d185"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="20" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CỬA HÀNG LINH KIỆN MÁY TÍNH ABC
+
+]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="53" width="100" height="15" uuid="632e6f76-849d-44d9-8262-2f664a34f12c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[info@gmail.com]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="68" width="100" height="27" uuid="37b63694-35a3-4d93-8d56-6c0dbf45bf0a"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[0934823489]]></text>
+				</staticText>
 			</frame>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="100" width="553" height="32" forecolor="#000000" backcolor="#CC0000" uuid="30c0ef98-675b-4df9-88a7-87229dda6902"/>
+				<reportElement mode="Opaque" x="0" y="100" width="553" height="32" forecolor="#000000" backcolor="#0066FF" uuid="30c0ef98-675b-4df9-88a7-87229dda6902"/>
 				<staticText>
 					<reportElement x="0" y="0" width="125" height="32" forecolor="#FFFFFF" uuid="2a6bedc4-4506-4c2a-9986-d50296a4595c"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -67,7 +87,7 @@ WHERE HD.MAHD = $P{MAHD}]]>
 					<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{NGAYHD})]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="328" y="0" width="125" height="32" forecolor="#FFFFFF" uuid="0a097f4c-ed5c-4404-aabc-860b1a6c97ee"/>
+					<reportElement x="384" y="0" width="69" height="32" forecolor="#FFFFFF" uuid="0a097f4c-ed5c-4404-aabc-860b1a6c97ee"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="14" isBold="true"/>
 					</textElement>
@@ -105,7 +125,7 @@ WHERE HD.MAHD = $P{MAHD}]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="34" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="438e6ccd-b8ad-4ed5-90b4-53e258ed143d"/>
 				<textField isStretchWithOverflow="true">
@@ -122,14 +142,14 @@ WHERE HD.MAHD = $P{MAHD}]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{SL}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="370" y="0" width="185" height="18" uuid="ecca7d82-db09-4fee-9025-ad1963394334"/>
-					<textElement>
-						<font size="15"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{TRIGIA}]]></textFieldExpression>
-				</textField>
 			</frame>
+			<textField isStretchWithOverflow="true" pattern="#,##0">
+				<reportElement style="Detail" positionType="Float" x="370" y="0" width="185" height="18" uuid="ecca7d82-db09-4fee-9025-ad1963394334"/>
+				<textElement>
+					<font size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TRIGIA}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
@@ -140,7 +160,7 @@ WHERE HD.MAHD = $P{MAHD}]]>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<textField>
+			<textField pattern="#,##0">
 				<reportElement x="469" y="4" width="84" height="33" uuid="50609ad9-1372-4234-9916-b5f2ca444bb3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="18"/>

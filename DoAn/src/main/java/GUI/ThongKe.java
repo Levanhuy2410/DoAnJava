@@ -5,12 +5,16 @@
  */
 package GUI;
 
-import BLL.SanPhamBLL;
-import DTO.SanPham;
-import java.awt.Color;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import DAL.JdbcConnection;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
+
 
 /**
  *
@@ -40,8 +44,8 @@ public class ThongKe extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         BTReturn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        BTThem = new javax.swing.JButton();
-        BTThem1 = new javax.swing.JButton();
+        BTDoanhThuThangNam = new javax.swing.JButton();
+        BTTop3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -85,23 +89,23 @@ public class ThongKe extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 26)); // NOI18N
         jLabel2.setText("Chọn chức năng báo cáo: ");
 
-        BTThem.setBackground(new java.awt.Color(0, 168, 232));
-        BTThem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        BTThem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-calendar-65.png"))); // NOI18N
-        BTThem.setText(" DOANH THU HÓA ĐƠN THEO THÁNG, NĂM");
-        BTThem.addActionListener(new java.awt.event.ActionListener() {
+        BTDoanhThuThangNam.setBackground(new java.awt.Color(0, 168, 232));
+        BTDoanhThuThangNam.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        BTDoanhThuThangNam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-calendar-65.png"))); // NOI18N
+        BTDoanhThuThangNam.setText(" DOANH THU HÓA ĐƠN THEO THÁNG, NĂM");
+        BTDoanhThuThangNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTThemActionPerformed(evt);
+                BTDoanhThuThangNamActionPerformed(evt);
             }
         });
 
-        BTThem1.setBackground(new java.awt.Color(0, 168, 232));
-        BTThem1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        BTThem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-medal-first-place-65.png"))); // NOI18N
-        BTThem1.setText(" TOP 3 SẢN PHẨM ĐƯỢC BÁN NHIỀU NHẤT");
-        BTThem1.addActionListener(new java.awt.event.ActionListener() {
+        BTTop3.setBackground(new java.awt.Color(0, 168, 232));
+        BTTop3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        BTTop3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-medal-first-place-65.png"))); // NOI18N
+        BTTop3.setText(" TOP 3 SẢN PHẨM ĐƯỢC BÁN NHIỀU NHẤT");
+        BTTop3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTThem1ActionPerformed(evt);
+                BTTop3ActionPerformed(evt);
             }
         });
 
@@ -119,8 +123,8 @@ public class ThongKe extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(302, 302, 302)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BTThem1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(BTTop3, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BTDoanhThuThangNam, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(301, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -129,9 +133,9 @@ public class ThongKe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BTThem)
+                .addComponent(BTDoanhThuThangNam)
                 .addGap(75, 75, 75)
-                .addComponent(BTThem1)
+                .addComponent(BTTop3)
                 .addGap(51, 51, 51)
                 .addComponent(BTReturn)
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -149,14 +153,23 @@ public class ThongKe extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_BTReturnActionPerformed
 
-    private void BTThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemActionPerformed
+    private void BTDoanhThuThangNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTDoanhThuThangNamActionPerformed
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_BTThemActionPerformed
+        ThongKeTheoThangNam tk = new ThongKeTheoThangNam();
+        tk.setVisible(true);
+    }//GEN-LAST:event_BTDoanhThuThangNamActionPerformed
 
-    private void BTThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThem1ActionPerformed
+    private void BTTop3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTTop3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BTThem1ActionPerformed
+        try {
+                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\Top3SanPham.jrxml");
+                JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+                JasperPrint jprint = JasperFillManager.fillReport(jreport, null, JdbcConnection.getConnection());
+                JasperViewer.viewReport(jprint, false);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+    }//GEN-LAST:event_BTTop3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,9 +208,9 @@ public class ThongKe extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTDoanhThuThangNam;
     private javax.swing.JButton BTReturn;
-    private javax.swing.JButton BTThem;
-    private javax.swing.JButton BTThem1;
+    private javax.swing.JButton BTTop3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
