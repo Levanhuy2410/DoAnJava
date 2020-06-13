@@ -45,7 +45,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         }
         ArrayList<KiemKe> listKiemKe = BLL.KiemKeBLL.getAllKiemKe();
         for (KiemKe kk : listKiemKe) {
-            Object[] row = {kk.maKK, kk.ngayTao, kk.maNV};
+            Object[] row = {kk.maKK, kk.ngayTao, kk.tenNV};
             model.addRow(row);
         }
         tableKiemKe.setModel(model);
@@ -87,7 +87,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(118, 118, 118)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
                 .addGap(117, 117, 117))
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,7 +98,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 120));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 120));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -132,7 +132,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê", "Mã Nhân Viên"
+                "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê", "Tên Nhân Viên Lập"
             }
         ));
         jScrollPane1.setViewportView(tableKiemKe);
@@ -153,7 +153,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
 
         BTXemCTKK1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         BTXemCTKK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-print-35.png"))); // NOI18N
-        BTXemCTKK1.setText(" IN PHIEU");
+        BTXemCTKK1.setText(" XEM VÀ IN PHIẾU KIỂM KÊ");
         BTXemCTKK1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTXemCTKK1ActionPerformed(evt);
@@ -165,25 +165,24 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BTReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BTReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(BTXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(BTXemCTKK1)
-                                .addGap(216, 216, 216)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(BTXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(BTXemCTKK1)
+                        .addGap(216, 216, 216)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(14, 14, 14))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 903, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,14 +195,14 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                         .addComponent(BTXoa)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BTXemCTKK1)))
-                .addGap(39, 39, 39)
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addComponent(BTReturn)
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1010, 460));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 1120, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

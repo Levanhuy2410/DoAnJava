@@ -15,6 +15,7 @@ public class KiemKe {
     public int maKK;
     public String ngayTao;
     public int maNV;
+    public String tenNV;
 
     public KiemKe(int maKK, String ngayTao, int maNV) {
         this.maKK = maKK;
@@ -29,6 +30,12 @@ public class KiemKe {
     public KiemKe(String ngayTao, int maNV) {
         this.ngayTao = ngayTao;
         this.maNV = maNV;
+    }
+
+    public KiemKe(int maKK, String ngayTao, String tenNV) {
+        this.maKK = maKK;
+        this.ngayTao = ngayTao;
+        this.tenNV = tenNV;
     }
     
     public KiemKe() {

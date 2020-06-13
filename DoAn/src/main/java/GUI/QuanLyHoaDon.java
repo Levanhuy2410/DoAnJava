@@ -151,7 +151,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
 
         BTInHoaDon.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         BTInHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-print-35.png"))); // NOI18N
-        BTInHoaDon.setText("  IN PHIEU");
+        BTInHoaDon.setText(" XEM VÀ IN HÓA ĐƠN");
         BTInHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTInHoaDonActionPerformed(evt);

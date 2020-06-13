@@ -19,7 +19,7 @@ import java.util.Calendar;
 public class KiemKeDAL {
 
     public static ArrayList<KiemKe> getAllKiemKe() {
-        String query = "SELECT * FROM PHIEUKK";
+        String query = "SELECT MAKK, NGAYTAO, NV.TENNV FROM PHIEUKK KK JOIN NHANVIEN NV ON KK.MANV = NV.MANV";
         ArrayList<KiemKe> listKiemKe = new ArrayList<>();
         ArrayList<Object> arr = new ArrayList<>();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -27,7 +27,7 @@ public class KiemKeDAL {
         try {
             while (rs.next()) {
                 String ngayKK = df.format(rs.getDate(2));
-                KiemKe kiemke = new KiemKe(rs.getInt(1), ngayKK, rs.getInt(3));
+                KiemKe kiemke = new KiemKe(rs.getInt(1), ngayKK, rs.getString(3));
                 listKiemKe.add(kiemke);
             }
         } catch (SQLException ex) {
