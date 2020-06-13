@@ -11,13 +11,11 @@ import DTO.SanPham;
 import DTO.ThanhVien;
 import BLL.SanPhamBLL;
 import BLL.ThanhVienBLL;
-import java.awt.Color;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
@@ -90,7 +88,7 @@ public class HoaDonThem extends javax.swing.JFrame {
       tongtien += (int) tableCTHD.getValueAt(i, 3) * (int) tableCTHD.getValueAt(i, 4);
     }
     if (memberType.equals("Standard")) tongtien = (int) (tongtien * 0.95);
-    else if (memberType == "Vip") tongtien = (int) (tongtien * 0.9);
+    else if (memberType.equals("Vip")) tongtien = (int) (tongtien * 0.9);
     this.tongTien = tongtien;
     tongtienTxt.setText(en.format(tongtien));
     return;
@@ -562,7 +560,7 @@ public class HoaDonThem extends javax.swing.JFrame {
       mathanhvienTxt.setText(maTv);
     }
     ThanhVien tv = ThanhVienBLL.getOneThanhVien(maTv);
-    memberType = tv.loaiTV;
+    memberType = (tv.diemTV >= 5000) ? tv.loaiTV : "pre-member";
     tinhTongtien();
   }//GEN-LAST:event_tableThanhvienMouseClicked
 
