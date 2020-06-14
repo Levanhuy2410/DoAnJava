@@ -3,11 +3,6 @@
 --   site:      Oracle Database 11g
 --   type:      Oracle Database 11g
 
---INSERT INTO PHIEUKK VALUES(id_phieukk.nextval, TO_DATE('1992-05-05', 'YYYY-MM-DD'));
---SELECT id_phieukk.currval from dual;
---DELETE FROM CTPHIEUKK WHERE MAKK = 31;
---SELECT MALSP FROM LOAISP WHERE TENLSP = 'Chip ';
-
 CREATE TABLE cthoadon (
     masp    NUMBER NOT NULL,
     mahd    NUMBER NOT NULL,
@@ -118,9 +113,9 @@ ALTER TABLE taikhoan ADD CONSTRAINT taikhoan_pk PRIMARY KEY ( username );
 --  DDL for Table SANPHAM
 --------------------------------------------------------
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (18,'RAM CORSAIR Vengeance',990000,24,'CORSAIR',20,'(1x8GB) DDR4 2666MHz',2);
-Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (19,'T?n khí Cooler Master Hyper 212',820000,12,'Cooler Master',20,'LED Turbo (??)',4);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (19,'T?n khí Cooler Master Hyper 212',820000,12,'Cooler Master',20,'LED Turbo (RED)',4);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (20,'Mainboard ASUS PRIME B365M-K',1690000,24,'Asus',20,'Micro-ATX, Socket: LGA 1151-v2, Chipset: B365',3);
-Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (23,'SSD Samsung 860 EVO 1TB M.2 Sata',4990000,24,'Samsung',20,'K?t n?i: M.2 Sata, ??c/ghi: 550MB/s|520MB/s',5);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (23,'SSD Samsung 860 EVO 1TB M.2 Sata',4990000,24,'Samsung',20,'K?t n?ii: M.2 Sata, ??c/ghi: 550MB/s|520MB/s',5);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (15,'CPU AMD Ryzen 3 3200g',2490000,24,'AMD',10,'(4C/4T, 3.6 GHz - 4.0 GHz)',1);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (24,'HDD Western Digital Blue 1TB 3.5" SATA 3',990000,24,'Western Digital',20,'K?t n?i: SATA 3, T?c ??: 7200RPM',5);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (25,'Asus TUF Gaming GeForce GTX 1650',5010000,36,'Asus',20,'4GB GDDR5',6);
@@ -171,7 +166,7 @@ Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG)
 Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (1,'Tr?n Thành Công','Qu?n Lý',to_date('09-JUN-20','DD-MON-RR'),to_date('10-DEC-01','DD-MON-RR'),'0961801013','cong@gmail.com',10000000);
 Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (4,'Nguy?n Mai Linh','Nhân Viên Kho',to_date('06-FEB-20','DD-MON-RR'),to_date('10-OCT-96','DD-MON-RR'),'0934823489','linh@gmail.com',7000000);
 Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (2,'Lê V?n Huy','Qu?n Lý',to_date('11-JUN-20','DD-MON-RR'),to_date('24-OCT-00','DD-MON-RR'),'0934823489','levanhuy5050@gmail.com',1000000);
-Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (5,'Lê V?n Hung','Nhân Viên K? Toán',to_date('08-MAR-20','DD-MON-RR'),to_date('16-OCT-96','DD-MON-RR'),'0934823489','Hung@gmail.com',5000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (5,'Lê V?n Hùng','Nhân Viên K? Toán',to_date('08-MAR-20','DD-MON-RR'),to_date('16-OCT-96','DD-MON-RR'),'0934823489','Hung@gmail.com',5000000);
 Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (3,'Lê V?n Hoàng','Nhân Viên Bán Hàng',to_date('10-OCT-20','DD-MON-RR'),to_date('23-OCT-90','DD-MON-RR'),'0955993488','hoang@gmail.com',5000000);
 -- REM INSERTING into DOAN.TAIKHOAN
 Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('thuytran','123','Nhân Viên Kho',6);
@@ -316,8 +311,7 @@ CREATE SEQUENCE id_malsp
     NOCACHE;
     
 -- Oracle SQL Developer Data Modeler Summary Report: 
-
--- TRIGGER UPDATE SANPHAM KHI THEM CTHD (cai nay cho lost update)
+-- TRIGGER UPDATE SL SANPHAM KHI THEM CTHD (cai nay cho lost update)
 CREATE OR REPLACE TRIGGER UPDATE_QUANTITY_SP
 BEFORE INSERT OR UPDATE ON CTHOADON
 FOR EACH ROW
@@ -325,16 +319,81 @@ DECLARE
     v_slton SANPHAM.SLTON%TYPE;
 BEGIN
     lock table sanpham in exclusive mode;
-    SELECT SLTON INTO v_slton FROM SANPHAM WHERE MASP = 15;
+    SELECT SLTON INTO v_slton FROM SANPHAM WHERE MASP = :NEW.MASP;
     IF INSERTING THEN
-        sleep(10);
-        UPDATE sanpham
-        SET SLTON = v_slton-:new.SL
-        WHERE MASP = :NEW.MASP;
+        IF (:NEW.SL <= v_slton)
+        then
+            UPDATE sanpham
+            SET SLTON = v_slton-:new.SL
+            WHERE MASP = :NEW.MASP;
+        else 
+            raise_application_error(-20010,'S? l??ng quá l?n');
+        end if;
+    END IF;
+    sleep(13);
+END;
+
+-- Thêm tr? giá vào t?ng ti?n khi thêm cthd
+CREATE OR REPLACE TRIGGER ADD_COST_HOADON
+BEFORE INSERT OR UPDATE ON CTHOADON
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        UPDATE hoadon
+        SET TONGTIEN=TONGTIEN+:NEW.TRIGIA
+        WHERE MAHD = :NEW.MAHD;
     END IF;
 END;
+
+-- Thêm ?i?m thành viên khi thêm cth?
+CREATE OR REPLACE TRIGGER BONUS_POINT
+BEFORE INSERT OR UPDATE ON CTHOADON
+FOR EACH ROW
+DECLARE
+    v_makh  KHTHANHVIEN.MATV%TYPE;
+BEGIN
+    SELECT MAKH into v_makh FROM HOADON HD WHERE HD.MAHD = :NEW.MAHD;
+    IF INSERTING THEN
+        IF (v_makh != 0)
+        THEN
+                UPDATE KHTHANHVIEN
+                SET DIEMTV=DIEMTV+(:NEW.TRIGIA/10000)
+                WHERE MATV = v_makh;
+        END IF;
+    END IF;
+END;
+
+
+CREATE OR REPLACE PROCEDURE INSERT_CTHD(v_masp IN CTHOADON.MASP%TYPE,
+                                        v_mahd IN CTHOADON.MAHD%TYPE,
+                                        v_sl   IN CTHOADON.SL%TYPE)
+AS           
+    v_trigia CTHOADON.TRIGIA%TYPE;
+    v_giaban SANPHAM.GIABAN%TYPE;
+BEGIN
+    SELECT GIABAN into v_giaban FROM SANPHAM WHERE MASP = v_masp;
+    v_trigia := v_giaban*v_sl;
+    INSERT INTO CTHOADON VALUES(v_masp, v_mahd, v_sl, v_trigia);
+    COMMIT;
+END;
+
+exec insert_cthd(23, 57, 2);
+select slton from sanpham where masp = 23;
+insert into hoadon values (57, TO_DATE('11/06/2000', 'dd/MM/yyyy'), 1, 2, 0); 
 COMMIT;
 
+--SELECT HD.MAHD, HD.NGAYHD, SUM(CTHD.SL), HD.TONGTIEN FROM HOADON hd join cthoadon cthd on hd.mahd = cthd.mahd
+--WHERE EXTRACT (MONTH FROM NGAYHD) = 6 AND EXTRACT (YEAR FROM NGAYHD) = 2020
+--GROUP BY HD.MAHD, HD.NGAYHD, HD.TONGTIEN;
+--
+--SELECT TO_CHAR(SYSDATE, 'MM') FROM DUAL;
+--
+--SELECT SP.TENSP, SUM(CTHD.SL) AS SL FROM CTHOADON CTHD JOIN SANPHAM SP ON SP.MASP = CTHD.MASP
+--                                                        JOIN HOADON HD ON HD.MAHD = CTHD.MAHD
+--WHERE EXTRACT (MONTH FROM NGAYHD) = TO_CHAR(SYSDATE, 'MM') and EXTRACT (YEAR FROM NGAYHD) = TO_CHAR(SYSDATE, 'YYYY')
+--GROUP BY SP.TENSP
+--ORDER BY SL DESC
+--FETCH FIRST 3 ROWS WITH TIES;
 
 -- CREATE TABLE                            13
 -- CREATE INDEX                             0
