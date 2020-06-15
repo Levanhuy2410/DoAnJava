@@ -45,6 +45,7 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
     jLabel2 = new javax.swing.JLabel();
     BTReturn = new javax.swing.JButton();
     BTCapNhat1 = new javax.swing.JButton();
+    btnDelete = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,6 +119,16 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
     BTCapNhat1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-view-35.png"))); // NOI18N
     BTCapNhat1.setText("  XEM CTPN");
 
+    btnDelete.setBackground(new java.awt.Color(255, 0, 0));
+    btnDelete.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+    btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-delete-35.png"))); // NOI18N
+    btnDelete.setText("  XÓA");
+    btnDelete.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btnDeleteActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
     jPanel2Layout.setHorizontalGroup(
@@ -137,6 +148,8 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
               .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(BTThem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(BTCapNhat1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
@@ -153,7 +166,8 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
           .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
             .addComponent(BTThem)
             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(BTCapNhat1)))
+            .addComponent(BTCapNhat1)
+            .addComponent(btnDelete)))
         .addGap(39, 39, 39)
         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(18, 18, 18)
@@ -188,6 +202,25 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
       mhchinh.setVisible(true);
       dispose();
     }//GEN-LAST:event_BTReturnActionPerformed
+
+  private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+    // TODO add your handling code here:
+    int selectedRow = tablePhieuNhapHang.getSelectedRow();
+    if (selectedRow < 0) {
+      JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 dòng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
+    if (reply == JOptionPane.YES_OPTION) {
+      int maHd = (int) tablePhieuNhapHang.getValueAt(selectedRow, 0);
+      boolean result = PhieuNhapHangBLL.deletePhieuNhapHang(maHd);
+      if (result) {
+        QuanLyPhieuNhap.loadAllPhieuNhapHang();
+        JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+      }
+      else JOptionPane.showMessageDialog(rootPane, "Xóa lỗi, thử lại sau", "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+  }//GEN-LAST:event_btnDeleteActionPerformed
 
   /**
    * @param args the command line arguments
@@ -235,6 +268,7 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
   private javax.swing.JButton BTCapNhat1;
   private javax.swing.JButton BTReturn;
   private javax.swing.JButton BTThem;
+  private javax.swing.JButton btnDelete;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JPanel jPanel1;

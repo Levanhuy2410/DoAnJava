@@ -51,7 +51,7 @@ public class HoaDonDAL {
     return JdbcConnection.getId(query);
   }
 
-  public static boolean deleteHoaDon(String maHd) {
+  public static boolean deleteHoaDon(int maHd) {
     String query = "DELETE FROM HOADON WHERE MAHD = ?";
     ArrayList<Object> arr = new ArrayList<>();
     arr.add(maHd);

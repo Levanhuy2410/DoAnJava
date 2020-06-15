@@ -266,7 +266,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
       }
       int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
       if (reply == JOptionPane.YES_OPTION) {
-          String idSanPham = tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0).toString();
+          int idSanPham = (int) tableSanPham.getValueAt(tableSanPham.getSelectedRow(), 0);
           if (SanPhamBLL.deleteSanPham(idSanPham)) {
               QuanLySanPham.loadAllSanpham();
               JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.PLAIN_MESSAGE);

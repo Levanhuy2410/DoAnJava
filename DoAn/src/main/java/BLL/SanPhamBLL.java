@@ -24,7 +24,7 @@ public class SanPhamBLL {
         return SanPhamDAL.getAllSanPham();
     }
 
-    public static boolean deleteSanPham(String idSanPham) {
+    public static boolean deleteSanPham(int idSanPham) {
         return SanPhamDAL.deleteSanPham(idSanPham);
     }
 

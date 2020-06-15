@@ -25,6 +25,9 @@ public class PhieuNhapHangBLL {
     if (PhieuNhapHangDAL.insertPhieuNhapHang(pn)) return maNh;
     else return -1;
   }
+  public static boolean deletePhieuNhapHang(int maNh) {
+    return PhieuNhapHangDAL.deletePhieuNhapHang(maNh);
+  }
   public static List<PhieuNhapHang> getAllPhieuNhapHang() {
     return PhieuNhapHangDAL.getAllPhieuNhapHang();
   }

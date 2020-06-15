@@ -44,7 +44,12 @@ public class PhieuNhapHangDAL {
     arr.add(phieunhap.tongTien);
     return JdbcConnection.executeUpdate(query, arr);
   }
-
+  public static boolean deletePhieuNhapHang(int maNh) {
+    String query = "DELETE FROM PHIEUNH WHERE MANH = ?";
+    ArrayList<Object> arr = new ArrayList<>();
+    arr.add(maNh);
+    return JdbcConnection.executeUpdate(query, arr);
+  }
   public static int getMaPhieuNhap() {
     String query = "select id_phieunhap.nextval from dual";
     return JdbcConnection.getId(query);

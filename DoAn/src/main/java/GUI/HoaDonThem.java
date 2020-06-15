@@ -508,7 +508,7 @@ public class HoaDonThem extends javax.swing.JFrame {
         int triGia = this.tongTien;
         int maHd = HoaDonBLL.insertHoaDon(maKh, username, triGia);
         for (int i = 0; i < tableCTHD.getRowCount(); i++) {
-          int maSp = Integer.parseInt(tableCTHD.getValueAt(i, 1).toString());
+          int maSp = (int) tableCTHD.getValueAt(i, 1);
           int soluong = (int) tableCTHD.getValueAt(i, 3);
           int giaban = (int) tableCTHD.getValueAt(i, 4);
           int thanhtien = soluong * giaban;

@@ -230,12 +230,6 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                 Map<String, Object> parameters = new HashMap<String, Object>();
                 JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\HoaDon.jrxml");
                 parameters.put("MAHD", mahd);
-    //            String query = "SELECT MASP, SLHETHONG, SLT, LYDO FROM CTPHIEUKK WHERE MAKK = '" + makk + "'";
-    //            System.out.println(query);
-    //            JRDesignQuery updateQuery = new JRDesignQuery();
-    //            updateQuery.setText(query);
-    //
-    //            jdesign.setQuery(updateQuery);
 
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
                 JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
@@ -259,7 +253,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
     }
     int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
     if (reply == JOptionPane.YES_OPTION) {
-      String maHd = tableHoaDon.getValueAt(selectedRow, 0).toString();
+      int maHd = (int) tableHoaDon.getValueAt(selectedRow, 0);
       boolean result = HoaDonBLL.deleteHoaDon(maHd);
       if (result) {
         QuanLyHoaDon.loadAllHoaDon();

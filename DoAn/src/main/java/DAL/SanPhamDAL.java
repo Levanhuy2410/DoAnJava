@@ -65,7 +65,7 @@ public class SanPhamDAL {
 //        return maLSP;
 //    }
     // Hàm xóa sản phẩm
-    public static boolean deleteSanPham(String idSanPham) {
+    public static boolean deleteSanPham(int idSanPham) {
         String query = "DELETE FROM SANPHAM WHERE masp = ?";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(idSanPham);

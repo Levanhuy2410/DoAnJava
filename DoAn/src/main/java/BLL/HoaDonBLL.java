@@ -28,7 +28,7 @@ public class HoaDonBLL {
   public static List<HoaDon> getAllHoaDon() {
     return HoaDonDAL.getAllHoaDon();
   }
-  public static boolean deleteHoaDon(String maHd) {
+  public static boolean deleteHoaDon(int maHd) {
     return HoaDonDAL.deleteHoaDon(maHd);
   }
 }
