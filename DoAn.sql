@@ -113,14 +113,14 @@ ALTER TABLE taikhoan ADD CONSTRAINT taikhoan_pk PRIMARY KEY ( username );
 --  DDL for Table SANPHAM
 --------------------------------------------------------
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (18,'RAM CORSAIR Vengeance',990000,24,'CORSAIR',20,'(1x8GB) DDR4 2666MHz',2);
-Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (19,'T?n khÌ Cooler Master Hyper 212',820000,12,'Cooler Master',20,'LED Turbo (RED)',4);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (19,'T?n kh√≠ Cooler Master Hyper 212',820000,12,'Cooler Master',20,'LED Turbo (RED)',4);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (20,'Mainboard ASUS PRIME B365M-K',1690000,24,'Asus',20,'Micro-ATX, Socket: LGA 1151-v2, Chipset: B365',3);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (23,'SSD Samsung 860 EVO 1TB M.2 Sata',4990000,24,'Samsung',20,'K?t n?ii: M.2 Sata, ??c/ghi: 550MB/s|520MB/s',5);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (15,'CPU AMD Ryzen 3 3200g',2490000,24,'AMD',10,'(4C/4T, 3.6 GHz - 4.0 GHz)',1);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (24,'HDD Western Digital Blue 1TB 3.5" SATA 3',990000,24,'Western Digital',20,'K?t n?i: SATA 3, T?c ??: 7200RPM',5);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (25,'Asus TUF Gaming GeForce GTX 1650',5010000,36,'Asus',20,'4GB GDDR5',6);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (26,'MSI GeForce GTX 1660 Super Gaming X',7850000,36,'MSI',20,'6GB GDDR6',6);
-Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (27,'Ngu?n m·y tÌnh Acbel HK+400',495000,12,'Acbel',20,'CÙng su?t: 400W',7);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (27,'Ngu?n m√°y t√≠nh Acbel HK+400',495000,12,'Acbel',20,'C√¥ng su?t: 400W',7);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (14,'CPU Intel Core i3 9100',3190000,24,'Intel',20,'(4C/4T,3.6GHz-4.2GHz)',1);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (16,'RAM Kingston Fury Black',1030000,24,'Kingston',20,'(1x8gb) DDR4 2666MHz',2);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (11,'RAM Kingston Fury Black',1030000,24,'Kingston',20,'(1x8gb) DDR4 2666MHz',2);
@@ -157,24 +157,24 @@ Insert into DOAN.PHIEUKK (MAKK,NGAYTAO,MANV) values (50,to_date('11-JUN-20','DD-
 Insert into DOAN.PHIEUKK (MAKK,NGAYTAO,MANV) values (51,to_date('11-JUN-20','DD-MON-RR'),2);
 -- INSERTING into DOAN.KHTHANHVIEN
 Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (1,'Nguy?n Mai Linh','Standard','0902456789','linh@gmail.com',0);
-Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (4,'LÍ V?n Ho‡ng','Standard','0966873489','levanhoang@gmail.com',0);
-Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (7,'Tr?n Th? Di?m Th˙y','Standard','0902524989','Thuytran@gmail.com',0);
-Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (8,'LÍ Th? Nh? ›','Standard','0934823555','y@gmail.com',0);
-Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (6,'LÍ V?n H˘ng','Standard','0934823489','hung@gmail.com',0);
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (4,'L√™ V?n Ho√†ng','Standard','0966873489','levanhoang@gmail.com',0);
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (7,'Tr?n Th? Di?m Th√∫y','Standard','0902524989','Thuytran@gmail.com',0);
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (8,'L√™ Th? Nh? √ù','Standard','0934823555','y@gmail.com',0);
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (6,'L√™ V?n H√πng','Standard','0934823489','hung@gmail.com',0);
 -- REM INSERTING into DOAN.NHANVIEN
-Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (6,'Tr?n Th˙y','Nh‚n ViÍn Kho',to_date('01-JAN-20','DD-MON-RR'),to_date('05-MAY-00','DD-MON-RR'),'0903844489','thuy@gmail.com',7000000);
-Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (1,'Tr?n Th‡nh CÙng','Qu?n L˝',to_date('09-JUN-20','DD-MON-RR'),to_date('10-DEC-01','DD-MON-RR'),'0961801013','cong@gmail.com',10000000);
-Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (4,'Nguy?n Mai Linh','Nh‚n ViÍn Kho',to_date('06-FEB-20','DD-MON-RR'),to_date('10-OCT-96','DD-MON-RR'),'0934823489','linh@gmail.com',7000000);
-Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (2,'LÍ V?n Huy','Qu?n L˝',to_date('11-JUN-20','DD-MON-RR'),to_date('24-OCT-00','DD-MON-RR'),'0934823489','levanhuy5050@gmail.com',1000000);
-Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (5,'LÍ V?n H˘ng','Nh‚n ViÍn K? To·n',to_date('08-MAR-20','DD-MON-RR'),to_date('16-OCT-96','DD-MON-RR'),'0934823489','Hung@gmail.com',5000000);
-Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (3,'LÍ V?n Ho‡ng','Nh‚n ViÍn B·n H‡ng',to_date('10-OCT-20','DD-MON-RR'),to_date('23-OCT-90','DD-MON-RR'),'0955993488','hoang@gmail.com',5000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (6,'Tr?n Th√∫y','Nh√¢n Vi√™n Kho',to_date('01-JAN-20','DD-MON-RR'),to_date('05-MAY-00','DD-MON-RR'),'0903844489','thuy@gmail.com',7000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (1,'Tr?n Th√†nh C√¥ng','Qu?n L√Ω',to_date('09-JUN-20','DD-MON-RR'),to_date('10-DEC-01','DD-MON-RR'),'0961801013','cong@gmail.com',10000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (4,'Nguy?n Mai Linh','Nh√¢n Vi√™n Kho',to_date('06-FEB-20','DD-MON-RR'),to_date('10-OCT-96','DD-MON-RR'),'0934823489','linh@gmail.com',7000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (2,'L√™ V?n Huy','Qu?n L√Ω',to_date('11-JUN-20','DD-MON-RR'),to_date('24-OCT-00','DD-MON-RR'),'0934823489','levanhuy5050@gmail.com',1000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (5,'L√™ V?n H√πng','Nh√¢n Vi√™n K? To√°n',to_date('08-MAR-20','DD-MON-RR'),to_date('16-OCT-96','DD-MON-RR'),'0934823489','Hung@gmail.com',5000000);
+Insert into DOAN.NHANVIEN (MANV,TENNV,CHUCVU,NGAYVL,NGAYSINH,SDT,EMAIL,MUCLUONG) values (3,'L√™ V?n Ho√†ng','Nh√¢n Vi√™n B√°n H√†ng',to_date('10-OCT-20','DD-MON-RR'),to_date('23-OCT-90','DD-MON-RR'),'0955993488','hoang@gmail.com',5000000);
 -- REM INSERTING into DOAN.TAIKHOAN
-Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('thuytran','123','Nh‚n ViÍn Kho',6);
-Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('CongAdmin','admin','Qu?n L˝',1);
-Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('Huy','123','Nh‚n ViÍn Kho',5);
-Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('Linh','123','Nh‚n ViÍn Kho',4);
-Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('HuyAdmin','admin','Qu?n L˝',2);
-Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('Hoang','123','Nh‚n ViÍn B·n H‡ng',3);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('thuytran','123','Nh√¢n Vi√™n Kho',6);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('CongAdmin','admin','Qu?n L√Ω',1);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('Huy','123','Nh√¢n Vi√™n Kho',5);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('Linh','123','Nh√¢n Vi√™n Kho',4);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('HuyAdmin','admin','Qu?n L√Ω',2);
+Insert into DOAN.TAIKHOAN (USERNAME,PASSWORD,LOAITK,MANV) values ('Hoang','123','Nh√¢n Vi√™n B√°n H√†ng',3);
 
 
 ALTER TABLE cthoadon
@@ -203,7 +203,7 @@ ALTER TABLE ctphieukk
 
 ALTER TABLE ctphieunhap
     ADD CONSTRAINT ctphieunhap_phieunh_fk FOREIGN KEY ( manh )
-        REFERENCES phieunh ( manh );
+        REFERENCES phieunh ( manh ) on DELETE CASCADE;
 
 ALTER TABLE ctphieunhap
     ADD CONSTRAINT ctphieunhap_sanpham_fk FOREIGN KEY ( masp )
@@ -327,13 +327,13 @@ BEGIN
             SET SLTON = v_slton-:new.SL
             WHERE MASP = :NEW.MASP;
         else 
-            raise_application_error(-20010,'S? l??ng qu· l?n');
+            raise_application_error(-20010,'S? l??ng qu√° l?n');
         end if;
     END IF;
     sleep(13);
 END;
 
--- ThÍm tr? gi· v‡o t?ng ti?n khi thÍm cthd
+-- Th√™m tr? gi√° v√†o t?ng ti?n khi th√™m cthd
 CREATE OR REPLACE TRIGGER ADD_COST_HOADON
 BEFORE INSERT OR UPDATE ON CTHOADON
 FOR EACH ROW
@@ -345,7 +345,7 @@ BEGIN
     END IF;
 END;
 
--- ThÍm ?i?m th‡nh viÍn khi thÍm cth?
+-- Th√™m ?i?m th√†nh vi√™n khi th√™m cth?
 CREATE OR REPLACE TRIGGER BONUS_POINT
 BEFORE INSERT OR UPDATE ON CTHOADON
 FOR EACH ROW
