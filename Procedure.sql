@@ -95,3 +95,74 @@ BEGIN
     CLOSE C_1;
 END;
 EXEC NHANVIEN_HOADON();
+-- insert cthd
+--CREATE OR REPLACE PROCEDURE INSERT_CTHD(v_masp IN CTHOADON.MASP%TYPE,
+--                                        v_mahd IN CTHOADON.MAHD%TYPE,
+--                                        v_sl   IN CTHOADON.SL%TYPE)
+--AS           
+--    v_trigia CTHOADON.TRIGIA%TYPE;
+--    v_giaban SANPHAM.GIABAN%TYPE;
+--BEGIN
+--    SELECT GIABAN into v_giaban FROM SANPHAM WHERE MASP = v_masp;
+--    v_trigia := v_giaban*v_sl;
+--    INSERT INTO CTHOADON VALUES(v_masp, v_mahd, v_sl, v_trigia);
+--    COMMIT;
+--END;
+-- 
+create or replace type table_REPORT AS TABLE OF ROW_REPORT;
+create or replace type ROW_REPORT AS OBJECT
+(
+    mahd      NUMBER,
+    ngayhd    DATE,
+    tentv     VARCHAR2(50),
+    tennv     VARCHAR2(50),
+    tongtien  NUMBER
+);
+-- Function l?y ra các hóa ??n trong tháng
+CREATE OR REPLACE FUNCTION CREATE_REPORT(v_month IN NUMBER, v_year IN NUMBER)
+RETURN
+    table_REPORT
+AS
+    v_tableTemp table_REPORT;
+BEGIN
+    SELECT ROW_REPORT(HD.MAHD, HD.NGAYHD, TV.TENTV, NV.TENNV, TONGTIEN)
+    BULK COLLECT INTO v_tableTemp
+    FROM HOADON HD JOIN KHTHANHVIEN TV ON HD.MAKH = TV.MATV
+        JOIN NHANVIEN NV ON HD.MANV = NV.MANV
+    WHERE EXTRACT (MONTH FROM HD.NGAYHD) = v_month AND EXTRACT (YEAR FROM HD.NGAYHD) = v_year;
+    RETURN v_tableTemp;
+END;
+
+
+select * from table(create_report(6, 2020));
+-- Procedure insert hoadon 
+CREATE OR REPLACE TYPE MASP_ARRAY is VARRAY(100) OF number;
+CREATE OR REPLACE TYPE SL_ARRAY is VARRAY(100) OF number;
+CREATE OR REPLACE PROCEDURE INSERT_HOADON(v_mahd HOADON.MAHD%TYPE, v_masp_array MASP_ARRAY, v_sl_array SL_ARRAY,
+                                            v_makh HOADON.MAKH%TYPE, v_manv HOADON.MANV%TYPE, v_ngayhd HOADON.NGAYHD%TYPE)
+AS
+    v_giaban SANPHAM.GIABAN%TYPE;
+    v_trigia CTHOADON.TRIGIA%TYPE;
+BEGIN
+    FOR i IN v_sl_array.first .. v_sl_array.last LOOP
+        IF (v_sl_array (i) <= 0) THEN
+            raise_application_error(-20010,'So luong khong hop le');
+        END IF;
+    END LOOP; 
+    INSERT INTO HOADON VALUES (v_mahd, v_ngayhd, v_makh, v_manv, 0);
+    FOR i IN v_masp_array.first .. v_masp_array.last LOOP
+        SELECT GIABAN into v_giaban FROM SANPHAM WHERE MASP = v_masp_array(i);
+        v_trigia:=v_sl_array(i)*v_giaban;
+        INSERT INTO CTHOADON VALUES (v_masp_array(i), v_mahd, v_sl_array(i), v_trigia);
+    END LOOP;
+    COMMIT;
+END;
+
+DECLARE 
+    v_masp_array MASP_ARRAY;
+    v_sl_array   SL_ARRAY;
+BEGIN
+    v_masp_array := MASP_ARRAY(23);
+    v_sl_array := SL_ARRAY(2);
+    INSERT_HOADON(59, v_masp_array, v_sl_array, 1, 1, to_date('15/06/2020', 'dd/MM/yyyy'));
+END;
