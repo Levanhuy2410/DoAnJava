@@ -31,7 +31,6 @@ public class TaiKhoanDAL {
             if (rs.next()) {
                 return true;
             }
-            JdbcConnection.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,7 +47,6 @@ public class TaiKhoanDAL {
             if (rs.next()) {
                 return true;
             }
-            JdbcConnection.closeConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }

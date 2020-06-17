@@ -505,14 +505,14 @@ public class HoaDonThem extends javax.swing.JFrame {
         } else {
           maKh = Integer.parseInt(mathanhvienTxt.getText());
         }
-        String username = Login.username;
+        int maNv = Login.maNv;
         List<CTHoaDon> cthoadon = new ArrayList<>();
         for (int i = 0; i < tableCTHD.getRowCount(); i++) {
           int maSp = Integer.parseInt(tableCTHD.getValueAt(i, 1).toString());
           int soluong = (int) tableCTHD.getValueAt(i, 3);
           cthoadon.add(new CTHoaDon(maSp, soluong));
         }
-        HoaDonBLL.insertHoaDon(maKh, username, cthoadon);
+        HoaDonBLL.insertHoaDon(maKh, maNv, cthoadon);
         tongtienTxt.setText("0");
         QuanLyHoaDon.loadAllHoaDon();
         resetLayout();

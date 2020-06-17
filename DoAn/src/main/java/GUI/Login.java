@@ -6,15 +6,18 @@
 package GUI;
 
 import BLL.TaiKhoanBLL;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
  *
  * @author USER
  */
 public class Login extends javax.swing.JFrame {
+
     
     TaiKhoanBLL TaiKhoanBLL = new TaiKhoanBLL();
     public static String username = "";
+    public static int maNv;
     /**
      * Creates new form NewJFrame
      */
@@ -25,6 +28,8 @@ public class Login extends javax.swing.JFrame {
         this.username = Username.getText();
         String password = new String(Password.getPassword());
         if (TaiKhoanBLL.KiemTraLogin(username, password)){
+            ArrayList<String> empInfo = TaiKhoanBLL.getThongTinNhanVien(username);
+            Login.maNv = Integer.parseInt(empInfo.get(0));
             ManHinhChinh mainscr = new ManHinhChinh();
             mainscr.setVisible(true);
             dispose();
