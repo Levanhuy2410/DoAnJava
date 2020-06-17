@@ -17,6 +17,10 @@ public class CTHoaDon {
         this.soLuong = soluong;
         this.triGia = trigia;
     }
+    public CTHoaDon(int masp, int soluong) {
+        this.maSp = masp;
+        this.soLuong = soluong;
+    }
     public int maSp;
     public int maHd;
     public int soLuong;

@@ -11,6 +11,7 @@ import DTO.SanPham;
 import DTO.ThanhVien;
 import BLL.SanPhamBLL;
 import BLL.ThanhVienBLL;
+import DTO.CTHoaDon;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -505,15 +506,13 @@ public class HoaDonThem extends javax.swing.JFrame {
           maKh = Integer.parseInt(mathanhvienTxt.getText());
         }
         String username = Login.username;
-        int triGia = this.tongTien;
-        int maHd = HoaDonBLL.insertHoaDon(maKh, username, triGia);
+        List<CTHoaDon> cthoadon = new ArrayList<>();
         for (int i = 0; i < tableCTHD.getRowCount(); i++) {
-          int maSp = (int) tableCTHD.getValueAt(i, 1);
+          int maSp = Integer.parseInt(tableCTHD.getValueAt(i, 1).toString());
           int soluong = (int) tableCTHD.getValueAt(i, 3);
-          int giaban = (int) tableCTHD.getValueAt(i, 4);
-          int thanhtien = soluong * giaban;
-          CTHoaDonBLL.insertCTHD(maSp, maHd, soluong, thanhtien);
+          cthoadon.add(new CTHoaDon(maSp, soluong));
         }
+        HoaDonBLL.insertHoaDon(maKh, username, cthoadon);
         tongtienTxt.setText("0");
         QuanLyHoaDon.loadAllHoaDon();
         resetLayout();

@@ -7,11 +7,17 @@ package DAL;
 
 import DTO.CTHoaDon;
 import DTO.HoaDon;
+import java.sql.Array;
+import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oracle.sql.ARRAY;
+import oracle.sql.ArrayDescriptor;
 
 /**
  *
@@ -46,6 +52,23 @@ public class HoaDonDAL {
     return JdbcConnection.executeUpdate(query, arr);
   }
 
+  public static boolean exeProc(int[] masp, int[] sl) {
+    try {
+      CallableStatement stmt = JdbcConnection.connection.prepareCall("BEGIN INSERT_HOADON(ID_MAHD.NEXTVAL, ?, ?, 1, 1, to_date('17/06/2020', 'dd/MM/yyyy')); END;");
+      ArrayDescriptor arraySpDesc = ArrayDescriptor.createDescriptor("MASP_ARRAY", JdbcConnection.connection);
+      ArrayDescriptor arraySlSpDesc = ArrayDescriptor.createDescriptor("SL_ARRAY", JdbcConnection.connection);
+      Array arraySp = new ARRAY(arraySpDesc, JdbcConnection.connection, masp);
+      Array arraySl = new ARRAY(arraySlSpDesc, JdbcConnection.connection, sl);
+      stmt.setArray(1, arraySp);
+      stmt.setArray(2, arraySl);
+      return stmt.execute();
+
+    } catch (SQLException ex) {
+      Logger.getLogger(HoaDonDAL.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return false;
+  }
+
   public static int getMaHd() {
     String query = "select id_mahd.nextval from dual";
     return JdbcConnection.getId(query);
@@ -58,7 +81,22 @@ public class HoaDonDAL {
     return JdbcConnection.executeUpdate(query, arr);
   }
 
-//    public static void main(String[] args) {
-//        System.out.println(HoaDonDAL.xoaHoaDon("19"));
-//    }
+  public static void main(String[] args) {
+
+    List<CTHoaDon> cthoadon = new ArrayList<>();
+    CTHoaDon sp1 = new CTHoaDon(18, 1);
+    CTHoaDon sp2 = new CTHoaDon(19, 1);
+    cthoadon.add(sp1);
+    cthoadon.add(sp2);
+    int slSanPham = cthoadon.size();
+    
+    int[] masp = new int[slSanPham];
+    int[] sl = new int[slSanPham];
+    for (int i = 0; i < slSanPham; i++) {
+      masp[i] = cthoadon.get(i).maSp;
+      sl[i] = cthoadon.get(i).soLuong;
+    }
+
+    System.out.println(exeProc(masp, sl));
+  }
 }
