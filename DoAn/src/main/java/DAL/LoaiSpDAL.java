@@ -25,7 +25,7 @@ public class LoaiSpDAL {
             ArrayList<Object> arr = new ArrayList<>();
             ResultSet rs = JdbcConnection.executeQuery(query, arr);
             while (rs.next()) {
-                LoaiSP loaiSp = new LoaiSP(rs.getString(1), rs.getString(2));
+                LoaiSP loaiSp = new LoaiSP(rs.getInt(1), rs.getString(2));
                 listLoaiSp.add(loaiSp);
             }
         } catch (SQLException ex) {

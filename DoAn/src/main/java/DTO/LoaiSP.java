@@ -10,9 +10,9 @@ package DTO;
  * @author Cong
  */
 public class LoaiSP {
-  public String maLSp;
+  public int maLSp;
   public String tenLSp;
-  public LoaiSP(String maLSp, String tenLSp) {
+  public LoaiSP(int maLSp, String tenLSp) {
     this.maLSp = maLSp;
     this.tenLSp = tenLSp;
   }
