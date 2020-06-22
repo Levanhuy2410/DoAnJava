@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d372f2b4-20f4-42e5-ada8-05e5459e1cc7">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="700" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d372f2b4-20f4-42e5-ada8-05e5459e1cc7">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="169"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -100,7 +100,7 @@ FETCH FIRST 3 ROWS WITH TIES]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="29" splitType="Stretch">
+		<band height="26">
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="5d189064-3478-47c3-b257-54a89ef9f00e"/>
 			</frame>
@@ -121,13 +121,31 @@ FETCH FIRST 3 ROWS WITH TIES]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="4" splitType="Stretch">
+		<band height="279" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="24211b00-0ee7-44eb-9b95-716f47a56743"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
+			<pieChart>
+				<chart>
+					<reportElement isPrintRepeatedValues="false" mode="Transparent" x="2" y="3" width="551" height="276" uuid="38b8b6bf-d056-42a2-9703-1e7a0391ceb3"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{TENSP}]]></keyExpression>
+					<valueExpression><![CDATA[$F{SL}
+]]></valueExpression>
+					<otherKeyExpression><![CDATA["Tổng số lượng"]]></otherKeyExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
 		</band>
 	</columnFooter>
 	<pageFooter>

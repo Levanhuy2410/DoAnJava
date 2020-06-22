@@ -335,7 +335,7 @@ BEGIN
             raise_application_error(-20010,'So luong qua lon');
         end if;
     END IF;
-    sleep(12);
+--    sleep(12);
 END;
 
 -- Thêm tr? giá vào t?ng ti?n khi thêm cthd
@@ -376,6 +376,8 @@ AS
     v_giaban SANPHAM.GIABAN%TYPE;
     v_trigia CTHOADON.TRIGIA%TYPE;
 BEGIN
+    lock table sanpham in share mode;
+    sleep(13);
     FOR i IN v_sl_array.first .. v_sl_array.last LOOP
         IF (v_sl_array (i) <= 0) THEN
             raise_application_error(-20010,'So luong khong hop le');
@@ -396,11 +398,12 @@ DECLARE
     v_sl_array   SL_ARRAY;
 BEGIN
     v_masp_array := MASP_ARRAY(23);
-    v_sl_array := SL_ARRAY(2);
+    v_sl_array := SL_ARRAY(1);
     INSERT_HOADON(59, v_masp_array, v_sl_array, 1, 1, to_date('15/06/2020', 'dd/MM/yyyy'));
 END;
+commit;
 
-
+select tongtien from hoadon where mahd = 59;
 --SELECT HD.MAHD, HD.NGAYHD, SUM(CTHD.SL), HD.TONGTIEN FROM HOADON hd join cthoadon cthd on hd.mahd = cthd.mahd
 --WHERE EXTRACT (MONTH FROM NGAYHD) = 6 AND EXTRACT (YEAR FROM NGAYHD) = 2020
 --GROUP BY HD.MAHD, HD.NGAYHD, HD.TONGTIEN;

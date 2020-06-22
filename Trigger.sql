@@ -76,6 +76,17 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20001,'Tuoi nhan vien phai lon hon 18');
     END IF;
 END;
+-- Trigger them so luong ton khi them chi tiet phieu nhap
+CREATE OR REPLACE TRIGGER ADD_QUANTITY_SANPHAM
+BEFORE INSERT ON CTPHIEUNHAP
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        UPDATE SANPHAM
+        SET SLTON=SLTON+:NEW.SLNHAP
+        WHERE MASP = :NEW.MASP;
+    END IF;
+END;
 -- Kiem tra so luong ton 
 --Create or replace trigger KiemTraSoLuongTon
 --Before insert on CTPHIEUKK 

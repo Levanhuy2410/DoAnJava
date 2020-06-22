@@ -15,7 +15,7 @@
 	</style>
 	<parameter name="MAHD" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT NV.TENNV, HD.NGAYHD,SP.TENSP, CTHD.SL, CTHD.TRIGIA, HD.TONGTIEN FROM CTHOADON CTHD JOIN HOADON HD ON HD.MAHD = CTHD.MAHD
+		<![CDATA[SELECT NV.TENNV, HD.NGAYHD,SP.TENSP,SP.GIABAN, CTHD.SL, CTHD.TRIGIA, HD.TONGTIEN FROM CTHOADON CTHD JOIN HOADON HD ON HD.MAHD = CTHD.MAHD
                                                         JOIN SANPHAM SP ON CTHD.MASP = SP.MASP
                                                         JOIN NHANVIEN NV ON HD.MANV = NV.MANV
 WHERE HD.MAHD = $P{MAHD}]]>
@@ -23,6 +23,7 @@ WHERE HD.MAHD = $P{MAHD}]]>
 	<field name="TENNV" class="java.lang.String"/>
 	<field name="NGAYHD" class="java.sql.Timestamp"/>
 	<field name="TENSP" class="java.lang.String"/>
+	<field name="GIABAN" class="java.math.BigDecimal"/>
 	<field name="SL" class="java.math.BigDecimal"/>
 	<field name="TRIGIA" class="java.math.BigDecimal"/>
 	<field name="TONGTIEN" class="java.math.BigDecimal"/>
@@ -102,49 +103,63 @@ WHERE HD.MAHD = $P{MAHD}]]>
 	<columnHeader>
 		<band height="33" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="0" y="7" width="175" height="18" forecolor="#000000" uuid="95511241-fff4-46cc-920d-b3fe09e02ca9"/>
+				<reportElement style="Column header" x="0" y="7" width="125" height="18" forecolor="#000000" uuid="95511241-fff4-46cc-920d-b3fe09e02ca9"/>
 				<textElement>
 					<font size="15" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Tên Sản Phẩm]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="185" y="7" width="173" height="18" forecolor="#000000" uuid="2636d502-2e49-4da8-9afa-e2d1f6551e80"/>
+				<reportElement style="Column header" x="138" y="7" width="123" height="18" forecolor="#000000" uuid="2636d502-2e49-4da8-9afa-e2d1f6551e80"/>
 				<textElement>
 					<font size="15" isBold="true" isUnderline="false"/>
 				</textElement>
 				<text><![CDATA[Số Lượng]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="370" y="7" width="185" height="18" forecolor="#000000" uuid="03c41eae-360b-49f1-b353-ba9342bef89b"/>
+				<reportElement style="Column header" x="410" y="7" width="145" height="18" forecolor="#000000" uuid="03c41eae-360b-49f1-b353-ba9342bef89b"/>
 				<textElement>
 					<font size="15" isBold="true" isUnderline="false"/>
 				</textElement>
-				<text><![CDATA[Trị Giá]]></text>
+				<text><![CDATA[Thành tiền]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="274" y="7" width="123" height="18" forecolor="#000000" uuid="3cce1a3b-005e-4dec-bc83-c61ad7a6a5a8"/>
+				<textElement>
+					<font size="15" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Đơn giá]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="31" splitType="Stretch">
 			<frame>
 				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="438e6ccd-b8ad-4ed5-90b4-53e258ed143d"/>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="175" height="18" uuid="83855be9-f434-42fc-aee0-82e0655ad1bd"/>
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="125" height="18" uuid="83855be9-f434-42fc-aee0-82e0655ad1bd"/>
 					<textElement>
 						<font size="15"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{TENSP}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="185" y="0" width="173" height="18" uuid="0ee17798-4437-401e-a8e1-960208109e03"/>
+					<reportElement style="Detail" positionType="Float" x="138" y="0" width="123" height="18" uuid="0ee17798-4437-401e-a8e1-960208109e03"/>
 					<textElement>
 						<font size="15"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{SL}]]></textFieldExpression>
 				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0">
+					<reportElement style="Detail" positionType="Float" x="274" y="0" width="123" height="18" uuid="a08b7def-c0b6-4a23-9ec4-20aa9e0a033f"/>
+					<textElement>
+						<font size="15"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TRIGIA}.divide( $F{SL} )]]></textFieldExpression>
+				</textField>
 			</frame>
 			<textField isStretchWithOverflow="true" pattern="#,##0">
-				<reportElement style="Detail" positionType="Float" x="370" y="0" width="185" height="18" uuid="ecca7d82-db09-4fee-9025-ad1963394334"/>
+				<reportElement style="Detail" positionType="Float" x="410" y="0" width="145" height="18" uuid="ecca7d82-db09-4fee-9025-ad1963394334"/>
 				<textElement>
 					<font size="15"/>
 				</textElement>
