@@ -41,16 +41,20 @@ public class HoaDonDAL {
     return listHoadon;
   }
 
-  public static boolean insertHoaDon(int[] masp, int[] sl, String ngayHd) {
+  public static boolean insertHoaDon(int[] masp, int[] sl, String ngayHd, int maKh, int maNv) {
     try {
-      CallableStatement stmt = JdbcConnection.connection.prepareCall("BEGIN INSERT_HOADON(ID_MAHD.NEXTVAL, ?, ?, 1, 1, to_date(?, 'dd/MM/yyyy')); END;");
+      CallableStatement stmt = JdbcConnection.connection.prepareCall("BEGIN INSERT_HOADON(ID_MAHD.NEXTVAL, ?, ?, ?, ?, to_date(?, 'dd/MM/yyyy')); END;");
       ArrayDescriptor arraySpDesc = ArrayDescriptor.createDescriptor("MASP_ARRAY", JdbcConnection.connection);
       ArrayDescriptor arraySlSpDesc = ArrayDescriptor.createDescriptor("SL_ARRAY", JdbcConnection.connection);
       Array arraySp = new ARRAY(arraySpDesc, JdbcConnection.connection, masp);
       Array arraySl = new ARRAY(arraySlSpDesc, JdbcConnection.connection, sl);
       stmt.setArray(1, arraySp);
       stmt.setArray(2, arraySl);
-      stmt.setString(3, ngayHd);
+      
+      stmt.setObject(3, maKh);
+      stmt.setObject(4, maNv);
+      
+      stmt.setString(5, ngayHd);
       return stmt.execute();
 
     } catch (SQLException ex) {

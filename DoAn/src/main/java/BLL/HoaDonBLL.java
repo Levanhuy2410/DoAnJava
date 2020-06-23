@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class HoaDonBLL {
   public static boolean insertHoaDon(int maKh, int maNv, List<CTHoaDon> cthoadon) {
+    System.out.println(maKh + "Ma nhanvien: " + maNv);
     int slSanPham = cthoadon.size();
     
     int[] masp = new int[slSanPham];
@@ -29,7 +30,7 @@ public class HoaDonBLL {
     }
     
     String timeStamp = new SimpleDateFormat("dd-MM-yyyy").format(Calendar.getInstance().getTime());
-    return HoaDonDAL.insertHoaDon(masp, sl, timeStamp);
+    return HoaDonDAL.insertHoaDon(masp, sl, timeStamp, maKh, maNv);
   }
   public static List<HoaDon> getAllHoaDon() {
     return HoaDonDAL.getAllHoaDon();
