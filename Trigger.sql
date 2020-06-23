@@ -38,7 +38,15 @@ COMMIT;
 CREATE OR REPLACE TRIGGER ADD_COST_HOADON
 BEFORE INSERT ON CTHOADON
 FOR EACH ROW
+DECLARE 
+    v_diemtv    KHTHANHVIEN.DIEMTV%TYPE;
 BEGIN
+    SELECT TV.DIEMTV INTO v_diemtv FROM KHTHANHVIEN TV JOIN HOADON HD ON TV.MATV = HD.MAKH WHERE MAHD = :NEW.MAHD;
+    IF v_diemtv >=5000 THEN
+        :NEW.TRIGIA := :NEW.TRIGIA * 0.95;
+    ELSIF v_diemtv >= 10000 THEN
+        :NEW.TRIGIA := :NEW.TRIGIA * 0.9;
+    END IF;
     IF INSERTING THEN
         UPDATE hoadon
         SET TONGTIEN=TONGTIEN+:NEW.TRIGIA
@@ -87,12 +95,4 @@ BEGIN
         WHERE MASP = :NEW.MASP;
     END IF;
 END;
--- Kiem tra so luong ton 
---Create or replace trigger KiemTraSoLuongTon
---Before insert on CTPHIEUKK 
---Begin
---    If(:NEW.SLT > 0) then
---        DBMS_OUTPUT.PUT_LINE('S? l??ng s?n ph?m trong kho ??');
---    RAISE_APPLICATION_ERROR(-20001,'S? l??ng s?n ph?m trong kho không ?? ?? ph?c v?');
---    End if;
---End;
+

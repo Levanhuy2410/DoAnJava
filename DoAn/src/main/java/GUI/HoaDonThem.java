@@ -505,6 +505,7 @@ public class HoaDonThem extends javax.swing.JFrame {
         } else {
           maKh = Integer.parseInt(mathanhvienTxt.getText());
         }
+          System.out.println(maKh);
         int maNv = Login.maNv;
         List<CTHoaDon> cthoadon = new ArrayList<>();
         for (int i = 0; i < tableCTHD.getRowCount(); i++) {

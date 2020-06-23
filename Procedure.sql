@@ -135,7 +135,8 @@ END;
 
 
 select * from table(create_report(6, 2020));
--- Procedure insert hoadon 
+-- Procedure insert hoadon
+SET TRANSACTION ISOLATION LEVEL READ COMMITTED;   
 CREATE OR REPLACE TYPE MASP_ARRAY is VARRAY(100) OF number;
 CREATE OR REPLACE TYPE SL_ARRAY is VARRAY(100) OF number;
 CREATE OR REPLACE PROCEDURE INSERT_HOADON(v_mahd HOADON.MAHD%TYPE, v_masp_array MASP_ARRAY, v_sl_array SL_ARRAY,
@@ -144,6 +145,7 @@ AS
     v_giaban SANPHAM.GIABAN%TYPE;
     v_trigia CTHOADON.TRIGIA%TYPE;
 BEGIN
+    
     FOR i IN v_sl_array.first .. v_sl_array.last LOOP
         IF (v_sl_array (i) <= 0) THEN
             raise_application_error(-20010,'So luong khong hop le');
@@ -154,15 +156,20 @@ BEGIN
         SELECT GIABAN into v_giaban FROM SANPHAM WHERE MASP = v_masp_array(i);
         v_trigia:=v_sl_array(i)*v_giaban;
         INSERT INTO CTHOADON VALUES (v_masp_array(i), v_mahd, v_sl_array(i), v_trigia);
+        sleep(6);
     END LOOP;
-    COMMIT;
+    commit;
 END;
 
-DECLARE 
+DECLARE
     v_masp_array MASP_ARRAY;
     v_sl_array   SL_ARRAY;
 BEGIN
-    v_masp_array := MASP_ARRAY(23);
-    v_sl_array := SL_ARRAY(2);
-    INSERT_HOADON(59, v_masp_array, v_sl_array, 1, 1, to_date('15/06/2020', 'dd/MM/yyyy'));
+    v_masp_array := MASP_ARRAY(20,23);
+    v_sl_array := SL_ARRAY(1,1);
+    INSERT_HOADON(61, v_masp_array, v_sl_array, 1, 1, to_date('15/06/2020', 'dd/MM/yyyy'));
 END;
+
+update sanpham set slton = slton - 1 where masp = 20;
+exec sleep(7);
+update sanpham set slton = slton - 1 where masp = 23;
