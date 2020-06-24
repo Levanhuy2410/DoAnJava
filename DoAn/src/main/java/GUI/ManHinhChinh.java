@@ -17,8 +17,8 @@ public class ManHinhChinh extends javax.swing.JFrame {
     /**
      * Creates new form ManHinhChinh
      */
-//    public String tenNV = TenNV.getText();
     public static int maNV;
+    
     public ManHinhChinh() {
         initComponents();
         loadThongTinNhanVien(Login.username);
@@ -60,7 +60,6 @@ public class ManHinhChinh extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         BTQuanLyNhapKho = new javax.swing.JButton();
-        BTQuanLyXuatKho = new javax.swing.JButton();
         BTQuanLySanPham = new javax.swing.JButton();
         BTQuanLyNhanVien = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -78,10 +77,10 @@ public class ManHinhChinh extends javax.swing.JFrame {
         Email = new javax.swing.JLabel();
         SDT = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        TongSoHoaDon = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        TongHoaDon = new javax.swing.JLabel();
+        TongNhanVien = new javax.swing.JLabel();
+        TongTonKho = new javax.swing.JLabel();
+        TongThanhVien = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -128,20 +127,6 @@ public class ManHinhChinh extends javax.swing.JFrame {
         BTQuanLyNhapKho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BTQuanLyNhapKhoActionPerformed(evt);
-            }
-        });
-
-        BTQuanLyXuatKho.setBackground(new java.awt.Color(0, 168, 232));
-        BTQuanLyXuatKho.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        BTQuanLyXuatKho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-output-60.png"))); // NOI18N
-        BTQuanLyXuatKho.setText(" XUẤT KHO ");
-        BTQuanLyXuatKho.setBorderPainted(false);
-        BTQuanLyXuatKho.setContentAreaFilled(false);
-        BTQuanLyXuatKho.setFocusPainted(false);
-        BTQuanLyXuatKho.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        BTQuanLyXuatKho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTQuanLyXuatKhoActionPerformed(evt);
             }
         });
 
@@ -252,7 +237,6 @@ public class ManHinhChinh extends javax.swing.JFrame {
                             .addComponent(BTQuanLySanPham, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTQuanLyNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTQuanLyNhapKho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTQuanLyXuatKho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTQuanLyThongTinThanhVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTQuanLyHoaDon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -272,10 +256,8 @@ public class ManHinhChinh extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BTReturn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addComponent(BTQuanLyNhapKho, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BTQuanLyXuatKho, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTQuanLySanPham, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -288,7 +270,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
                 .addComponent(BTQuanLyThongTinThanhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
@@ -376,33 +358,33 @@ public class ManHinhChinh extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(250, 250, 250));
         jPanel4.setLayout(new java.awt.GridLayout(2, 2, 15, 15));
 
-        TongSoHoaDon.setBackground(new java.awt.Color(255, 255, 255));
-        TongSoHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TongSoHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-paid-bill-100.png"))); // NOI18N
-        TongSoHoaDon.setText("<html> <br> TỔNG SỐ HÓA ĐƠN </html>");
-        TongSoHoaDon.setOpaque(true);
-        jPanel4.add(TongSoHoaDon);
+        TongHoaDon.setBackground(new java.awt.Color(255, 255, 255));
+        TongHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TongHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-paid-bill-100.png"))); // NOI18N
+        TongHoaDon.setText("<html> <br> TỔNG SỐ HÓA ĐƠN </html>");
+        TongHoaDon.setOpaque(true);
+        jPanel4.add(TongHoaDon);
 
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-staff-100.png"))); // NOI18N
-        jLabel11.setText("TỔNG SỐ NHÂN VIÊN TRONG CỬA HÀNG");
-        jLabel11.setOpaque(true);
-        jPanel4.add(jLabel11);
+        TongNhanVien.setBackground(new java.awt.Color(255, 255, 255));
+        TongNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TongNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-staff-100.png"))); // NOI18N
+        TongNhanVien.setText("TỔNG SỐ NHÂN VIÊN TRONG CỬA HÀNG");
+        TongNhanVien.setOpaque(true);
+        jPanel4.add(TongNhanVien);
 
-        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-in-inventory-100.png"))); // NOI18N
-        jLabel9.setText("TỔNG SỐ SẢN PHẨM TỒN KHO");
-        jLabel9.setOpaque(true);
-        jPanel4.add(jLabel9);
+        TongTonKho.setBackground(new java.awt.Color(255, 255, 255));
+        TongTonKho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TongTonKho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-in-inventory-100.png"))); // NOI18N
+        TongTonKho.setText("TỔNG SỐ SẢN PHẨM TỒN KHO");
+        TongTonKho.setOpaque(true);
+        jPanel4.add(TongTonKho);
 
-        jLabel12.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-member-100.png"))); // NOI18N
-        jLabel12.setText("TỔNG SỐ THÀNH VIÊN");
-        jLabel12.setOpaque(true);
-        jPanel4.add(jLabel12);
+        TongThanhVien.setBackground(new java.awt.Color(255, 255, 255));
+        TongThanhVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TongThanhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-member-100.png"))); // NOI18N
+        TongThanhVien.setText("TỔNG SỐ THÀNH VIÊN");
+        TongThanhVien.setOpaque(true);
+        jPanel4.add(TongThanhVien);
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 970, 570));
 
@@ -415,13 +397,6 @@ public class ManHinhChinh extends javax.swing.JFrame {
         qlypnh.setVisible(true);
         dispose();
     }//GEN-LAST:event_BTQuanLyNhapKhoActionPerformed
-
-    private void BTQuanLyXuatKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTQuanLyXuatKhoActionPerformed
-        // TODO add your handling code here:
-        QuanLyPhieuXuat qlypxh = new QuanLyPhieuXuat();
-        qlypxh.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_BTQuanLyXuatKhoActionPerformed
 
     private void BTQuanLySanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTQuanLySanPhamActionPerformed
         // TODO add your handling code here:
@@ -511,22 +486,21 @@ public class ManHinhChinh extends javax.swing.JFrame {
     private javax.swing.JButton BTQuanLyNhapKho;
     private javax.swing.JButton BTQuanLySanPham;
     private javax.swing.JButton BTQuanLyThongTinThanhVien;
-    private javax.swing.JButton BTQuanLyXuatKho;
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThongKe;
     public static javax.swing.JLabel ChucVu;
     private javax.swing.JLabel Email;
     private javax.swing.JLabel SDT;
     public static javax.swing.JLabel TenNV;
-    private javax.swing.JLabel TongSoHoaDon;
+    private javax.swing.JLabel TongHoaDon;
+    private javax.swing.JLabel TongNhanVien;
+    private javax.swing.JLabel TongThanhVien;
+    private javax.swing.JLabel TongTonKho;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

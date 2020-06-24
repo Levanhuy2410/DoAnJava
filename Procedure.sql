@@ -139,13 +139,14 @@ select * from table(create_report(6, 2020));
 SET TRANSACTION ISOLATION LEVEL READ COMMITTED;   
 CREATE OR REPLACE TYPE MASP_ARRAY is VARRAY(100) OF number;
 CREATE OR REPLACE TYPE SL_ARRAY is VARRAY(100) OF number;
+
 CREATE OR REPLACE PROCEDURE INSERT_HOADON(v_mahd HOADON.MAHD%TYPE, v_masp_array MASP_ARRAY, v_sl_array SL_ARRAY,
                                             v_makh HOADON.MAKH%TYPE, v_manv HOADON.MANV%TYPE, v_ngayhd HOADON.NGAYHD%TYPE)
 AS
     v_giaban SANPHAM.GIABAN%TYPE;
     v_trigia CTHOADON.TRIGIA%TYPE;
 BEGIN
-    
+    LOCK TABLE SANPHAM IN SHARE MODE;
     FOR i IN v_sl_array.first .. v_sl_array.last LOOP
         IF (v_sl_array (i) <= 0) THEN
             raise_application_error(-20010,'So luong khong hop le');
@@ -161,7 +162,7 @@ BEGIN
     commit;
 END;
 
-DECLARE
+DECLARE 
     v_masp_array MASP_ARRAY;
     v_sl_array   SL_ARRAY;
 BEGIN
@@ -170,6 +171,73 @@ BEGIN
     INSERT_HOADON(61, v_masp_array, v_sl_array, 1, 1, to_date('15/06/2020', 'dd/MM/yyyy'));
 END;
 
-update sanpham set slton = slton - 1 where masp = 20;
-exec sleep(7);
-update sanpham set slton = slton - 1 where masp = 23;
+
+
+-- Procedure t?o phi?u nh?p
+CREATE OR REPLACE TYPE GIANHAP_ARRAY is VARRAY(100) OF number;--Nh? t?o cái này tr??c t?o procedure
+CREATE OR REPLACE PROCEDURE INSERT_PHIEUNHAP(v_manh PHIEUNH.MANH%TYPE, v_masp_array MASP_ARRAY, v_sl_array SL_ARRAY,
+                                            v_nhacc PHIEUNH.NHACC%TYPE, v_manv PHIEUNH.MANV%TYPE, v_ngaynh PHIEUNH.NGAYNH%TYPE,
+                                            v_gianhap_array GIANHAP_ARRAY)
+AS
+BEGIN
+    lock table sanpham in share mode;
+    FOR i IN v_sl_array.first .. v_sl_array.last LOOP
+        IF (v_sl_array (i) <= 0) THEN
+            raise_application_error(-20010,'So luong khong hop le');
+        END IF;
+    END LOOP; 
+    INSERT INTO PHIEUNH VALUES (v_manh, v_ngaynh, v_nhacc, v_manv, 0);
+    FOR i IN v_masp_array.first .. v_masp_array.last LOOP
+        INSERT INTO CTPHIEUNHAP VALUES (v_masp_array(i), v_manh, v_sl_array(i), v_gianhap_array(i));
+--        sleep(6);
+    END LOOP;
+    commit;
+END;
+
+DECLARE
+    v_masp_array MASP_ARRAY;
+    v_sl_array   SL_ARRAY;
+    v_gianhap_array GIANHAP_ARRAY;
+BEGIN
+    v_masp_array := MASP_ARRAY(18, 15);
+    v_sl_array := SL_ARRAY(20, 20);
+    v_gianhap_array := GIANHAP_ARRAY(50000000, 100000000);
+    INSERT_PHIEUNHAP(61, v_masp_array, v_sl_array, 'Phong V?', 1, to_date('15/06/2020', 'dd/MM/yyyy'), v_gianhap_array);
+END;
+
+-- Procedure t?o phi?u ki?m kê
+CREATE OR REPLACE TYPE LYDO_ARRAY is VARRAY(100) OF VARCHAR2(50);
+CREATE OR REPLACE PROCEDURE INSERT_PHIEUKK(v_makk PHIEUKK.MAKK%TYPE, v_masp_array MASP_ARRAY, v_slthuc_array SL_ARRAY, 
+                                            v_manv PHIEUKK.MANV%TYPE, v_ngaytao PHIEUKK.NGAYTAO%TYPE,
+                                            v_lydo_array LYDO_ARRAY)
+AS
+    v_slhethong SANPHAM.SLTON%TYPE;
+BEGIN
+    FOR i IN v_slthuc_array.first .. v_slthuc_array.last LOOP
+        IF (v_slthuc_array (i) <= 0) THEN
+            raise_application_error(-20010,'So luong khong hop le');
+        END IF;
+    END LOOP; 
+    INSERT INTO PHIEUKK VALUES (v_makk, v_ngaytao, v_manv);
+    FOR i IN v_masp_array.first .. v_masp_array.last LOOP
+        SELECT SLTON into v_slhethong FROM SANPHAM WHERE MASP = v_masp_array(i);
+        IF v_slhethong < v_slthuc_array(i) THEN
+            raise_application_error(-20010,'So luong thuc khong hop le');
+        END IF;
+        INSERT INTO CTPHIEUKK VALUES (v_masp_array(i), v_makk, v_slhethong, v_slthuc_array(i), v_lydo_array(i));
+--        sleep(6);
+    END LOOP;
+    COMMIT;
+END;
+
+DECLARE
+    v_masp_array MASP_ARRAY;
+    v_slthuc_array   SL_ARRAY;
+    v_lydo_array    LYDO_ARRAY;
+BEGIN
+    v_masp_array := MASP_ARRAY(18, 19);
+    v_slthuc_array := SL_ARRAY(20, 17);
+    v_lydo_array := LYDO_ARRAY('H? h?ng', 'Th?t l?c');
+    INSERT_PHIEUKK(61, v_masp_array, v_slthuc_array, 1, to_date('15/06/2020', 'dd/MM/yyyy'), v_lydo_array);
+END;
+
