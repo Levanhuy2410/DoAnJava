@@ -111,9 +111,9 @@
                               <Component id="BTQuanLySanPham" alignment="1" max="32767" attributes="0"/>
                               <Component id="BTQuanLyNhanVien" alignment="1" max="32767" attributes="0"/>
                               <Component id="BTQuanLyNhapKho" max="32767" attributes="0"/>
-                              <Component id="BTQuanLyThongTinThanhVien" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BTQuanLyThanhVien" alignment="1" max="32767" attributes="0"/>
                               <Component id="BTQuanLyHoaDon" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jButton7" alignment="1" max="32767" attributes="0"/>
+                              <Component id="BTKiemKe" alignment="1" max="32767" attributes="0"/>
                               <Component id="BTThongKe" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -144,11 +144,11 @@
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Component id="BTQuanLyHoaDon" min="-2" pref="61" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton7" min="-2" pref="61" max="-2" attributes="0"/>
+                  <Component id="BTKiemKe" min="-2" pref="61" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Component id="BTQuanLyNhanVien" min="-2" pref="61" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="BTQuanLyThongTinThanhVien" min="-2" pref="61" max="-2" attributes="0"/>
+                  <Component id="BTQuanLyThanhVien" min="-2" pref="61" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Component id="BTThongKe" min="-2" pref="61" max="-2" attributes="0"/>
                   <EmptySpace pref="175" max="32767" attributes="0"/>
@@ -233,7 +233,7 @@
             <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;center&gt;&#xa;H&#x1ec6; TH&#x1ed0;NG TH&#xd4;NG TIN KH&#xd3;A 2018&#xa;&lt;/center&gt;&#xa;&lt;center&gt;&#x110;H CNTT - &#x110;HQG TPHCM&#xa;&lt;/center&gt;&#xa;&#xa;&lt;/html&gt;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="BTQuanLyThongTinThanhVien">
+        <Component class="javax.swing.JButton" name="BTQuanLyThanhVien">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e8" green="a8" red="0" type="rgb"/>
@@ -253,7 +253,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTQuanLyThongTinThanhVienActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTQuanLyThanhVienActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BTQuanLyHoaDon">
@@ -279,7 +279,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTQuanLyHoaDonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton7">
+        <Component class="javax.swing.JButton" name="BTKiemKe">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="e8" green="a8" red="0" type="rgb"/>
@@ -299,7 +299,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTKiemKeActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BTThongKe">

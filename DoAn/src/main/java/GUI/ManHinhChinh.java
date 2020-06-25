@@ -41,7 +41,22 @@ public class ManHinhChinh extends javax.swing.JFrame {
             ChucVu.setText(nv.get(2));
             Email.setText(nv.get(3));
             SDT.setText(nv.get(4));
-            
+        }
+        // Phân quyền
+        if (nv.get(2).equals("Nhân Viên Kho")){
+            BTQuanLyNhanVien.setVisible(false);
+            BTQuanLyThanhVien.setVisible(false);
+            BTQuanLyHoaDon.setVisible(false);
+        }
+        else if (nv.get(2).equals("Nhân Viên Kế Toán")){
+            BTQuanLyNhanVien.setVisible(false);
+            BTQuanLyThanhVien.setVisible(false);
+            BTKiemKe.setVisible(false);
+        }
+        else if (nv.get(2).equals("Nhân Viên Bán Hàng")){
+            BTQuanLyNhanVien.setVisible(false);
+            BTKiemKe.setVisible(false);
+            BTQuanLyNhapKho.setVisible(false);
         }
     }
     /**
@@ -63,9 +78,9 @@ public class ManHinhChinh extends javax.swing.JFrame {
         BTQuanLySanPham = new javax.swing.JButton();
         BTQuanLyNhanVien = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        BTQuanLyThongTinThanhVien = new javax.swing.JButton();
+        BTQuanLyThanhVien = new javax.swing.JButton();
         BTQuanLyHoaDon = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        BTKiemKe = new javax.swing.JButton();
         BTThongKe = new javax.swing.JButton();
         BTReturn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -160,17 +175,17 @@ public class ManHinhChinh extends javax.swing.JFrame {
 
         jLabel2.setText("<html>\n<center>\nHỆ THỐNG THÔNG TIN KHÓA 2018\n</center>\n<center>ĐH CNTT - ĐHQG TPHCM\n</center>\n\n</html>");
 
-        BTQuanLyThongTinThanhVien.setBackground(new java.awt.Color(0, 168, 232));
-        BTQuanLyThongTinThanhVien.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        BTQuanLyThongTinThanhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-member-60.png"))); // NOI18N
-        BTQuanLyThongTinThanhVien.setText(" THÀNH VIÊN");
-        BTQuanLyThongTinThanhVien.setBorderPainted(false);
-        BTQuanLyThongTinThanhVien.setContentAreaFilled(false);
-        BTQuanLyThongTinThanhVien.setFocusPainted(false);
-        BTQuanLyThongTinThanhVien.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        BTQuanLyThongTinThanhVien.addActionListener(new java.awt.event.ActionListener() {
+        BTQuanLyThanhVien.setBackground(new java.awt.Color(0, 168, 232));
+        BTQuanLyThanhVien.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
+        BTQuanLyThanhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-member-60.png"))); // NOI18N
+        BTQuanLyThanhVien.setText(" THÀNH VIÊN");
+        BTQuanLyThanhVien.setBorderPainted(false);
+        BTQuanLyThanhVien.setContentAreaFilled(false);
+        BTQuanLyThanhVien.setFocusPainted(false);
+        BTQuanLyThanhVien.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        BTQuanLyThanhVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTQuanLyThongTinThanhVienActionPerformed(evt);
+                BTQuanLyThanhVienActionPerformed(evt);
             }
         });
 
@@ -188,17 +203,17 @@ public class ManHinhChinh extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(0, 168, 232));
-        jButton7.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-check-60.png"))); // NOI18N
-        jButton7.setText(" KIỂM KÊ      ");
-        jButton7.setBorderPainted(false);
-        jButton7.setContentAreaFilled(false);
-        jButton7.setFocusPainted(false);
-        jButton7.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        BTKiemKe.setBackground(new java.awt.Color(0, 168, 232));
+        BTKiemKe.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
+        BTKiemKe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-check-60.png"))); // NOI18N
+        BTKiemKe.setText(" KIỂM KÊ      ");
+        BTKiemKe.setBorderPainted(false);
+        BTKiemKe.setContentAreaFilled(false);
+        BTKiemKe.setFocusPainted(false);
+        BTKiemKe.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        BTKiemKe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                BTKiemKeActionPerformed(evt);
             }
         });
 
@@ -237,9 +252,9 @@ public class ManHinhChinh extends javax.swing.JFrame {
                             .addComponent(BTQuanLySanPham, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTQuanLyNhanVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTQuanLyNhapKho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BTQuanLyThongTinThanhVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTQuanLyThanhVien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTQuanLyHoaDon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BTKiemKe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BTThongKe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
@@ -263,11 +278,11 @@ public class ManHinhChinh extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(BTQuanLyHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BTKiemKe, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTQuanLyNhanVien, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BTQuanLyThongTinThanhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BTQuanLyThanhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BTThongKe, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
@@ -412,12 +427,12 @@ public class ManHinhChinh extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_BTQuanLyNhanVienActionPerformed
 
-    private void BTQuanLyThongTinThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTQuanLyThongTinThanhVienActionPerformed
+    private void BTQuanLyThanhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTQuanLyThanhVienActionPerformed
         // TODO add your handling code here:
         QuanLyThanhVien qlytv = new QuanLyThanhVien();
         qlytv.setVisible(true);
         dispose();
-    }//GEN-LAST:event_BTQuanLyThongTinThanhVienActionPerformed
+    }//GEN-LAST:event_BTQuanLyThanhVienActionPerformed
 
     private void BTQuanLyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTQuanLyHoaDonActionPerformed
         // TODO add your handling code here:
@@ -426,12 +441,12 @@ public class ManHinhChinh extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_BTQuanLyHoaDonActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void BTKiemKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTKiemKeActionPerformed
         // TODO add your handling code here:
         QuanLyKiemKe qlykk = new QuanLyKiemKe();
         qlykk.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_BTKiemKeActionPerformed
 
     private void BTThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThongKeActionPerformed
         // TODO add your handling code here:
@@ -481,11 +496,12 @@ public class ManHinhChinh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BTKiemKe;
     private javax.swing.JButton BTQuanLyHoaDon;
     private javax.swing.JButton BTQuanLyNhanVien;
     private javax.swing.JButton BTQuanLyNhapKho;
     private javax.swing.JButton BTQuanLySanPham;
-    private javax.swing.JButton BTQuanLyThongTinThanhVien;
+    private javax.swing.JButton BTQuanLyThanhVien;
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThongKe;
     public static javax.swing.JLabel ChucVu;
@@ -496,7 +512,6 @@ public class ManHinhChinh extends javax.swing.JFrame {
     private javax.swing.JLabel TongNhanVien;
     private javax.swing.JLabel TongThanhVien;
     private javax.swing.JLabel TongTonKho;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
