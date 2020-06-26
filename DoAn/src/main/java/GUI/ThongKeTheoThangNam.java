@@ -148,7 +148,7 @@ public class ThongKeTheoThangNam extends javax.swing.JFrame {
         else {
             try {
                 Map<String, Object> parameters = new HashMap<String, Object>();
-                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\DoanhThuTheoThang.jrxml");
+                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\cutui\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\DoanhThuTheoThang.jrxml");
                 parameters.put("Thang", THANG);
                 parameters.put("Nam", NAM);
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
@@ -170,7 +170,7 @@ public class ThongKeTheoThangNam extends javax.swing.JFrame {
         else {
             try {
                 Map<String, Object> parameters = new HashMap<String, Object>();
-                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\DoanhThuTheoNam.jrxml");
+                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\cutui\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\DoanhThuTheoNam.jrxml");
                 
                 parameters.put("Nam", NAM);
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);

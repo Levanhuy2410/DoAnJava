@@ -92,10 +92,6 @@ public class ManHinhChinh extends javax.swing.JFrame {
         Email = new javax.swing.JLabel();
         SDT = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        TongHoaDon = new javax.swing.JLabel();
-        TongNhanVien = new javax.swing.JLabel();
-        TongTonKho = new javax.swing.JLabel();
-        TongThanhVien = new javax.swing.JLabel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -296,7 +292,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-male-user-100.png"))); // NOI18N
 
-        TenNV.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        TenNV.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         TenNV.setText("TÊN NHÂN VIÊN...");
 
         timelable.setBackground(new java.awt.Color(0, 0, 0));
@@ -304,18 +300,18 @@ public class ManHinhChinh extends javax.swing.JFrame {
         timelable.setText("Timelable");
 
         jLabel5.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 2, 28)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 2, 32)); // NOI18N
         jLabel5.setText("WELCOME BACK...");
 
-        ChucVu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ChucVu.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         ChucVu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChucVu.setText("CHỨC VỤ");
 
-        Email.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Email.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         Email.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Email.setText("EMAIL");
 
-        SDT.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        SDT.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         SDT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SDT.setText("SĐT");
 
@@ -325,18 +321,18 @@ public class ManHinhChinh extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(ChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ChucVu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(TenNV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(TenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGap(273, 273, 273)
                                 .addComponent(Email)))
@@ -356,52 +352,23 @@ public class ManHinhChinh extends javax.swing.JFrame {
                         .addComponent(timelable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(2, 2, 2)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
+                        .addGap(54, 54, 54)
                         .addComponent(TenNV)))
-                .addGap(27, 27, 27)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Email)
                     .addComponent(ChucVu)
+                    .addComponent(Email)
                     .addComponent(SDT))
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 960, 220));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 960, 340));
 
         jPanel4.setBackground(new java.awt.Color(250, 250, 250));
         jPanel4.setLayout(new java.awt.GridLayout(2, 2, 15, 15));
-
-        TongHoaDon.setBackground(new java.awt.Color(255, 255, 255));
-        TongHoaDon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TongHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-paid-bill-100.png"))); // NOI18N
-        TongHoaDon.setText("<html> <br> TỔNG SỐ HÓA ĐƠN </html>");
-        TongHoaDon.setOpaque(true);
-        jPanel4.add(TongHoaDon);
-
-        TongNhanVien.setBackground(new java.awt.Color(255, 255, 255));
-        TongNhanVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TongNhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-staff-100.png"))); // NOI18N
-        TongNhanVien.setText("TỔNG SỐ NHÂN VIÊN TRONG CỬA HÀNG");
-        TongNhanVien.setOpaque(true);
-        jPanel4.add(TongNhanVien);
-
-        TongTonKho.setBackground(new java.awt.Color(255, 255, 255));
-        TongTonKho.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TongTonKho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-in-inventory-100.png"))); // NOI18N
-        TongTonKho.setText("TỔNG SỐ SẢN PHẨM TỒN KHO");
-        TongTonKho.setOpaque(true);
-        jPanel4.add(TongTonKho);
-
-        TongThanhVien.setBackground(new java.awt.Color(255, 255, 255));
-        TongThanhVien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TongThanhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-member-100.png"))); // NOI18N
-        TongThanhVien.setText("TỔNG SỐ THÀNH VIÊN");
-        TongThanhVien.setOpaque(true);
-        jPanel4.add(TongThanhVien);
-
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 970, 570));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 960, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -508,10 +475,6 @@ public class ManHinhChinh extends javax.swing.JFrame {
     private javax.swing.JLabel Email;
     private javax.swing.JLabel SDT;
     public static javax.swing.JLabel TenNV;
-    private javax.swing.JLabel TongHoaDon;
-    private javax.swing.JLabel TongNhanVien;
-    private javax.swing.JLabel TongThanhVien;
-    private javax.swing.JLabel TongTonKho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

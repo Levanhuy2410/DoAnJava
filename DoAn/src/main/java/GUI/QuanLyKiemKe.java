@@ -247,7 +247,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             if (selected != -1){
                 int makk = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
                 Map<String, Object> parameters = new HashMap<String, Object>();
-                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\PhieuKiemKe.jrxml");
+                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\cutui\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\PhieuKiemKe.jrxml");
                 parameters.put("MAKK", makk);
 
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);

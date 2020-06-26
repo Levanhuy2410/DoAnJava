@@ -162,7 +162,7 @@ public class ThongKe extends javax.swing.JFrame {
     private void BTTop3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTTop3ActionPerformed
         // TODO add your handling code here:
         try {
-                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\Top3SanPham.jrxml");
+                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\cutui\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\Top3SanPham.jrxml");
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
                 JasperPrint jprint = JasperFillManager.fillReport(jreport, null, JdbcConnection.getConnection());
                 JasperViewer.viewReport(jprint, false);

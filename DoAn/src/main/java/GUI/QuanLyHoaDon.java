@@ -235,12 +235,11 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                 int mahd = Integer.parseInt(tableHoaDon.getValueAt(selected, 0).toString());
 
                 Map<String, Object> parameters = new HashMap<String, Object>();
-                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\HoaDon.jrxml");
+                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\cutui\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\HoaDon.jrxml");
                 parameters.put("MAHD", mahd);
 
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
                 JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
-
                 JasperViewer.viewReport(jprint, false);
             }
             

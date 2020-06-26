@@ -252,7 +252,7 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
             if (selected != -1){
                 int manh = Integer.parseInt(tablePhieuNhapHang.getValueAt(selected, 0).toString());
                 Map<String, Object> parameters = new HashMap<String, Object>();
-                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\USER\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\PhieuNhapHang.jrxml");
+                JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\cutui\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\PhieuNhapHang.jrxml");
                 parameters.put("MANH", manh);
 
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
