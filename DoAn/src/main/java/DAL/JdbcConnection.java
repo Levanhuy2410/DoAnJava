@@ -39,7 +39,8 @@ public class JdbcConnection {
     public static Connection getConnection() {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            return DriverManager.getConnection(JdbcConnection.url, JdbcConnection.user, JdbcConnection.password);
+            return DriverManager.getConnection(JdbcConnection.url, JdbcConnection.user, 
+                    JdbcConnection.password);
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
         }

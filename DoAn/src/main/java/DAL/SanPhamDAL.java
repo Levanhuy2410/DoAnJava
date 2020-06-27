@@ -18,16 +18,19 @@ import java.util.List;
  */
 public class SanPhamDAL {
 
-    private final Connection connection = JdbcConnection.getConnection();
+    private static final Connection connection = JdbcConnection.getConnection();
+
     // Hàm get all sản phẩm
     public static List<SanPham> getAllSanPham() {
+        
         String query = "SELECT * FROM SANPHAM S JOIN LOAISP L on S.MALSP = L.MALSP";
         List<SanPham> listSanPham = new ArrayList<>();
         ArrayList<Object> arr = new ArrayList<>();
         ResultSet rs = JdbcConnection.executeQuery(query, arr);
         try {
             while (rs.next()) {
-                SanPham sanpham = new SanPham(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getString(10));
+                SanPham sanpham = new SanPham(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4), 
+                        rs.getString(5), rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getString(10));
                 listSanPham.add(sanpham);
             }
         } catch (SQLException ex) {
@@ -35,6 +38,7 @@ public class SanPhamDAL {
         }
         return listSanPham;
     }
+
     // Hàm thêm sản phẩm
     public static boolean insertSanPham(SanPham sanpham) {
         String query = "INSERT INTO SANPHAM VALUES(ID_MASP.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
@@ -65,6 +69,7 @@ public class SanPhamDAL {
 //        return maLSP;
 //    }
     // Hàm xóa sản phẩm
+
     public static boolean deleteSanPham(int idSanPham) {
         String query = "DELETE FROM SANPHAM WHERE masp = ?";
         ArrayList<Object> arr = new ArrayList<>();
@@ -84,15 +89,16 @@ public class SanPhamDAL {
         arr.add(sanpham.maSp);
         return JdbcConnection.executeUpdate(query, arr);
     }
+
     // Hàm update số lượng tồn sau khi kiểm kê
-    public static boolean updateSoLuongTon(int slTon, int maSP){
+    public static boolean updateSoLuongTon(int slTon, int maSP) {
         String query = "UPDATE SANPHAM SET SLTON = ? WHERE MASP = ?";
         ArrayList<Object> arr = new ArrayList<>();
         arr.add(slTon);
         arr.add(maSP);
         return JdbcConnection.executeUpdate(query, arr);
-    }   
-            
+    }
+
 //  public static void main(String[] args) {
 //    SanPham a = new SanPham(23, "COng update", 14000, 36, "CONGCOMPANY", 1, "afs", 2, "RAM DDR4");
 //    System.out.println(SanPhamDAL.capnhatSanPham(a));

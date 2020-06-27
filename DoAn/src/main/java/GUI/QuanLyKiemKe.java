@@ -10,9 +10,14 @@ import DAL.JdbcConnection;
 import DTO.KiemKe;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -49,6 +54,12 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             model.addRow(row);
         }
         tableKiemKe.setModel(model);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+        tableKiemKe.setRowSorter(sorter);
+
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
+        sorter.setSortKeys(sortKeys);
     }
 
     /**

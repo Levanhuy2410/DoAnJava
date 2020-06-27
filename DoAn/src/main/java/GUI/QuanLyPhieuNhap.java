@@ -15,7 +15,10 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -211,6 +214,12 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
       Object[] row = { phieunhap.maNh, phieunhap.ngayNh, phieunhap.nhaCc };
       model.addRow(row);
     }
+    TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+    tablePhieuNhapHang.setRowSorter(sorter);
+
+    List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+    sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
+    sorter.setSortKeys(sortKeys);
   }
     private void BTThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThemActionPerformed
       // TODO add your handling code here:

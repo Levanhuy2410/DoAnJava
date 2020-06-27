@@ -19,6 +19,9 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -27,103 +30,111 @@ import javax.swing.table.TableRowSorter;
  */
 public class HoaDonThem extends javax.swing.JFrame {
 
-  /**
-   * Creates new form ThemSanPham
-   */
-  private boolean clicked = false;
-  public int stt = 0;
-  private int tongTien;
+    /**
+     * Creates new form ThemSanPham
+     */
+    private boolean clicked = false;
+    public int stt = 0;
+    private int tongTien;
 
-  public HoaDonThem() {
-    initComponents();
-    loadAllSanPham();
-    loadAllThanhVien();
-  }
-
-  public void resetLayout() {
-    DefaultTableModel CTHDmodel = (DefaultTableModel) tableCTHD.getModel();
-    while (tableCTHD.getRowCount() > 0) {
-      CTHDmodel.removeRow(0);
-    }
-    soluongTxt.setText("");
-  }
-
-  public void loadAllThanhVien() {
-    DefaultTableModel Thanhvienmodel = (DefaultTableModel) tableThanhvien.getModel();
-    ArrayList<ThanhVien> listThanhvien = BLL.ThanhVienBLL.getAllThanhVien();
-    while (tableThanhvien.getRowCount() > 0) {
-      Thanhvienmodel.removeRow(0);
-    }
-    for (ThanhVien thanhvien : listThanhvien) {
-      Object[] row = {thanhvien.maTV, thanhvien.tenTV};
-      Thanhvienmodel.addRow(row);
-    }
-  }
-
-  public void loadAllSanPham() {
-    DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
-    while (tableSanPham.getRowCount() > 0) {
-      model.removeRow(0);
+    public HoaDonThem() {
+        initComponents();
+        loadAllSanPham();
+        loadAllThanhVien();
     }
 
-    List<SanPham> listSanPham = SanPhamBLL.getAllSanPham();
-    for (SanPham sp : listSanPham) {
-      Object[] row = {sp.maSp, sp.tenSp, sp.slTon, sp.giaBan};
-      model.addRow(row);
+    public void resetLayout() {
+        DefaultTableModel CTHDmodel = (DefaultTableModel) tableCTHD.getModel();
+        while (tableCTHD.getRowCount() > 0) {
+            CTHDmodel.removeRow(0);
+        }
+        soluongTxt.setText("");
     }
-    tableSanPham.setModel(model);
-  }
 
-  public int getRowbyId(String id) {
-    for (int i = 0; i < tableCTHD.getRowCount(); i++) {
-      if (Integer.parseInt(id) == Integer.parseInt(tableCTHD.getValueAt(i, 1).toString())) {
-        return i;
-      }
+    public void loadAllThanhVien() {
+        DefaultTableModel Thanhvienmodel = (DefaultTableModel) tableThanhvien.getModel();
+        ArrayList<ThanhVien> listThanhvien = BLL.ThanhVienBLL.getAllThanhVien();
+        while (tableThanhvien.getRowCount() > 0) {
+            Thanhvienmodel.removeRow(0);
+        }
+        for (ThanhVien thanhvien : listThanhvien) {
+            Object[] row = {thanhvien.maTV, thanhvien.tenTV};
+            Thanhvienmodel.addRow(row);
+        }
     }
-    return -1;
-  }
 
-  public void tinhTongtien() {
-    int tongtien = 0;
-    Locale localeEN = new Locale("en", "EN");
-    NumberFormat en = NumberFormat.getInstance(localeEN);
-    for (int i = 0; i < tableCTHD.getRowCount(); i++) {
-      tongtien += (int) tableCTHD.getValueAt(i, 3) * (int) tableCTHD.getValueAt(i, 4);
+    public void loadAllSanPham() {
+        DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
+        while (tableSanPham.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+
+        List<SanPham> listSanPham = SanPhamBLL.getAllSanPham();
+        for (SanPham sp : listSanPham) {
+            Object[] row = {sp.maSp, sp.tenSp, sp.slTon, sp.giaBan};
+            model.addRow(row);
+        }
+        tableSanPham.setModel(model);
+
+        // sort DESC
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+        tableSanPham.setRowSorter(sorter);
+
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
+        sorter.setSortKeys(sortKeys);
     }
-    if (memberType.equals("Standard")) {
-      tongtien = (int) (tongtien * 0.95);
-    } else if (memberType.equals("Vip")) {
-      tongtien = (int) (tongtien * 0.9);
+
+    public int getRowbyId(String id) {
+        for (int i = 0; i < tableCTHD.getRowCount(); i++) {
+            if (Integer.parseInt(id) == Integer.parseInt(tableCTHD.getValueAt(i, 1).toString())) {
+                return i;
+            }
+        }
+        return -1;
     }
-    this.tongTien = tongtien;
-    tongtienTxt.setText(en.format(tongtien));
-    return;
-  }
 
-  public void addRowCTHD(String masp, String tensp, int soluong, int giaban) {
-    int tienHientai;
-    int thanhtien = 0;
-    if (getRowbyId(masp) == -1) {
-      this.stt++;
-      thanhtien = giaban * soluong;
-      Object[] row = {this.stt, masp, tensp, soluong, giaban, thanhtien};
-      DefaultTableModel model = (DefaultTableModel) tableCTHD.getModel();
-      model.addRow(row);
-    } else {
-      int existRow = getRowbyId(masp);
-      int slHientai = (int) tableCTHD.getValueAt(existRow, 3);
-      tableCTHD.setValueAt(slHientai + soluong, existRow, 3);
+    public void tinhTongtien() {
+        int tongtien = 0;
+        Locale localeEN = new Locale("en", "EN");
+        NumberFormat en = NumberFormat.getInstance(localeEN);
+        for (int i = 0; i < tableCTHD.getRowCount(); i++) {
+            tongtien += (int) tableCTHD.getValueAt(i, 3) * (int) tableCTHD.getValueAt(i, 4);
+        }
+        if (memberType.equals("Standard")) {
+            tongtien = (int) (tongtien * 0.95);
+        } else if (memberType.equals("Vip")) {
+            tongtien = (int) (tongtien * 0.9);
+        }
+        this.tongTien = tongtien;
+        tongtienTxt.setText(en.format(tongtien));
+        return;
     }
-    tinhTongtien();
 
-  }
+    public void addRowCTHD(String masp, String tensp, int soluong, int giaban) {
+        int tienHientai;
+        int thanhtien = 0;
+        if (getRowbyId(masp) == -1) {
+            this.stt++;
+            thanhtien = giaban * soluong;
+            Object[] row = {this.stt, masp, tensp, soluong, giaban, thanhtien};
+            DefaultTableModel model = (DefaultTableModel) tableCTHD.getModel();
+            model.addRow(row);
+        } else {
+            int existRow = getRowbyId(masp);
+            int slHientai = (int) tableCTHD.getValueAt(existRow, 3);
+            tableCTHD.setValueAt(slHientai + soluong, existRow, 3);
+        }
+        tinhTongtien();
 
-  /**
-   * This method is called from within the constructor to initialize the form.
-   * WARNING: Do NOT modify this code. The content of this method is always
-   * regenerated by the Form Editor.
-   */
-  @SuppressWarnings("unchecked")
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
@@ -465,163 +476,163 @@ public class HoaDonThem extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemsanphamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemsanphamActionPerformed
-      // TODO add your handling code here:
-      try {
-        int selected = tableSanPham.getSelectedRow();
-        if (selected == -1) {
-          JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 sản phẩm", "Lỗi", JOptionPane.ERROR_MESSAGE);
-          return;
+        // TODO add your handling code here:
+        try {
+            int selected = tableSanPham.getSelectedRow();
+            if (selected == -1) {
+                JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 sản phẩm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String masp = tableSanPham.getValueAt(selected, 0).toString().trim();
+            String tensp = tableSanPham.getValueAt(selected, 1).toString().trim();
+            int giaban = Integer.parseInt(tableSanPham.getValueAt(selected, 3).toString());
+            int soluong = Integer.parseInt(soluongTxt.getText().toString().trim());
+            if ((int) tableSanPham.getValueAt(selected, 2) < soluong) {
+                JOptionPane.showMessageDialog(rootPane, "Số lượng không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            addRowCTHD(masp, tensp, soluong, giaban);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "Thông tin không hộp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        String masp = tableSanPham.getValueAt(selected, 0).toString().trim();
-        String tensp = tableSanPham.getValueAt(selected, 1).toString().trim();
-        int giaban = Integer.parseInt(tableSanPham.getValueAt(selected, 3).toString());
-        int soluong = Integer.parseInt(soluongTxt.getText().toString().trim());
-        if ((int) tableSanPham.getValueAt(selected, 2) < soluong) {
-          JOptionPane.showMessageDialog(rootPane, "Số lượng không hợp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-          return;
-        }
-        addRowCTHD(masp, tensp, soluong, giaban);
-      } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(rootPane, "Thông tin không hộp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-      }
 
     }//GEN-LAST:event_btnThemsanphamActionPerformed
 
     private void BTThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTThoatActionPerformed
-      // TODO add your handling code here:
-      dispose();
+        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_BTThoatActionPerformed
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-      // TODO add your handling code here:
-      try {
-        if (tableCTHD.getRowCount() == 0) {
-          JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn ít nhất 1 sản phẩm", "Chưa có sản phẩm", JOptionPane.ERROR_MESSAGE);
-          return;
+        // TODO add your handling code here:
+        try {
+            if (tableCTHD.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn ít nhất 1 sản phẩm", "Chưa có sản phẩm", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int maKh;
+            if (mathanhvienTxt.getText().isEmpty()) {
+                maKh = 0;
+            } else {
+                maKh = Integer.parseInt(mathanhvienTxt.getText());
+            }
+            System.out.println(maKh);
+            int maNv = Login.maNv;
+            List<CTHoaDon> cthoadon = new ArrayList<>();
+            for (int i = 0; i < tableCTHD.getRowCount(); i++) {
+                int maSp = Integer.parseInt(tableCTHD.getValueAt(i, 1).toString());
+                int soluong = (int) tableCTHD.getValueAt(i, 3);
+                cthoadon.add(new CTHoaDon(maSp, soluong));
+            }
+            HoaDonBLL.insertHoaDon(maKh, maNv, cthoadon);
+            tongtienTxt.setText("0");
+            QuanLyHoaDon.loadAllHoaDon();
+            resetLayout();
+            loadAllSanPham();
+            JOptionPane.showMessageDialog(rootPane, "Tạo hóa đơn thành công");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(rootPane, "Thông tin không hộp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        int maKh;
-        if (mathanhvienTxt.getText().isEmpty()) {
-          maKh = 0;
-        } else {
-          maKh = Integer.parseInt(mathanhvienTxt.getText());
-        }
-          System.out.println(maKh);
-        int maNv = Login.maNv;
-        List<CTHoaDon> cthoadon = new ArrayList<>();
-        for (int i = 0; i < tableCTHD.getRowCount(); i++) {
-          int maSp = Integer.parseInt(tableCTHD.getValueAt(i, 1).toString());
-          int soluong = (int) tableCTHD.getValueAt(i, 3);
-          cthoadon.add(new CTHoaDon(maSp, soluong));
-        }
-        HoaDonBLL.insertHoaDon(maKh, maNv, cthoadon);
-        tongtienTxt.setText("0");
-        QuanLyHoaDon.loadAllHoaDon();
-        resetLayout();
-        loadAllSanPham();
-        JOptionPane.showMessageDialog(rootPane, "Tạo hóa đơn thành công");
-      } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(rootPane, "Thông tin không hộp lệ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-      }
 
     }//GEN-LAST:event_btnLuuActionPerformed
 
   private void FilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FilterKeyReleased
-    // TODO add your handling code here:       
-    DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
-    String query = Filter.getText();
-    TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
-    tableSanPham.setRowSorter(tr);
-    tr.setRowFilter(RowFilter.regexFilter(query));
+      // TODO add your handling code here:       
+      DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
+      String query = Filter.getText();
+      TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+      tableSanPham.setRowSorter(tr);
+      tr.setRowFilter(RowFilter.regexFilter(query));
   }//GEN-LAST:event_FilterKeyReleased
 
   private void memberFilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_memberFilterKeyReleased
-    // TODO add your handling code here:
-    DefaultTableModel model = (DefaultTableModel) tableThanhvien.getModel();
-    String query = memberFilter.getText();
-    TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
-    tableThanhvien.setRowSorter(tr);
-    tr.setRowFilter(RowFilter.regexFilter(query));
+      // TODO add your handling code here:
+      DefaultTableModel model = (DefaultTableModel) tableThanhvien.getModel();
+      String query = memberFilter.getText();
+      TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+      tableThanhvien.setRowSorter(tr);
+      tr.setRowFilter(RowFilter.regexFilter(query));
   }//GEN-LAST:event_memberFilterKeyReleased
 
   private void tableSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableSanPhamMouseClicked
-    // TODO add your handling code here:
-    int selected = tableSanPham.getSelectedRow();
-    if (selected != -1) {
-      maspTxt.setText(tableSanPham.getValueAt(selected, 0).toString());
-    }
+      // TODO add your handling code here:
+      int selected = tableSanPham.getSelectedRow();
+      if (selected != -1) {
+          maspTxt.setText(tableSanPham.getValueAt(selected, 0).toString());
+      }
   }//GEN-LAST:event_tableSanPhamMouseClicked
 
   private void tableCTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCTHDMouseClicked
-    // TODO add your handling code here:
+      // TODO add your handling code here:
   }//GEN-LAST:event_tableCTHDMouseClicked
 
   private void tableThanhvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableThanhvienMouseClicked
-    // TODO add your handling code here:
-    int selected = tableThanhvien.getSelectedRow();
-    String maTv = tableThanhvien.getValueAt(selected, 0).toString();
-    if (selected != -1) {
-      mathanhvienTxt.setText(maTv);
-    }
-    ThanhVien tv = ThanhVienBLL.getOneThanhVien(maTv);
-    memberType = (tv.diemTV >= 5000) ? tv.loaiTV : "pre-member";
-    tinhTongtien();
+      // TODO add your handling code here:
+      int selected = tableThanhvien.getSelectedRow();
+      String maTv = tableThanhvien.getValueAt(selected, 0).toString();
+      if (selected != -1) {
+          mathanhvienTxt.setText(maTv);
+      }
+      ThanhVien tv = ThanhVienBLL.getOneThanhVien(maTv);
+      memberType = (tv.diemTV >= 5000) ? tv.loaiTV : "pre-member";
+      tinhTongtien();
   }//GEN-LAST:event_tableThanhvienMouseClicked
 
   private void xoaCTHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaCTHDActionPerformed
-    // TODO add your handling code here:
-    // TODO add your handling code here:
-    DefaultTableModel model = (DefaultTableModel) tableCTHD.getModel();
-    int[] selected = tableCTHD.getSelectedRows();
-    int del = 1;
-    for (int i = 0; i < selected.length; i++) {
-      model.removeRow(selected[i]);
-      if (i < selected.length - 1) {
-        selected[i + 1] = selected[i + 1] - del;
-        del = del + 1;
+      // TODO add your handling code here:
+      // TODO add your handling code here:
+      DefaultTableModel model = (DefaultTableModel) tableCTHD.getModel();
+      int[] selected = tableCTHD.getSelectedRows();
+      int del = 1;
+      for (int i = 0; i < selected.length; i++) {
+          model.removeRow(selected[i]);
+          if (i < selected.length - 1) {
+              selected[i + 1] = selected[i + 1] - del;
+              del = del + 1;
+          }
       }
-    }
-    tinhTongtien();
-    // Xuất hiện thông báo xóa thành công
-    JOptionPane.showMessageDialog(rootPane, "Xóa chi tiết hóa đơn thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
+      tinhTongtien();
+      // Xuất hiện thông báo xóa thành công
+      JOptionPane.showMessageDialog(rootPane, "Xóa chi tiết hóa đơn thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
   }//GEN-LAST:event_xoaCTHDActionPerformed
 
-  /**
-   * @param args the command line arguments
-   */
-  public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+    /**
+     * @param args the command line arguments
      */
-    try {
-      for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-        if ("Nimbus".equals(info.getName())) {
-          javax.swing.UIManager.setLookAndFeel(info.getClassName());
-          break;
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(HoaDonThem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(HoaDonThem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(HoaDonThem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(HoaDonThem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-      }
-    } catch (ClassNotFoundException ex) {
-      java.util.logging.Logger.getLogger(HoaDonThem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-      java.util.logging.Logger.getLogger(HoaDonThem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-      java.util.logging.Logger.getLogger(HoaDonThem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-      java.util.logging.Logger.getLogger(HoaDonThem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
-    //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        new HoaDonThem().setVisible(true);
-      }
-    });
-  }
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new HoaDonThem().setVisible(true);
+            }
+        });
+    }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton BTThoat;

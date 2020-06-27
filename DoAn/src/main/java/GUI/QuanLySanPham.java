@@ -8,9 +8,14 @@ package GUI;
 import BLL.SanPhamBLL;
 import DTO.SanPham;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -38,6 +43,12 @@ public class QuanLySanPham extends javax.swing.JFrame {
             model.addRow(row);
         }
         tableSanPham.setModel(model);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+        tableSanPham.setRowSorter(sorter);
+
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
+        sorter.setSortKeys(sortKeys);
     }
 
     /**

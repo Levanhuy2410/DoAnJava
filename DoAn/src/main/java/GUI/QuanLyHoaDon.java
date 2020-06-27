@@ -8,12 +8,16 @@ package GUI;
 import BLL.HoaDonBLL;
 import DAL.JdbcConnection;
 import DTO.HoaDon;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -36,18 +40,27 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         initComponents();
         loadAllHoaDon();
     }
+
     public static void loadAllHoaDon() {
-      DefaultTableModel model = (DefaultTableModel) tableHoaDon.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableHoaDon.getModel();
         while (tableHoaDon.getRowCount() > 0) {
             model.removeRow(0);
         }
         List<HoaDon> listHoaDon = HoaDonBLL.getAllHoaDon();
         for (HoaDon hd : listHoaDon) {
-          Object[] row = { hd.maHd, hd.ngayHd, hd.triGia, hd.tenKh, hd.tenNv };
-          model.addRow(row);
+            Object[] row = {hd.maHd, hd.ngayHd, hd.triGia, hd.tenKh, hd.tenNv};
+            model.addRow(row);
         }
         tableHoaDon.setModel(model);
+        // sort DESC
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+        tableHoaDon.setRowSorter(sorter);
+
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
+        sorter.setSortKeys(sortKeys);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -231,7 +244,7 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
         // TODO add your handling code here
         try {
             int selected = tableHoaDon.getSelectedRow();
-            if (selected != -1){
+            if (selected != -1) {
                 int mahd = Integer.parseInt(tableHoaDon.getValueAt(selected, 0).toString());
 
                 Map<String, Object> parameters = new HashMap<String, Object>();
@@ -242,41 +255,42 @@ public class QuanLyHoaDon extends javax.swing.JFrame {
                 JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
                 JasperViewer.viewReport(jprint, false);
             }
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
     }//GEN-LAST:event_BTInHoaDonActionPerformed
 
   private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-    // TODO add your handling code here:
-    int selectedRow = tableHoaDon.getSelectedRow();
-    System.out.println(selectedRow);
-    if (selectedRow < 0) {
-      JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 dòng", "Lỗi", JOptionPane.ERROR_MESSAGE);
-      return;
-    }
-    int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
-    if (reply == JOptionPane.YES_OPTION) {
-      int maHd = (int) tableHoaDon.getValueAt(selectedRow, 0);
-      boolean result = HoaDonBLL.deleteHoaDon(maHd);
-      if (result) {
-        QuanLyHoaDon.loadAllHoaDon();
-        JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+      // TODO add your handling code here:
+      int selectedRow = tableHoaDon.getSelectedRow();
+      System.out.println(selectedRow);
+      if (selectedRow < 0) {
+          JOptionPane.showMessageDialog(rootPane, "Vui lòng chọn 1 dòng", "Lỗi", JOptionPane.ERROR_MESSAGE);
+          return;
       }
-      else JOptionPane.showMessageDialog(rootPane, "Xóa lỗi, thử lại sau", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    }
+      int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
+      if (reply == JOptionPane.YES_OPTION) {
+          int maHd = (int) tableHoaDon.getValueAt(selectedRow, 0);
+          boolean result = HoaDonBLL.deleteHoaDon(maHd);
+          if (result) {
+              QuanLyHoaDon.loadAllHoaDon();
+              JOptionPane.showMessageDialog(rootPane, "Xóa thành công !");
+          } else {
+              JOptionPane.showMessageDialog(rootPane, "Xóa lỗi, thử lại sau", "Lỗi", JOptionPane.ERROR_MESSAGE);
+          }
+      }
   }//GEN-LAST:event_btnDeleteActionPerformed
 
   private void FilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FilterKeyReleased
-    // TODO add your handling code here:
-    tableHoaDon.getSelectionModel().clearSelection();
-    DefaultTableModel model = (DefaultTableModel) tableHoaDon.getModel();
-    String query = Filter.getText();
-    TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
-    tableHoaDon.setRowSorter(tr);
-    tr.setRowFilter(RowFilter.regexFilter(query));
+      // TODO add your handling code here:
+      tableHoaDon.getSelectionModel().clearSelection();
+      DefaultTableModel model = (DefaultTableModel) tableHoaDon.getModel();
+      String query = Filter.getText();
+      TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+      tableHoaDon.setRowSorter(tr);
+      tr.setRowFilter(RowFilter.regexFilter(query));
   }//GEN-LAST:event_FilterKeyReleased
 
     /**
