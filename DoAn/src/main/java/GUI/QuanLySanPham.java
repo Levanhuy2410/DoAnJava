@@ -283,7 +283,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.PLAIN_MESSAGE);
               return;
           }
-          JOptionPane.showMessageDialog(rootPane, "Xóa thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+          JOptionPane.showMessageDialog(rootPane, "Xóa thất bại, sản phẩm tồn tại ở một hóa đơn nào đó", "Lỗi", JOptionPane.ERROR_MESSAGE);
       }
 
   }//GEN-LAST:event_btnXoaActionPerformed

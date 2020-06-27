@@ -6,6 +6,9 @@
 package Main;
 
 //import BLL.LoaiSpBLL;
+
+import GUI.Login;
+
 //import DTO.LoaiSP;
 //import GUI.Login;
 //import java.sql.*;
@@ -17,7 +20,7 @@ package Main;
 // */
 public class Main {
   public static void main(String[] args) {
-    //    Login loginFrame = new Login();
-    //    loginFrame.setVisible(true);
+        Login loginFrame = new Login();
+        loginFrame.setVisible(true);
   }
 }

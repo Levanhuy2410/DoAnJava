@@ -79,6 +79,7 @@ public class NhanVienDAL {
 //    }
     // Ham` xoa' nhan vien
     public boolean deleteNhanVien(String MaNV){
+        System.out.println(MaNV);
         boolean result = false;
         try {
             String query = "DELETE FROM NHANVIEN WHERE MANV ='" + MaNV + "'";

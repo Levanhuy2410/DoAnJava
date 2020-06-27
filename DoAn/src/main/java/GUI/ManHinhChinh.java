@@ -115,7 +115,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(234, 234, 234)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
                 .addGap(234, 234, 234))
         );
         jPanel1Layout.setVerticalGroup(
@@ -123,7 +123,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 0, 960, 140));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 0, 1000, 140));
 
         jPanel2.setBackground(new java.awt.Color(0, 168, 232));
 
@@ -332,7 +332,7 @@ public class ManHinhChinh extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(TenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE))
+                                .addComponent(TenNV, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGap(273, 273, 273)
                                 .addComponent(Email)))
@@ -364,11 +364,11 @@ public class ManHinhChinh extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 960, 340));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 1000, 340));
 
         jPanel4.setBackground(new java.awt.Color(250, 250, 250));
         jPanel4.setLayout(new java.awt.GridLayout(2, 2, 15, 15));
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 960, 450));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 1000, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

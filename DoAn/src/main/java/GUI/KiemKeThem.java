@@ -430,10 +430,10 @@ public class KiemKeThem extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selected = tableSanPham.getSelectedRow();
         if (selected != -1) {
-            maSP.setText(String.valueOf(tableSanPham.getModel().getValueAt(selected, 0)));
-            tenSP.setText(String.valueOf(tableSanPham.getModel().getValueAt(selected, 1)));
-            slHeThong.setText(String.valueOf(tableSanPham.getModel().getValueAt(selected, 2)));
-            loaiSP.setText(String.valueOf(tableSanPham.getModel().getValueAt(selected, 3)));
+            maSP.setText(String.valueOf(tableSanPham.getValueAt(selected, 0)));
+            tenSP.setText(String.valueOf(tableSanPham.getValueAt(selected, 1)));
+            slHeThong.setText(String.valueOf(tableSanPham.getValueAt(selected, 2)));
+            loaiSP.setText(String.valueOf(tableSanPham.getValueAt(selected, 3)));
         }
     }//GEN-LAST:event_tableSanPhamMouseClicked
 

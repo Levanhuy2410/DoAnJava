@@ -145,7 +145,15 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             new String [] {
                 "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê", "Tên Nhân Viên Lập"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tableKiemKe);
         tableKiemKe.getAccessibleContext().setAccessibleName("");
 
@@ -243,9 +251,8 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             } else {
                 int MaKK = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
                 KiemKeBLL.deleteKiemKe(MaKK);
-                model.removeRow(selected);
+                loadAllKiemKe();
             }
-            tableKiemKe.setModel(model);
             // Xuất hiện thông báo xóa thành công
             JOptionPane.showMessageDialog(rootPane, "Xóa phiếu kiểm kê thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         }

@@ -8,9 +8,13 @@ package GUI;
 import DTO.ThanhVien;
 import BLL.ThanhVienBLL;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -26,11 +30,11 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
      */
     public QuanLyThanhVien() {
         initComponents();
-        this.TableThongTinThanhVien();
+        this.loadAllThanhVien();
     }
     
     // Load all thành viên
-    public void TableThongTinThanhVien() {
+    public void loadAllThanhVien() {
         DefaultTableModel model = (DefaultTableModel) JTableThanhVien.getModel();
         while (JTableThanhVien.getRowCount() > 0) {
             model.removeRow(0);
@@ -49,6 +53,13 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
             model.addRow(row);
         }
         JTableThanhVien.setModel(model);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+        JTableThanhVien.setRowSorter(sorter);
+
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
+        sorter.setSortKeys(sortKeys);
     }
 
     // Add 1 row thành viên
@@ -160,7 +171,15 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
             new String [] {
                 "Mã Thành Viên", "Tên Thành Viên", "Loại Thành Viên", "SĐT", "Email", "Điểm Thành Viên"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(JTableThanhVien);
 
         Filter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -280,20 +299,21 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
 
     private void BTXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXoaActionPerformed
         // TODO add your handling code here:
+        
         int reply = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa dòng này không", "Xóa", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             DefaultTableModel model = (DefaultTableModel) JTableThanhVien.getModel();
             // Lay vi tri dang chon tren JTable
             int indexTB = JTableThanhVien.getSelectedRow();
             // Lay du lieu tu dong dang chon.
-            String maTV = JTableThanhVien.getModel().getValueAt(indexTB, 0).toString();
+            String maTV = JTableThanhVien.getValueAt(indexTB, 0).toString();
             // Delete dòng dữ liệu
             if (ThanhVienBLL.deleteThanhVien(maTV)) {
-                model.removeRow(indexTB);
+                loadAllThanhVien();
                 // Thông báo thành công
                 JOptionPane.showMessageDialog(rootPane, "Xóa thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Xóa không thành công", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Xóa không thành công, thành viên này thuộc 1 hóa đơn nào đó", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_BTXoaActionPerformed
