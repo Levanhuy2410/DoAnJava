@@ -28,10 +28,9 @@ BEGIN
             SET SLTON = v_slton-:new.SL
             WHERE MASP = :NEW.MASP;
         else 
-            raise_application_error(-20010,'S? l??ng quá l?n');
+            raise_application_error(-20010,'So luong qua lon');
         end if;
     END IF;
-    sleep(13);
 END;
 COMMIT;
 -- Thêm tr? giá vào t?ng ti?n khi thêm cthd
@@ -89,6 +88,7 @@ CREATE OR REPLACE TRIGGER ADD_QUANTITY_SANPHAM
 BEFORE INSERT ON CTPHIEUNHAP
 FOR EACH ROW
 BEGIN
+    lock table sanpham in exclusive mode;
     IF INSERTING THEN
         UPDATE SANPHAM
         SET SLTON=SLTON+:NEW.SLNHAP
@@ -111,6 +111,7 @@ CREATE OR REPLACE TRIGGER UPDATE_QUANTITY_SP_KK
 BEFORE INSERT ON CTPHIEUKK
 FOR EACH ROW
 BEGIN
+    lock table sanpham in exclusive mode;
     IF INSERTING THEN
         UPDATE SANPHAM
         SET SLTON=:NEW.SLT

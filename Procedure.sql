@@ -168,7 +168,7 @@ DECLARE
 BEGIN
     v_masp_array := MASP_ARRAY(20,23);
     v_sl_array := SL_ARRAY(1,1);
-    INSERT_HOADON(61, v_masp_array, v_sl_array, 1, 1, to_date('15/06/2020', 'dd/MM/yyyy'));
+    INSERT_HOADON(62, v_masps_array, v_sl_array, 1, 1, to_date('15/06/2020', 'dd/MM/yyyy'));
 END;
 
 
@@ -213,6 +213,7 @@ CREATE OR REPLACE PROCEDURE INSERT_PHIEUKK(v_makk PHIEUKK.MAKK%TYPE, v_masp_arra
 AS
     v_slhethong SANPHAM.SLTON%TYPE;
 BEGIN
+    LOCK TABLE SANPHAM IN SHARE MODE;
     FOR i IN v_slthuc_array.first .. v_slthuc_array.last LOOP
         IF (v_slthuc_array (i) <= 0) THEN
             raise_application_error(-20010,'So luong khong hop le');

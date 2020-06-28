@@ -196,15 +196,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             new String [] {
                 "Mã Nhân Viên", "Tên Nhân Viên", "Chức Vụ", "Ngày Vào Làm", "Ngày Sinh", "SĐT", "Email", "Mức Lương"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         JTableNhanVien.setShowHorizontalLines(false);
         jScrollPane1.setViewportView(JTableNhanVien);
 
@@ -299,14 +291,14 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         } else {
             // Lấy dữ liệu dòng đang chọn hiện lên 
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            int MANV = Integer.parseInt(JTableNhanVien.getModel().getValueAt(selected, 0).toString());
-            String TENNV = JTableNhanVien.getModel().getValueAt(selected, 1).toString();
-            String CHUCVU = JTableNhanVien.getModel().getValueAt(selected, 2).toString();
-            String NGAYVL = JTableNhanVien.getModel().getValueAt(selected, 3).toString();
-            String NGAYSINH = JTableNhanVien.getModel().getValueAt(selected, 4).toString();
-            String SDT = JTableNhanVien.getModel().getValueAt(selected, 5).toString();
-            String EMAIL = JTableNhanVien.getModel().getValueAt(selected, 6).toString();
-            int MUCLUONG = Integer.parseInt(JTableNhanVien.getModel().getValueAt(selected, 7).toString());
+            int MANV = Integer.parseInt(JTableNhanVien.getValueAt(selected, 0).toString());
+            String TENNV = JTableNhanVien.getValueAt(selected, 1).toString();
+            String CHUCVU = JTableNhanVien.getValueAt(selected, 2).toString();
+            String NGAYVL = JTableNhanVien.getValueAt(selected, 3).toString();
+            String NGAYSINH = JTableNhanVien.getValueAt(selected, 4).toString();
+            String SDT = JTableNhanVien.getValueAt(selected, 5).toString();
+            String EMAIL = JTableNhanVien.getValueAt(selected, 6).toString();
+            int MUCLUONG = Integer.parseInt(JTableNhanVien.getValueAt(selected, 7).toString());
             // Hiện lên JFrame cập nhật
             capnhat.maNV.setText(String.valueOf(MANV));
             capnhat.tenNV.setText(TENNV);

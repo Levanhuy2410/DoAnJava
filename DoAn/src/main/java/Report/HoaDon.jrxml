@@ -15,9 +15,10 @@
 	</style>
 	<parameter name="MAHD" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT NV.TENNV, HD.NGAYHD,SP.TENSP,SP.GIABAN, CTHD.SL, CTHD.TRIGIA, HD.TONGTIEN FROM CTHOADON CTHD JOIN HOADON HD ON HD.MAHD = CTHD.MAHD
+		<![CDATA[SELECT NV.TENNV, HD.NGAYHD,SP.TENSP,SP.GIABAN, CTHD.SL, CTHD.TRIGIA, HD.TONGTIEN, TV.TENTV FROM CTHOADON CTHD JOIN HOADON HD ON HD.MAHD = CTHD.MAHD
                                                         JOIN SANPHAM SP ON CTHD.MASP = SP.MASP
                                                         JOIN NHANVIEN NV ON HD.MANV = NV.MANV
+JOIN KHTHANHVIEN TV ON HD.MAKH = TV.MATV 
 WHERE HD.MAHD = $P{MAHD}]]>
 	</queryString>
 	<field name="TENNV" class="java.lang.String"/>
@@ -27,6 +28,7 @@ WHERE HD.MAHD = $P{MAHD}]]>
 	<field name="SL" class="java.math.BigDecimal"/>
 	<field name="TRIGIA" class="java.math.BigDecimal"/>
 	<field name="TONGTIEN" class="java.math.BigDecimal"/>
+	<field name="TENTV" class="java.lang.String"/>
 	<variable name="TRIGIA_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{TRIGIA}]]></variableExpression>
 	</variable>
@@ -34,7 +36,7 @@ WHERE HD.MAHD = $P{MAHD}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="132" splitType="Stretch">
+		<band height="163" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="0" width="553" height="95" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="bd0675a3-3167-444a-9421-063e7c28afa4"/>
 				<staticText>
@@ -65,7 +67,7 @@ WHERE HD.MAHD = $P{MAHD}]]>
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="100" width="553" height="32" forecolor="#000000" backcolor="#0066FF" uuid="30c0ef98-675b-4df9-88a7-87229dda6902"/>
+				<reportElement mode="Opaque" x="0" y="100" width="553" height="63" forecolor="#000000" backcolor="#0066FF" uuid="30c0ef98-675b-4df9-88a7-87229dda6902"/>
 				<staticText>
 					<reportElement x="0" y="0" width="125" height="32" forecolor="#FFFFFF" uuid="2a6bedc4-4506-4c2a-9986-d50296a4595c"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -74,8 +76,8 @@ WHERE HD.MAHD = $P{MAHD}]]>
 					<text><![CDATA[Tên Nhân Viên Lập:]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="125" y="0" width="100" height="32" forecolor="#FFFFFF" uuid="a08f2ec1-b61f-4351-983c-1912a959a623"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<reportElement x="125" y="0" width="136" height="32" forecolor="#FFFFFF" uuid="a08f2ec1-b61f-4351-983c-1912a959a623"/>
+					<textElement verticalAlignment="Middle">
 						<font fontName="Times New Roman" size="14"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{TENNV}]]></textFieldExpression>
@@ -93,6 +95,20 @@ WHERE HD.MAHD = $P{MAHD}]]>
 						<font fontName="Times New Roman" size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Ngày Lập:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="125" y="31" width="136" height="32" forecolor="#FFFFFF" uuid="1227e02d-806c-4403-b6ed-aaae1aeb5203"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TENTV}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="31" width="125" height="32" forecolor="#FFFFFF" uuid="3725f0e2-4dd4-484a-b584-0f910c8827f6"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tên Khách Hàng:]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -155,7 +171,7 @@ WHERE HD.MAHD = $P{MAHD}]]>
 					<textElement>
 						<font size="15"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{TRIGIA}.divide( $F{SL} )]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{GIABAN}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<textField isStretchWithOverflow="true" pattern="#,##0">
@@ -176,14 +192,14 @@ WHERE HD.MAHD = $P{MAHD}]]>
 				</graphicElement>
 			</line>
 			<textField pattern="#,##0">
-				<reportElement x="469" y="4" width="84" height="33" uuid="50609ad9-1372-4234-9916-b5f2ca444bb3"/>
+				<reportElement x="433" y="4" width="120" height="33" uuid="50609ad9-1372-4234-9916-b5f2ca444bb3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="18"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{TRIGIA_1}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="308" y="3" width="161" height="34" forecolor="#000000" uuid="5a4b18c6-0f2b-4728-b2ea-770fa72d399b"/>
+				<reportElement x="272" y="3" width="161" height="34" forecolor="#000000" uuid="5a4b18c6-0f2b-4728-b2ea-770fa72d399b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="18" isBold="true"/>
 				</textElement>

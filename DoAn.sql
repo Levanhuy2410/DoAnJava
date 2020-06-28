@@ -129,6 +129,7 @@ Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (14,'CPU Intel Core i3 9100',3190000,24,'Intel',20,'(4C/4T,3.6GHz-4.2GHz)',1);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (16,'RAM Kingston Fury Black',1030000,24,'Kingston',20,'(1x8gb) DDR4 2666MHz',2);
 Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (11,'RAM Kingston Fury Black',1030000,24,'Kingston',20,'(1x8gb) DDR4 2666MHz',2);
+Insert into DOAN.SANPHAM (MASP,TENSP,GIABAN,TGBH,HANGSX,SLTON,MOTA,MALSP) values (ID_MASP.NEXTVAL,'? c?ng SSD Samsung 860 EVO 2TB 2.5"',10680000,60,'Samsung',20,'T?c ?? ??c/ghi(t?i ?a):550MB/s|520MB/s',5);
 --  DDL for Table LOAISP
 --------------------------------------------------------
 Insert into DOAN.LOAISP (MALSP,TENLSP) values (4,'T?n nhi?t');
@@ -388,6 +389,7 @@ BEGIN
         SELECT GIABAN into v_giaban FROM SANPHAM WHERE MASP = v_masp_array(i);
         v_trigia:=v_sl_array(i)*v_giaban;
         INSERT INTO CTHOADON VALUES (v_masp_array(i), v_mahd, v_sl_array(i), v_trigia);
+        sleep(10);
     END LOOP;
     COMMIT;
 END;
@@ -397,9 +399,9 @@ DECLARE
     v_masp_array MASP_ARRAY;
     v_sl_array   SL_ARRAY;
 BEGIN
-    v_masp_array := MASP_ARRAY(23);
-    v_sl_array := SL_ARRAY(1);
-    INSERT_HOADON(59, v_masp_array, v_sl_array, 1, 1, to_date('15/06/2020', 'dd/MM/yyyy'));
+    v_masp_array := MASP_ARRAY(23,20);
+    v_sl_array := SL_ARRAY(1,1);
+    INSERT_HOADON(61, v_masp_array, v_sl_array, 1, 1, to_date('15/06/2020', 'dd/MM/yyyy'));
 END;
 commit;
 

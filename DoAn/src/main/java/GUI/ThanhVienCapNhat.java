@@ -7,6 +7,7 @@
 package GUI;
 
 import BLL.ThanhVienBLL;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -192,10 +193,12 @@ public class ThanhVienCapNhat extends javax.swing.JFrame {
         String SDT = sdt.getText().trim();
         String EMAIL = email.getText().trim();
         if (ThanhVienBLL.updateThanhVien(MATV, TENTV, LOAITV, SDT, EMAIL)){
-            Object[] data = {TENTV, LOAITV, SDT, EMAIL};
+            JOptionPane.showMessageDialog(rootPane, "Cập nhật thành công !", "Thành công", JOptionPane.INFORMATION_MESSAGE);
             // Update row đc chọn
-            QuanLyThanhVien.UpdateRow(data);
+            QuanLyThanhVien.loadAllThanhVien();
+            return;
         }
+        JOptionPane.showMessageDialog(rootPane, "Cập nhật thất bại", "Lỗi", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_BTCapNhatActionPerformed
 
     /**

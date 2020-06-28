@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
@@ -78,7 +80,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         BTXoa = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableKiemKe = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        Filter = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
         BTXemCTKK1 = new javax.swing.JButton();
@@ -145,19 +147,24 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
             new String [] {
                 "Mã Phiếu Kiểm Kê", "Ngày Kiểm Kê", "Tên Nhân Viên Lập"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tableKiemKe);
+        if (tableKiemKe.getColumnModel().getColumnCount() > 0) {
+            tableKiemKe.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
         tableKiemKe.getAccessibleContext().setAccessibleName("");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Filter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Filter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FilterActionPerformed(evt);
+            }
+        });
+        Filter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                FilterKeyReleased(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-search-35.png"))); // NOI18N
 
@@ -196,7 +203,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                         .addGap(216, 216, 216)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -212,7 +219,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BTThem)
                         .addComponent(BTXoa)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BTXemCTKK1)))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,6 +286,19 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTXemCTKK1ActionPerformed
 
+    private void FilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FilterActionPerformed
+
+    private void FilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FilterKeyReleased
+      // TODO add your handling code here:
+      DefaultTableModel model = (DefaultTableModel) tableKiemKe.getModel();
+      String query = Filter.getText();
+      TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+      tableKiemKe.setRowSorter(tr);
+      tr.setRowFilter(RowFilter.regexFilter(query));
+    }//GEN-LAST:event_FilterKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -322,12 +342,12 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
     private javax.swing.JButton BTThem;
     private javax.swing.JButton BTXemCTKK1;
     private javax.swing.JButton BTXoa;
+    private javax.swing.JTextField Filter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     public static javax.swing.JTable tableKiemKe;
     // End of variables declaration//GEN-END:variables
 }

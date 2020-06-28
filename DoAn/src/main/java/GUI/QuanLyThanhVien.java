@@ -34,7 +34,7 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
     }
     
     // Load all thành viên
-    public void loadAllThanhVien() {
+    public static void loadAllThanhVien() {
         DefaultTableModel model = (DefaultTableModel) JTableThanhVien.getModel();
         while (JTableThanhVien.getRowCount() > 0) {
             model.removeRow(0);
@@ -269,15 +269,15 @@ public class QuanLyThanhVien extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần chọn 1 dòng để cập nhật");
         } else {
             // Lấy dữ liệu dòng đang chọn
-            int MATV = Integer.parseInt(JTableThanhVien.getModel().getValueAt(selected, 0).toString());
-            String TENTV = JTableThanhVien.getModel().getValueAt(selected, 1).toString();
-            String LOAITV = JTableThanhVien.getModel().getValueAt(selected, 2).toString();
-            String SDT = JTableThanhVien.getModel().getValueAt(selected, 3).toString();
-            String EMAIL = JTableThanhVien.getModel().getValueAt(selected, 4).toString();
-            int DIEMTV = Integer.parseInt(JTableThanhVien.getModel().getValueAt(selected, 5).toString());
+            String MATV = JTableThanhVien.getValueAt(selected, 0).toString();
+            String TENTV = JTableThanhVien.getValueAt(selected, 1).toString();
+            String LOAITV = JTableThanhVien.getValueAt(selected, 2).toString();
+            String SDT = JTableThanhVien.getValueAt(selected, 3).toString();
+            String EMAIL = JTableThanhVien.getValueAt(selected, 4).toString();
+            int DIEMTV = Integer.parseInt(JTableThanhVien.getValueAt(selected, 5).toString());
             // Hiện lên jframe cập nhật
             ThanhVienCapNhat capnhat = new ThanhVienCapNhat();
-            capnhat.maTV.setText(String.valueOf(MATV));
+            capnhat.maTV.setText(MATV);
             capnhat.tenTV.setText(TENTV);
             capnhat.loaiTV.setSelectedItem(LOAITV);
             capnhat.sdt.setText(SDT);

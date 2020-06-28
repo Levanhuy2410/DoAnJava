@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
@@ -68,7 +69,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
         BTCapNhat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableSanPham = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        Filter = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         BTReturn = new javax.swing.JButton();
         BTThemLoaiSP = new javax.swing.JButton();
@@ -150,7 +151,17 @@ public class QuanLySanPham extends javax.swing.JFrame {
         tableSanPham.setSelectionForeground(new java.awt.Color(0, 168, 232));
         jScrollPane1.setViewportView(tableSanPham);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Filter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        Filter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FilterActionPerformed(evt);
+            }
+        });
+        Filter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                FilterKeyReleased(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8-search-35.png"))); // NOI18N
 
@@ -195,7 +206,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(66, 66, 66)
                         .addComponent(jScrollPane1)))
@@ -211,7 +222,7 @@ public class QuanLySanPham extends javax.swing.JFrame {
                         .addComponent(BTThem)
                         .addComponent(btnXoa)
                         .addComponent(BTCapNhat)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Filter, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BTThemLoaiSP)))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,6 +305,20 @@ public class QuanLySanPham extends javax.swing.JFrame {
         lspthem.setVisible(true);
     }//GEN-LAST:event_BTThemLoaiSPActionPerformed
 
+    private void FilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FilterActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_FilterActionPerformed
+
+    private void FilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_FilterKeyReleased
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tableSanPham.getModel();
+      String query = Filter.getText();
+      TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(model);
+      tableSanPham.setRowSorter(tr);
+      tr.setRowFilter(RowFilter.regexFilter(query));
+    }//GEN-LAST:event_FilterKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -334,13 +359,13 @@ public class QuanLySanPham extends javax.swing.JFrame {
     private javax.swing.JButton BTReturn;
     private javax.swing.JButton BTThem;
     private javax.swing.JButton BTThemLoaiSP;
+    private javax.swing.JTextField Filter;
     private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     public static javax.swing.JTable tableSanPham;
     // End of variables declaration//GEN-END:variables
 }
