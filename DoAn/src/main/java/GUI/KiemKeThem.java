@@ -375,7 +375,18 @@ public class KiemKeThem extends javax.swing.JFrame {
         Object[] row = {MASP, TENSP, SLHT, SLT, SLHT - SLT, LYDO, LOAISP};
         model.addRow(row);
     }//GEN-LAST:event_BTThemCTKKActionPerformed
-
+    public void resetLayout() {
+        DefaultTableModel CTHDmodel = (DefaultTableModel) tableCTKK.getModel();
+        while (tableCTKK.getRowCount() > 0) {
+            CTHDmodel.removeRow(0);
+        }
+        maSP.setText("");
+        tenSP.setText("");
+        loaiSP.setText("");
+        slTon.setText("");
+        slHeThong.setText("");
+        lyDo.setText("");
+    }
     private void BTLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTLuuActionPerformed
         // TODO add your handling code here:
         // Insert phieu kk
@@ -393,11 +404,12 @@ public class KiemKeThem extends javax.swing.JFrame {
                 // Insert chi tiết kiếm kê vào phiếu kiểm kê
                 CTKiemKeBLL.insertCTKiemKe(MASP, MAKK, SLHETHONG, SLTON, LYDO);
                 // Cập nhật số lượng tồn cho sản phẩm nếu có sự thay đổi
-                if (CHENHLECH != 0) {
-                    SanPhamBLL.updateSoLuongTon(SLTON, MASP);
-                }
+//                if (CHENHLECH != 0) {
+//                    SanPhamBLL.updateSoLuongTon(SLTON, MASP);
+//                }
                 // Reload list
                 QuanLyKiemKe.loadAllKiemKe();
+                resetLayout();
             }
             JOptionPane.showMessageDialog(rootPane, "Thêm phiếu kiểm kê thành công", "Thành công", JOptionPane.INFORMATION_MESSAGE);
         }

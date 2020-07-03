@@ -132,7 +132,9 @@ BEGIN
     WHERE EXTRACT (MONTH FROM HD.NGAYHD) = v_month AND EXTRACT (YEAR FROM HD.NGAYHD) = v_year;
     RETURN v_tableTemp;
 END;
-
+begin
+    DBMS_OUTPUT.PUT_LINE(TOTAL_COST_FOR_MEMBER(1));
+end;
 
 select * from table(create_report(6, 2020));
 -- Procedure insert hoadon
@@ -157,7 +159,7 @@ BEGIN
         SELECT GIABAN into v_giaban FROM SANPHAM WHERE MASP = v_masp_array(i);
         v_trigia:=v_sl_array(i)*v_giaban;
         INSERT INTO CTHOADON VALUES (v_masp_array(i), v_mahd, v_sl_array(i), v_trigia);
-        sleep(6);
+--        sleep(6);
     END LOOP;
     commit;
 END;

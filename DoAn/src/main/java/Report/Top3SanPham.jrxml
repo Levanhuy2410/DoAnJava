@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="700" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d372f2b4-20f4-42e5-ada8-05e5459e1cc7">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="169"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
@@ -13,17 +13,15 @@
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
-	<parameter name="Thang" class="java.lang.String"/>
-	<parameter name="Nam" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT SP.TENSP, SUM(CTHD.SL) AS SL FROM CTHOADON CTHD JOIN SANPHAM SP ON SP.MASP = CTHD.MASP
+		<![CDATA[SELECT SP.TENSP, SP.MASP, CTHD.SL FROM CTHOADON CTHD JOIN SANPHAM SP ON SP.MASP = CTHD.MASP
                                                         JOIN HOADON HD ON HD.MAHD = CTHD.MAHD
 WHERE EXTRACT (MONTH FROM NGAYHD) = TO_CHAR(SYSDATE, 'MM') and EXTRACT (YEAR FROM NGAYHD) = TO_CHAR(SYSDATE, 'YYYY')
-GROUP BY SP.TENSP
 ORDER BY SL DESC
 FETCH FIRST 3 ROWS WITH TIES]]>
 	</queryString>
 	<field name="TENSP" class="java.lang.String"/>
+	<field name="MASP" class="java.math.BigDecimal"/>
 	<field name="SL" class="java.math.BigDecimal"/>
 	<variable name="TenNhanVienLap" class="java.lang.String"/>
 	<variable name="SLT_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
@@ -32,6 +30,30 @@ FETCH FIRST 3 ROWS WITH TIES]]>
 	<variable name="TONGTIEN_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[]]></variableExpression>
 	</variable>
+	<variable name="SL_1" class="java.math.BigDecimal" resetType="Group" resetGroup="Tensp" calculation="Sum">
+		<variableExpression><![CDATA[$F{SL}]]></variableExpression>
+	</variable>
+	<group name="Tensp">
+		<groupExpression><![CDATA[$F{TENSP}]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<textField>
+					<reportElement x="2" y="0" width="277" height="20" uuid="59d3ddef-f99d-4122-a656-6e1e44371406"/>
+					<textElement>
+						<font fontName="Times New Roman" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TENSP}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="Tensp">
+					<reportElement x="396" y="0" width="117" height="27" uuid="d4af989c-2bc5-462f-83a6-c38977950fbe"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SL_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -99,55 +121,6 @@ FETCH FIRST 3 ROWS WITH TIES]]>
 			</staticText>
 		</band>
 	</columnHeader>
-	<detail>
-		<band height="26">
-			<frame>
-				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18" uuid="5d189064-3478-47c3-b257-54a89ef9f00e"/>
-			</frame>
-			<textField>
-				<reportElement x="2" y="0" width="277" height="20" uuid="59d3ddef-f99d-4122-a656-6e1e44371406"/>
-				<textElement>
-					<font fontName="Times New Roman" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{TENSP}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="279" y="0" width="273" height="20" uuid="38d579d1-a9ab-4089-8bd6-6d8f2f50d071"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{SL}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="279" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="24211b00-0ee7-44eb-9b95-716f47a56743"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
-			<pieChart>
-				<chart>
-					<reportElement isPrintRepeatedValues="false" mode="Transparent" x="2" y="3" width="551" height="276" uuid="38b8b6bf-d056-42a2-9703-1e7a0391ceb3"/>
-					<chartTitle/>
-					<chartSubtitle/>
-					<chartLegend/>
-				</chart>
-				<pieDataset>
-					<keyExpression><![CDATA[$F{TENSP}]]></keyExpression>
-					<valueExpression><![CDATA[$F{SL}
-]]></valueExpression>
-					<otherKeyExpression><![CDATA["Tổng số lượng"]]></otherKeyExpression>
-				</pieDataset>
-				<piePlot>
-					<plot/>
-					<itemLabel/>
-				</piePlot>
-			</pieChart>
-		</band>
-	</columnFooter>
 	<pageFooter>
 		<band height="26" splitType="Stretch">
 			<frame>

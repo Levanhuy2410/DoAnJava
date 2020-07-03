@@ -162,6 +162,7 @@ Insert into DOAN.CTPHIEUKK (MASP,MAKK,SLHETHONG,SLT,LYDO) values (14,51,20,19,nu
 Insert into DOAN.PHIEUKK (MAKK,NGAYTAO,MANV) values (50,to_date('11-JUN-20','DD-MON-RR'),2);
 Insert into DOAN.PHIEUKK (MAKK,NGAYTAO,MANV) values (51,to_date('11-JUN-20','DD-MON-RR'),2);
 -- INSERTING into DOAN.KHTHANHVIEN
+Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (0,'Vãng lai','Standard',NULL,NULL,0);
 Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (1,'Nguy?n Mai Linh','Standard','0902456789','linh@gmail.com',0);
 Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (4,'Lê V?n Hoàng','Standard','0966873489','levanhoang@gmail.com',0);
 Insert into DOAN.KHTHANHVIEN (MATV,TENTV,LOAITV,SDT,EMAIL,DIEMTV) values (7,'Tr?n Th? Di?m Thúy','Standard','0902524989','Thuytran@gmail.com',0);
