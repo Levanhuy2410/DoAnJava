@@ -6,6 +6,7 @@
 package GUI;
 
 import DAL.JdbcConnection;
+import java.sql.Connection;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -21,6 +22,8 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author Cong
  */
 public class ThongKe extends javax.swing.JFrame {
+        public Connection con = JdbcConnection.getConnection();
+
     /**
      * Creates new form QuanLySanPham
      */
@@ -162,9 +165,10 @@ public class ThongKe extends javax.swing.JFrame {
     private void BTTop3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTTop3ActionPerformed
         // TODO add your handling code here:
         try {
+                con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
                 JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\cutui\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\Top3SanPham.jrxml");
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
-                JasperPrint jprint = JasperFillManager.fillReport(jreport, null, JdbcConnection.getConnection());
+                JasperPrint jprint = JasperFillManager.fillReport(jreport, null, con);
                 JasperViewer.viewReport(jprint, false);
             } catch (Exception ex) {
                 ex.printStackTrace();

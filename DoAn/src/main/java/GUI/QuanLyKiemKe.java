@@ -8,6 +8,7 @@ package GUI;
 import BLL.KiemKeBLL;
 import DAL.JdbcConnection;
 import DTO.KiemKe;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class QuanLyKiemKe extends javax.swing.JFrame {
 
     public KiemKeBLL KiemKeBLL = new KiemKeBLL();
-
+    public Connection con = JdbcConnection.getConnection();
     /**
      * Creates new form QuanLySanPham
      */
@@ -268,6 +269,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
     private void BTXemCTKK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTXemCTKK1ActionPerformed
         // TODO add your handling code here:
         try {
+             con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             int selected = tableKiemKe.getSelectedRow();
             if (selected != -1){
                 int makk = Integer.parseInt(tableKiemKe.getValueAt(selected, 0).toString());
@@ -276,7 +278,7 @@ public class QuanLyKiemKe extends javax.swing.JFrame {
                 parameters.put("MAKK", makk);
 
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
-                JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
+                JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, con);
 
                 JasperViewer.viewReport(jprint, false);
             }

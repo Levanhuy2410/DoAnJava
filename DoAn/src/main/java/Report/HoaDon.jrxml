@@ -191,20 +191,6 @@ WHERE HD.MAHD = $P{MAHD}]]>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<textField pattern="#,##0">
-				<reportElement x="433" y="4" width="120" height="33" uuid="50609ad9-1372-4234-9916-b5f2ca444bb3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="18"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{TRIGIA_1}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="272" y="3" width="161" height="34" forecolor="#000000" uuid="5a4b18c6-0f2b-4728-b2ea-770fa72d399b"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="18" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tổng tiền:]]></text>
-			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
@@ -236,6 +222,21 @@ WHERE HD.MAHD = $P{MAHD}]]>
 		</band>
 	</pageFooter>
 	<summary>
-		<band splitType="Stretch"/>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="272" y="6" width="161" height="34" forecolor="#000000" uuid="5a4b18c6-0f2b-4728-b2ea-770fa72d399b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tổng tiền:]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="435" y="7" width="120" height="33" uuid="50609ad9-1372-4234-9916-b5f2ca444bb3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TRIGIA_1}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

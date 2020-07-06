@@ -33,7 +33,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author USER
  */
 public class QuanLyPhieuNhap extends javax.swing.JFrame {
-    public Connection conn = JdbcConnection.getConnection();
+    public Connection con = JdbcConnection.getConnection();
   /**
    * Creates new form QuanLySanPham
    */
@@ -265,6 +265,7 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try {
+            con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
             int selected = tablePhieuNhapHang.getSelectedRow();
             if (selected != -1){
                 int manh = Integer.parseInt(tablePhieuNhapHang.getValueAt(selected, 0).toString());
@@ -273,7 +274,7 @@ public class QuanLyPhieuNhap extends javax.swing.JFrame {
                 parameters.put("MANH", manh);
 
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
-                JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
+                JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, con);
 
                 JasperViewer.viewReport(jprint, false);
             }

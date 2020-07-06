@@ -6,6 +6,7 @@
 package GUI;
 
 import DAL.JdbcConnection;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -22,7 +23,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author USER
  */
 public class ThongKeTheoThangNam extends javax.swing.JFrame {
-
+    public Connection con = JdbcConnection.getConnection();
     /**
      * Creates new form ThemSanPham
      */
@@ -140,6 +141,7 @@ public class ThongKeTheoThangNam extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTTheoThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTTheoThangActionPerformed
+       
         String THANG = Thang.getSelectedItem().toString();
         String NAM = Nam.getText();
         if (THANG.isEmpty() || NAM.isEmpty()){
@@ -147,12 +149,13 @@ public class ThongKeTheoThangNam extends javax.swing.JFrame {
         }
         else {
             try {
+                con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
                 Map<String, Object> parameters = new HashMap<String, Object>();
                 JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\cutui\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\DoanhThuTheoThang.jrxml");
                 parameters.put("Thang", THANG);
                 parameters.put("Nam", NAM);
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
-                JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
+                JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, con);
                 JasperViewer.viewReport(jprint, false);
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -169,12 +172,13 @@ public class ThongKeTheoThangNam extends javax.swing.JFrame {
         }
         else {
             try {
+                 con.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
                 Map<String, Object> parameters = new HashMap<String, Object>();
                 JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\cutui\\Desktop\\DoAnJava\\DoAn\\src\\main\\java\\Report\\DoanhThuTheoNam.jrxml");
                 
                 parameters.put("Nam", NAM);
                 JasperReport jreport = JasperCompileManager.compileReport(jdesign);
-                JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, JdbcConnection.getConnection());
+                JasperPrint jprint = JasperFillManager.fillReport(jreport, parameters, con);
                 JasperViewer.viewReport(jprint, false);
             } catch (Exception ex) {
                 ex.printStackTrace();
